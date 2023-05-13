@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './assets/App.css';
+import { Route, Routes } from 'react-router-dom';
+import {Header}  from './components/header';
+import { VistaPersonajes } from './components/vistaPersonajes';
+import { VistaSeries } from './components/vistaSeries';
+import { VistaPeliculas } from './components/vistaPeliculas';
+import { VistaJuegos } from './components/vistaJuegos';
+import { VistaComics } from './components/vistaComics';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header/>
+      <Routes>
+        <Route path='/personajes' element={<VistaPersonajes/>}/>
+        <Route path='/series' element={<VistaSeries/>}/>
+        <Route path='/peliculas' element={<VistaPeliculas/>}/>
+        <Route path='/juegos' element={<VistaJuegos/>}/>
+        <Route path='/comics' element={<VistaComics/>}/>
+      </Routes>
+    </>
   );
 }
 
