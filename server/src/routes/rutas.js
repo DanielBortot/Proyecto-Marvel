@@ -1,7 +1,10 @@
 const router = require('express').Router();
-const {mostrar, agregar} = require('../controllers/acciones');
+const {personajes, peliculas, series, juegos, comics} = require('../controllers/acciones');
 
-router.get('/mostrar', mostrar);
-router.post('/agregar/:nombre/:desc', agregar);
+router.get('/personajes', personajes);
+router.get('/peliculas', peliculas);
+router.get('/series', series);
+router.get('/juegos', juegos);
+router.get('/comics', comics);
 
 module.exports = router;
