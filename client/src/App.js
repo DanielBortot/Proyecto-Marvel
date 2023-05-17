@@ -8,6 +8,7 @@ import { VistaPeliculas } from './components/vistaPeliculas';
 import { VistaJuegos } from './components/vistaJuegos';
 import { VistaComics } from './components/vistaComics';
 import { VistaInicio } from './components/inicio';
+import { Footer } from './components/footer';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/juegos' element={<VistaJuegos/>}/>
         <Route path='/comics' element={<VistaComics/>}/>
       </Routes>
+      <Footer/>
     </>
   );
 }

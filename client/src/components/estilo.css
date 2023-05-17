@@ -1,0 +1,51 @@
+
+.custom-button {
+    background-color: #EC1D24;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+  }
+  
+  .custom-button:hover {
+    background-color: #414141;
+  }
+
+  .logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    color: white;
+    float: left;
+    padding: 10px;
+    text-shadow: 0.1em 0.1em 0.2em #414141;
+
+  }
+
+  /*.regis {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 12px;
+    background-color: #EC1D24;
+    border: none;
+    cursor: pointer;
+    
+  }*/
+
+  .footer {
+    background-color: black;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 2.5rem;   
+  }
+
+  .footer p {
+    text-align: center;
+    color: white;
+    font-size: 8px;
+    font-family: 'Roboto', sans-serif;
+  }
