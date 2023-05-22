@@ -1,6 +1,6 @@
 import React from "react";
 /*import { Link } from "react-router-dom";*/
-import './estilo.css';
+import '../assets/estilo.css';
 
 function Footer (){
     

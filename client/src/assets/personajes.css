@@ -1,0 +1,50 @@
+.tituloCont {
+    width: 100%;
+    border-bottom: 2px solid black;
+}
+
+.tituloCont h2 {
+    text-shadow: 5px 2px 4px rgb(185, 185, 185);
+}
+
+.vistaPers {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4rem;
+    margin-top: 3rem;
+    padding: 0 3rem 3rem;
+}
+
+.bordeImg {
+    border-bottom: 5px solid red;
+}
+
+.imagen {
+    object-fit: cover;
+    width: 100%;
+    height: 300px;
+}
+
+.tituloPers {
+    padding: 6px;
+    background-color: rgb(85, 85, 85);
+    color: white;
+    position: relative;
+    height: 100px;
+}
+
+.tituloPers p {
+    position: absolute;
+    bottom: -15px;
+    right: 10px;
+
+}
+
+.cajaPers {
+    box-shadow: 8px 5px 10px rgb(155, 154, 154);
+    transition: all 0.4s ease;
+}
+
+.cajaPers:hover {
+    filter: brightness(40%);
+}
