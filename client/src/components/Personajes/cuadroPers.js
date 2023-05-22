@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descPersonaje } from "../../reducers/personajesSlice";
 
-function CuadroPers ({nombre, tipo, img}) {
+function CuadroPers ({img, tipo, nombre, genero, ojos, ocupacion, nacionalidad, marital}) {
     const dispatch = useDispatch();
 
     const enviar = ()=> {
-        dispatch(descPersonaje({img: img, nombre: nombre, tipo: tipo}));
+        dispatch(descPersonaje({img: img, nombre: nombre, tipo: tipo, genero: genero, ojos: ojos, ocupacion: ocupacion, nacionalidad: nacionalidad, marital: marital}));
     }
 
     return (

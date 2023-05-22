@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     contenido: [],
-    descripcion: {img: '', nombre: '', tipo: ''}
+    descripcion: {img: '', nombre: '', tipo: '', genero: '', ojos: '', ocupacion: '', nacionalidad: '', marital: ''}
 }
 
 export const personajesSlice = createSlice({

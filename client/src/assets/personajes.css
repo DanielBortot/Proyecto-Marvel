@@ -9,7 +9,7 @@
 
 .vistaPers {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 4rem;
     margin-top: 3rem;
     padding: 0 3rem 3rem;
@@ -47,4 +47,33 @@
 
 .cajaPers:hover {
     filter: brightness(40%);
+}
+
+.descCont {
+    display: flex;
+    padding-left: 30px;
+}
+
+.descContImg h2 {
+    text-shadow: 5px 2px 4px rgb(185, 185, 185);
+}
+
+.descContImg img {
+    box-shadow: 8px 5px 10px rgb(155, 154, 154);
+}
+
+.descContTitu {
+    display: flex;
+    padding: 45px 0 0 20px;
+}
+
+.descContTitu div:nth-child(1) {
+    margin-right: 50px;
+    text-align: left;
+    font-weight: bolder;
+}
+
+.descContTitu div:nth-child(2){
+    text-align: right;
+    max-width: 400px;
 }
