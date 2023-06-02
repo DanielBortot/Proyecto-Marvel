@@ -9,8 +9,8 @@ function VistaPersonajes () {
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
-          breakpoint: { max: 4000, min: 1024 },
-          items: 5
+          breakpoint: { max: 2000, min: 1024 },
+          items: 4
         },
         desktop: {
           breakpoint: { max: 1024, min: 800 },
@@ -107,15 +107,17 @@ function VistaPersonajes () {
             <div className="carrusel">
             <Carousel 
                  responsive={responsive}
-                 infinite={true}       
+                 infinite={true}
+                 centerMode={true}       
             >
+                
                     {prueba.map(personaje => {
                             return <CuadroPers img={personaje.img} tipo={personaje.tipo} nombre={personaje.nombre} genero={personaje.genero} ojos={personaje.color_ojos} ocupacion={personaje.ocupacion} nacionalidad={personaje.nacionalidad} marital={personaje.estado_marital} key={personaje.nombre}/>
-                        })}
+                        })}     
             </Carousel>
             </div>
             <div className="tituloCont">
-                <h2>Lsita de personajes de marvel</h2>
+                <h2>Lista de personajes de marvel</h2>
             </div>
             <div className="vistaPers">
                 {prueba.map(personaje => {
