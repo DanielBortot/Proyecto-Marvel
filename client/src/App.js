@@ -10,6 +10,9 @@ import { VistaComics } from './components/vistaComics';
 import { VistaInicio } from './components/inicio';
 import { Footer } from './components/footer';
 import { DescripcionPers } from './components/Personajes/DescripcionPers';
+import { Login } from './components/login';
+import { Register } from './components/register';
+import { Perfil } from './components/perfil';
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
           <Route path='/peliculas' element={<VistaPeliculas/>}/>
           <Route path='/juegos' element={<VistaJuegos/>}/>
           <Route path='/comics' element={<VistaComics/>}/>
+          <Route path='/inicioSesion' element={<Login/>}/>
+          <Route path='/registro' element={<Register/>}/>
+          <Route path='/perfil' element={<Perfil/>}/>
         </Routes>
       </div>
       <Footer/>

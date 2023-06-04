@@ -1,0 +1,106 @@
+.tituloContReg {
+    font-family: 'Roboto', sans-serif;
+    margin: auto;
+    width: 30%;
+    border-bottom: 2px solid black;
+    margin-top: 30px;
+}
+
+.titulo {
+    text-align: center;
+    text-shadow: 5px 2px 4px rgb(185, 185, 185);
+}
+
+.formContReg {
+    width: 50%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.formContReg form {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.formContReg form input {
+    width: 70%;
+    height: 40px;
+    margin: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(206, 206, 207, 0.39);
+    padding: 10px;
+    outline: none;
+    transition: all .4s ease;
+}
+
+.formContReg form input:focus {
+    background-color: rgb(196, 194, 194);
+}
+
+.suscripcionReg {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.suscripcionReg div {
+    color: white;
+    width: 110px;
+    height: 100px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+}
+
+.suscripcionReg div p {
+    margin: 0;
+}
+
+.suscripcionReg div p:nth-child(2) {
+    align-self: flex-end;
+}
+
+.Regnselec {
+    background-color: #EC1D24;
+}
+
+.Regselec {
+    background-color: #af1b20;
+}
+
+.botonReg {
+    width: 71%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid black;
+    padding-top: 20px;
+}
+
+.botonReg button {
+    width: 99%;
+    height: 40px;
+    margin: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: #EC1D24;
+    padding: 10px;
+    color: white;
+    transition: all .4s ease;
+}
+
+.botonReg button:hover {
+    background-color: #af1b20;
+}
