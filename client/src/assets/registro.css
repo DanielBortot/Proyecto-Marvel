@@ -104,3 +104,12 @@
 .botonReg button:hover {
     background-color: #af1b20;
 }
+
+.register {
+    text-decoration: none;
+    color:grey;
+}
+
+.register:hover{
+    color: grey;
+}

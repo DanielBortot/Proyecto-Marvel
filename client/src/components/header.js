@@ -16,7 +16,6 @@ function Header (){
                     <Link className='custom-button btn btn-secondary mx-4 px-4 py-4' to={'/juegos'}>Juegos</Link>
                     <Link className='custom-button btn btn-secondary mx-4 px-4 py-4' to={'/comics'}>Comics</Link>
                     <Link className='custom-button2 btn btn-secondary mx-4 px-4 py-4' to={'/inicioSesion'}>Iniciar Sesion</Link>
-                    <Link className='custom-button2 btn btn-secondary mx-4 px-4 py-4' to={'/registro'}>Registrarse</Link>
                 </li>
             </div>
         </div>
