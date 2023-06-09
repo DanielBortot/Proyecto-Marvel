@@ -36,13 +36,12 @@ function App() {
             <Route path='/inicioSesion' element={<Login/>}/>
             <Route path='/registro' element={<Register/>}/>
             <Route path='/perfil' element={<Perfil/>}/>
-            <Route path='/usuario' element={<DescUsuario/>}>
-              <Route path='/usuario/resumen' element={<VistaResumen/>}/>
-              <Route path='/usuario/info' element={<VistaInfo/>}/>
-              <Route path='/usuario/suscr' element={<VistaSuscr/>}/>
-              <Route path='/usuario/pago' element={<VistaPago/>}/>
-              <Route path='/usuario/historial' element={<VistaHistorial/>}/>
-            </Route>
+            <Route path='/usuario' element={<DescUsuario/>}/>
+            <Route path='/usuario/resumen' element={<VistaResumen/>}/>
+            <Route path='/usuario/info' element={<VistaInfo/>}/>
+            <Route path='/usuario/suscr' element={<VistaSuscr/>}/>
+            <Route path='/usuario/pago' element={<VistaPago/>}/>
+            <Route path='/usuario/historial' element={<VistaHistorial/>}/>
           </Routes>
       </div>
       <Footer/>
