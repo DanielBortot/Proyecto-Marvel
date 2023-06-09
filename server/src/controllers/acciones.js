@@ -68,22 +68,46 @@ const acciones = {
         await pool.query('DELETE * FROM prueba WHERE juego_id = $1', [id]);
         res.redirect('/api/juegos');
     },
-
-    comics: async (req, res) => {
-        const comics = await pool.query('SELECT * FROM prueba');
-        res.send(comics.rows);
-    },
-
-    addComic: async (req, res) => {
-        const {cont1, cont2 ,cont3} = req.body;
-        await pool.query('INSERT INTO prueba (cont1, cont2, cont3) VALUES ($1, $2, $3)', [cont1, cont2, cont3]);
-        res.redirect('/api/comics');
-    },
     
-    removeComic: async (req,res) => {
-        const id = req.params['id'];
-        await pool.query('DELETE * FROM prueba WHERE comic_id = $1', [id]);
-        res.redirect('/api/comics');
+    register: async (req,res) => {
+        const {email,contrasena,nombre,apellido,fechaNac,fechaCrea,idSus,direccion,nTarjeta} = req.body;
+        try{
+            await pool.query('INSERT INTO "Usuario" ("Email", "Contrasena", "Nombre", "Apellido", "Fecha_Nac", "Fecha_Creacion", "Id_Suscripcion", "Direccion", "N_Tarjeta") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)',[email,contrasena,nombre,apellido,fechaNac,fechaCrea,idSus,direccion,nTarjeta]);
+            res.send([{email,contrasena,nombre,apellido,fechaNac,fechaCrea,idSus,direccion,nTarjeta}]);
+        } catch(err) {
+            res.send(err);
+        }
+    },
+
+    login: async (req,res) => {
+        const {email,contrasena} = req.body;
+        const usuario = await pool.query('SELECT "Email", "Contrasena" FROM "Usuario" WHERE "Email"=$1 AND "Contrasena"=$2',[email,contrasena]);
+        if (usuario.rows.length == 0){
+            res.send("El usuario o la contrasena no existe");
+        } else {
+            res.send(usuario.rows);
+        }
+    },
+
+    addPerfil: async (req,res) => {
+        const {dispositivo,nombre,idioma,email,imagen} = req.body;
+        const perfiles = await pool.query('SELECT "Id_Perfil" FROM "Perfil" WHERE "Email"=$1',[email]);
+        if (perfiles.rows.length == 5){
+            res.send('Numero maximo de perfiles en el usuario');
+        } else {
+            try {
+                await pool.query('INSERT INTO "Perfil"("Dispositivo", "Nombre", "Idioma", "Email", "Imagen") VALUES ($1, $2, $3, $4, $5)',[dispositivo,nombre,idioma,email,imagen]);
+                res.send([{dispositivo,nombre,idioma,email,imagen}]);
+            } catch (err){
+                res.send(err);
+            }
+        }
+    },
+
+    perfiles: async (req,res) => {
+        const {email} = req.body;
+        const perfiles = await pool.query('SELECT "Id_Perfil" FROM "Perfil" WHERE "Email"=$1',[email]);
+        res.send(perfiles.rows);
     }
 }
 
