@@ -12,15 +12,6 @@ function DescUsuario () {
     return (
         <>
           <SideMenu/>
-          <div className='mx-3 my-2'>
-            <Routes>
-              <Route path='usuario/resumen' element={<VistaResumen/>}/>
-              <Route path='/info' element={<VistaInfo/>}/>
-              <Route path='/suscr' element={<VistaSuscr/>}/>
-              <Route path='/pago' element={<VistaPago/>}/>
-              <Route path='/historial' element={<VistaHistorial/>}/>
-            </Routes>
-          </div>
         </>
       );
 }
