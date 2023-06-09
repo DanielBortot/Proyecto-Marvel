@@ -1,4 +1,10 @@
 
+.header {
+  background: #EC1D24;
+  padding: '0 10px';
+  position: 'sticky';
+}
+
 .custom-button {
     background-color: #EC1D24;
     font-family: 'Roboto', sans-serif;
@@ -8,8 +14,9 @@
     border: none;
     border-radius: 0px;
     cursor: pointer;
+    margin: none;
   }
-
+  
   .custom-button2 {
     background-color: #EC1D24;
     font-family: 'Roboto', sans-serif;
@@ -19,8 +26,9 @@
     border: none;
     border-radius: 0px;
     cursor: pointer;
+    margin: 0px auto;
   }
-  
+
   .custom-button:hover {
     background-color: #414141;
   }
@@ -59,4 +67,10 @@
     color: white;
     font-size: 8px;
     font-family: 'Roboto', sans-serif;
+  }
+
+  .inisesion {
+    float: right;
+    position: relative;
+    top: -85px;
   }

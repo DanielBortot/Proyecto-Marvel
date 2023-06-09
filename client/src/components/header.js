@@ -1,22 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import '../assets/estilo.css';
 
 function Header (){
     
     return (
-        <div style={{background: 'rgb(236  , 29, 36)', padding: '0 10px', position: 'sticky'}}>
-            <div className="logo">FANATIC DB</div>
-            <div className="botones">
+        <div className="header">
+            <div className="logo hed">FANATIC DB</div>
+            <div className="botones hed">
                 <li style={{listStyle: 'none'}}>
-                    <Link className='custom-button btn btn-secondary mx-4 px-4 py-4' to={'/'}>Inicio</Link>
-                    <Link className='custom-button btn btn-secondary mx-4 px-4 py-4' to={'/personajes'}>Personajes</Link>
-                    <Link className='custom-button btn btn-secondary mx-4 px-4 py-4' to={'/peliculas'}>Peliculas</Link>
-                    <Link className='custom-button btn btn-secondary mx-4 px-4 py-4' to={'/series'}>Series</Link>
-                    <Link className='custom-button btn btn-secondary mx-4 px-4 py-4' to={'/juegos'}>Juegos</Link>
-                    <Link className='custom-button btn btn-secondary mx-4 px-4 py-4' to={'/comics'}>Comics</Link>
-                    <Link className='custom-button2 btn btn-secondary mx-4 px-4 py-4' to={'/inicioSesion'}>Iniciar Sesion</Link>
+                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/'}>Inicio</Link>
+                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/personajes'}>Personajes</Link>
+                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/peliculas'}>Peliculas</Link>
+                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/series'}>Series</Link>
+                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/juegos'}>Juegos</Link>
                 </li>
+            </div>
+            <div className="inisesion hed">
+                <Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/inicioSesion'}>Iniciar Sesion</Link>
+                <Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/usuario'}><FontAwesomeIcon icon={faUser} style={{color: "#ffffff",width: 40,}} /></Link>
             </div>
         </div>
     );

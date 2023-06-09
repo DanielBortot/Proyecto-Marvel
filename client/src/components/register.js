@@ -24,7 +24,7 @@ function Register() {
                     <input type="date" placeholder="Fecha de nacimiento"/>
                     <p>Selecciona el servicio</p>
                     <div className="suscripcionReg">
-                        <div className={`Reg${colores.p}`} onClick={()=>setColores({p:'selec',s:'nselec',t:'nselec',c:'nselec'})}>
+                       <div className={`Reg${colores.p}`} onClick={()=>setColores({p:'selec',s:'nselec',t:'nselec',c:'nselec'})}>
                             <p>GOLD</p>
                             <p>5.99$</p>
                         </div>

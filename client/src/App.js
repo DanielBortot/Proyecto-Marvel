@@ -1,7 +1,7 @@
 
 import './assets/App.css';
 import { Route, Routes } from 'react-router-dom';
-import {Header}  from './components/header';
+import { Header}  from './components/header';
 import { VistaPersonajes } from './components/Personajes/vistaPersonajes';
 import { VistaSeries } from './components/Series/vistaSeries';
 import { VistaPeliculas } from './components/Peliculas/vistaPeliculas';
@@ -13,6 +13,7 @@ import { DescripcionPers } from './components/Personajes/DescripcionPers';
 import { Login } from './components/login';
 import { Register } from './components/register';
 import { Perfil } from './components/perfil';
+import { DescUsuario } from './components/Usuario/usuario';
 
 function App() {
   return (
@@ -30,6 +31,8 @@ function App() {
           <Route path='/inicioSesion' element={<Login/>}/>
           <Route path='/registro' element={<Register/>}/>
           <Route path='/perfil' element={<Perfil/>}/>
+          <Route path='/usuario' element={<DescUsuario/>}/>
+
         </Routes>
       </div>
       <Footer/>
