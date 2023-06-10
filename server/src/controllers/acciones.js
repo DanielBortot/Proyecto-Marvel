@@ -69,6 +69,25 @@ const acciones = {
         res.redirect('/api/juegos');
     },
     
+    buscUsuario: async (req,res) => {
+        const {email,nombre,apellido} = req.body;
+        let errores = {};
+        const usuarios = pool.query('SELECT "Email", "Nombre", "Apellido" FROM "Usuario" WHERE "Email"=$1 OR "Nombre"=$2 OR "Apellido"=$3',[email,nombre,apellido]);
+
+        usuarios.rows.map(usuario => {
+            if (usuario.Email = email){
+                errores.email = "El email ya existe";
+            }
+            if (usuario.Nombre = nombre){
+                errores.nombre = "El nombre ya existe";
+            }
+            if (usuario.Apellido = apellido){
+                errores.apellido = "El apellido ya existe";
+            }
+        });
+        res.send(errores);
+    },
+
     register: async (req,res) => {
         const {email,contrasena,nombre,apellido,fechaNac,fechaCrea,idSus,direccion,nTarjeta} = req.body;
         try{
@@ -108,6 +127,20 @@ const acciones = {
         const {email} = req.body;
         const perfiles = await pool.query('SELECT "Id_Perfil" FROM "Perfil" WHERE "Email"=$1',[email]);
         res.send(perfiles.rows);
+    },
+
+    buscTarjeta: async (req,res) => {
+        const {nTarjeta,codSeguridad,fecha} = req.body;
+        let enc = false;
+        const tarjetas = pool.query('SELECT "N_Tarjeta", "Cod_Seguridad", "Fecha_Ven" FROM "Tarjeta" WHERE "N_Tarjeta"=$1 OR "Cod_Seguridad"=$2 OR "Fecha_Ven"=$3',[nTarjeta,codSeguridad,fecha]);
+
+        tarjetas.rows.map(tarjeta => {
+            if (tarjeta.N_Tarjeta == nTarjeta && tarjeta.Cod_Seguridad == codSeguridad && tarjeta.Fecha_Ven == fecha){
+                enc = true;
+            }
+        });
+
+        res.send(enc);
     },
 
     addTarjeta: async (req,res) => {

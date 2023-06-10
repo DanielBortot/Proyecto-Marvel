@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    descripcion: {
+    descUsuario: {
         nombre: null, 
         apellido: null, 
         email: null, 
@@ -19,7 +19,7 @@ export const usuarioSlice = createSlice({
     initialState: initialState,
     reducers: {
         datosUsuario: (state, action) =>{
-            state.descripcion = {...action.payload};
+            state.descUsuario = {...action.payload};
         }
     }
 });

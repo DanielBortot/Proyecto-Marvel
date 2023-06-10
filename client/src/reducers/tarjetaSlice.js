@@ -1,7 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    descripcion: {
+    descTarjeta: {
         nTarjeta: null, 
         codSeguridad: null, 
         fechaVen: null
@@ -13,7 +13,7 @@ export const tarjetaSlice = createSlice({
     initialState: initialState,
     reducers: {
         datosTarjeta: (state, action) =>{
-            state.descripcion = {...action.payload};
+            state.descTarjeta = {...action.payload};
         }
     }
 });
