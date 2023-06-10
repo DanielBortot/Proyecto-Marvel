@@ -1,12 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import '../assets/registro.css';
 import axios from 'axios';
 import { createRef } from "react";
 import { useDispatch } from "react-redux";
 import { datosUsuario } from "../reducers/usuarioSlice";
-import Selector from "./Selector";
-import { Country } from "country-state-city";
+import { City, Country, State } from "country-state-city";
 
 function Register() {
     const [colores, setColores] = useState(['nselec','nselec','nselec','nselec']);
@@ -48,12 +47,33 @@ function Register() {
             })
         }   
     }
-
-    let countryData = Country.getAllCountries();
-
-    const [country,setCountry] = useState(countryData[0]);
-
-
+    let countryData = Country.getAllCountries(); //BUSCA LA LISTA DE TODOS LOS PAISES
+    const [stateData, setStateData] = useState(); //CREA LA LISTA VACIA DONDE ESTARAN LOS DATOS DE LOS ESTADOS
+    const [cityData, setCityData] = useState(); //CREA LA LISTA VACIA DONDE ESTARAN LOS DATOS DE LAS CIUDADES
+  
+    const [country, setCountry] = useState(countryData); //CREA UN ARRAY CON TODOS LOS PAISES
+    const [state, setState] = useState();   
+    const [city, setCity] = useState();
+  
+    useEffect(() => {
+      setCountry(countryData);
+    }, []);
+    
+    useEffect(() => {
+        setStateData(State.getStatesOfCountry(country.countryCode));  //DEBERIA CREAR LA LISTA DE LOS DATOS DE LOS ESTADOS AL ESCOGER UN PAIS
+      }, [country]);
+    
+      useEffect(() => {
+        setCityData(City.getCitiesOfState(country.conuntry, state?.isoCode)); //DEBERIA CREAR LA LISTA DE LOS DATOS DE LAS CIUDADS AL ESCOGER UN ESTADO
+      }, [country, state]);
+    
+      useEffect(() => {
+        setState(stateData); // CREA EL ARRAY DE LOS ESTADOS DEL PAIS
+      }, []);
+    
+      useEffect(() => {
+        setCity(cityData); // CREA EL ARRAY DE LAS CIUDADES DEL
+      }, []);
 
     return (
         <>
@@ -72,9 +92,50 @@ function Register() {
                     <input type="password" placeholder="Repetir Contraseña" ref={repContrasenaRef}/>
                     <input type="date" placeholder="Fecha de nacimiento" ref={fechaNacRef}/>
                     <div>
-                        <Selector data={countryData} selected={country} setSelected={setCountry} />
-                    </div>
-
+                        <p className="text-teal-800 font-semibold">País :</p>
+                        <select className="form-control select-class">
+                            <option value='0'>Selecciona el pais</option>
+                            {
+                                country && 
+                                country !== undefined ?
+                                country.map((ctr,index) => {
+                                    return (
+                                        <option key = {index} value={ctr.countryCode}>{ctr.name}</option> // ESCOGE EL PAIS
+                                    )
+                                })
+                                :"No country"
+                            }    
+                        </select>
+                        <p className="text-teal-800 font-semibold">Estado :</p>
+                        <select className="form-control">
+                            <option value='0'>Selecciona el estado</option>
+                            {
+                                state && 
+                                state !== undefined ?
+                                state.map((ctr,index) => {
+                                    return (
+                                        <option key = {index} value={ctr.stateCode}>{ctr.name}</option> //ESCOGE EL ESTAOD
+                                    )
+                                })
+                                :"No state"
+                            }    
+                        </select>
+                        <p className="text-teal-800 font-semibold">Ciudad :</p>
+                        <select className="form-control">
+                            <option value='0'>Selecciona la ciudad</option>
+                            {
+                                city && 
+                                city !== undefined ?
+                                city.map((ctr,index) => {
+                                    return (
+                                        <option key = {index} value={ctr.id}>{ctr.name}</option> //ESCOGE LA CIUDAD
+                                    )
+                                })
+                                :"No city"
+                            }    
+                        </select>
+                        </div> 
+                          
                     <p>Selecciona el servicio</p>
 
                     <div className="suscripcionReg">
