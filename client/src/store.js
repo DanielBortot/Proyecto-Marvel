@@ -4,6 +4,8 @@ import peliculasReducer from "./reducers/peliculasSlice";
 import seriesReducer from "./reducers/seriesSlice";
 import juegosReducer from "./reducers/juegosSlice";
 import comicsReducer from "./reducers/comicsSlice";
+import usuarioReducer from  "./reducers/usuarioSlice";
+import tarjetaReducer from "./reducers/tarjetaSlice";
 
 export default configureStore({
     reducer: {
@@ -11,6 +13,8 @@ export default configureStore({
         peliculas: peliculasReducer,
         series: seriesReducer,
         juegos: juegosReducer,
-        comics: comicsReducer
-    }
+        comics: comicsReducer,
+        usuario: usuarioReducer,
+        tarjeta: tarjetaReducer
+    }  
 })

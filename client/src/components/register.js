@@ -1,12 +1,50 @@
 import React from "react";
 import { useState } from "react";
 import '../assets/registro.css';
+import axios from 'axios';
+import { createRef } from "react";
+import { useDispatch } from "react-redux";
+import { datosUsuario } from "../reducers/usuarioSlice";
 
 function Register() {
-    const [colores, setColores] = useState({p:'nselec',s:'nselec',t:'nselec',c:'nselec'});
+    const [colores, setColores] = useState(['nselec','nselec','nselec','nselec']);
+    const [datos, setDatos] = useState({nombre: null, apellido: null, email: null, contrasena: null, fechaNac: null, fechaCrea: null, idSus: null, direccion: null})
+    const dispatch = useDispatch();
+
+    const nombreRef = createRef();
+    const apellidoRef = createRef();
+    const emailRef = createRef();
+    const contrasenaRef = createRef();
+    const repContrasenaRef = createRef();
+    const fechaNacRef = createRef();
+    const direccionRef = createRef();
+
+    const changeState = (idSus) => {
+        setDatos({
+            nombre: nombreRef.current.value,
+            apellido: nombreRef.current.value,
+            email: nombreRef.current.value,
+            contrasena: nombreRef.current.value,
+            fechaNac: fechaNacRef.current.value,
+            fechaCrea: Date(),
+            idSus: idSus,
+            direccion: direccionRef.current.value
+        })
+    }
 
     const enviar = e=> {
         e.preventDefault();
+        if (colores[3] === 'selec' || colores.find(col => col === 'selec') === undefined){
+
+            changeState(3);
+            
+            axios.post('/register',{...datos, direccion: null, nTarjeta: null}).then(res => {
+                console.log(res.data);
+                dispatch(datosUsuario(datos))
+            }).catch(err => {
+                console.log(err);
+            })
+        }   
     }
 
     return (
@@ -14,36 +52,48 @@ function Register() {
             <div className="tituloContReg">
                 <h2 className="titulo">Registrarse</h2>
             </div>
+
             <div className="formContReg">
+
                 <form>
-                    <input type="text" placeholder="Nombre"/>
-                    <input type="text" placeholder="Apellido"/>
-                    <input type="email" placeholder="Email"/>
-                    <input type="password" placeholder="Contraseña"/>
-                    <input type="password" placeholder="Repetir Contraseña"/>
-                    <input type="date" placeholder="Fecha de nacimiento"/>
+
+                    <input type="text" placeholder="Nombre" ref={nombreRef}/>
+                    <input type="text" placeholder="Apellido" ref={apellidoRef}/>
+                    <input type="email" placeholder="Email" ref={emailRef}/>
+                    <input type="password" placeholder="Contraseña" ref={contrasenaRef}/>
+                    <input type="password" placeholder="Repetir Contraseña" ref={repContrasenaRef}/>
+                    <input type="date" placeholder="Fecha de nacimiento" ref={fechaNacRef}/>
+
                     <p>Selecciona el servicio</p>
+
                     <div className="suscripcionReg">
-                       <div className={`Reg${colores.p}`} onClick={()=>setColores({p:'selec',s:'nselec',t:'nselec',c:'nselec'})}>
+
+                        <div className={`Reg${colores[0]}`} onClick={()=>setColores(['selec','nselec','nselec','nselec'])}>
                             <p>GOLD</p>
                             <p>5.99$</p>
                         </div>
-                        <div className={`Reg${colores.s}`} onClick={()=>setColores({p:'nselec',s:'selec',t:'nselec',c:'nselec'})}>
+
+                        <div className={`Reg${colores[1]}`} onClick={()=>setColores(['nselec','selec','nselec','nselec'])}>
                             <p>PREMIUM</p>
                             <p>9.99$</p>
                         </div>
-                        <div className={`Reg${colores.t}`} onClick={()=>setColores({p:'nselec',s:'nselec',t:'selec',c:'nselec'})}>
+
+                        <div className={`Reg${colores[2]}`} onClick={()=>setColores(['nselec','nselec','selec','nselec'])}>
                             <p>VIP</p>
                             <p>14.99$</p>
                         </div>
-                        <div className={`Reg${colores.c}`} onClick={()=>setColores({p:'nselec',s:'nselec',t:'nselec',c:'selec'})}>
+
+                        <div className={`Reg${colores[3]}`} onClick={()=>setColores(['nselec','nselec','nselec','selec'])}>
                             <p>GRATIS</p>
                             <p>0$</p>
                         </div>
+
                     </div>
+
                     <div className="botonReg">
                         <button type="submit" onClick={enviar}>Aceptar</button>
                     </div>
+
                 </form>
             </div>
             
