@@ -96,7 +96,7 @@ const acciones = {
             res.send('Numero maximo de perfiles en el usuario');
         } else {
             try {
-                await pool.query('INSERT INTO "Perfil"("Dispositivo", "Nombre", "Idioma", "Email", "Imagen") VALUES ($1, $2, $3, $4, $5)',[dispositivo,nombre,idioma,email,imagen]);
+                await pool.query('INSERT INTO "Perfil" ("Dispositivo", "Nombre", "Idioma", "Email", "Imagen") VALUES ($1, $2, $3, $4, $5)',[dispositivo,nombre,idioma,email,imagen]);
                 res.send([{dispositivo,nombre,idioma,email,imagen}]);
             } catch (err){
                 res.send(err);
@@ -108,6 +108,16 @@ const acciones = {
         const {email} = req.body;
         const perfiles = await pool.query('SELECT "Id_Perfil" FROM "Perfil" WHERE "Email"=$1',[email]);
         res.send(perfiles.rows);
+    },
+
+    addTarjeta: async (req,res) => {
+        const {nTarjeta,codSeguridad,fechaVen} = req.body;
+        try{
+            await pool.query('INSERT INTO "Tarjeta" ("N_Tarjeta", "Cod_Seguridad", "Fecha_Ven") VALUES ($1, $2, $3)',[nTarjeta,codSeguridad,fechaVen]);
+            res.send([{nTarjeta,codSeguridad,fechaVen}]);
+        } catch (err) {
+            res.send(err);
+        }
     }
 }
 

@@ -19,6 +19,7 @@ import { VistaInfo } from "./components/Usuario/vistaInfo";
 import { VistaSuscr } from "./components/Usuario/vistasuscr";
 import { VistaPago } from "./components/Usuario/vistaPago";
 import { VistaHistorial } from "./components/Usuario/vistaHistorial";
+import { Tarjeta } from './components/tarjeta';
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
             <Route path='/usuario/suscr' element={<VistaSuscr/>}/>
             <Route path='/usuario/pago' element={<VistaPago/>}/>
             <Route path='/usuario/historial' element={<VistaHistorial/>}/>
+            <Route path='/registro/tarjeta' element={<Tarjeta/>}/>
           </Routes>
       </div>
       <Footer/>
