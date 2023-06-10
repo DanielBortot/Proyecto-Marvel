@@ -5,6 +5,8 @@ import axios from 'axios';
 import { createRef } from "react";
 import { useDispatch } from "react-redux";
 import { datosUsuario } from "../reducers/usuarioSlice";
+import Selector from "./Selector";
+import { Country } from "country-state-city";
 
 function Register() {
     const [colores, setColores] = useState(['nselec','nselec','nselec','nselec']);
@@ -47,6 +49,12 @@ function Register() {
         }   
     }
 
+    let countryData = Country.getAllCountries();
+
+    const [country,setCountry] = useState(countryData[0]);
+
+
+
     return (
         <>
             <div className="tituloContReg">
@@ -63,6 +71,9 @@ function Register() {
                     <input type="password" placeholder="Contraseña" ref={contrasenaRef}/>
                     <input type="password" placeholder="Repetir Contraseña" ref={repContrasenaRef}/>
                     <input type="date" placeholder="Fecha de nacimiento" ref={fechaNacRef}/>
+                    <div>
+                        <Selector data={countryData} selected={country} setSelected={setCountry} />
+                    </div>
 
                     <p>Selecciona el servicio</p>
 

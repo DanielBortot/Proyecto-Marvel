@@ -1,8 +1,24 @@
 .sidebar {
     width: 340px;
 }
-.blue {
-width: 500px;
-height: 500px;
-background-color: blue;
+
+.resumenbar {
+    position: fixed;
+    top: 110px;
+    left: 420px;
+    width: 720px;
+    height: 340px;
+    background-color: #656565;
+}
+
+.tituloresumen {
+    background-color: #535353;
+}
+
+.tituloresumen h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    color: #fff;
+    text-shadow: none;
+    text-align: left;
+    padding: 15px;
 }

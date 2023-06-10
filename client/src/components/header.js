@@ -20,7 +20,7 @@ function Header (){
             </div>
             <div className="inisesion hed">
                 <Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/inicioSesion'}>Iniciar Sesion</Link>
-                <Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/usuario'}><FontAwesomeIcon icon={faUser} style={{color: "#ffffff",width: 40,}} /></Link>
+                <Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/usuario/resumen'}><FontAwesomeIcon icon={faUser} style={{color: "#ffffff",width: 40,}} /></Link>
             </div>
         </div>
     );
