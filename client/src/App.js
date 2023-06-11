@@ -44,6 +44,7 @@ function App() {
             <Route path='/usuario/pago' element={<VistaPago/>}/>
             <Route path='/usuario/historial' element={<VistaHistorial/>}/>
             <Route path='/registro/tarjeta' element={<Tarjeta/>}/>
+            
           </Routes>
       </div>
       <Footer/>
