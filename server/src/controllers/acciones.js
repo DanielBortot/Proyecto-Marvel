@@ -100,9 +100,9 @@ const acciones = {
 
     login: async (req,res) => {
         const {email,contrasena} = req.body;
-        const usuario = await pool.query('SELECT "Email", "Contrasena" FROM "Usuario" WHERE "Email"=$1 AND "Contrasena"=$2',[email,contrasena]);
+        const usuario = await pool.query('SELECT * FROM "Usuario" WHERE "Email"=$1 AND "Contrasena"=$2',[email,contrasena]);
         if (usuario.rows.length == 0){
-            res.send("El usuario o la contrasena no existe");
+            res.send([]);
         } else {
             res.send(usuario.rows);
         }
@@ -141,6 +141,13 @@ const acciones = {
         });
 
         res.send(enc);
+    },
+
+    selecTarjeta: async (req,res) => {
+        const {nTarjeta} = req.body;
+        const tarjeta = await pool.query('SELECT * FROM "Tarjeta" WHERE "N_Tarjeta"=$1',[nTarjeta]);
+    
+        res.send(tarjeta);
     },
 
     addTarjeta: async (req,res) => {
