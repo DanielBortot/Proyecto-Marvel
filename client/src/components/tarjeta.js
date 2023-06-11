@@ -39,13 +39,13 @@ function Tarjeta () {
                         return errores;
                     }}
                     onSubmit={async (val) => {
-                        let tarjeta = await axios.post('/buscTarjeta',val);
+                        let tarjeta = (await axios.post('../api/buscTarjeta',val)).data;
                         if (!tarjeta){
-                            await axios.post('/addTarjeta',{nTarjeta: val.tarjeta, codSeguridad: val.codigo, fechaVen: val.fecha}); 
+                            await axios.post('../api/addTarjeta',{N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha}); 
                         }
-                        dispatch(datosTarjeta({nTarjeta: val.tarjeta, codSeguridad: val.codigo, fechaVen: val.fecha}));
-                        await axios.post('/register',{...descUsuario, nTarjeta: val.tarjeta});
-                        dispatch(datosUsuario({...descUsuario, nTarjeta: val.tarjeta}));
+                        dispatch(datosTarjeta({N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha}));
+                        await axios.post('../api/register',{...descUsuario, N_Tarjeta: val.tarjeta});
+                        dispatch(datosUsuario({...descUsuario, N_Tarjeta: val.tarjeta}));
                         navigate('/')
                     }}>
                         {({errors}) => (

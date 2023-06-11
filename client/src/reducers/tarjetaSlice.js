@@ -2,9 +2,9 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     descTarjeta: {
-        nTarjeta: null, 
-        codSeguridad: null, 
-        fechaVen: null
+        N_Tarjeta: null, 
+        Cod_Seguridad: null, 
+        Fecha_Ven: null
     }
 }
 

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Register() {
     const [colores, setColores] = useState(['nselec','nselec','nselec','nselec']);
-    const [erroresBD, setErroresBD] = useState({});
+    //const [erroresBD, setErroresBD] = useState({});
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -55,36 +55,37 @@ function Register() {
                         return errores;
                     }}
                     onSubmit={async (val)=>{
-                        setErroresBD(await axios.post('/buscTarjeta',{email: val.email, nombre: val.nombre, apellido: val.apellido}));
+                        const erroresBD = (await axios.post('api/buscUsuario',{Email: val.email, Nombre: val.nombre, Apellido: val.apellido})).data;
                         const date = new Date();
                         if (!erroresBD.nombre && !erroresBD.apellido && !erroresBD.email){
                             const col = colores.findIndex(c => c ==='selec');
-                            if (col === -1 || col === 0){
-                                await axios.post('/register',{nombre: val.nombre, apellido: val.apellido, email: val.email, contrasena: val.contra, direccion: null, nTarjeta: null, idSus: 1, fechaCrea: date.toLocaleDateString()});
+                            if (col === -1 || col === 3){
+                                await axios.post('api/register',{Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: 3, N_Tarjeta: null, Id_Suscripcion: 4, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha});
 
-                                dispatch(datosUsuario({nombre: val.nombre, apellido: val.apellido, email: val.email, contrasena: val.contra, direccion: null, nTarjeta: null, idSus: 1, fechaCrea: date.toLocaleDateString()}));
+                                dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: 3, N_Tarjeta: null, Id_Suscripcion: 4, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
                                 navigate('/');
 
                             } else {
-                                dispatch(datosUsuario({nombre: val.nombre, apellido: val.apellido, email: val.email, contrasena: val.contra, direccion: null, nTarjeta: null, idSus: col+1, fechaCrea: date.toLocaleDateString()}));
+                                dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: 3, N_Tarjeta: null, Id_Suscripcion: col+1, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
                                 navigate('/registro/tarjeta');
                             }
                         }
+                        alert(`${erroresBD.nombre}, ${erroresBD.apellido}, ${erroresBD.email}`);
                     }}
                 >
                     {({errors})=>(
                         <Form>
-                            {erroresBD.nombre && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.nombre}</div>}
+                            {/* {erroresBD.nombre && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.nombre}</div>} */}
                             <ErrorMessage name="nombre" id="nombre" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombre}</div>)}/>
 
                             <Field type="text" placeholder="Nombre" name="nombre"/>
 
-                            {erroresBD.apellido && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.apellido}</div>}
+                            {/* {erroresBD.apellido && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.apellido}</div>} */}
                             <ErrorMessage name="apellido" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.apellido}</div>)}/>
 
                             <Field type="text" placeholder="Apellido" name="apellido"/>
 
-                            {erroresBD.email && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.email}</div>}
+                            {/* {erroresBD.email && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.email}</div>} */}
                             <ErrorMessage name="email" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.email}</div>)}/>
                             
                             <Field type="email" placeholder="Email" name="email"/>

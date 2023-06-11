@@ -2,14 +2,14 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     descUsuario: {
-        nombre: null, 
-        apellido: null, 
-        email: null, 
-        contrasena: null, 
-        fechaNac: null,
-        fechaCrea: null,
-        idSus: null,
-        direccion: null
+        Nombre: null, 
+        Apellido: null, 
+        Email: null, 
+        Contrasena: null, 
+        Fecha_Nac: null,
+        Fecha_Creacion: null,
+        Id_Suscripcion: null,
+        Direccion: null
     }
 }
 

@@ -37,15 +37,15 @@ function Login() {
                         }
                     }}
                     onSubmit={ async (val)=> {
-                        const usuario = await axios.post('/login',{email: val.email, contrasena: val.contrasena});
+                        const usuario = (await axios.post('api/login',{Email: val.email, Contrasena: val.contra})).data;
                         if (usuario.length === 0){
                             setErrorDB({error: "Email o Contraseña incorrecto"});
                         }
                         else {
                             usuario.map(u => dispatch(datosUsuario({...u})));
                             if (usuario[0].N_Tarjeta != null){
-                                const tarjeta = await axios.post('/selecTarjeta',{nTarjeta: usuario[0].N_Tarjeta});
-                                tarjeta.map(t => dispatch(datosTarjeta(...t)));
+                                const tarjeta = (await axios.post('api/selecTarjeta',{N_Tarjeta: usuario[0].N_Tarjeta})).data;
+                                tarjeta.map(t => dispatch(datosTarjeta({...t})));
                             }
                             navigate('/');
                         }
