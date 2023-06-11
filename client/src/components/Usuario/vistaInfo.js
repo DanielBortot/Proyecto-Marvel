@@ -10,21 +10,21 @@ function VistaInfo () {
                     <div class="col-4 ">
                         <SideMenu/>
                     </div>
-                    <div class="col-8 tituloresumen">
-                        <div>
+                    <div class="col-8">
+                        <div class="tituloresumen">
                             <h1 class="p-15px">Informacion personal</h1>
                             <div class="p-15px resumenbar">
                                 <h5>Nombre Apellido</h5>
                                 <h5>Pais</h5>
                             </div>
                         </div>
-                        <div>
+                        <div class="tituloresumen">
                             <h1 class="p-15px">email</h1>
                             <div class="p-15px resumenbar">
                                 <h5>email@ejemplo.com</h5>
                             </div>
                         </div>
-                        <div>
+                        <div class="tituloresumen">
                             <h1 class="p-15px">direccion</h1>
                             <div class="p-15px resumenbar">
                                 <h5>Pais</h5>

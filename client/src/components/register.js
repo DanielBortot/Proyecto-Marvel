@@ -100,24 +100,16 @@ function Register() {
                             <ErrorMessage name="fecha" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fecha}</div>)}/>
 
                             <Field type="date" placeholder="Fecha de nacimiento" name="fecha"/>
-                            <div>
-                                <p className="text-teal-800 font-semibold">País :</p>
-                                <select className="form-control select-class">
-                                    <option value='0'>Selecciona el pais</option>
-                                      
-                                </select>
-                                <p className="text-teal-800 font-semibold">Estado :</p>
-                                <select className="form-control">
-                                    <option value='0'>Selecciona el estado</option>
-                                     
-                                </select>
-                                <p className="text-teal-800 font-semibold">Ciudad :</p>
-                                <select className="form-control">
-                                    <option value='0'>Selecciona la ciudad</option>
-                                    
-                                      
-                                </select>
-                                </div> 
+                            
+                            <Field type="text" placeholder="Pais" name="pais" as="select">
+                            <option value='0'>Selecciona el pais</option>
+                            </Field>
+                            <Field type="text" placeholder="Estado" name="estado" as="select">
+                            <option value='0'>Selecciona el estado</option>
+                            </Field>   
+                            <Field type="text" placeholder="Ciudad" name="ciudad" as="select">
+                            <option value='0'>Selecciona la ciudad</option>
+                            </Field>      
                                 
                             <p>Selecciona el servicio</p>
 

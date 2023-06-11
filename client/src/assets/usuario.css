@@ -9,11 +9,14 @@
     font-family: 'Roboto', sans-serif;
 }
 
-.tituloresumen h1 {
-    font-family: 'Bebas Neue', sans-serif;
+.tituloresumen {
     color: #fff;
-    padding: 15px;
+    padding: 10px;
     background-color: #535353;
     margin: 0;
     margin-top: 25px;
+}
+
+.tituloresumen h1 {
+    font-family: 'Bebas Neue', sans-serif;
 }

@@ -39,6 +39,19 @@
     transition: all .4s ease;
 }
 
+.formContReg form select {
+    width: 70%;
+    height: 40px;
+    margin: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(206, 206, 207, 0.39);
+    padding: 10px;
+    outline: none;
+    transition: all .4s ease;
+    color:grey;
+}
+
 .formContReg form input:focus {
     background-color: rgb(196, 194, 194);
 }

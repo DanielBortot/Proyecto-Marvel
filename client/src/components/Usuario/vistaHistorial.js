@@ -10,8 +10,8 @@ function VistaHistorial () {
                     <div class="col-4 ">
                         <SideMenu/>
                     </div>
-                    <div class="col-8 tituloresumen">
-                        <div>
+                    <div class="col-8">
+                        <div class="tituloresumen">
                             <h1 class="p-15px">Historial</h1>
                             <div class="p-15px resumenbar">
                                 <h5>Historial</h5>
