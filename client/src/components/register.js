@@ -6,10 +6,13 @@ import { useDispatch } from "react-redux";
 import { datosUsuario } from "../reducers/usuarioSlice";
 import { City, Country, State } from "country-state-city";
 import { Formik, Form, ErrorMessage, Field} from "formik";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
     const [colores, setColores] = useState(['nselec','nselec','nselec','nselec']);
+    const [erroresBD, setErroresBD] = useState({});
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     let countryData = Country.getAllCountries(); //BUSCA LA LISTA DE TODOS LOS PAISES
     const [stateData, setStateData] = useState(); //CREA LA LISTA VACIA DONDE ESTARAN LOS DATOS DE LOS ESTADOS
@@ -57,13 +60,13 @@ function Register() {
                     }}
                     validate={(val)=> {
                         let errores = {};
-                        if (!val.nombre){
+                        if (!val.nombre || !/^[a-zA-Z]{1,50}$/.test(val.nombre)){
                             errores.nombre = 'Introduzca un nombre valido';
                         }
-                        if (!val.apellido){
+                        if (!val.apellido || !/^[a-zA-Z]{1,50}$/.test(val.apellido)){
                             errores.apellido = 'Introduzca un apellido valido';
                         }
-                        if (!val.email){
+                        if (!val.email || !/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(val.email)){
                             errores.email = 'Introduzca un email valido';
                         }
                         if (!val.contra){
@@ -79,28 +82,37 @@ function Register() {
                         }
                         return errores;
                     }}
-                    onSubmit={(val)=>{
-                        if (colores[3] === 'selec' || colores.find(col => col === 'selec') === undefined){
-                            
-                            axios.post('/register',{...val, direccion: null, nTarjeta: null}).then(res => {
-                                console.log(res.data);
-                                dispatch(datosUsuario(val))
-                            }).catch(err => {
-                                console.log(err);
-                            })
-                        }   
+                    onSubmit={async (val)=>{
+                        setErroresBD(await axios.post('/buscTarjeta',{email: val.email, nombre: val.nombre, apellido: val.apellido}));
+                        const date = new Date();
+                        if (!erroresBD.nombre && !erroresBD.apellido && !erroresBD.email){
+                            const col = colores.findIndex(c => c ==='selec');
+                            if (col === -1 || col === 0){
+                                await axios.post('/register',{nombre: val.nombre, apellido: val.apellido, email: val.email, contrasena: val.contra, direccion: null, nTarjeta: null, idSus: 1, fechaCrea: date.toLocaleDateString()});
+
+                                dispatch(datosUsuario({nombre: val.nombre, apellido: val.apellido, email: val.email, contrasena: val.contra, direccion: null, nTarjeta: null, idSus: 1, fechaCrea: date.toLocaleDateString()}));
+                                navigate('/');
+
+                            } else {
+                                dispatch(datosUsuario({nombre: val.nombre, apellido: val.apellido, email: val.email, contrasena: val.contra, direccion: null, nTarjeta: null, idSus: col+1, fechaCrea: date.toLocaleDateString()}));
+                                navigate('/registro/tarjeta');
+                            }
+                        }
                     }}
                 >
                     {({errors})=>(
                         <Form>
+                            {erroresBD.nombre && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.nombre}</div>}
                             <ErrorMessage name="nombre" id="nombre" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombre}</div>)}/>
 
                             <Field type="text" placeholder="Nombre" name="nombre"/>
 
+                            {erroresBD.apellido && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.apellido}</div>}
                             <ErrorMessage name="apellido" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.apellido}</div>)}/>
 
                             <Field type="text" placeholder="Apellido" name="apellido"/>
 
+                            {erroresBD.email && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.email}</div>}
                             <ErrorMessage name="email" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.email}</div>)}/>
                             
                             <Field type="email" placeholder="Email" name="email"/>

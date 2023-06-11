@@ -5,10 +5,12 @@ import {ErrorMessage, Field, Form, Formik} from "formik";
 import { useDispatch } from "react-redux";
 import { datosTarjeta } from "../reducers/tarjetaSlice"; 
 import { datosUsuario } from "../reducers/usuarioSlice";
+import { useNavigate } from "react-router-dom";
 
 function Tarjeta () {
     const {descUsuario} = useSelector(state => state.usuario);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     return (
         <>
@@ -25,7 +27,7 @@ function Tarjeta () {
                     }}
                     validate={({tarjeta,codigo,fecha}) => {
                         let errores = {};
-                        if (!tarjeta || !/[0-9]{12,12}$/.test(tarjeta)){
+                        if (!tarjeta || !/^[0-9]{12,12}$/.test(tarjeta)){
                             errores.tarjeta = 'Ingrese un numero de tarjeta';
                         }
                         if (!codigo || isNaN(codigo) || parseInt(codigo) < 100 || parseInt(codigo) > 999 ){
@@ -36,15 +38,15 @@ function Tarjeta () {
                         }
                         return errores;
                     }}
-                    onSubmit={async (val, {resetForm}) => {
-                        resetForm();
+                    onSubmit={async (val) => {
                         let tarjeta = await axios.post('/buscTarjeta',val);
                         if (!tarjeta){
-                            tarjeta = await axios.post('/addTarjeta',{nTarjeta: val.tarjeta, codSeguridad: val.codigo, fechaVen: val.fecha}); 
+                            await axios.post('/addTarjeta',{nTarjeta: val.tarjeta, codSeguridad: val.codigo, fechaVen: val.fecha}); 
                         }
-                        dispatch(datosTarjeta({nTarjeta: tarjeta.N_Tarjeta, codSeguridad: tarjeta.Cod_Seguridad, fechaVen: tarjeta.Fecha_Ven}));
+                        dispatch(datosTarjeta({nTarjeta: val.tarjeta, codSeguridad: val.codigo, fechaVen: val.fecha}));
                         await axios.post('/register',{...descUsuario, nTarjeta: val.tarjeta});
-                        dispatch(datosUsuario({...descUsuario, nTarjeta: val.tarjeta}))
+                        dispatch(datosUsuario({...descUsuario, nTarjeta: val.tarjeta}));
+                        navigate('/')
                     }}>
                         {({errors}) => (
 
