@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import {ErrorMessage, Field, Form, Formik} from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { datosTarjeta } from "../reducers/tarjetaSlice"; 
 import { datosUsuario } from "../reducers/usuarioSlice";

@@ -4,8 +4,24 @@ import { SideMenu } from "./sideMenu";
 function VistaSuscr () {
     return (
         <>
-            <h1>Suscripción</h1>
-            <SideMenu/>
+           <div class="container">
+                <div class="row">
+                    <div class="col-4 ">
+                        <SideMenu/>
+                    </div>
+                    <div class="col-8 tituloresumen">
+                        <div>
+                            <h1 class="p-15px">Suscripcion actual</h1>
+                            <div class="p-15px resumenbar">
+                                <h5>Titulo</h5>
+                                <p>Detalles de la suscripcion</p>
+                                <h4>Coste</h4>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-danger mt-5">Cambiar de suscripcion</button>
+                    </div>
+                </div>   
+            </div>   
         </>
     );
 }
