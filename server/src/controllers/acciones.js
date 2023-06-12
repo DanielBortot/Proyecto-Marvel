@@ -149,6 +149,23 @@ const acciones = {
         } catch (err) {
             res.send(err);
         }
+    },
+
+    paises: async (req,res) => {
+        const paises = await pool.query('SELECT * FROM "Pais"');
+        res.send(paises.rows);
+    },
+
+    estados: async (req,res) => {
+        const {Id_Pais} = req.body;
+        const estados = await pool.query('SELECT * FROM "Estado" WHERE "Id_Pais"=$1',[Id_Pais]);
+        res.send(estados.rows);
+    },
+
+    ciudades: async (req,res) => {
+        const {Id_Estado} = req.body;
+        const ciudades = await pool.query('SELECT * FROM "Ciudad" WHERE "Id_Estado"=$1',[Id_Estado]);
+        res.send(ciudades.rows);
     }
 }
 

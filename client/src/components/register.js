@@ -6,13 +6,41 @@ import { useDispatch } from "react-redux";
 import { datosUsuario } from "../reducers/usuarioSlice";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useNavigate } from "react-router-dom";
+import { setPais, setEstado } from "../reducers/direccionSlice";
 
 function Register() {
     const [colores, setColores] = useState(['nselec','nselec','nselec','nselec']);
     //const [erroresBD, setErroresBD] = useState({});
+    const [paises, setPaises] = useState([]);
+    const [estados, setEstados] = useState([]);
+    const [ciudades, setCiudades] = useState([]);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    useEffect(async ()=>{
+        const ps = await (await axios.get('/paises')).data;
+        setPaises(ps);
+    },[]);
+
+    const paisRed = async (id) => {
+        paises.map(pais => {
+            if (pais.Id_Pais === id){
+                dispatch(setPais(pais));
+            }
+        });
+        const estados = await (await axios.post('/estados',{Id_Pais: id})).data;
+        setEstados(estados);
+    }
+
+    const estadoRed = async (id) => {
+        estados.map(estado => {
+            if (estado.Id_Estado === id){
+                dispatch(setEstado(estado));
+            }
+        });
+        const ciudades = await (await axios.post('/ciudades', {Id_Estado: id})).data;
+        setCiudades(ciudades);
+    }
 
     return (
         <>
@@ -51,6 +79,15 @@ function Register() {
                         }
                         if (!val.fecha){
                             errores.fecha = 'Introduzca la fecha de nacimiento';
+                        }
+                        if (!val.pais){
+                            errores.pais = 'Seleccione un pais';
+                        }
+                        if (!val.estado){
+                            errores.estado = 'Seleccione un estado';
+                        }
+                        if (!val.ciudad){
+                            errores.ciudad = 'Seleccione una ciudad';
                         }
                         return errores;
                     }}
@@ -103,14 +140,31 @@ function Register() {
 
                             <Field type="date" placeholder="Fecha de nacimiento" name="fecha"/>
                             
+                            <ErrorMessage name="pais" id="pais" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.pais}</div>)}/>
+
                             <Field type="text" placeholder="Pais" name="pais" as="select">
-                            <option value='0'>Selecciona el pais</option>
+                            <option hidden selected>Selecciona el pais</option>
+                            {paises.map(pais => (
+                                <option value={pais.Id_Pais} onClick={()=>paisRed(pais.Id_Pais)}>{pais.Nombre}</option>
+                            ))}
                             </Field>
+
+                            <ErrorMessage name="estado" id="estado" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.estado}</div>)}/>
+
                             <Field type="text" placeholder="Estado" name="estado" as="select">
-                            <option value='0'>Selecciona el estado</option>
-                            </Field>   
+                            <option hidden selected>Selecciona el estado</option>
+                            {estados.map(estado => (
+                                <option value={estado.Id_Estado} onClick={()=>estadoRed(estado.Id_Estado)}>{estado.Nombre}</option>
+                            ))}
+                            </Field>
+
+                            <ErrorMessage name="ciudad" id="ciudad" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.ciudad}</div>)}/>
+
                             <Field type="text" placeholder="Ciudad" name="ciudad" as="select">
-                            <option value='0'>Selecciona la ciudad</option>
+                            <option hidden selected>Selecciona la ciudad</option>
+                            {ciudades.map(ciudad => (
+                                <option value={ciudad.Id_Ciudad}>{ciudad.Nombre}</option>
+                            ))}
                             </Field>      
                                 
                             <p>Selecciona el servicio</p>

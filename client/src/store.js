@@ -6,7 +6,8 @@ import juegosReducer from "./reducers/juegosSlice";
 import comicsReducer from "./reducers/comicsSlice";
 import usuarioReducer from  "./reducers/usuarioSlice";
 import tarjetaReducer from "./reducers/tarjetaSlice";
-import perfilesReducer from "./reducers/perfilesSlice"
+import perfilesReducer from "./reducers/perfilesSlice";
+import direccionReducer from "./reducers/direccionSlice";
 
 export default configureStore({
     reducer: {
@@ -17,6 +18,7 @@ export default configureStore({
         comics: comicsReducer,
         usuario: usuarioReducer,
         tarjeta: tarjetaReducer,
-        perfiles: perfilesReducer
+        perfiles: perfilesReducer,
+        direccion: direccionReducer
     }  
 })

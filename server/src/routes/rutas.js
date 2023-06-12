@@ -1,10 +1,11 @@
 const router = require('express').Router();
-const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta} = require('../controllers/acciones');
+const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades} = require('../controllers/acciones');
 
 router.get('/personajes', personajes);
 router.get('/peliculas', peliculas);
 router.get('/series', series);
 router.get('/juegos', juegos);
+router.get('/paises', paises);
 
 router.delete('/removePersonaje/:id', removePersonaje);
 router.delete('/removePelicula/:id', removePelicula);
@@ -24,5 +25,7 @@ router.post('/perfiles', perfiles);
 router.post('/addTarjeta', addTarjeta);
 router.post('/buscTarjeta', buscTarjeta);
 router.post('/selecTarjeta', selecTarjeta);
+router.post('/estados', estados);
+router.post('/ciudades', ciudades);
 
 module.exports = router;
