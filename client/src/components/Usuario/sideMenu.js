@@ -11,7 +11,7 @@ import { faClockRotateLeft } from '@fortawesome/free-solid-svg-icons'
 function SideMenu (){
     
     return (     
-                <ul class=" sidebar nav flex-column m-4">               
+                <ul className=" sidebar nav flex-column m-4">               
                     <Link className='custom-button btn btn-secondary px-4 py-4 d-flex justify-content-left' to={'/usuario/resumen'}> <FontAwesomeIcon icon={faHome} style={{color: "#ffffff",width: 40,}}/> Resumen de cuenta</Link>
                     <Link className='custom-button btn btn-secondary px-4 py-4 d-flex justify-content-left' to={'/usuario/info'}> <FontAwesomeIcon icon={faUser} style={{color: "#ffffff",width: 40,}}/> Información de usuario</Link>
                     <Link className='custom-button btn btn-secondary px-4 py-4 d-flex justify-content-left' to={'/usuario/suscr'}> <FontAwesomeIcon icon={faList} style={{color: "#ffffff",width: 40,}}/> Suscripción</Link>                        

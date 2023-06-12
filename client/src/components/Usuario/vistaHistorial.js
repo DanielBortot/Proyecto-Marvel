@@ -5,15 +5,15 @@ import { SideMenu } from "./sideMenu";
 function VistaHistorial () {
     return (
         <>
-            <div class="container">
-                <div class="row">
-                    <div class="col-4 ">
+            <div className="container">
+                <div className="row">
+                    <div className="col-4 ">
                         <SideMenu/>
                     </div>
-                    <div class="col-8">
-                        <div class="tituloresumen">
-                            <h1 class="p-15px">Historial</h1>
-                            <div class="p-15px resumenbar">
+                    <div className="col-8">
+                        <div className="tituloresumen">
+                            <h1 className="p-15px">Historial</h1>
+                            <div className="p-15px resumenbar">
                                 <h5>Historial</h5>
                             </div>
                         </div>

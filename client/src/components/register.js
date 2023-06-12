@@ -69,8 +69,9 @@ function Register() {
                                 dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: 3, N_Tarjeta: null, Id_Suscripcion: col+1, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
                                 navigate('/registro/tarjeta');
                             }
+                        } else {
+                            alert(`${erroresBD.nombre}, ${erroresBD.apellido}, ${erroresBD.email}`);
                         }
-                        alert(`${erroresBD.nombre}, ${erroresBD.apellido}, ${erroresBD.email}`);
                     }}
                 >
                     {({errors})=>(

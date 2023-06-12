@@ -6,14 +6,13 @@ import { useDispatch } from "react-redux";
 import { datosUsuario } from "../reducers/usuarioSlice";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useNavigate } from "react-router-dom";
-import "../assets/img/imgSelect.js"
+import { imagenPerfil } from "../assets/img/imgSelect";
+import "../assets/perfil.css"
 
 function Perfil (){
-    const [erroresBD, setErroresBD] = useState({});
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const imgPer = <imgSelect/>; 
-    const [val, setVal] = useState(imgPer);
+    const [val, setVal] = useState(imagenPerfil[0].img);
     return (
         <>
             <div className="tituloContReg"> {/* dispositivo, nombre, idioma, imagen*/}
@@ -38,14 +37,18 @@ function Perfil (){
                 >
                     {({errors})=>(
                         <Form>
-{/*
-                            <Field type="text" placeholder="Imagen de perfil" name="imgperfil" as="select" value={val} onChange={e=>setVal(e.target.value)}>
-                            {
-                                imgPer.map(<option><img src={val}/></option>)
-                            }
-                            </Field>
-*/}
-                            {erroresBD.nombre && <div style={{fontSize: "15px", color: "red"}}>{erroresBD.nombre}</div>}
+
+                            <div className="perfilCont">
+
+                                {imagenPerfil.map(i => (
+                                    <div key={i.pos} className="imgPerfil">
+                                        <textarea style={{opacity: '0', cursor: 'default'}} onClick={()=>setVal(i.img)}></textarea>
+                                        <img src={i.img} key={i.pos}></img>
+                                    </div>
+                                ))}
+
+                            </div>
+
                             <ErrorMessage name="nombre" id="nombre" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombre}</div>)}/>
 
                             <Field type="text" placeholder="Nombre" name="nombre"/>
@@ -55,7 +58,8 @@ function Perfil (){
                             </Field>
                             <Field type="text" placeholder="Dispositivo" name="dispositivo" as="select">
                             <option value='0'>Selecciona tu dispositivo</option>
-                            </Field>             
+                            </Field>
+                            <img src={val}></img>            
                             <div className="botonReg">
                                 <button type="submit">Aceptar</button>
                             </div>

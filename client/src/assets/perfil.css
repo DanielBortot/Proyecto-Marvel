@@ -1,0 +1,24 @@
+.perfilCont {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 5px
+}
+
+.perfilCont textarea {
+    position: absolute;
+    width: 130px;
+    height: 131px;
+    z-index: 10;
+}
+
+.imgPerfil {
+    padding: 8px;
+    border-radius: 50%;
+
+}
+
+.imgPerfil:focus-within{
+    filter: brightness(40%);
+}
