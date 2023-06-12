@@ -32,6 +32,12 @@ function Perfil (){
                         if (!val.nombre || !/^[a-zA-Z]{1,50}$/.test(val.nombre)){
                             errores.nombre = 'Introduzca un nombre valido';
                         }
+                        if (!val.idioma){
+                            errores.idioma = 'Seleccione un idioma';
+                        }
+                        if (!val.dispositivo){
+                            errores.dispositivo = 'Seleccione un dispositivo';
+                        }
                         return errores;
                     }}
                 >
@@ -42,7 +48,7 @@ function Perfil (){
 
                                 {imagenPerfil.map(i => (
                                     <div key={i.pos} className="imgPerfil">
-                                        <textarea style={{opacity: '0', cursor: 'default'}} onClick={()=>setVal(i.img)}></textarea>
+                                        <textarea style={{opacity: '0', cursor: 'default', resize: 'none'}} onClick={()=>setVal(i.img)} maxLength={0}></textarea>
                                         <img src={i.img} key={i.pos}></img>
                                     </div>
                                 ))}
@@ -52,12 +58,26 @@ function Perfil (){
                             <ErrorMessage name="nombre" id="nombre" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombre}</div>)}/>
 
                             <Field type="text" placeholder="Nombre" name="nombre"/>
+                            
+                            <ErrorMessage name="idioma" id="idioma" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.idioma}</div>)}/>
 
                             <Field type="text" placeholder="Idioma" name="idioma" as="select">
-                            <option value='0'>Selecciona tu idioma</option>
+                            <option hidden selected>Selecciona tu idioma</option>
+                            <option value='Espanol'>Español</option>
+                            <option value='Ingles'>Ingles</option>
+                            <option value='Chino'>Chino</option>
+                            <option value='Frances'>Frances</option>
+                            <option value='Portugues'>Portugues</option>
                             </Field>
+
+                            <ErrorMessage name="dispositivo" id="dispositivo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.dispositivo}</div>)}/>
+
                             <Field type="text" placeholder="Dispositivo" name="dispositivo" as="select">
-                            <option value='0'>Selecciona tu dispositivo</option>
+                            <option hidden selected>Selecciona tu dispositivo</option>
+                            <option value='Telefono'>Telefono</option>
+                            <option value='Tablet'>Tablet</option>
+                            <option value='Televisor'>Televisor</option>
+                            <option value='Computadora'>Computadora</option>
                             </Field>
                             <img src={val}></img>            
                             <div className="botonReg">
