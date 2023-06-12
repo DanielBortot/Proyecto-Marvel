@@ -103,27 +103,13 @@ const acciones = {
     login: async (req,res) => {
         const {Email,Contrasena} = req.body;
         const usuario = await pool.query('SELECT * FROM "Usuario" WHERE "Email"=$1 AND "Contrasena"=$2',[Email,Contrasena]);
-        
-        if (usuario.rows.length == 0){
-            res.send([]);
-        } else {
-            res.send(usuario.rows);
-        }
+        res.send(usuario.rows);
     },
 
     addPerfil: async (req,res) => {
         const {Dispositivo,Nombre,Idioma,Email,Imagen} = req.body;
-        const perfiles = await pool.query('SELECT "Id_Perfil" FROM "Perfil" WHERE "Email"=$1',[Email]);
-        if (perfiles.rows.length == 5){
-            res.send('Numero maximo de perfiles en el usuario');
-        } else {
-            try {
-                await pool.query('INSERT INTO "Perfil" ("Dispositivo", "Nombre", "Idioma", "Email", "Imagen") VALUES ($1, $2, $3, $4, $5)',[Dispositivo,Nombre,Idioma,Email,Imagen]);
-                res.send([{Dispositivo,Nombre,Idioma,Email,Imagen}]);
-            } catch (err){
-                res.send(err);
-            }
-        }
+        await pool.query('INSERT INTO "Perfil" ("Dispositivo", "Nombre", "Idioma", "Email", "Imagen") VALUES ($1, $2, $3, $4, $5)',[Dispositivo,Nombre,Idioma,Email,Imagen]);
+        res.send([{Dispositivo,Nombre,Idioma,Email,Imagen}]);
     },
 
     perfiles: async (req,res) => {

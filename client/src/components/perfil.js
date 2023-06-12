@@ -3,7 +3,8 @@ import { useState } from "react";
 import '../assets/registro.css';
 import axios from 'axios';
 import { useDispatch } from "react-redux";
-import { datosUsuario } from "../reducers/usuarioSlice";
+import { useSelector } from "react-redux";
+import { datosPerfil } from "../reducers/perfilesSlice";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useNavigate } from "react-router-dom";
 import { imagenPerfil } from "../assets/img/imgSelect";
@@ -12,7 +13,9 @@ import "../assets/perfil.css"
 function Perfil (){
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [val, setVal] = useState(imagenPerfil[0].img);
+    const {descUsuario} = useSelector(state => state.usuario);
+    const [imagen, setImagen] = useState(imagenPerfil[0].img);
+    const [errorDB, setErrorDB] = useState([]);
     return (
         <>
             <div className="tituloContReg"> {/* dispositivo, nombre, idioma, imagen*/}
@@ -40,6 +43,23 @@ function Perfil (){
                         }
                         return errores;
                     }}
+                    onSubmit={ async (val)=> {
+                        const perfiles = (await axios.post('/perfiles',{Email: descUsuario.Email})).data;
+                        if (perfiles.length === 5){
+                            setErrorDB({errTam: 'Numero de perfiles maximos alcanzados'});
+                        }
+                        else if (perfiles.length !== 0) {
+                            perfiles.map(perfil => {
+                                if (perfil.Nombre === val.nombre){
+                                    setErrorDB({errNom: 'Ya existe un perfil con este nombre'});
+                                }
+                            })
+                        }
+                        if (!errorDB.errTam && !errorDB.errNom){
+                            await axios.post('/addPerfil',{Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen});
+                            dispatch(datosPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
+                        }
+                    }}
                 >
                     {({errors})=>(
                         <Form>
@@ -48,13 +68,14 @@ function Perfil (){
 
                                 {imagenPerfil.map(i => (
                                     <div key={i.pos} className="imgPerfil">
-                                        <textarea style={{opacity: '0', cursor: 'default', resize: 'none'}} onClick={()=>setVal(i.img)} maxLength={0}></textarea>
+                                        <textarea style={{opacity: '0', cursor: 'default', resize: 'none'}} onClick={()=>setImagen(i.img)} maxLength={0}></textarea>
                                         <img src={i.img} key={i.pos}></img>
                                     </div>
                                 ))}
 
                             </div>
-
+                            {errorDB.errNom && <div style={{fontSize: "15px", color: "red"}}>{errorDB.errNom}</div>}
+                            {errorDB.errTam && <div style={{fontSize: "15px", color: "red"}}>{errorDB.errTam}</div>}
                             <ErrorMessage name="nombre" id="nombre" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombre}</div>)}/>
 
                             <Field type="text" placeholder="Nombre" name="nombre"/>
@@ -79,7 +100,7 @@ function Perfil (){
                             <option value='Televisor'>Televisor</option>
                             <option value='Computadora'>Computadora</option>
                             </Field>
-                            <img src={val}></img>            
+                            <img src={imagen}></img>            
                             <div className="botonReg">
                                 <button type="submit">Aceptar</button>
                             </div>
