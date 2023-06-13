@@ -32,6 +32,7 @@ function Register() {
             if (pais.Id_Pais === id){
                 dispatch(setPais(pais));
             }
+            return 0;
         });
         const list = op;
         list[0] = id;
@@ -45,6 +46,7 @@ function Register() {
             if (estado.Id_Estado === id){
                 dispatch(setEstado(estado));
             }
+            return 0;
         });
         const list = op;
         list[1] = id;
@@ -58,6 +60,7 @@ function Register() {
             if (ciudad.Id_Ciudad === id){
                 dispatch(setCiudad(ciudad));
             }
+            return 0;
         });
     }
 
@@ -99,29 +102,28 @@ function Register() {
                         if (!val.fecha){
                             errores.fecha = 'Introduzca la fecha de nacimiento';
                         }
-                        if (!val.pais || val.pais === 0){
+                        if (!val.pais || val.pais === -1){
                             errores.pais = 'Seleccione un pais';
                         } else {
                             if (op[0] !== val.pais){
-                                val.estado = 0;
-                                val.ciudad = 0;
+                                val.estado = -1;
+                                val.ciudad = -1;
                             }
                             paisRed(val.pais);
                         }
-                        if (!val.estado || val.estado === 0){
+                        if (!val.estado || val.estado === -1){
                             errores.estado = 'Seleccione un estado';
                         } else {
                             if (op[1] !== val.estado){
-                                val.ciudad = 0;
+                                val.ciudad = -1;
                             }
                             estadoRed(val.estado);
                         }
-                        if (!val.ciudad || val.ciudad === 0){
+                        if (!val.ciudad || val.ciudad === -1){
                             errores.ciudad = 'Seleccione una ciudad';
                         } else {
                             ciudadRed(val.ciudad);
                         }
-                        
                         return errores;
                     }}
                     onSubmit={async (val)=>{
@@ -130,15 +132,17 @@ function Register() {
                         const date = new Date();
 
                         if (!erroresBD.nombre && !erroresBD.apellido && !erroresBD.email){
-                            const col = colores.findIndex(c => c ==='selec');
-                            if (col === -1 || col === 3){
-                                await axios.post('api/register',{Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: 3, N_Tarjeta: null, Id_Suscripcion: 4, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha});
 
-                                dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: 3, N_Tarjeta: null, Id_Suscripcion: 4, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
-                                navigate('/');
+                            const col = colores.findIndex(c => c ==='selec');
+
+                            if (col === -1 || col === 3){
+                                await axios.post('api/register',{Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: val.ciudad, N_Tarjeta: null, Id_Suscripcion: 4, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha});
+
+                                dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: val.ciudad, N_Tarjeta: null, Id_Suscripcion: 4, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
+                                navigate('/perfil');
 
                             } else {
-                                dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: 3, N_Tarjeta: null, Id_Suscripcion: col+1, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
+                                dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: val.ciudad, N_Tarjeta: null, Id_Suscripcion: col+1, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
                                 navigate('/registro/tarjeta');
                             }
                         }
@@ -176,7 +180,7 @@ function Register() {
                             <ErrorMessage name="pais" id="pais" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.pais}</div>)}/>
 
                             <Field type="text" placeholder="Pais" name="pais" as="select">
-                            <option hidden selected value={0}>Selecciona el pais</option>
+                            <option hidden selected value={-1}>Selecciona el pais</option>
                             {paises.map(pais => (
                                 <option key={pais.Id_Pais} value={pais.Id_Pais}>{pais.Nombre}</option>
                             ))}
@@ -185,7 +189,7 @@ function Register() {
                             <ErrorMessage name="estado" id="estado" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.estado}</div>)}/>
 
                             <Field type="text" placeholder="Estado" name="estado" as="select">
-                            <option hidden selected value={0}>Selecciona el estado</option>
+                            <option hidden selected value={-1}>Selecciona el estado</option>
                             {estados.map(estado => (
                                 <option key={estado.Id_Estado} value={estado.Id_Estado} onClick={()=>estadoRed(estado.Id_Estado)}>{estado.Nombre}</option>
                             ))}
@@ -194,7 +198,7 @@ function Register() {
                             <ErrorMessage name="ciudad" id="ciudad" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.ciudad}</div>)}/>
 
                             <Field type="text" placeholder="Ciudad" name="ciudad" as="select">
-                            <option hidden selected value={0}>Selecciona la ciudad</option>
+                            <option hidden selected value={-1}>Selecciona la ciudad</option>
                             {ciudades.map(ciudad => (
                                 <option key={ciudad.Id_Ciudad} value={ciudad.Id_Ciudad}>{ciudad.Nombre}</option>
                             ))}

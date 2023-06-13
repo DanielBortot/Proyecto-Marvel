@@ -7,13 +7,24 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { datosUsuario } from "../reducers/usuarioSlice";
 import { datosTarjeta } from "../reducers/tarjetaSlice";
+import { datosPerfil } from "../reducers/perfilesSlice";
 import { useNavigate } from "react-router-dom";
+import { setCiudad, setEstado, setPais } from "../reducers/direccionSlice";
 
 function Login() {
 
     const [errorDB, setErrorDB] = useState({});
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const addDireccion = async (Id_Ciudad) => {
+        const ciudad = await (await axios.post('/api/setCiudad',{Id_Ciudad: Id_Ciudad})).data;
+        const estado = await (await axios.post('/api/setEstado',{Id_Estado: ciudad[0].Id_Estado})).data;
+        const pais = await (await axios.post('/api/setPais',{Id_Pais: estado[0].Id_Pais})).data;
+        dispatch(setCiudad({Id_Ciudad: Id_Ciudad, Nombre: ciudad[0].Nombre}));
+        dispatch(setEstado({Id_Estado: estado[0].Id_Estado, Nombre: estado[0].Nombre}));
+        dispatch(setPais({Id_Pais: pais[0].Id_Pais, Nombre: pais[0].Nombre}));
+    }
 
     return (
         <>
@@ -37,17 +48,28 @@ function Login() {
                         }
                     }}
                     onSubmit={ async (val)=> {
-                        const usuario = (await axios.post('api/login',{Email: val.email, Contrasena: val.contra})).data;
+                        const usuario = await (await axios.post('/api/login',{Email: val.email, Contrasena: val.contra})).data;
                         if (usuario.length === 0){
                             setErrorDB({error: "Email o Contraseña incorrecto"});
                         }
                         else {
-                            usuario.map(u => dispatch(datosUsuario({...u})));
+                            usuario.map(u => {
+                                dispatch(datosUsuario({...u}));
+                                addDireccion(u.Direccion);
+                                return 0;
+                            });
                             if (usuario[0].N_Tarjeta != null){
-                                const tarjeta = (await axios.post('api/selecTarjeta',{N_Tarjeta: usuario[0].N_Tarjeta})).data;
+                                const tarjeta = await (await axios.post('/api/selecTarjeta',{N_Tarjeta: usuario[0].N_Tarjeta})).data;
                                 tarjeta.map(t => dispatch(datosTarjeta({...t})));
                             }
-                            navigate('/');
+                            
+                            const perfiles = await (await axios.post('/api/perfiles',{Email: usuario[0].Email,op: false})).data;
+                            if (perfiles.length !== 0){
+                                perfiles.map(perfil => dispatch(datosPerfil({...perfil})));
+                                navigate('/')
+                            } else {
+                                navigate('/perfil');
+                            }
                         }
                     }}
                 >
