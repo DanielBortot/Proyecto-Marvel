@@ -53,22 +53,24 @@ function VistaResumen () {
                         <div className="tituloresumen">
                             <h1 className="p-15px">Resumen de usuario</h1>
                             <div className="p-15px resumenbar">
-                                <h5>{descUsuario.Nombre} {descUsuario.Apellido}</h5>
-                                <h5>{descUsuario.Email}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Nombre:</span> {descUsuario.Nombre} {descUsuario.Apellido}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Fecha de Nacimiento:</span> {descUsuario.Fecha_Nac}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Email:</span> {descUsuario.Email}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Fecha de Creacion:</span> {descUsuario.Fecha_Creacion}</h5>
                             </div>
                         </div>
                         <div className="tituloresumen">
                             <h1 className="p-15px">Resumen forma de pago</h1>
                             <div className="p-15px resumenbar">
                                 <h5>Banco</h5>
-                                <h5>{descTarjeta.N_Tarjeta ? descTarjeta.N_Tarjeta : 'No posee tarjeta'}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Numero de Tarjeta:</span> {descTarjeta.N_Tarjeta ? descTarjeta.N_Tarjeta : 'No posee tarjeta'}</h5>
                             </div>
                         </div>
                         <div className="tituloresumen">
                             <h1 className="p-15px">Resumen de suscripcion</h1>
                             <div className="p-15px resumenbar">
-                                <h5>{sus.Tipo}</h5>
-                                <h5>{sus.Tarifa}$</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Tipo de Suscripcion:</span> {sus.Tipo}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Tarifa de la Suscripcion:</span> {sus.Tarifa}$</h5>
                             </div>
                         </div>
                     </div>   

@@ -16,7 +16,7 @@ function Perfil (){
     const {descUsuario} = useSelector(state => state.usuario);
     const {descPerfil} = useSelector(state => state.perfiles);
     const [imagen, setImagen] = useState(imagenPerfil[0].img);
-    const numPerf = descPerfil.length == 5;
+    const numPerf = descPerfil.length === 5;
     return (
         <>
             <div className="tituloContReg"> {/* dispositivo, nombre, idioma, imagen*/}
