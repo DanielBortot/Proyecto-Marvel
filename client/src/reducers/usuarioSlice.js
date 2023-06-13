@@ -20,9 +20,12 @@ export const usuarioSlice = createSlice({
     reducers: {
         datosUsuario: (state, action) =>{
             state.descUsuario = {...action.payload};
+        },
+        delUsuario: (state, action) => {
+            state.descUsuario = {};
         }
     }
 });
 
-export const {datosUsuario} = usuarioSlice.actions;
+export const {datosUsuario, delUsuario} = usuarioSlice.actions;
 export default usuarioSlice.reducer;

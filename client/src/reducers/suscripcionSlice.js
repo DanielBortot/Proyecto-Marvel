@@ -14,9 +14,12 @@ export const suscripcionSlice = createSlice({
     reducers: {
         datosSuscripcion: (state, action) =>{
             state.descSuscripcion = {...action.payload};
+        },
+        delSuscripcion: (state, action) => {
+            state.descSuscripcion = {}
         }
     }
 });
 
-export const {datosSuscripcion} = suscripcionSlice.actions;
+export const {datosSuscripcion, delSuscripcion} = suscripcionSlice.actions;
 export default suscripcionSlice.reducer;

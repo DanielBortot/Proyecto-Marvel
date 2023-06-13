@@ -21,6 +21,8 @@ import { VistaPago } from "./components/Usuario/vistaPago";
 import { VistaHistorial } from "./components/Usuario/vistaHistorial";
 import { Tarjeta } from './components/tarjeta';
 import { EscogePerfil } from './components/escogePerfil';
+import { RouteProtectUser } from './RouteProtectUser';
+import { RouteProtectPerfil } from './RouteProtectPerfil';
 
 function App() {
   return (
@@ -28,24 +30,28 @@ function App() {
       <Header/>
       <div className='mx-3 my-2'>
           <Routes>  
-            <Route path='/' element={<VistaInicio/>}/>
-            <Route path='/personajes' element={<VistaPersonajes/>}/>
-            <Route path='/personajes/:nombre' element={<DescripcionPers/>}/>
-            <Route path='/series' element={<VistaSeries/>}/>
-            <Route path='/peliculas' element={<VistaPeliculas/>}/>
-            <Route path='/juegos' element={<VistaJuegos/>}/>
-            <Route path='/comics' element={<VistaComics/>}/>
+            <Route element={<RouteProtectUser/>}>
+              <Route path='/escogePerfil' element={<EscogePerfil/>}/>
+              <Route path='/registro/tarjeta' element={<Tarjeta/>}/>
+              <Route path='/perfil' element={<Perfil/>}/>
+              <Route element={<RouteProtectPerfil/>}>
+                <Route path='/' element={<VistaInicio/>}/>
+                <Route path='/personajes' element={<VistaPersonajes/>}/>
+                <Route path='/personajes/:nombre' element={<DescripcionPers/>}/>
+                <Route path='/series' element={<VistaSeries/>}/>
+                <Route path='/peliculas' element={<VistaPeliculas/>}/>
+                <Route path='/juegos' element={<VistaJuegos/>}/>
+                <Route path='/comics' element={<VistaComics/>}/>
+                <Route path='/usuario' element={<DescUsuario/>}/>
+                <Route path='/usuario/resumen' element={<VistaResumen/>}/>
+                <Route path='/usuario/info' element={<VistaInfo/>}/>
+                <Route path='/usuario/suscr' element={<VistaSuscr/>}/>
+                <Route path='/usuario/pago' element={<VistaPago/>}/>
+                <Route path='/usuario/historial' element={<VistaHistorial/>}/>
+              </Route>
+            </Route>
             <Route path='/inicioSesion' element={<Login/>}/>
-            <Route path='/registro' element={<Register/>}/>
-            <Route path='/perfil' element={<Perfil/>}/>
-            <Route path='/usuario' element={<DescUsuario/>}/>
-            <Route path='/usuario/resumen' element={<VistaResumen/>}/>
-            <Route path='/usuario/info' element={<VistaInfo/>}/>
-            <Route path='/usuario/suscr' element={<VistaSuscr/>}/>
-            <Route path='/usuario/pago' element={<VistaPago/>}/>
-            <Route path='/usuario/historial' element={<VistaHistorial/>}/>
-            <Route path='/registro/tarjeta' element={<Tarjeta/>}/>
-            <Route path='/escogePerfil' element={<EscogePerfil/>}/>     
+            <Route path='/registro' element={<Register/>}/>     
           </Routes>
       </div>
       <Footer/>

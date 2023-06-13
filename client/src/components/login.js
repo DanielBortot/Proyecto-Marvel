@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import '../assets/registro.css';
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { datosUsuario } from "../reducers/usuarioSlice";
-import { datosTarjeta } from "../reducers/tarjetaSlice";
-import { datosPerfil } from "../reducers/perfilesSlice";
+import { datosUsuario, delUsuario } from "../reducers/usuarioSlice";
+import { datosTarjeta, delTarjeta } from "../reducers/tarjetaSlice";
+import { datosPerfil, delPerfiles } from "../reducers/perfilesSlice";
 import { useNavigate } from "react-router-dom";
-import { setCiudad, setEstado, setPais } from "../reducers/direccionSlice";
+import { setCiudad, setEstado, setPais, delDireccion } from "../reducers/direccionSlice";
+import { delSuscripcion } from "../reducers/suscripcionSlice";
 
 function Login() {
 
@@ -21,10 +22,18 @@ function Login() {
         const ciudad = await (await axios.post('/api/setCiudad',{Id_Ciudad: Id_Ciudad})).data;
         const estado = await (await axios.post('/api/setEstado',{Id_Estado: ciudad[0].Id_Estado})).data;
         const pais = await (await axios.post('/api/setPais',{Id_Pais: estado[0].Id_Pais})).data;
+        
         dispatch(setCiudad({Id_Ciudad: Id_Ciudad, Nombre: ciudad[0].Nombre}));
         dispatch(setEstado({Id_Estado: estado[0].Id_Estado, Nombre: estado[0].Nombre}));
         dispatch(setPais({Id_Pais: pais[0].Id_Pais, Nombre: pais[0].Nombre}));
     }
+    useEffect(()=> {
+        dispatch(delDireccion());
+        dispatch(delUsuario());
+        dispatch(delPerfiles());
+        dispatch(delSuscripcion());
+        dispatch(delTarjeta());
+    },[]);
 
     return (
         <>

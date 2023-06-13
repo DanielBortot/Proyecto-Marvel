@@ -18,9 +18,14 @@ export const direccionSlice = createSlice({
         },
         setCiudad: (state, action) => {
             state.Ciudad = action.payload;
+        },
+        delDireccion: (state, action) => {
+            state.Pais = {};
+            state.Estado = {};
+            state.Ciudad = {};
         }
     }
 });
 
-export const {setCiudad, setEstado, setPais} = direccionSlice.actions;
+export const {setCiudad, setEstado, setPais, delDireccion} = direccionSlice.actions;
 export default direccionSlice.reducer;

@@ -14,9 +14,13 @@ export const perfilSlice = createSlice({
         },
         setPerfil: (state, action) => {
             state.perfilUso = action.payload;
+        },
+        delPerfiles: (state, action) => {
+            state.descPerfil = [];
+            state.perfilUso = {};
         }
     }
 });
 
-export const {datosPerfil, setPerfil} = perfilSlice.actions;
+export const {datosPerfil, setPerfil, delPerfiles} = perfilSlice.actions;
 export default perfilSlice.reducer;

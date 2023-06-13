@@ -14,9 +14,12 @@ export const tarjetaSlice = createSlice({
     reducers: {
         datosTarjeta: (state, action) =>{
             state.descTarjeta = {...action.payload};
+        },
+        delTarjeta: (state, action) => {
+            state.descTarjeta = {};
         }
     }
 });
 
-export const {datosTarjeta} = tarjetaSlice.actions;
+export const {datosTarjeta, delTarjeta} = tarjetaSlice.actions;
 export default tarjetaSlice.reducer;
