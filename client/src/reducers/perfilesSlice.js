@@ -9,7 +9,7 @@ export const perfilSlice = createSlice({
     initialState: initialState,
     reducers: {
         datosPerfil: (state, action) =>{
-            state.descTarjeta = [...state.descPerfil, action.payload];
+            state.descPerfil = [...state.descPerfil, action.payload];
         }
     }
 });

@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import axios from "axios";
 
 const initialState = {
     Pais: {},
@@ -14,7 +13,7 @@ export const direccionSlice = createSlice({
         setPais: (state, action) =>{
             state.Pais = action.payload;
         },
-        setEstado: async (state, action) => {
+        setEstado: (state, action) => {
             state.Estado = action.payload;
         },
         setCiudad: (state, action) => {

@@ -113,9 +113,27 @@ const acciones = {
     },
 
     perfiles: async (req,res) => {
-        const {Email} = req.body;
-        const perfiles = await pool.query('SELECT "Id_Perfil" FROM "Perfil" WHERE "Email"=$1',[Email]);
-        res.send(perfiles.rows);
+        const {Email, op} = req.body;
+        const perfiles = await pool.query('SELECT * FROM "Perfil" WHERE "Email"=$1',[Email]);
+        if (perfiles.rows.length == 5 && op){
+            res.send({errTam: 'Numero de perfiles maximos alcanzados'});
+        } 
+        else if (!op) {
+            res.send(perfiles.rows);
+        }
+        else {
+            res.send({});
+        }
+    },
+
+    buscPerfil: async (req,res) => {
+        const {Email, Nombre} = req.body;
+        const perfiles = await pool.query('SELECT * FROM "Perfil" WHERE "Email"=$1 AND "Nombre"=$2',[Email,Nombre]);
+        if (perfiles.rowCount != 0 && perfiles.rows[0].Nombre === Nombre){
+            res.send({errNom: 'Ya existe un perfil con este nombre'})
+        } else {
+            res.send({});
+        }
     },
 
     buscTarjeta: async (req,res) => {
@@ -165,6 +183,24 @@ const acciones = {
     ciudades: async (req,res) => {
         const {Id_Estado} = req.body;
         const ciudades = await pool.query('SELECT * FROM "Ciudad" WHERE "Id_Estado"=$1',[Id_Estado]);
+        res.send(ciudades.rows);
+    },
+
+    setPais: async (req,res) => {
+        const {Id_Pais} = req.body;
+        const paises = await pool.query('SELECT * FROM "Pais" WHERE "Id_Pais"=$1',[Id_Pais]);
+        res.send(paises.rows);
+    },
+
+    setEstado: async (req,res) => {
+        const {Id_Estado} = req.body;
+        const estados = await pool.query('SELECT * FROM "Estado" WHERE "Id_Estado"=$1',[Id_Estado]);
+        res.send(estados.rows);
+    },
+
+    setCiudad: async (req,res) => {
+        const {Id_Ciudad} = req.body;
+        const ciudades = await pool.query('SELECT * FROM "Ciudad" WHERE "Id_Ciudad"=$1',[Id_Ciudad]);
         res.send(ciudades.rows);
     }
 }

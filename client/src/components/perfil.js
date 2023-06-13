@@ -15,7 +15,7 @@ function Perfil (){
     const navigate = useNavigate();
     const {descUsuario} = useSelector(state => state.usuario);
     const [imagen, setImagen] = useState(imagenPerfil[0].img);
-    const [errorDB, setErrorDB] = useState([]);
+    const [errorP, setErrorP] = useState({});
     return (
         <>
             <div className="tituloContReg"> {/* dispositivo, nombre, idioma, imagen*/}
@@ -44,20 +44,17 @@ function Perfil (){
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const perfiles = (await axios.post('/perfiles',{Email: descUsuario.Email})).data;
-                        if (perfiles.length === 5){
-                            setErrorDB({errTam: 'Numero de perfiles maximos alcanzados'});
-                        }
-                        else if (perfiles.length !== 0) {
-                            perfiles.map(perfil => {
-                                if (perfil.Nombre === val.nombre){
-                                    setErrorDB({errNom: 'Ya existe un perfil con este nombre'});
-                                }
-                            })
-                        }
-                        if (!errorDB.errTam && !errorDB.errNom){
-                            await axios.post('/addPerfil',{Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen});
+                        
+                        const perfiles = await axios.post('/api/perfiles',{Email: descUsuario.Email, op: true});
+                        const info = await perfiles.data;
+                        setErrorP(info)
+                        const buscPerfil = await axios.post('/api/buscPerfil',{Email: descUsuario.Email, Nombre: val.nombre});
+                        const info2 = await buscPerfil.data;
+                        setErrorP(info2);
+                        if (!info.errTam && !info2.errNom){
+                            await axios.post('/api/addPerfil',{Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen});
                             dispatch(datosPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
+                            navigate('/')
                         }
                     }}
                 >
@@ -69,13 +66,13 @@ function Perfil (){
                                 {imagenPerfil.map(i => (
                                     <div key={i.pos} className="imgPerfil">
                                         <textarea style={{opacity: '0', cursor: 'default', resize: 'none'}} onClick={()=>setImagen(i.img)} maxLength={0}></textarea>
-                                        <img src={i.img} key={i.pos}></img>
+                                        <img src={i.img} alt="" key={i.pos}></img>
                                     </div>
                                 ))}
 
                             </div>
-                            {errorDB.errNom && <div style={{fontSize: "15px", color: "red"}}>{errorDB.errNom}</div>}
-                            {errorDB.errTam && <div style={{fontSize: "15px", color: "red"}}>{errorDB.errTam}</div>}
+                            {errorP.errNom && <div style={{fontSize: "15px", color: "red"}}>{errorP.errNom}</div>}
+                            {errorP.errTam && <div style={{fontSize: "15px", color: "red"}}>{errorP.errTam}</div>}
                             <ErrorMessage name="nombre" id="nombre" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombre}</div>)}/>
 
                             <Field type="text" placeholder="Nombre" name="nombre"/>
@@ -100,7 +97,7 @@ function Perfil (){
                             <option value='Televisor'>Televisor</option>
                             <option value='Computadora'>Computadora</option>
                             </Field>
-                            <img src={imagen}></img>            
+                            <img src={imagen} alt=""></img>            
                             <div className="botonReg">
                                 <button type="submit">Aceptar</button>
                             </div>
