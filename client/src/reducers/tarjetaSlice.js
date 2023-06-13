@@ -13,7 +13,7 @@ export const tarjetaSlice = createSlice({
     initialState: initialState,
     reducers: {
         datosTarjeta: (state, action) =>{
-            state.descTarjeta = {...action.payload};
+            state.descTarjeta = {...action.payload, Fecha_Ven: action.payload.Fecha_Ven.slice(0,10)};
         },
         delTarjeta: (state, action) => {
             state.descTarjeta = {};

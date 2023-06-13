@@ -19,7 +19,7 @@ export const usuarioSlice = createSlice({
     initialState: initialState,
     reducers: {
         datosUsuario: (state, action) =>{
-            state.descUsuario = {...action.payload};
+            state.descUsuario = {...action.payload, Fecha_Nac: action.payload.Fecha_Nac.slice(0,10), Fecha_Creacion: action.payload.Fecha_Creacion.slice(0,10)};
         },
         delUsuario: (state, action) => {
             state.descUsuario = {};

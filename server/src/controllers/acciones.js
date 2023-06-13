@@ -143,13 +143,20 @@ const acciones = {
 
         if (tarjetas.rows.length !== 0){
             tarjetas.rows.map(tarjeta => {
-                if (tarjeta.N_Tarjeta == N_Tarjeta && tarjeta.Cod_Seguridad == Cod_Seguridad && tarjeta.Fecha_Ven == Fecha_Ven){
+                const fecha = tarjeta.Fecha_Ven.toISOString().slice(0,10);
+                if (tarjeta.N_Tarjeta == N_Tarjeta && (tarjeta.Cod_Seguridad != Cod_Seguridad || fecha != Fecha_Ven)) {
+                    res.send({errTarj: 'Existe la tarjeta ingresada pero el resto de datos son incorrectos'});
                     enc = true;
+                }
+                else if (tarjeta.N_Tarjeta == N_Tarjeta && tarjeta.Cod_Seguridad == Cod_Seguridad && tarjeta.Fecha_Ven == Fecha_Ven){
+                    enc = true;
+                    res.send(true);
                 }
             });
         }
-
-        res.send(enc);
+        if (!enc){
+            res.send(false);
+        }
     },
 
     updateUsuTarjeta: async (req,res) => {
