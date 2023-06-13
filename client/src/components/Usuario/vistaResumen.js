@@ -1,36 +1,51 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { SideMenu } from "./sideMenu";
+import { useDispatch, useSelector } from "react-redux";
+import { datosSuscripcion } from "../../reducers/suscripcionSlice";
 import '../../assets/usuario.css';
+import axios from "axios";
 
 function VistaResumen () {
+    const {descPerfil} = useSelector(state => state.perfiles);
+    const {descUsuario} = useSelector(state => state.usuario);
+    const {descTarjeta} = useSelector(state => state.tarjeta);
+    const [sus, setSuscri] = useState({})
+    const dispatch = useDispatch();
+
+    useEffect(()=> {
+        const setSus = async () => {
+            const suscripcion = await axios.post('/api/suscripcion',{ID: descUsuario.Id_Suscripcion});
+            const sus = await suscripcion.data;
+            setSuscri(sus[0]);
+            dispatch(datosSuscripcion(sus[0]));
+        };
+        setSus();
+    }, []);
+
     return (
         <> 
             <div className="container">
                 <div className="row">
-                    <div className="col-4 menubar">
+                    <div className="col-4 ">
                         <SideMenu/>
                     </div>
                     <div className="col-8">
                         <div className="tituloresumen">
                             <div className="row">
                                 <h1 className=" col ">Perfiles</h1>
-                                <div className="col"><Link className='btn btn-danger jalign-self-end' to={'/perfil'}>Agregar nuevo perfil</Link></div>
+                                <div className="col justify-content-right"><Link className='btn btn-danger' to={'/perfil'}>Agregar nuevo perfil</Link></div>
                             </div>
                             <div className="p-15px resumenbar">
                                 <div className="row">
-                                    <div className="col">
-                                        <img src="http://ximg.es/600x400/000/fff" alt="NombrePerfil" width={150} height={150}/>
-                                        <div className="card-body">      
-                                            <h5 className="card-title">NombrePerfil</h5>
+                                    {descPerfil.map(perfil => (
+                                        <div className="col" key={perfil.Id_Perfil}>
+                                            <img src={perfil.Imagen} alt={perfil.Nombre} width={150} height={150}/>
+                                            <div className="card-body" key={perfil.Id_Perfil}>      
+                                                <h5 className="card-title">{perfil.Nombre}</h5>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div className="col">
-                                        <img src="http://ximg.es/600x400/000/fff" alt="NombrePerfil" width={150} height={150}/>
-                                        <div className="card-body">      
-                                            <h5 className="card-title">NombrePerfil</h5>
-                                        </div>
-                                    </div>
+                                    ))}
                                 </div>
                             </div>                               
                         </div>                   
@@ -38,25 +53,25 @@ function VistaResumen () {
                         <div className="tituloresumen">
                             <h1 className="p-15px">Resumen de usuario</h1>
                             <div className="p-15px resumenbar">
-                                <h5>Nombre Apellido</h5>
-                                <h5>email@ejemplo.com</h5>
+                                <h5>{descUsuario.Nombre} {descUsuario.Apellido}</h5>
+                                <h5>{descUsuario.Email}</h5>
                             </div>
                         </div>
                         <div className="tituloresumen">
                             <h1 className="p-15px">Resumen forma de pago</h1>
                             <div className="p-15px resumenbar">
                                 <h5>Banco</h5>
-                                <h5>Numero de tarjeta</h5>
+                                <h5>{descTarjeta.N_Tarjeta ? descTarjeta.N_Tarjeta : 'No posee tarjeta'}</h5>
                             </div>
                         </div>
                         <div className="tituloresumen">
                             <h1 className="p-15px">Resumen de suscripcion</h1>
                             <div className="p-15px resumenbar">
-                                <h5>Suscripcion</h5>
-                                <h5>Coste mensual</h5>
+                                <h5>{sus.Tipo}</h5>
+                                <h5>{sus.Tarifa}$</h5>
                             </div>
                         </div>
-                     </div>   
+                    </div>   
                 </div>   
             </div>     
         </>

@@ -4,7 +4,7 @@ import '../assets/registro.css';
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { datosPerfil } from "../reducers/perfilesSlice";
+import { datosPerfil, setPerfil } from "../reducers/perfilesSlice";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useNavigate } from "react-router-dom";
 import { imagenPerfil } from "../assets/img/imgSelect";
@@ -54,7 +54,8 @@ function Perfil (){
                         if (!info.errTam && !info2.errNom){
                             await axios.post('/api/addPerfil',{Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen});
                             dispatch(datosPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
-                            navigate('/')
+                            dispatch(setPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
+                            navigate('/');
                         }
                     }}
                 >

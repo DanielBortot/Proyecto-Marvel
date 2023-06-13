@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    descPerfil: []
+    descPerfil: [],
+    perfilUso: {}
 }
 
 export const perfilSlice = createSlice({
@@ -10,9 +11,12 @@ export const perfilSlice = createSlice({
     reducers: {
         datosPerfil: (state, action) =>{
             state.descPerfil = [...state.descPerfil, action.payload];
+        },
+        setPerfil: (state, action) => {
+            state.perfilUso = action.payload;
         }
     }
 });
 
-export const {datosPerfil} = perfilSlice.actions;
+export const {datosPerfil, setPerfil} = perfilSlice.actions;
 export default perfilSlice.reducer;

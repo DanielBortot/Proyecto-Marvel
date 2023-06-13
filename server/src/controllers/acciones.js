@@ -202,6 +202,12 @@ const acciones = {
         const {Id_Ciudad} = req.body;
         const ciudades = await pool.query('SELECT * FROM "Ciudad" WHERE "Id_Ciudad"=$1',[Id_Ciudad]);
         res.send(ciudades.rows);
+    },
+
+    suscripcion: async (req,res) => {
+        const {ID} = req.body;
+        const suscripcion = await pool.query('SELECT * FROM "Suscripcion" WHERE "ID"=$1',[ID]);
+        res.send(suscripcion.rows);
     }
 }
 

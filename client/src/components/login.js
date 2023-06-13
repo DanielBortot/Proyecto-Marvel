@@ -66,7 +66,7 @@ function Login() {
                             const perfiles = await (await axios.post('/api/perfiles',{Email: usuario[0].Email,op: false})).data;
                             if (perfiles.length !== 0){
                                 perfiles.map(perfil => dispatch(datosPerfil({...perfil})));
-                                navigate('/')
+                                navigate('/escogePerfil');
                             } else {
                                 navigate('/perfil');
                             }
