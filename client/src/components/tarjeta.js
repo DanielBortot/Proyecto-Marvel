@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 
 function Tarjeta () {
     const {descUsuario} = useSelector(state => state.usuario);
+    const {perfilUso} = useSelector(state => state.perfiles);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -39,14 +40,22 @@ function Tarjeta () {
                         return errores;
                     }}
                     onSubmit={async (val) => {
-                        let tarjeta = await (await axios.post('../api/buscTarjeta',val)).data;
+                        let tarjeta = await (await axios.post('../api/buscTarjeta',{N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha})).data;
                         if (!tarjeta){
                             await axios.post('../api/addTarjeta',{N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha}); 
                         }
+                        if (!perfilUso.Nombre){
+                            await axios.post('../api/register',{...descUsuario, N_Tarjeta: val.tarjeta});
+                        } else {
+                            await axios.put('../api/upUsuTarj', {N_Tarjeta: val.tarjeta, Email: descUsuario.Email});
+                        }
                         dispatch(datosTarjeta({N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha}));
-                        await axios.post('../api/register',{...descUsuario, N_Tarjeta: val.tarjeta});
                         dispatch(datosUsuario({...descUsuario, N_Tarjeta: val.tarjeta}));
-                        navigate('/perfil');
+                        if (perfilUso.Nombre){
+                            navigate('/');
+                        } else {
+                            navigate('/perfil');
+                        }
                     }}>
                         {({errors}) => (
 

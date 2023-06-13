@@ -22,8 +22,8 @@ function EscogePerfil () {
             </div>
             <div className="row">
                 {descPerfil.map(perfil => (
-                    <div className="col" key={perfil.Id_Perfil} onClick={()=>escoger(perfil)}>
-                        <img src={perfil.Imagen} alt={perfil.Nombre} width={200} height={200}/>
+                    <div className="col" key={perfil.Id_Perfil}>
+                        <img onClick={()=>escoger(perfil)} src={perfil.Imagen} alt={perfil.Nombre} width={200} height={200}/>
                         <h4>{perfil.Nombre}</h4>
                     </div>
                 ))}

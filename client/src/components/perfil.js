@@ -14,8 +14,9 @@ function Perfil (){
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const {descUsuario} = useSelector(state => state.usuario);
+    const {descPerfil} = useSelector(state => state.perfiles);
     const [imagen, setImagen] = useState(imagenPerfil[0].img);
-    const [errorP, setErrorP] = useState({});
+    const numPerf = descPerfil.length == 5;
     return (
         <>
             <div className="tituloContReg"> {/* dispositivo, nombre, idioma, imagen*/}
@@ -32,8 +33,18 @@ function Perfil (){
                     }}
                     validate={(val)=> {
                         let errores = {};
+                        if (numPerf){
+                            errores.nombre = 'Ya posee el maximo numero de usuarios posibles';
+                            return errores;
+                        }
                         if (!val.nombre || !/^[a-zA-Z]{1,50}$/.test(val.nombre)){
                             errores.nombre = 'Introduzca un nombre valido';
+                        } else {
+                            descPerfil.map(perfil => {
+                                if (perfil.Nombre === val.nombre){
+                                    errores.nombre = 'Ya posee un perfil con ese nombre';
+                                }
+                            })
                         }
                         if (!val.idioma){
                             errores.idioma = 'Seleccione un idioma';
@@ -45,18 +56,10 @@ function Perfil (){
                     }}
                     onSubmit={ async (val)=> {
                         
-                        const perfiles = await axios.post('/api/perfiles',{Email: descUsuario.Email, op: true});
-                        const info = await perfiles.data;
-                        setErrorP(info)
-                        const buscPerfil = await axios.post('/api/buscPerfil',{Email: descUsuario.Email, Nombre: val.nombre});
-                        const info2 = await buscPerfil.data;
-                        setErrorP(info2);
-                        if (!info.errTam && !info2.errNom){
-                            await axios.post('/api/addPerfil',{Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen});
-                            dispatch(datosPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
-                            dispatch(setPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
-                            navigate('/');
-                        }
+                        await axios.post('/api/addPerfil',{Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen});
+                        dispatch(datosPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
+                        dispatch(setPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
+                        navigate('/');
                     }}
                 >
                     {({errors})=>(
@@ -72,8 +75,7 @@ function Perfil (){
                                 ))}
 
                             </div>
-                            {errorP.errNom && <div style={{fontSize: "15px", color: "red"}}>{errorP.errNom}</div>}
-                            {errorP.errTam && <div style={{fontSize: "15px", color: "red"}}>{errorP.errTam}</div>}
+                            
                             <ErrorMessage name="nombre" id="nombre" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombre}</div>)}/>
 
                             <Field type="text" placeholder="Nombre" name="nombre"/>

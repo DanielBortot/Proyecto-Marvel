@@ -152,6 +152,12 @@ const acciones = {
         res.send(enc);
     },
 
+    updateUsuTarjeta: async (req,res) => {
+        const {N_Tarjeta, Email} = req.body;
+        await pool.query('UPDATE "Usuario" SET "N_Tarjeta"=$1 WHERE "Email"=$2',[N_Tarjeta,Email]);
+        res.send('Actualizado');
+    },
+
     selecTarjeta: async (req,res) => {
         const {N_Tarjeta} = req.body;
         const tarjeta = await pool.query('SELECT * FROM "Tarjeta" WHERE "N_Tarjeta"=$1',[N_Tarjeta]);

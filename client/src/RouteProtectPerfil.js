@@ -4,7 +4,6 @@ import { Navigate, Outlet } from "react-router-dom";
 
 function RouteProtectPerfil ({redirectionTo='/inicioSesion'}) {
     const {perfilUso} = useSelector(state => state.perfiles);
-    console.log(perfilUso.Nombre);
     if (!perfilUso.Nombre){
         return <Navigate to={redirectionTo}/>
     }
