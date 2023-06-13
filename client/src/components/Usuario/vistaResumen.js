@@ -8,14 +8,14 @@ function VistaResumen () {
         <> 
             <div className="container">
                 <div className="row">
-                    <div className="col-4 ">
+                    <div className="col-4 menubar">
                         <SideMenu/>
                     </div>
                     <div className="col-8">
                         <div className="tituloresumen">
                             <div className="row">
                                 <h1 className=" col ">Perfiles</h1>
-                                <div className="col justify-content-right"><Link className='btn btn-danger' to={'/perfil'}>Agregar nuevo perfil</Link></div>
+                                <div className="col"><Link className='btn btn-danger jalign-self-end' to={'/perfil'}>Agregar nuevo perfil</Link></div>
                             </div>
                             <div className="p-15px resumenbar">
                                 <div className="row">

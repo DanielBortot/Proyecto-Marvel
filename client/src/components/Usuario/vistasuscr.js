@@ -6,7 +6,7 @@ function VistaSuscr () {
         <>
            <div className="container">
                 <div className="row">
-                    <div className="col-4 ">
+                    <div className="col-4 menubar">
                         <SideMenu/>
                     </div>
                     <div className="col-8">

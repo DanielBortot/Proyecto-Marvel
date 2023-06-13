@@ -20,13 +20,14 @@ import { VistaSuscr } from "./components/Usuario/vistasuscr";
 import { VistaPago } from "./components/Usuario/vistaPago";
 import { VistaHistorial } from "./components/Usuario/vistaHistorial";
 import { Tarjeta } from './components/tarjeta';
+import { escojePerfil } from './components/escojeP';
 
 function App() {
   return (
     <>
       <Header/>
       <div className='mx-3 my-2'>
-          <Routes>
+          <Routes>         
             <Route path='/' element={<VistaInicio/>}/>
             <Route path='/personajes' element={<VistaPersonajes/>}/>
             <Route path='/personajes/:nombre' element={<DescripcionPers/>}/>
@@ -37,6 +38,7 @@ function App() {
             <Route path='/inicioSesion' element={<Login/>}/>
             <Route path='/registro' element={<Register/>}/>
             <Route path='/perfil' element={<Perfil/>}/>
+            <Route path='/escoje' element={<escojePerfil/>}/>
             <Route path='/usuario' element={<DescUsuario/>}/>
             <Route path='/usuario/resumen' element={<VistaResumen/>}/>
             <Route path='/usuario/info' element={<VistaInfo/>}/>
@@ -44,7 +46,6 @@ function App() {
             <Route path='/usuario/pago' element={<VistaPago/>}/>
             <Route path='/usuario/historial' element={<VistaHistorial/>}/>
             <Route path='/registro/tarjeta' element={<Tarjeta/>}/>
-            
           </Routes>
       </div>
       <Footer/>
