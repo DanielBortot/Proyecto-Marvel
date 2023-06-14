@@ -1,11 +1,7 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    descSuscripcion: {
-        N_Tarjeta: null, 
-        Cod_Seguridad: null, 
-        Fecha_Ven: null
-    }
+    descSuscripcion: {}
 }
 
 export const suscripcionSlice = createSlice({

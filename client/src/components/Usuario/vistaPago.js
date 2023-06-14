@@ -1,10 +1,27 @@
 import React from "react";
 import { SideMenu } from "./sideMenu";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+import { datosUsuario } from "../../reducers/usuarioSlice";
+import { delTarjeta } from "../../reducers/tarjetaSlice";
+import { datosSuscripcion } from "../../reducers/suscripcionSlice";
 
 function VistaPago () {
     const {descTarjeta} = useSelector(state => state.tarjeta);
+    const {descUsuario} = useSelector(state => state.usuario);
+    const dispatch = useDispatch();
+
+    const delSusUsu = async () => {
+        await axios.put('/api/upSusUsu', {Id_Suscripcion: 4, Email: descUsuario.Email});
+        await axios.put('/api/upUsuTarj', {N_Tarjeta: null, Email: descUsuario.Email});
+        const sus = await axios.post('/api/suscripcion', {ID: 4});
+        const susData = await sus.data;
+        dispatch(datosUsuario({...descUsuario, Id_Suscripcion: 4, N_Tarjeta: null}));
+        dispatch(delTarjeta());
+        dispatch(datosSuscripcion(susData[0]));
+    }
+
     return (
         <>
             <div className="container">
@@ -22,7 +39,7 @@ function VistaPago () {
                         </div>
                         <div>
                             <Link className='btn btn-danger' to={'/registro/tarjeta'}>Nueva Tarjeta</Link>
-                            <button type="button" className="btn btn-danger m-3">Eliminar Tarjeta</button>
+                            <button type="button" className="btn btn-danger m-3" onClick={()=>delSusUsu()}>Eliminar Tarjeta</button>
                         </div>
                     </div>
                 </div>   
