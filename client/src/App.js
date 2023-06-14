@@ -30,11 +30,11 @@ function App() {
       <Header/>
       <div className='mx-3 my-2'>
           <Routes>  
-            <Route element={<RouteProtectUser/>}>
+            <Route element={<RouteProtectUser/>}/>
               <Route path='/escogePerfil' element={<EscogePerfil/>}/>
               <Route path='/registro/tarjeta' element={<Tarjeta/>}/>
               <Route path='/perfil' element={<Perfil/>}/>
-              <Route element={<RouteProtectPerfil/>}>
+              <Route element={<RouteProtectPerfil/>}/>
                 <Route path='/' element={<VistaInicio/>}/>
                 <Route path='/personajes' element={<VistaPersonajes/>}/>
                 <Route path='/personajes/:nombre' element={<DescripcionPers/>}/>
@@ -48,8 +48,6 @@ function App() {
                 <Route path='/usuario/suscr' element={<VistaSuscr/>}/>
                 <Route path='/usuario/pago' element={<VistaPago/>}/>
                 <Route path='/usuario/historial' element={<VistaHistorial/>}/>
-              </Route>
-            </Route>
             <Route path='/inicioSesion' element={<Login/>}/>
             <Route path='/registro' element={<Register/>}/>     
           </Routes>

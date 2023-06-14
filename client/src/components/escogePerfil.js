@@ -20,9 +20,9 @@ function EscogePerfil () {
             <div className="tituloContReg">
                 <h2 className="titulo">Escoge un perifl</h2>
             </div>
-            <div className="row">
+            <div className="row justify-content-center">                
                 {descPerfil.map(perfil => (
-                    <div className="col" key={perfil.Id_Perfil}>
+                    <div className="col-1 d-flex justify-content-center m-5" key={perfil.Id_Perfil}>
                         <img onClick={()=>escoger(perfil)} src={perfil.Imagen} alt={perfil.Nombre} width={200} height={200}/>
                         <h4>{perfil.Nombre}</h4>
                     </div>
