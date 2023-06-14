@@ -221,6 +221,12 @@ const acciones = {
         const {ID} = req.body;
         const suscripcion = await pool.query('SELECT * FROM "Suscripcion" WHERE "ID"=$1',[ID]);
         res.send(suscripcion.rows);
+    },
+
+    updateSusUsuario: async (req,res) => {
+        const {Id_Suscripcion, Email} = req.body;
+        await pool.query('UPDATE "Usuario" SET "Id_Suscripcion"=$1 WHERE "Email"=$2',[Id_Suscripcion,Email]);
+        res.send('Actualizado');
     }
 }
 
