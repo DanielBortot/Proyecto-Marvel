@@ -29,8 +29,8 @@ function Tarjeta () {
                     }}
                     validate={({tarjeta,codigo,fecha}) => {
                         let errores = {};
-                        if (!tarjeta || !/^[0-9]{12,12}$/.test(tarjeta)){
-                            errores.tarjeta = 'Ingrese un numero de tarjeta';
+                        if (!tarjeta || !/^[0-9]{16,16}$/.test(tarjeta)){
+                            errores.tarjeta = 'Ingrese un numero de tarjeta valido';
                         }
                         if (!codigo || isNaN(codigo) || parseInt(codigo) < 100 || parseInt(codigo) > 999 ){
                             errores.codigo = 'Ingrese un codigo de tarjeta valido';
