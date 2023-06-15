@@ -1,7 +1,3 @@
--- Table: public.Aparece
-
--- DROP TABLE IF EXISTS public."Aparece";
-
 CREATE TABLE IF NOT EXISTS public."Aparece"
 (
     "N_Organizacion" text COLLATE pg_catalog."default" NOT NULL,
@@ -25,9 +21,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Aparece"
     OWNER to postgres;
 	
--- Table: public.Combate
-
--- DROP TABLE IF EXISTS public."Combate";
 
 CREATE TABLE IF NOT EXISTS public."Combate"
 (
@@ -56,9 +49,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Combate"
     OWNER to postgres;
 	
--- Table: public.Crea
-
--- DROP TABLE IF EXISTS public."Crea";
 
 CREATE TABLE IF NOT EXISTS public."Crea"
 (
@@ -80,9 +70,7 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Crea"
     OWNER to postgres;	
 	
--- Table: public.Enfrenta
 
--- DROP TABLE IF EXISTS public."Enfrenta";
 
 CREATE TABLE IF NOT EXISTS public."Enfrenta"
 (
@@ -104,9 +92,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Enfrenta"
     OWNER to postgres;
 	
--- Table: public.Esta
-
--- DROP TABLE IF EXISTS public."Esta";
 
 CREATE TABLE IF NOT EXISTS public."Esta"
 (
@@ -133,9 +118,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Esta"
     OWNER to postgres;
 	
--- Table: public.Historial
-
--- DROP TABLE IF EXISTS public."Historial";
 
 CREATE TABLE IF NOT EXISTS public."Historial"
 (
@@ -161,9 +143,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Historial"
     OWNER to postgres;
 	
--- Table: public.Pertenece
-
--- DROP TABLE IF EXISTS public."Pertenece";
 
 CREATE TABLE IF NOT EXISTS public."Pertenece"
 (
@@ -185,9 +164,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Pertenece"
     OWNER to postgres;
 
--- Table: public.Posee
-
--- DROP TABLE IF EXISTS public."Posee";
 
 CREATE TABLE IF NOT EXISTS public."Posee"
 (
@@ -211,9 +187,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Posee"
     OWNER to postgres;
 	
--- Table: public.RelacionadoHer
-
--- DROP TABLE IF EXISTS public."RelacionadoHer";
 
 CREATE TABLE IF NOT EXISTS public."RelacionadoHer"
 (
@@ -235,9 +208,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."RelacionadoHer"
     OWNER to postgres;
 	
--- Table: public.RelacionadoVill
-
--- DROP TABLE IF EXISTS public."RelacionadoVill";
 
 CREATE TABLE IF NOT EXISTS public."RelacionadoVill"
 (

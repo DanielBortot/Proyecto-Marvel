@@ -1,7 +1,3 @@
--- Table: public.Creador
-
--- DROP TABLE IF EXISTS public."Creador";
-
 CREATE TABLE IF NOT EXISTS public."Creador"
 (
     "Nom_Creador" text COLLATE pg_catalog."default" NOT NULL,
@@ -14,11 +10,6 @@ ALTER TABLE IF EXISTS public."Creador"
     OWNER to postgres;
 	
 	
-	
--- Table: public.Medio
-
--- DROP TABLE IF EXISTS public."Medio";
-
 CREATE TABLE IF NOT EXISTS public."Medio"
 (
     "Titulo" text COLLATE pg_catalog."default" NOT NULL,
@@ -37,9 +28,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Medio"
     OWNER to postgres;
 
--- Table: public.Nacionalidad
-
--- DROP TABLE IF EXISTS public."Nacionalidad";
 
 CREATE TABLE IF NOT EXISTS public."Nacionalidad"
 (
@@ -52,9 +40,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Nacionalidad"
     OWNER to postgres;
 	
--- Table: public.Ocupacion
-
--- DROP TABLE IF EXISTS public."Ocupacion";
 
 CREATE TABLE IF NOT EXISTS public."Ocupacion"
 (
@@ -69,10 +54,6 @@ ALTER TABLE IF EXISTS public."Ocupacion"
 
 
 
--- Table: public.Pais
-
--- DROP TABLE IF EXISTS public."Pais";
-
 CREATE TABLE IF NOT EXISTS public."Pais"
 (
     "Id_Pais" integer NOT NULL,
@@ -85,9 +66,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Pais"
     OWNER to postgres;
 	
--- Table: public.Personaje
-
--- DROP TABLE IF EXISTS public."Personaje";
 
 CREATE TABLE IF NOT EXISTS public."Personaje"
 (
@@ -111,9 +89,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Personaje"
     OWNER to postgres;
 	
--- Table: public.Poder
-
--- DROP TABLE IF EXISTS public."Poder";
 
 CREATE TABLE IF NOT EXISTS public."Poder"
 (
@@ -129,9 +104,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Poder"
     OWNER to postgres;	
 	
--- Table: public.Suscripcion
-
--- DROP TABLE IF EXISTS public."Suscripcion";
 
 CREATE TABLE IF NOT EXISTS public."Suscripcion"
 (
@@ -149,9 +121,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Suscripcion"
     OWNER to postgres;	
 	
--- Table: public.Tarjeta
-
--- DROP TABLE IF EXISTS public."Tarjeta";
 
 CREATE TABLE IF NOT EXISTS public."Tarjeta"
 (

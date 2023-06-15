@@ -1,8 +1,4 @@
 
--- Table: public.Ciudad
-
--- DROP TABLE IF EXISTS public."Ciudad";
-
 CREATE TABLE IF NOT EXISTS public."Ciudad"
 (
     "Id_Ciudad" integer NOT NULL,
@@ -21,9 +17,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Ciudad"
     OWNER to postgres;
 	
--- Table: public.Civil
-
--- DROP TABLE IF EXISTS public."Civil";
 
 CREATE TABLE IF NOT EXISTS public."Civil"
 (
@@ -41,10 +34,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Civil"
     OWNER to postgres;
 	
-	
--- Table: public.Estado
-
--- DROP TABLE IF EXISTS public."Estado";
 
 CREATE TABLE IF NOT EXISTS public."Estado"
 (
@@ -64,9 +53,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Estado"
     OWNER to postgres;
 	
--- Table: public.Heroe
-
--- DROP TABLE IF EXISTS public."Heroe";
 
 CREATE TABLE IF NOT EXISTS public."Heroe"
 (
@@ -96,9 +82,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Heroe"
     OWNER to postgres;
 	
--- Table: public.Juego
-
--- DROP TABLE IF EXISTS public."Juego";
 
 CREATE TABLE IF NOT EXISTS public."Juego"
 (
@@ -119,9 +102,6 @@ ALTER TABLE IF EXISTS public."Juego"
     OWNER to postgres;
 	
 	
--- Table: public.Nacionalidad
-
--- DROP TABLE IF EXISTS public."Nacionalidad";
 
 CREATE TABLE IF NOT EXISTS public."Nacionalidad"
 (
@@ -134,9 +114,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Nacionalidad"
     OWNER to postgres;
 	
--- Table: public.Objeto
-
--- DROP TABLE IF EXISTS public."Objeto";
 
 CREATE TABLE IF NOT EXISTS public."Objeto"
 (
@@ -161,9 +138,7 @@ ALTER TABLE IF EXISTS public."Objeto"
     OWNER to postgres;
 	
 	
--- Table: public.Organizacion
 
--- DROP TABLE IF EXISTS public."Organizacion";
 
 CREATE TABLE IF NOT EXISTS public."Organizacion"
 (
@@ -198,9 +173,6 @@ ALTER TABLE IF EXISTS public."Organizacion"
     OWNER to postgres;
 	
 	
--- Table: public.Pelicula
-
--- DROP TABLE IF EXISTS public."Pelicula";
 
 CREATE TABLE IF NOT EXISTS public."Pelicula"
 (
@@ -226,9 +198,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Pelicula"
     OWNER to postgres;
 	
--- Table: public.Perfil
-
--- DROP TABLE IF EXISTS public."Perfil";
 
 CREATE TABLE IF NOT EXISTS public."Perfil"
 (
@@ -253,9 +222,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Perfil"
     OWNER to postgres;
 	
--- Table: public.Pers_Creador
-
--- DROP TABLE IF EXISTS public."Pers_Creador";
 
 CREATE TABLE IF NOT EXISTS public."Pers_Creador"
 (
@@ -277,9 +243,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Pers_Creador"
     OWNER to postgres;
 	
--- Table: public.Pers_Nac
-
--- DROP TABLE IF EXISTS public."Pers_Nac";
 
 CREATE TABLE IF NOT EXISTS public."Pers_Nac"
 (
@@ -301,9 +264,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Pers_Nac"
     OWNER to postgres;
 	
--- Table: public.Pers_Oc
-
--- DROP TABLE IF EXISTS public."Pers_Oc";
 
 CREATE TABLE IF NOT EXISTS public."Pers_Oc"
 (
@@ -325,9 +285,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Pers_Oc"
     OWNER to postgres;
 	
--- Table: public.Plat_Juego
-
--- DROP TABLE IF EXISTS public."Plat_Juego";
 
 CREATE TABLE IF NOT EXISTS public."Plat_Juego"
 (
@@ -349,10 +306,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Plat_Juego"
     OWNER to postgres;
 	
-
--- Table: public.Sede
-
--- DROP TABLE IF EXISTS public."Sede";
 
 CREATE TABLE IF NOT EXISTS public."Sede"
 (
@@ -376,9 +329,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Sede"
     OWNER to postgres;
 	
--- Table: public.Serie
-
--- DROP TABLE IF EXISTS public."Serie";
 
 CREATE TABLE IF NOT EXISTS public."Serie"
 (
@@ -399,9 +349,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Serie"
     OWNER to postgres;
 	
--- Table: public.Usuario
-
--- DROP TABLE IF EXISTS public."Usuario";
 
 CREATE TABLE IF NOT EXISTS public."Usuario"
 (
@@ -440,9 +387,6 @@ TABLESPACE pg_default;
 ALTER TABLE IF EXISTS public."Usuario"
     OWNER to postgres;
 	
--- Table: public.Villano
-
--- DROP TABLE IF EXISTS public."Villano";
 
 CREATE TABLE IF NOT EXISTS public."Villano"
 (
