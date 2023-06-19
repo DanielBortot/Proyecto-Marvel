@@ -15,7 +15,7 @@ function Perfil (){
     const navigate = useNavigate();
     const {descUsuario} = useSelector(state => state.usuario);
     const {descPerfil} = useSelector(state => state.perfiles);
-    const [imagen, setImagen] = useState(imagenPerfil[0].img);
+    const [imagen, setImagen] = useState(imagenPerfil[0]);
     const numPerf = descPerfil.length === 5;
     return (
         <>
@@ -56,9 +56,9 @@ function Perfil (){
                     }}
                     onSubmit={ async (val)=> {
                         
-                        await axios.post('/api/addPerfil',{Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen});
-                        dispatch(datosPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
-                        dispatch(setPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen}));
+                        await axios.post('/api/addPerfil',{Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen.pos});
+                        dispatch(datosPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen.pos}));
+                        dispatch(setPerfil({Dispositivo: val.dispositivo, Nombre: val.nombre, Idioma: val.idioma, Email: descUsuario.Email, Imagen: imagen.pos}));
                         navigate('/');
                     }}
                 >
@@ -69,7 +69,7 @@ function Perfil (){
 
                                 {imagenPerfil.map(i => (
                                     <div key={i.pos} className="imgPerfil">
-                                        <textarea style={{opacity: '0', cursor: 'default', resize: 'none'}} onClick={()=>setImagen(i.img)} maxLength={0}></textarea>
+                                        <textarea style={{opacity: '0', cursor: 'default', resize: 'none'}} onClick={()=>setImagen(i)} maxLength={0}></textarea>
                                         <img src={i.img} alt="" key={i.pos}></img>
                                     </div>
                                 ))}
@@ -100,7 +100,7 @@ function Perfil (){
                             <option value='Televisor'>Televisor</option>
                             <option value='Computadora'>Computadora</option>
                             </Field>
-                            <img src={imagen} alt=""></img>            
+                            <img src={imagen.img} alt=""></img>            
                             <div className="botonReg">
                                 <button type="submit">Aceptar</button>
                             </div>

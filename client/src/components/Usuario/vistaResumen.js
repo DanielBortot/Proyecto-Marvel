@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { datosSuscripcion } from "../../reducers/suscripcionSlice";
 import '../../assets/usuario.css';
 import axios from "axios";
+import { imagenPerfil } from "../../assets/img/imgSelect";
 
 function VistaResumen () {
     const {descPerfil} = useSelector(state => state.perfiles);
@@ -40,7 +41,7 @@ function VistaResumen () {
                                 <div className="row">
                                     {descPerfil.map(perfil => (
                                         <div className="col" key={perfil.Id_Perfil}>
-                                            <img src={perfil.Imagen} alt={perfil.Nombre} width={150} height={150}/>
+                                            <img src={imagenPerfil.find(i => i.pos === perfil.Imagen).img} alt={perfil.Nombre} width={150} height={150}/>
                                             <div className="card-body" key={perfil.Id_Perfil}>      
                                                 <h5 className="card-title">{perfil.Nombre}</h5>
                                             </div>
