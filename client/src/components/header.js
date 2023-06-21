@@ -32,9 +32,7 @@ function Header (){
                     <Link className='custom-button btn btn-secondary px-4 py-4' to={'/personajes'}>Personajes</Link>
                     <Link className='custom-button btn btn-secondary px-4 py-4' to={'/peliculas'}>Peliculas</Link>
                     <Link className='custom-button btn btn-secondary px-4 py-4' to={'/series'}>Series</Link>
-                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/juegos'}>Juegos</Link>
-                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/escogePerfil'}>Perf</Link>
-                    
+                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/juegos'}>Juegos</Link>                  
                 </li>
             </div>
             <div className="inisesion hed">

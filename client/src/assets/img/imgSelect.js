@@ -7,6 +7,7 @@ import img6 from "./Asset 6.png"
 import img7 from "./Asset 7.png"
 import img8 from "./Asset 8.png"
 import img9 from "./Asset 9.png"
+import img10 from "./Asset 11.png"
 
    const imagenPerfil = [
       {img : img1, pos: 1},
@@ -17,6 +18,7 @@ import img9 from "./Asset 9.png"
       {img : img6, pos: 6},
       {img : img7, pos: 7},
       {img : img8, pos: 8},
-      {img : img9, pos: 9}
+      {img : img9, pos: 9},
+      {img : img10, pos: 10}
    ]
 export {imagenPerfil};
