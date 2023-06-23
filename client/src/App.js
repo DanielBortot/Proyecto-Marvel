@@ -23,6 +23,7 @@ import { EscogePerfil } from './components/Usuario/escogePerfil';
 import { RouteProtectUser } from './RouteProtectUser';
 import { RouteProtectPerfil } from './RouteProtectPerfil';
 import { Login } from './components/Usuario/login';
+import { ModInfo } from './components/Usuario/modUsuario/modInfo';
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
                 <Route path='/usuario' element={<DescUsuario/>}/>
                 <Route path='/usuario/resumen' element={<VistaResumen/>}/>
                 <Route path='/usuario/info' element={<VistaInfo/>}/>
+                <Route path='/usuario/info/modi' element={<ModInfo/>}/>
                 <Route path='/usuario/suscr' element={<VistaSuscr/>}/>
                 <Route path='/usuario/pago' element={<VistaPago/>}/>
                 <Route path='/usuario/historial' element={<VistaHistorial/>}/>
