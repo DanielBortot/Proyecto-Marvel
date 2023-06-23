@@ -1,9 +1,9 @@
 import React from "react";
-import '../assets/registro.css';
+import '../../assets/registro.css';
 import { useDispatch, useSelector } from "react-redux";
-import { setPerfil } from "../reducers/perfilesSlice";
+import { setPerfil } from "../../reducers/perfilesSlice";
 import { useNavigate } from "react-router-dom";
-import { imagenPerfil } from "../assets/img/imgSelect";
+import { imagenPerfil } from "../../assets/img/imgSelect";
 
 function EscogePerfil () {
     const {descPerfil} = useSelector(state => state.perfiles);

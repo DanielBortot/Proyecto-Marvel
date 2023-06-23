@@ -1,14 +1,14 @@
 import React from "react";
 import { useState } from "react";
-import '../assets/registro.css';
+import '../../assets/registro.css';
 import axios from 'axios';
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { datosPerfil, setPerfil } from "../reducers/perfilesSlice";
+import { datosPerfil, setPerfil } from "../../reducers/perfilesSlice";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useNavigate } from "react-router-dom";
-import { imagenPerfil } from "../assets/img/imgSelect";
-import "../assets/perfil.css"
+import { imagenPerfil } from "../../assets/img/imgSelect";
+import "../../assets/perfil.css"
 
 function Perfil (){
     const dispatch = useDispatch();

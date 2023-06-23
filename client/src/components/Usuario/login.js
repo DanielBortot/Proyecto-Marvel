@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import '../assets/registro.css';
+import '../../assets/registro.css';
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { datosUsuario, delUsuario } from "../reducers/usuarioSlice";
-import { datosTarjeta, delTarjeta } from "../reducers/tarjetaSlice";
-import { datosPerfil, delPerfiles } from "../reducers/perfilesSlice";
+import { datosUsuario, delUsuario } from "../../reducers/usuarioSlice";
+import { datosTarjeta, delTarjeta } from "../../reducers/tarjetaSlice";
+import { datosPerfil, delPerfiles } from "../../reducers/perfilesSlice";
 import { useNavigate } from "react-router-dom";
-import { setCiudad, setEstado, setPais, delDireccion } from "../reducers/direccionSlice";
-import { delSuscripcion } from "../reducers/suscripcionSlice";
+import { setCiudad, setEstado, setPais, delDireccion } from "../../reducers/direccionSlice";
+import { delSuscripcion } from "../../reducers/suscripcionSlice";
 
 function Login() {
 

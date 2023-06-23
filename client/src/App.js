@@ -10,19 +10,19 @@ import { VistaComics } from './components/vistaComics';
 import { VistaInicio } from './components/inicio';
 import { Footer } from './components/footer';
 import { DescripcionPers } from './components/Personajes/DescripcionPers';
-import { Login } from './components/login';
-import { Register } from './components/register';
-import { Perfil } from './components/perfil';
+import { Register } from './components/Usuario/register';
+import { Perfil } from './components/Usuario/perfil';
 import { DescUsuario } from './components/Usuario/usuario';
 import { VistaResumen } from "./components/Usuario/vistaResumen";
 import { VistaInfo } from "./components/Usuario/vistaInfo";
 import { VistaSuscr } from "./components/Usuario/vistasuscr";
 import { VistaPago } from "./components/Usuario/vistaPago";
 import { VistaHistorial } from "./components/Usuario/vistaHistorial";
-import { Tarjeta } from './components/tarjeta';
-import { EscogePerfil } from './components/escogePerfil';
+import { Tarjeta } from './components/Usuario/tarjeta';
+import { EscogePerfil } from './components/Usuario/escogePerfil';
 import { RouteProtectUser } from './RouteProtectUser';
 import { RouteProtectPerfil } from './RouteProtectPerfil';
+import { Login } from './components/Usuario/login';
 
 function App() {
   return (
