@@ -1,12 +1,12 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import '../assets/registro.css';
+import '../../assets/registro.css';
 import axios from 'axios';
 import { useDispatch } from "react-redux";
-import { datosUsuario } from "../reducers/usuarioSlice";
+import { datosUsuario } from "../../reducers/usuarioSlice";
 import { Formik, Form, ErrorMessage, Field } from "formik";
 import { useNavigate } from "react-router-dom";
-import { setPais, setEstado, setCiudad } from "../reducers/direccionSlice";
+import { setPais, setEstado, setCiudad } from "../../reducers/direccionSlice";
 
 function Register() {
     const [colores, setColores] = useState(['nselec','nselec','nselec','nselec']);

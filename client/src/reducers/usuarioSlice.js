@@ -19,7 +19,13 @@ export const usuarioSlice = createSlice({
     initialState: initialState,
     reducers: {
         datosUsuario: (state, action) =>{
-            state.descUsuario = {...action.payload, Fecha_Nac: action.payload.Fecha_Nac.slice(0,10), Fecha_Creacion: action.payload.Fecha_Creacion.slice(0,10)};
+            state.descUsuario = {...action.payload};
+            if (action.payload.Fecha_Nac){
+                state.descUsuario = {...state.descUsuario, Fecha_Nac: action.payload.Fecha_Nac.slice(0,10)};
+            }
+            if (!state.descUsuario.Fecha_Creacion){
+                state.descUsuario = {...state.descUsuario, Fecha_Creacion: action.payload.Fecha_Creacion.slice(0,10)};
+            }
         },
         delUsuario: (state, action) => {
             state.descUsuario = {};
