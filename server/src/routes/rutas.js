@@ -1,11 +1,14 @@
 const router = require('express').Router();
 const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario} = require('../controllers/acciones');
+const {eliminarSerie, seriesRep2, buscSeries, updateSerie} = require('../controllers/reportes');
+
 
 router.get('/personajes', personajes);
 router.get('/peliculas', peliculas);
 router.get('/series', series);
 router.get('/juegos', juegos);
 router.get('/paises', paises);
+router.get('/Rep2Series', seriesRep2);
 
 router.delete('/removePersonaje/:id', removePersonaje);
 router.delete('/removePelicula/:id', removePelicula);
@@ -33,8 +36,12 @@ router.post('/setEstado', setEstado);
 router.post('/setPais', setPais);
 router.post('/suscripcion', suscripcion);
 
+router.post('/delSerie', eliminarSerie);
+router.post('/buscSeries', buscSeries);
+
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);
-router.put('/upInfoUsu', updateInfoUsuario)
+router.put('/upInfoUsu', updateInfoUsuario);
+router.put('/upSerie', updateSerie);
 
 module.exports = router;

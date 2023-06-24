@@ -27,7 +27,6 @@ function Register() {
     },[]);
 
     const paisRed = async (id) => {
-        console.log(id);
         paises.map(pais => {
             if (pais.Id_Pais === id){
                 dispatch(setPais(pais));
@@ -78,7 +77,10 @@ function Register() {
                         email: '',
                         contra: '',
                         repContra: '',
-                        fecha: ''
+                        fecha: '',
+                        pais: '',
+                        estado: '',
+                        ciudad: ''
                     }}
                     validate={(val)=> {
                         let errores = {};

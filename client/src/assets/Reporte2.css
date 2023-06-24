@@ -1,0 +1,40 @@
+.rep2 {
+    width: 50%;
+    margin: 30px auto;
+}
+
+.rep2Cont {
+    background-color: rgb(127, 130, 133);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 3px;
+    padding: 10px;
+}
+
+.rep2item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    font-size: 18px;
+    background-color: aliceblue;
+}
+
+.rep2ContDato {
+    position: relative;
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.rep2ContIcon {
+    position: absolute;
+    left: 5%;
+    top: 38%;
+}
+
+.rep2ContIcon i {
+    padding: 5px;
+    cursor: pointer;
+}

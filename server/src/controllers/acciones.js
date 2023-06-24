@@ -72,7 +72,7 @@ const acciones = {
     buscUsuario: async (req,res) => {
         const {Email,Nombre,Apellido} = req.body;
         let errores = {};
-        const usuarios = await pool.query('SELECT "Email", "Nombre", "Apellido" FROM "Usuario" WHERE "Email"=$1 OR "Nombre"=$2 OR "Apellido"=$3',[Email,Nombre,Apellido]);
+        const usuarios = await pool.query('SELECT "Email", "Nombre", "Apellido" FROM "Usuario" WHERE "Email"=$1 OR "Nombre"=$2 OR "Apellido"=$3',[Email || null, Nombre || null, Apellido || null]);
 
         if (usuarios.rows.length !== 0){
             usuarios.rows.map(usuario => {
@@ -189,13 +189,13 @@ const acciones = {
 
     estados: async (req,res) => {
         const {Id_Pais} = req.body;
-        const estados = await pool.query('SELECT * FROM "Estado" WHERE "Id_Pais"=$1',[Id_Pais]);
+        const estados = await pool.query('SELECT * FROM "Estado" WHERE "Id_Pais"=$1',[Id_Pais || null]);
         res.send(estados.rows);
     },
 
     ciudades: async (req,res) => {
         const {Id_Estado} = req.body;
-        const ciudades = await pool.query('SELECT * FROM "Ciudad" WHERE "Id_Estado"=$1',[Id_Estado]);
+        const ciudades = await pool.query('SELECT * FROM "Ciudad" WHERE "Id_Estado"=$1',[Id_Estado || null]);
         res.send(ciudades.rows);
     },
 

@@ -2,6 +2,7 @@ import React from "react";
 import { SideMenu } from "./sideMenu";
 import '../../assets/usuario.css';
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function VistaInfo () {
     const {descUsuario} = useSelector(state => state.usuario);
@@ -35,8 +36,9 @@ function VistaInfo () {
                                 <h5><span style={{fontWeight: 'bold'}}>Ciudad:</span> {Ciudad.Nombre}</h5>
                             </div>
                         </div>
+                        <Link className='btn btn-danger' style={{marginTop: '15px'}} to={'/usuario/info/modi'}>Actualizar Informacion</Link> 
                     </div>
-                </div>   
+                </div>  
             </div>     
         </>
     );

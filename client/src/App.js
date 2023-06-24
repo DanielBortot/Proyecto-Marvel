@@ -24,6 +24,8 @@ import { RouteProtectUser } from './RouteProtectUser';
 import { RouteProtectPerfil } from './RouteProtectPerfil';
 import { Login } from './components/Usuario/login';
 import { ModInfo } from './components/Usuario/modUsuario/modInfo';
+import { Reporte2 } from './components/Reportes/Reporte2';
+import { ModRep2 } from './components/Reportes/modRep2';
 
 function App() {
   return (
@@ -53,7 +55,9 @@ function App() {
               </Route>
             </Route>
             <Route path='/inicioSesion' element={<Login/>}/>
-            <Route path='/registro' element={<Register/>}/>     
+            <Route path='/registro' element={<Register/>}/>
+            <Route path='/Rep2' element={<Reporte2/>}/>
+            <Route path='/Rep2/modRep2/:tituloP/:episodiosP' element={<ModRep2/>}/>
           </Routes>
       </div>
       <Footer/>
