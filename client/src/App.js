@@ -27,6 +27,9 @@ import { ModInfo } from './components/Usuario/modUsuario/modInfo';
 import { Reporte2 } from './components/Reportes/Reporte2';
 import { ModRep2 } from './components/Reportes/modRep2';
 import { AgSerie } from './components/Reportes/AgSerie';
+import { Reporte5 } from './components/Reportes/Reporte5';
+import { AgPelicula } from './components/Reportes/AgPelicula';
+import { ModRep5 } from './components/Reportes/modRep5';
 
 function App() {
   return (
@@ -60,6 +63,9 @@ function App() {
             <Route path='/Rep2' element={<Reporte2/>}/>
             <Route path='/Rep2/addRep2' element={<AgSerie/>}/>
             <Route path='/Rep2/modRep2' element={<ModRep2/>}/>
+            <Route path='/Rep5' element={<Reporte5/>}/>
+            <Route path='/Rep5/addRep5' element={<AgPelicula/>}/>
+            <Route path='/Rep5/modRep5' element={<ModRep5/>}/>
           </Routes>
       </div>
       <Footer/>

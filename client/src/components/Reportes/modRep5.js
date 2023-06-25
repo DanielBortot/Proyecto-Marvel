@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ue from "underscore";
 
-function ModRep2 () {
+function ModRep5() {
+
     const [errorDB, setErrorDB] = useState({});
     const {descReporte} = useSelector(state => state.reporte);
-    const {titulo, fecha, compania, rating, sinopsis, imagen, episodios, creador, canal, tipo} = descReporte;
+    const {titulo, fecha, compania, rating, sinopsis, imagen, director, distribuidor, duracion, tipo, ganancia, coste} = descReporte;
     const navigate = useNavigate();
 
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Agregar Serie</h2>
+                <h2 className="titulo">Agregar Pelicula</h2>
             </div>
             <div className="formContReg">
                 <Formik
@@ -25,16 +26,18 @@ function ModRep2 () {
                         rating: rating,
                         sinopsis: sinopsis,
                         imagen: imagen,
-                        episodios: episodios,
-                        creador: creador,
-                        canal: canal,
-                        tipo: tipo
+                        director: director,
+                        distribuidor: distribuidor,
+                        duracion: duracion,
+                        tipo: tipo,
+                        coste: coste,
+                        ganancia: ganancia
                     }}
                     validate={(val)=>{
                         let errores = {};
 
                         if (!val.titulo){
-                            errores.titulo = 'Introduzca el titulo de la serie';
+                            errores.titulo = 'Introduzca el titulo de la pelicula';
                         }
                         if (!val.fecha){
                             errores.fecha = 'Seleccione una fecha de creacion';
@@ -46,34 +49,40 @@ function ModRep2 () {
                             errores.rating = 'Ingrese un rating valido del 1 al 5';
                         }
                         if (!val.sinopsis){
-                            errores.sinopsis = 'Ingrese la sinopsis de la serie';
+                            errores.sinopsis = 'Ingrese la sinopsis de la pelicula';
                         }
-                        if (!val.creador){
-                            errores.creador = 'Ingrese el nombre del creador de la serie';
+                        if (!val.director){
+                            errores.director = 'Ingrese el nombre del director de la pelicula';
                         }
-                        if (!val.canal){
-                            errores.canal = 'Ingrese el nombre del canal donde se transmite la serie';
+                        if (!val.distribuidor){
+                            errores.distribuidor = 'Ingrese el nombre del distribuidor de la pelicula';
+                        }
+                        if (!val.duracion || isNaN(val.duracion) || parseInt(val.duracion) < 1){
+                            errores.duracion = 'Ingrese una duracion valida en minutos';
+                        }
+                        if (!val.ganancia || isNaN(val.ganancia) || parseInt(val.ganancia) < 0){
+                            errores.ganancia = 'Ingrese una ganacia valida';
+                        }
+                        if (!val.coste || isNaN(val.coste) || parseInt(val.coste) < 0){
+                            errores.coste = 'Ingrese un coste valido';
                         }
                         if (!val.tipo || val.tipo === -1){
-                            errores.tipo = 'Ingrese el tipo de la serie';
-                        }
-                        if (!val.episodios || isNaN(val.episodios) || parseInt(val.episodios) < 1){
-                            errores.episodios = 'Ingrese un numero de episodios valido';
+                            errores.tipo = 'Ingrese el tipo de la pelicula';
                         }
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
                         let error = {}
                         if (val.titulo !== titulo){
-                            error = await (await axios.post('../api/buscSeries', {T_Serie: val.titulo})).data;
+                            error = await (await axios.post('../api/buscPeliculas', {T_Pelicula: val.titulo})).data;
                             setErrorDB(error);
                         }
                         if(ue.isEqual(val, descReporte)){
-                            navigate('/Rep2');
+                            navigate('/Rep5');
                         }
                         else if (!error.titulo){
-                            await axios.put('../api/addRep2', val);
-                            navigate('/Rep2');
+                            await axios.put('../api/addRep5', val);
+                            navigate('/Rep5');
                         }
                     }}
                 >
@@ -110,28 +119,40 @@ function ModRep2 () {
                                 placeholder="Sinopsis"
                                 name="sinopsis"
                             />
-                            <ErrorMessage name="episodios" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.episodios}</div>)}/>
+                            <ErrorMessage name="director" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.director}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Numero de Episodios"
-                                name="episodios"
+                                placeholder="Nombre del Director"
+                                name="director"
                             />
-                            <ErrorMessage name="creador" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.creador}</div>)}/>
+                            <ErrorMessage name="distribuidor" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.distribuidor}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Nombre del Creador"
-                                name="creador"
+                                placeholder="Nombre del Distribuidor"
+                                name="distribuidor"
                             />
-                            <ErrorMessage name="canal" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.canal}</div>)}/>
+                            <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.duracion}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Nombre del Canal"
-                                name="canal"
+                                placeholder="Duracion de la Pelicula en Minutos"
+                                name="duracion"
+                            />
+                            <ErrorMessage name="ganancia" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.ganancia}</div>)}/>
+                            <Field 
+                                type="text" 
+                                placeholder="Ganancia de la Pelicula"
+                                name="ganacia"
+                            />
+                            <ErrorMessage name="coste" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.coste}</div>)}/>
+                            <Field 
+                                type="text" 
+                                placeholder="Coste de la Pelicula"
+                                name="coste"
                             />
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
 
                             <Field type="text" name="tipo" as="select">
-                                <option hidden selected value={-1}>Selecciona el tipo de la serie</option>
+                                <option hidden selected value={-1}>Selecciona el tipo de la pelicula</option>
                                 <option value={'Animada'}>Animada</option>
                                 <option value={'Live Action'}>Live Action</option>
                             </Field>
@@ -147,4 +168,4 @@ function ModRep2 () {
     );
 }
 
-export {ModRep2};
+export {ModRep5};

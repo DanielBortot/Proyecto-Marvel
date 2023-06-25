@@ -31,12 +31,12 @@ function AgSerie() {
                         let errores = {};
 
                         if (!val.titulo){
-                            errores.titulo = 'Introduzca un titulo de la serie';
+                            errores.titulo = 'Introduzca el titulo de la serie';
                         }
                         if (!val.fecha){
                             errores.fecha = 'Seleccione una fecha de creacion';
                         }
-                        if (!val.compa){
+                        if (!val.compania){
                             errores.compania = 'Ingrese la compañia';
                         }
                         if (!val.rating || isNaN(val.rating) || parseInt(val.rating) > 5 || parseInt(val.rating) < 1){

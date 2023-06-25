@@ -1,0 +1,40 @@
+.rep5 {
+    width: 70%;
+    margin: 30px auto;
+}
+
+.rep5Cont {
+    background-color: rgb(127, 130, 133);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 3px;
+    padding: 10px;
+}
+
+.rep5item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    font-size: 18px;
+    background-color: aliceblue;
+}
+
+.rep5ContDato {
+    position: relative;
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.rep5ContIcon {
+    position: absolute;
+    left: 5%;
+    top: 38%;
+}
+
+.rep5ContIcon i {
+    padding: 5px;
+    cursor: pointer;
+}
