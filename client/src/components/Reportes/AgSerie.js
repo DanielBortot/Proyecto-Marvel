@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
-import { useSelector } from "react-redux";
-import ue from "underscore";
+import { useNavigate } from "react-router-dom";
 
-function ModRep2 () {
-    const [errorDB, setErrorDB] = useState({});
-    const {descReporte} = useSelector(state => state.reporte);
-    const {titulo, fecha, compania, rating, sinopsis, imagen, episodios, creador, canal, tipo} = descReporte;
+function AgSerie() {
+
+    const [errorDB, setErrorDB] = useState({})
     const navigate = useNavigate();
 
     return (
@@ -19,16 +16,16 @@ function ModRep2 () {
             <div className="formContReg">
                 <Formik
                     initialValues={{
-                        titulo: titulo,
-                        fecha: fecha,
-                        compania: compania,
-                        rating: rating,
-                        sinopsis: sinopsis,
-                        imagen: imagen,
-                        episodios: episodios,
-                        creador: creador,
-                        canal: canal,
-                        tipo: tipo
+                        titulo: '',
+                        fecha: '',
+                        compania: '',
+                        rating: '',
+                        sinopsis: '',
+                        imagen: '',
+                        episodios: '',
+                        creador: '',
+                        canal: '',
+                        tipo: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
@@ -63,16 +60,10 @@ function ModRep2 () {
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        let error = {}
-                        if (val.titulo !== titulo){
-                            error = await (await axios.post('../api/buscSeries', {T_Serie: val.titulo})).data;
-                            setErrorDB(error);
-                        }
-                        if(ue.isEqual(val, descReporte)){
-                            navigate('/Rep2');
-                        }
-                        else if (!error.titulo){
-                            await axios.put('../api/addRep2', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: 'aaaaa', episodios: val.episodios, creador: val.creador, canal: val.canal, tipo: val.tipo});
+                        const error = await (await axios.post('../api/buscSeries', {T_Serie: val.titulo})).data;
+                        setErrorDB(error);
+                        if (!error.titulo){
+                            await axios.post('../api/addRep2', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: 'aaaaa', episodios: val.episodios, creador: val.creador, canal: val.canal, tipo: val.tipo});
                             navigate('/Rep2');
                         }
                     }}
@@ -147,4 +138,4 @@ function ModRep2 () {
     );
 }
 
-export {ModRep2};
+export {AgSerie};

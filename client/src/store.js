@@ -9,6 +9,7 @@ import tarjetaReducer from "./reducers/tarjetaSlice";
 import perfilesReducer from "./reducers/perfilesSlice";
 import direccionReducer from "./reducers/direccionSlice";
 import suscripcionReducer from "./reducers/suscripcionSlice";
+import reporteReducer from "./reducers/reportesSlice";
 
 export default configureStore({
     reducer: {
@@ -21,6 +22,7 @@ export default configureStore({
         tarjeta: tarjetaReducer,
         perfiles: perfilesReducer,
         direccion: direccionReducer,
-        suscripcion: suscripcionReducer
+        suscripcion: suscripcionReducer,
+        reporte: reporteReducer
     }  
 })

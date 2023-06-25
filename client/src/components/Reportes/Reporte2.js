@@ -16,7 +16,7 @@ function Reporte2 (){
     })
 
     const eliminar = async (id) => {
-        await axios.post('/api/delSerie');
+        await axios.post('/api/delRep2');
         const lista = [...reporte];
         lista.filter(rep => rep.T_Serie !== id);
         setReporte(lista);
