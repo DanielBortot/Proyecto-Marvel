@@ -233,6 +233,21 @@ const acciones = {
         const {Nombre, Apellido, Email, Contrasena, Fecha_Nac, Direccion, EmailAnt} = req.body;
         await pool.query('UPDATE "Usuario" SET "Email"=$1, "Nombre"=$2, "Apellido"=$3, "Contrasena"=$4, "Fecha_Nac"=$5, "Direccion"=$6 WHERE "Email"=$7',[Email,Nombre,Apellido,Contrasena,Fecha_Nac,Direccion,EmailAnt]);
         res.send('Actualizado');
+    },
+
+    eliminarUsuario: async (req,res) => {
+        const {Email} = req.body;
+        const perfiles = (await pool.query('SELECT "Id_Perfil" FROM "Perfil" WHERE "Email"=$1',[Email])).rows;
+        for (let i=0; i<=perfiles.length; i++){
+            if (i < perfiles.length){
+                await pool.query('DELETE FROM "Historial" WHERE "Id_Perfil"=$1',[perfiles[i].Id_Perfil]);
+                await pool.query('DELETE FROM "Perfil" WHERE "Id_Perfil"=$1',[perfiles[i].Id_Perfil]);
+            }
+            else if (i === perfiles.length){
+                await pool.query('DELETE FROM "Usuario" WHERE "Email"=$1',[Email]);
+            }
+        }
+        res.send('eliminado');
     }
 }
 

@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { SideMenu } from "./sideMenu";
 import { useDispatch, useSelector } from "react-redux";
-import { datosSuscripcion } from "../../reducers/suscripcionSlice";
+import { datosSuscripcion, delSuscripcion } from "../../reducers/suscripcionSlice";
 import '../../assets/usuario.css';
 import axios from "axios";
 import { imagenPerfil } from "../../assets/img/imgSelect";
+import { delUsuario } from "../../reducers/usuarioSlice";
+import { delDireccion } from "../../reducers/direccionSlice";
+import { delTarjeta } from "../../reducers/tarjetaSlice";
+import { delPerfiles } from "../../reducers/perfilesSlice";
 
 function VistaResumen () {
     const {descPerfil} = useSelector(state => state.perfiles);
@@ -13,6 +17,7 @@ function VistaResumen () {
     const {descTarjeta} = useSelector(state => state.tarjeta);
     const [sus, setSuscri] = useState({})
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(()=> {
         const setSus = async () => {
@@ -23,6 +28,16 @@ function VistaResumen () {
         };
         setSus();
     }, []);
+
+    const eliminar = async () => {
+        await axios.post('/api/delUsuario',{Email: descUsuario.Email});
+        dispatch(delUsuario());
+        dispatch(delPerfiles());
+        dispatch(delDireccion());
+        dispatch(delTarjeta());
+        dispatch(delSuscripcion());
+        navigate('/inicioSesion');
+    }
 
     return (
         <> 
@@ -74,6 +89,7 @@ function VistaResumen () {
                                 <h5><span style={{fontWeight: 'bold'}}>Tarifa de la Suscripcion:</span> {sus.Tarifa}$</h5>
                             </div>
                         </div>
+                        <button className='btn btn-danger' style={{margin: '15px 0 10px 0'}} onClick={eliminar}>Eliminar Cuenta</button>
                     </div>   
                 </div>   
             </div>     

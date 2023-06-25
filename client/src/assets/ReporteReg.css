@@ -1,0 +1,23 @@
+.repReg {
+    width: 70%;
+    margin: 30px auto;
+}
+
+.repRegCont {
+    background-color: rgb(127, 130, 133);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 3px;
+    padding: 10px;
+}
+
+.repRegitem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    font-size: 18px;
+    background-color: aliceblue;
+}

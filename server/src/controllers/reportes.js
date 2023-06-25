@@ -73,6 +73,12 @@ const reportes = {
         await pool.query('INSERT INTO "Pelicula" ("T_Pelicula", "Director", "Distribuidor", "Duracion", "Ganancia", "Coste") VALUES ($1, $2, $3, $4, $5, $6)', [titulo,director,distribuidor,duracion,ganancia,coste]);
         res.send('creado')
     },
+
+    usuariosRepReg: async (req,res) => {
+        const suscripcion = 'Vip';
+        const pais = 'Venezuela';
+        const datos = await pool.query('SELECT U."Email", U."Nombre", U."Apellido", U."Fecha_Nac" FROM "Usuario" U JOIN "Suscripcion" S ON (U."Id_Suscripcion" = S."ID") WHERE ((S."Tipo" = $1) AND (U."Direccion" IN (SELECT "Id_Ciudad" FROM "Ciudad" WHERE "Id_Estado" IN (SELECT "Id_Estado" FROM "Estado" WHERE "Id_Pais" IN (SELECT "Id_Pais" FROM "Pais" WHERE "Nombre" = $2)))))', [suscripcion,pais]);
+    }
 }
 
 module.exports = reportes;
