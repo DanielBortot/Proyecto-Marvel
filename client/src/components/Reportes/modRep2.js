@@ -19,8 +19,8 @@ function ModRep2 () {
             <div className="formContReg">
                 <Formik
                     initialValues={{
-                        titulo: titulo,
-                        fecha: fecha,
+                        tituloNew: titulo,
+                        fecha: fecha.slice(0,10),
                         compania: compania,
                         rating: rating,
                         sinopsis: sinopsis,
@@ -33,8 +33,8 @@ function ModRep2 () {
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.titulo){
-                            errores.titulo = 'Introduzca el titulo de la serie';
+                        if (!val.tituloNew){
+                            errores.tituloNew = 'Introduzca el titulo de la serie';
                         }
                         if (!val.fecha){
                             errores.fecha = 'Seleccione una fecha de creacion';
@@ -64,15 +64,15 @@ function ModRep2 () {
                     }}
                     onSubmit={ async (val)=> {
                         let error = {}
-                        if (val.titulo !== titulo){
-                            error = await (await axios.post('../api/buscSeries', {T_Serie: val.titulo})).data;
+                        if (val.tituloNew !== titulo){
+                            error = await (await axios.post('../api/buscSeries', {T_Serie: val.tituloNew})).data;
                             setErrorDB(error);
                         }
                         if(ue.isEqual(val, descReporte)){
                             navigate('/Rep2');
                         }
                         else if (!error.titulo){
-                            await axios.put('../api/addRep2', val);
+                            await axios.put('../api/upRep2', {...val,titulo: titulo});
                             navigate('/Rep2');
                         }
                     }}
@@ -80,11 +80,11 @@ function ModRep2 () {
                     {({errors})=>(
                         <Form>
                             {errorDB.error && <div style={{fontSize: "15px", color: "red"}}>{errorDB.error}</div>}
-                            <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
+                            <ErrorMessage name="tituloNew" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tituloNew}</div>)}/>
                             <Field 
                                 type="text" 
                                 placeholder="Titulo"
-                                name="titulo"
+                                name="tituloNew"
                             />
                             <ErrorMessage name="fecha" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fecha}</div>)}/>
                             <Field 

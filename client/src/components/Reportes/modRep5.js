@@ -20,8 +20,8 @@ function ModRep5() {
             <div className="formContReg">
                 <Formik
                     initialValues={{
-                        titulo: titulo,
-                        fecha: fecha,
+                        tituloNew: titulo,
+                        fecha: fecha.slice(0,10),
                         compania: compania,
                         rating: rating,
                         sinopsis: sinopsis,
@@ -36,8 +36,8 @@ function ModRep5() {
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.titulo){
-                            errores.titulo = 'Introduzca el titulo de la pelicula';
+                        if (!val.tituloNew){
+                            errores.tituloNew = 'Introduzca el titulo de la pelicula';
                         }
                         if (!val.fecha){
                             errores.fecha = 'Seleccione una fecha de creacion';
@@ -73,15 +73,15 @@ function ModRep5() {
                     }}
                     onSubmit={ async (val)=> {
                         let error = {}
-                        if (val.titulo !== titulo){
-                            error = await (await axios.post('../api/buscPeliculas', {T_Pelicula: val.titulo})).data;
+                        if (val.tituloNew !== titulo){
+                            error = await (await axios.post('../api/buscPeliculas', {T_Pelicula: val.tituloNew})).data;
                             setErrorDB(error);
                         }
                         if(ue.isEqual(val, descReporte)){
                             navigate('/Rep5');
                         }
                         else if (!error.titulo){
-                            await axios.put('../api/addRep5', val);
+                            await axios.put('../api/upRep5', {...val,titulo: titulo});
                             navigate('/Rep5');
                         }
                     }}
@@ -89,11 +89,11 @@ function ModRep5() {
                     {({errors})=>(
                         <Form>
                             {errorDB.error && <div style={{fontSize: "15px", color: "red"}}>{errorDB.error}</div>}
-                            <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
+                            <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tituloNew}</div>)}/>
                             <Field 
                                 type="text" 
                                 placeholder="Titulo"
-                                name="titulo"
+                                name="tituloNew"
                             />
                             <ErrorMessage name="fecha" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fecha}</div>)}/>
                             <Field 
@@ -115,7 +115,7 @@ function ModRep5() {
                             />
                             <ErrorMessage name="sinopsis" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.sinopsis}</div>)}/>
                             <Field 
-                                type="textarea" 
+                                type="text" 
                                 placeholder="Sinopsis"
                                 name="sinopsis"
                             />
@@ -141,7 +141,7 @@ function ModRep5() {
                             <Field 
                                 type="text" 
                                 placeholder="Ganancia de la Pelicula"
-                                name="ganacia"
+                                name="ganancia"
                             />
                             <ErrorMessage name="coste" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.coste}</div>)}/>
                             <Field 

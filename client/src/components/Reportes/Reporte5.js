@@ -13,20 +13,21 @@ function Reporte5 (){
 
     useEffect(()=> {
         const traerDatos = async ()=> {
-            const datos = await (await axios.get('/api/Rep5')).data;
+            const datos = await (await axios.get('/api/Rep5Peliculas')).data;
             setReporte(datos);
         }
         traerDatos();
-    })
+    },[]);
 
     const eliminar = async (id) => {
         await axios.post('/api/delRep5', {T_Pelicula: id});
         let lista = [...reporte];
-        lista = lista.filter(rep => rep.T_Pelicula !== id);
+        lista = lista.filter(rep => rep.titulo !== id);
         setReporte(lista);
     }
 
     const update = async (val) => {
+        val.fecha = val.fecha.slice(0,10);
         dispatch(datosReporte(val));
         navigate('modRep5');
     }
@@ -43,17 +44,17 @@ function Reporte5 (){
                     <div className="rep5item"><span style={{fontWeight: 'bold'}}>Estreno</span></div>
                     {reporte.map(rep => (
                         <>
-                            <div className="rep5ContDato" key={rep.T_Pelicula}>
+                            <div className="rep5ContDato" key={rep.titulo}>
                                 <div className="rep5ContIcon">
-                                    <i className="fa-solid fa-trash" onClick={()=> eliminar(rep.T_Pelicula)}></i>
+                                    <i className="fa-solid fa-trash" onClick={()=> eliminar(rep.titulo)}></i>
                                     <i className="fa-solid fa-pen-to-square" onClick={()=> update(rep)}></i>
                                 </div>
-                                <div className="rep5item">{rep.T_Pelicula}</div>
+                                <div className="rep5item">{rep.titulo}</div>
                             </div>
-                            <div className="rep5item">{rep.Duracion}</div>
-                            <div className="rep5item">{rep.Ganancia}</div>
-                            <div className="rep5item">{rep.Costo}</div>
-                            <div className="rep5item">{rep.Estreno}</div>
+                            <div className="rep5item">{rep.duracion}</div>
+                            <div className="rep5item">{rep.ganancia}</div>
+                            <div className="rep5item">{rep.coste}</div>
+                            <div className="rep5item">{rep.fecha.slice(0,10)}</div>
                         </>
                     ))}
                 </div>

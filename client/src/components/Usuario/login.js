@@ -53,8 +53,9 @@ function Login() {
                             errores.email = 'Introduzca un email valido';
                         }
                         if (!val.contra){
-                            errores.contra = 'Introduzca una contraseña valido';
+                            errores.contra = 'Introduzca una contraseña valida';
                         }
+                        return errores;
                     }}
                     onSubmit={ async (val)=> {
                         const usuario = await (await axios.post('/api/login',{Email: val.email, Contrasena: val.contra})).data;
@@ -91,7 +92,7 @@ function Login() {
                                 placeholder="Email"
                                 name="email"
                             />
-                            <ErrorMessage name="nombre" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.contra}</div>)}/>
+                            <ErrorMessage name="contra" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.contra}</div>)}/>
                             <Field 
                                 type="password" 
                                 placeholder="Contraseña"

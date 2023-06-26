@@ -27,7 +27,7 @@ function ReporteReg (){
                             <div className="repRegitem">{rep.Email}</div>
                             <div className="repRegitem">{rep.Nombre}</div>
                             <div className="repRegitem">{rep.Apellido}</div>
-                            <div className="repRegitem">{rep.Fecha_Nac}</div>
+                            <div className="repRegitem">{rep.Fecha_Nac.slice(0,10)}</div>
                         </>
                     ))}
                 </div>

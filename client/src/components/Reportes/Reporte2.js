@@ -17,12 +17,12 @@ function Reporte2 (){
             setReporte(datos);
         }
         traerDatos();
-    })
+    },[])
 
     const eliminar = async (id) => {
         await axios.post('/api/delRep2', {T_Serie: id});
         let lista = [...reporte];
-        lista = lista.filter(rep => rep.T_Serie !== id);
+        lista = lista.filter(rep => rep.titulo !== id);
         setReporte(lista);
     }
 
@@ -40,14 +40,14 @@ function Reporte2 (){
                     <div className="rep2item"><span style={{fontWeight: 'bold'}}>Num Episodios</span></div>
                     {reporte.map(rep => (
                         <>
-                            <div className="rep2ContDato" key={rep.T_Serie}>
+                            <div className="rep2ContDato" key={rep.titulo}>
                                 <div className="rep2ContIcon">
-                                    <i className="fa-solid fa-trash" onClick={()=> eliminar(rep.T_Serie)}></i>
+                                    <i className="fa-solid fa-trash" onClick={()=> eliminar(rep.titulo)}></i>
                                     <i className="fa-solid fa-pen-to-square" onClick={()=> update(rep)}></i>
                                 </div>
-                                <div className="rep2item">{rep.T_Serie}</div>
+                                <div className="rep2item">{rep.titulo}</div>
                             </div>
-                            <div className="rep2item">{rep.N_Episodios}</div>
+                            <div className="rep2item">{rep.episodios}</div>
                         </>
                     ))}
                 </div>
