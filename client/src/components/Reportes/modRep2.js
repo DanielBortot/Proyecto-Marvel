@@ -106,7 +106,7 @@ function ModRep2 () {
                             />
                             <ErrorMessage name="sinopsis" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.sinopsis}</div>)}/>
                             <Field 
-                                type="textarea" 
+                                type="text" 
                                 placeholder="Sinopsis"
                                 name="sinopsis"
                             />

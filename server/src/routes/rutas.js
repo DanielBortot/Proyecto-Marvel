@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario, eliminarUsuario} = require('../controllers/acciones');
-const {eliminarSerie, seriesRep2, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, peliculasRep5, buscPeliculas, updateMedioPelicula, addMedioPelicula, usuariosRepReg} = require('../controllers/reportes');
+const {eliminarSerie, seriesRep2, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, peliculasRep5, buscPeliculas, updateMedioPelicula, addMedioPelicula, usuariosRepReg, buscPodPersVill, buscVillanos, buscPoderes, eliminarPosee, buscNacionalidades, buscOcupaciones, buscCreadores, addPodPersVill, poseeRep6} = require('../controllers/reportes');
 
 
 router.get('/personajes', personajes);
@@ -8,10 +8,16 @@ router.get('/peliculas', peliculas);
 router.get('/series', series);
 router.get('/juegos', juegos);
 router.get('/paises', paises);
+router.get('/villanos', buscVillanos);
+router.get('/poderes', buscPoderes);
+router.get('/nacionalidades', buscNacionalidades);
+router.get('/ocupaciones', buscOcupaciones);
+router.get('/creadores', buscCreadores);
 
 router.get('/Rep2Series', seriesRep2);
 router.get('/Rep5Peliculas', peliculasRep5);
 router.get('/RepRegistro', usuariosRepReg);
+router.get('/Rep6Poderes', poseeRep6);
 
 router.delete('/removePersonaje/:id', removePersonaje);
 router.delete('/removePelicula/:id', removePelicula);
@@ -47,6 +53,10 @@ router.post('/addRep2', addMedioSerie);
 router.post('/delRep5', eliminarPelicula);
 router.post('/buscPeliculas', buscPeliculas);
 router.post('/addRep5', addMedioPelicula);
+
+router.post('/delRep6', eliminarPosee);
+router.post('/buscPodPersVill', buscPodPersVill);
+router.post('/addRep6', addPodPersVill);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

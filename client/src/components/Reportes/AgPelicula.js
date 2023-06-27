@@ -88,7 +88,7 @@ function AgPelicula() {
                                 <Switch checked={checked} onChange={handleChange} inputProps={{'aria-label': 'controlled'}}/>
                                 <label>{checked ? 'Cambiar a modo Agregar Medio y Pelicula' : 'Cambiar a modo Agregar Solo Pelicula'}</label>
                             </div>
-                            {errorDB.error && <div style={{fontSize: "15px", color: "red"}}>{errorDB.error}</div>}
+                            {errorDB.titulo && <div style={{fontSize: "15px", color: "red"}}>{errorDB.titulo}</div>}
                             <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
                             <Field 
                                 type="text" 

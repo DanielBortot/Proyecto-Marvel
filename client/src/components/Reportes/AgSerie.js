@@ -80,7 +80,7 @@ function AgSerie() {
                                 <Switch checked={checked} onChange={handleChange} inputProps={{'aria-label': 'controlled'}}/>
                                 <label>{checked ? 'Cambiar a modo Agregar Medio y Serie' : 'Cambiar a modo Agregar Solo Serie'}</label>
                             </div>
-                            {errorDB.error && <div style={{fontSize: "15px", color: "red"}}>{errorDB.error}</div>}
+                            {errorDB.titulo && <div style={{fontSize: "15px", color: "red"}}>{errorDB.titulo}</div>}
                             <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
                             <Field 
                                 type="text" 

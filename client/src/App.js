@@ -31,6 +31,8 @@ import { Reporte5 } from './components/Reportes/Reporte5';
 import { AgPelicula } from './components/Reportes/AgPelicula';
 import { ModRep5 } from './components/Reportes/modRep5';
 import { ReporteReg } from './components/Reportes/ReporteReg';
+import { Reporte6 } from './components/Reportes/Reporte6';
+import { AgPosee } from './components/Reportes/AgPosee';
 
 function App() {
   return (
@@ -68,6 +70,8 @@ function App() {
             <Route path='/Rep5/addRep5' element={<AgPelicula/>}/>
             <Route path='/Rep5/modRep5' element={<ModRep5/>}/>
             <Route path='/RepReg' element={<ReporteReg/>}/>
+            <Route path='/Rep6' element={<Reporte6/>}/>
+            <Route path='/Rep6/addRep6' element={<AgPosee/>}/>
           </Routes>
       </div>
       <Footer/>
