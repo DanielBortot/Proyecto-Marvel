@@ -31,7 +31,6 @@ const reportes = {
     eliminarSerie: async (req,res) => {
         const {T_Serie} = req.body;
         await pool.query('DELETE from "Serie" WHERE "T_Serie"=$1"',[T_Serie]);
-        await pool.query('DELETE from "Medio" WHERE "Titulo"=$1"',[T_Serie]);
         res.send('borrado');
     },
 
@@ -83,7 +82,6 @@ const reportes = {
     eliminarPelicula: async (req,res) => {
         const {T_Pelicula} = req.body;
         await pool.query('DELETE from "Pelicula" WHERE "T_Pelicula"=$1"',[T_Pelicula]);
-        await pool.query('DELETE from "Medio" WHERE "Titulo"=$1"',[T_Pelicula]);
         res.send('borrado');
     },
 
