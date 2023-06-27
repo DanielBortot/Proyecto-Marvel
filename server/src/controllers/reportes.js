@@ -135,8 +135,12 @@ const reportes = {
     },
 
     buscPodPersVill: async (req,res) => {
-        const {nombrePers, nombrePod, aliasVill, opPers, opVill, opPod} = req.body;
+        let {nombrePers, nombrePod, aliasVill, opPers, opVill, opPod} = req.body;
         let errores = {};
+        if (opVill){
+            const nom = (await pool.query('SELECT "N_Villano" "nombrePers" FROM "Villano" WHERE "Alias"=$1',[aliasVill])).rows;
+            nombrePers = nom[0].nombrePers;
+        }
         const personajes = await pool.query('SELECT * FROM "Personaje" WHERE "Nombre"=$1',[nombrePers]);
         const villanos = await pool.query('SELECT * FROM "Villano" WHERE "N_Villano"=$1',[nombrePers]);
         const alias = await pool.query('SELECT * FROM "Villano" WHERE "Alias"=$1',[aliasVill]);
@@ -252,7 +256,7 @@ const reportes = {
     },
 
     addPodPersVill: async (req,res) => {
-        const {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion,opPers,opVill,opPod} = req.body;
+        let {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion,opPers,opVill,opPod} = req.body;
         if (!opPers && !opVill){
             await pool.query('INSERT INTO "Personaje" ("Nombre", "Genero", "Color_Ojos", "Color_Pelo", "Nom_Comic", "E_Marital", imagen) VALUES ($1, $2, $3, $4, $5, $6, $7)',[nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers]);
             for (let i = 0; i<nacionalidades.length; i++){
@@ -268,6 +272,10 @@ const reportes = {
         }
         else if (opPers && !opVill){
             await pool.query('INSERT INTO "Villano" ("N_Villano", "Alias", "Objetivo") VALUES ($1, $2, $3)',[nombrePers,alias,objetivo]);
+        }
+        else {
+            const nom = (await pool.query('SELECT "N_Villano" "nombrePers" FROM "Villano" WHERE "Alias"=$1',[alias])).rows;
+            nombrePers = nom[0].nombrePers;
         }
         if (!opPod){
             await pool.query('INSERT INTO "Poder" ("Nombre", "Imagen", "Descripcion") VALUES ($1, $2, $3)',[nombrePod,imagenPod,descripcion]);
