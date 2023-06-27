@@ -132,7 +132,7 @@ function ModRep2 () {
 
                             <Field type="text" name="tipo" as="select">
                                 <option hidden selected value={-1}>Selecciona el tipo de la serie</option>
-                                <option value={'Animada'}>Animada</option>
+                                <option value={'Animacion'}>Animada</option>
                                 <option value={'Live Action'}>Live Action</option>
                             </Field>
 

@@ -5,7 +5,7 @@ const reportes = {
         const {T_Serie, op} = req.body;
         let errores = {};
         const medios = await pool.query('SELECT * FROM "Medio" WHERE "Titulo"=$1',[T_Serie]);
-        const series = await pool.query('SELECT * FROM "Serie" WHERE "Titulo"=$1',[T_Serie]);
+        const series = await pool.query('SELECT * FROM "Serie" WHERE "T_Serie"=$1',[T_Serie]);
         if (medios.rowCount > 0 && !op){
             errores.titulo = 'Ya existe una serie con ese titulo';
         }
@@ -55,7 +55,7 @@ const reportes = {
         const {T_Pelicula, op} = req.body;
         let errores = {};
         const medios = await pool.query('SELECT * FROM "Medio" WHERE "Titulo"=$1',[T_Pelicula]);
-        const peliculas = await pool.query('SELECT * FROM "Pelicula" WHERE "Titulo"=$1',[T_Pelicula]);
+        const peliculas = await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula"=$1',[T_Pelicula]);
         if (medios.rowCount > 0 && !op){
             errores.titulo = 'Ya existe una pelicula con ese titulo';
         }
