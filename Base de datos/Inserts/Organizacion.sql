@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-26 19:04:54
+-- Started on 2023-06-27 15:01:19
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -48,11 +48,11 @@ ALTER TABLE public."Organizacion" OWNER TO postgres;
 -- Data for Name: Organizacion; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('Hydra', 'Si se corta una cabeza, dos mas tomaran su lugar', 'Johann Schmidt', 'Johann Schmidt', 'Militar', 'Strange Tales #135', 'imagen', 'Dominar el mundo', 'Alemania');
-INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('Vengadores', 'Si no podemos salvarlos, da por seguro que los vengaremos', 'Tony Stark', 'Tony Stark', 'Grupo de superheroes', 'The Avengers #1', 'https://upload.wikimedia.org/wikipedia/en/2/2b/Avengers_%28Marvel_Comics%29_vol_3_num_38.jpg', 'Salvar el mundo', 'Estados Unidos');
-INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('SHIELD', 'Sistema Homologado de Inteligencia, Espionaje, Logística, y Defensa.', 'Nicholas Fury', 'Howard Stark', 'Agencia de inteligencia', 'Strange Tales #135', 'https://i.pinimg.com/originals/70/d1/8d/70d18dc11298dc928d60ddfead03b768.jpg', 'Investigar posibles amenazas en el mundo', 'Estados Unidos');
-INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('X-Men', '"Bienvenido a los X-Men. Espero que sobrevivas a la experiencia".', 'Charles Xavier', 'Charles Xavier', 'Escuela para jovenes mutantes', 'X-Men #1', 'https://static.wikia.nocookie.net/marvel/images/6/6b/X-Men.jpg/revision/latest?cb=20101213233550&path-prefix=es', 'Proteger los derechos de los mutantes', 'Estados Unidos');
-INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('Guardianes de la Galaxia', 'Ése tipo, allí. Necesito su pierna ortopédica.', 'Peter Quill', 'Peter Quill', 'Mercenarios', 'Marvel Super-Heroes # 18', 'Imagen de gg', 'Salvar la galaxia', 'Xandar');
+INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('Guardianes de la Galaxia', 'Ése tipo, allí. Necesito su pierna ortopédica.', 'Peter Quill', 'Peter Quill', 'Mercenarios', 'Marvel Super-Heroes # 18', 'guardianes.jpg', 'Salvar la galaxia', 'Xandar');
+INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('Hydra', 'Si se corta una cabeza, dos mas tomaran su lugar', 'Johann Schmidt', 'Johann Schmidt', 'Militar', 'Strange Tales #135', 'hydra.jpg', 'Dominar el mundo', 'Alemania');
+INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('SHIELD', 'Sistema Homologado de Inteligencia, Espionaje, Logística, y Defensa.', 'Nicholas Fury', 'Howard Stark', 'Agencia de inteligencia', 'Strange Tales #135', 'shield.jpg', 'Investigar posibles amenazas en el mundo', 'Estados Unidos');
+INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('Vengadores', 'Si no podemos salvarlos, da por seguro que los vengaremos', 'Tony Stark', 'Tony Stark', 'Grupo de superheroes', 'The Avengers #1', 'avengers.jpg', 'Salvar el mundo', 'Estados Unidos');
+INSERT INTO public."Organizacion" ("Nombre", "Eslogan", "Lider", "Fundador", "Tipo", "Nom_Comic", "Imagen", "Objetivo", "Lugar_Creacion") VALUES ('X-Men', '"Bienvenido a los X-Men. Espero que sobrevivas a la experiencia".', 'Charles Xavier', 'Charles Xavier', 'Escuela para jovenes mutantes', 'X-Men #1', 'xmen.jpg', 'Proteger los derechos de los mutantes', 'Estados Unidos');
 
 
 --
@@ -109,7 +109,7 @@ ALTER TABLE ONLY public."Organizacion"
     ADD CONSTRAINT "Organizacion_Lider_fkey" FOREIGN KEY ("Lider") REFERENCES public."Personaje"("Nombre") ON UPDATE CASCADE NOT VALID;
 
 
--- Completed on 2023-06-26 19:04:54
+-- Completed on 2023-06-27 15:01:19
 
 --
 -- PostgreSQL database dump complete

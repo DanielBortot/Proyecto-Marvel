@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-26 19:03:06
+-- Started on 2023-06-27 14:59:52
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -67,7 +67,7 @@ INSERT INTO public."Heroe" ("N_Heroe", "Alias", "Logotipo", "Color_Traje", "Arch
 INSERT INTO public."Heroe" ("N_Heroe", "Alias", "Logotipo", "Color_Traje", "Archienemigo") VALUES ('Gamora', 'Gamora', 'imagen ga', 'Morado', NULL);
 INSERT INTO public."Heroe" ("N_Heroe", "Alias", "Logotipo", "Color_Traje", "Archienemigo") VALUES ('Drax', 'Drax el Destructor', 'imagen da', 'Negro', NULL);
 INSERT INTO public."Heroe" ("N_Heroe", "Alias", "Logotipo", "Color_Traje", "Archienemigo") VALUES ('Groot', 'Groot', 'imagen g', 'Marron', NULL);
-INSERT INTO public."Heroe" ("N_Heroe", "Alias", "Logotipo", "Color_Traje", "Archienemigo") VALUES ('Ratchet', 'Ratchet ', 'imagen ra', 'Naranja', NULL);
+INSERT INTO public."Heroe" ("N_Heroe", "Alias", "Logotipo", "Color_Traje", "Archienemigo") VALUES ('Rocket', 'Ratchet ', 'imagen ra', 'Naranja', NULL);
 
 
 --
@@ -106,7 +106,7 @@ CREATE TRIGGER archienemigo_trigger BEFORE INSERT OR UPDATE ON public."Heroe" FO
 
 
 --
--- TOC entry 3305 (class 2606 OID 25357)
+-- TOC entry 3305 (class 2606 OID 25633)
 -- Name: Heroe Heroe_Archienemigo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -115,15 +115,15 @@ ALTER TABLE ONLY public."Heroe"
 
 
 --
--- TOC entry 3306 (class 2606 OID 25362)
+-- TOC entry 3306 (class 2606 OID 25638)
 -- Name: Heroe Heroe_N_Heroe_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Heroe"
-    ADD CONSTRAINT "Heroe_N_Heroe_fkey" FOREIGN KEY ("N_Heroe") REFERENCES public."Personaje"("Nombre") ON UPDATE CASCADE NOT VALID;
+    ADD CONSTRAINT "Heroe_N_Heroe_fkey" FOREIGN KEY ("N_Heroe") REFERENCES public."Personaje"("Nombre") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
--- Completed on 2023-06-26 19:03:07
+-- Completed on 2023-06-27 14:59:52
 
 --
 -- PostgreSQL database dump complete

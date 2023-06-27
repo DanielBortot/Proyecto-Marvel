@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-26 19:01:09
+-- Started on 2023-06-27 14:58:56
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -54,15 +54,15 @@ ALTER TABLE ONLY public."Civil"
 
 
 --
--- TOC entry 3300 (class 2606 OID 25307)
+-- TOC entry 3300 (class 2606 OID 25582)
 -- Name: Civil Civil_N_Civil_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Civil"
-    ADD CONSTRAINT "Civil_N_Civil_fkey" FOREIGN KEY ("N_Civil") REFERENCES public."Personaje"("Nombre") ON UPDATE CASCADE NOT VALID;
+    ADD CONSTRAINT "Civil_N_Civil_fkey" FOREIGN KEY ("N_Civil") REFERENCES public."Personaje"("Nombre") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
--- Completed on 2023-06-26 19:01:09
+-- Completed on 2023-06-27 14:58:56
 
 --
 -- PostgreSQL database dump complete

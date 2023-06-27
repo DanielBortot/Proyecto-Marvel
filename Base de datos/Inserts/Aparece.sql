@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-26 18:59:58
+-- Started on 2023-06-27 14:58:22
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -44,14 +44,14 @@ ALTER TABLE public."Aparece" OWNER TO postgres;
 -- Data for Name: Aparece; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('Vengadores', 'Los Vengadores', 'Activo', 'Protagonista');
-INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('SHIELD', 'Los Vengadores', 'Activo', 'Secundario');
 INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('SHIELD', 'Iron Man 2', 'Activo', 'Secundario');
 INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('Hydra', 'Capitán América: el primer vengador', 'Activo', 'Antagonista');
-INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('Vengadores', 'Los Vengadores 2: La era de ultron', 'Activo', 'Protagonista');
 INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('SHIELD', 'Capitán América: El soldado del invierno', 'Activo', 'Secundario');
 INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('Hydra', 'Capitán América: El soldado del invierno', 'Activo', 'Antagonista');
 INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('Guardianes de la Galaxia', 'Guardianes de la Galaxia', 'Activa', 'Protagonista');
+INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('Vengadores', 'Avengers', 'Activo', 'Protagonista');
+INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('SHIELD', 'Avengers', 'Activo', 'Secundario');
+INSERT INTO public."Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ('Vengadores', 'Avengers: La era de ultron', 'Activo', 'Protagonista');
 
 
 --
@@ -64,24 +64,24 @@ ALTER TABLE ONLY public."Aparece"
 
 
 --
--- TOC entry 3301 (class 2606 OID 25297)
+-- TOC entry 3301 (class 2606 OID 25572)
 -- Name: Aparece Aparece_N_Organizacion_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Aparece"
-    ADD CONSTRAINT "Aparece_N_Organizacion_fkey" FOREIGN KEY ("N_Organizacion") REFERENCES public."Organizacion"("Nombre") ON UPDATE CASCADE NOT VALID;
+    ADD CONSTRAINT "Aparece_N_Organizacion_fkey" FOREIGN KEY ("N_Organizacion") REFERENCES public."Organizacion"("Nombre") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
 --
--- TOC entry 3302 (class 2606 OID 25302)
+-- TOC entry 3302 (class 2606 OID 25577)
 -- Name: Aparece Aparece_N_Titulo_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Aparece"
-    ADD CONSTRAINT "Aparece_N_Titulo_fkey" FOREIGN KEY ("N_Titulo") REFERENCES public."Medio"("Titulo") ON UPDATE CASCADE NOT VALID;
+    ADD CONSTRAINT "Aparece_N_Titulo_fkey" FOREIGN KEY ("N_Titulo") REFERENCES public."Medio"("Titulo") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
--- Completed on 2023-06-26 18:59:58
+-- Completed on 2023-06-27 14:58:22
 
 --
 -- PostgreSQL database dump complete

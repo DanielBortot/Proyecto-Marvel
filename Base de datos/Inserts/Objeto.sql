@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-26 19:04:17
+-- Started on 2023-06-27 15:00:53
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -84,7 +84,7 @@ ALTER TABLE ONLY public."Objeto"
     ADD CONSTRAINT "Objeto_N_Personaje_fkey" FOREIGN KEY ("N_Personaje") REFERENCES public."Personaje"("Nombre") ON UPDATE CASCADE NOT VALID;
 
 
--- Completed on 2023-06-26 19:04:17
+-- Completed on 2023-06-27 15:00:53
 
 --
 -- PostgreSQL database dump complete

@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-26 19:00:43
+-- Started on 2023-06-27 14:58:02
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -98,7 +98,7 @@ ALTER TABLE ONLY public."Cargo"
     ADD CONSTRAINT "Cargo_pkey" PRIMARY KEY ("Cod_Cargo");
 
 
--- Completed on 2023-06-26 19:00:43
+-- Completed on 2023-06-27 14:58:03
 
 --
 -- PostgreSQL database dump complete

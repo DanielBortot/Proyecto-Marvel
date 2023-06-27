@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-26 19:05:16
+-- Started on 2023-06-27 15:01:44
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -51,7 +51,6 @@ ALTER TABLE public."Pelicula" OWNER TO postgres;
 
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Capitán América: el primer vengador', 'Joe Johnston', 124, 140, 371, 'Paramount Pictures', 'Live Action');
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Iron Man 2', 'Jon Favreau', 124, 200, 624, 'Paramount Pictures', 'Live Action');
-INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Los Vengadores', 'Joss Whedon', 143, 220, 1520, 'Walt Disney Studios', 'Live Action');
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('The Incredible Hulk', 'Louis Leterrier', 112, 150, 264, 'Universal Pictures', 'Live Action');
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Thor', 'Kenneth Branargh', 115, 150, 450, 'Paramount Pictures', 'Live Action');
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Spiderman: Un nuevo universo', 'Peter Ramsey', 160, 90, 375, 'Sony Pictues Releasing', 'Animacion');
@@ -62,8 +61,16 @@ INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "G
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Thor: Un mundo oscuro', 'Alan Taylor', 112, 250, 645, 'Walt Disney Studios', 'Live Action');
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Capitán América: El soldado del invierno', 'Anthony Russo', 136, 170, 714, 'Walt Disney Studios', 'Live Action');
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Guardianes de la Galaxia', 'James Gunn', 122, 200, 773, 'Walt Disney Studios', 'Live Action');
-INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Los Vengadores 2: La era de ultron', 'Joss Whedon', 141, 316, 1405, 'Walt Disney Studios', 'Live Action');
 INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Antman', 'Peyton reed', 117, 169, 519, 'Walt Disney Studios', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Black Widow', 'Cate Shrotland', 134, 200, 380, 'Walt Disney Studios', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('X-Men', 'Bryan Singer', 104, 75, 296, '20th Century Fox', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Spiderman 2', 'Sam Raimi', 127, 200, 790, 'Columbia Pictures', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Thor: Ragnarok', 'Taika Waititi', 130, 180, 854, 'Walt Disney Studios', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Avengers: Endgame', 'Anthony Ruso', 181, 365, 2780, 'Walt Disney Studios', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Avengers', 'Joss Whedon', 143, 220, 1520, 'Walt Disney Studios', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Avengers: La era de ultron', 'Joss Whedon', 141, 316, 1405, 'Walt Disney Studios', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Capitán América: Civil War', 'Anthony Ruso', 147, 230, 1153, 'Walt Disney Studios', 'Live Action');
+INSERT INTO public."Pelicula" ("T_Pelicula", "Director", "Duracion", "Coste", "Ganancia", "Distribuidor", "Tipo") VALUES ('Black Panther: Wakanda Forever', 'Ryan Coogler', 161, 250, 860, 'Walt Disney Studios', 'Live Action');
 
 
 --
@@ -93,15 +100,15 @@ CREATE TRIGGER ganancia_perdida_trigger BEFORE INSERT OR UPDATE ON public."Pelic
 
 
 --
--- TOC entry 3304 (class 2606 OID 25397)
+-- TOC entry 3304 (class 2606 OID 25648)
 -- Name: Pelicula Pelicula_T_Pelicula_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Pelicula"
-    ADD CONSTRAINT "Pelicula_T_Pelicula_fkey" FOREIGN KEY ("T_Pelicula") REFERENCES public."Medio"("Titulo") ON UPDATE CASCADE NOT VALID;
+    ADD CONSTRAINT "Pelicula_T_Pelicula_fkey" FOREIGN KEY ("T_Pelicula") REFERENCES public."Medio"("Titulo") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
--- Completed on 2023-06-26 19:05:16
+-- Completed on 2023-06-27 15:01:44
 
 --
 -- PostgreSQL database dump complete

@@ -5,7 +5,7 @@
 -- Dumped from database version 15.3
 -- Dumped by pg_dump version 15.3
 
--- Started on 2023-06-26 19:01:26
+-- Started on 2023-06-27 14:59:23
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -30,7 +30,7 @@ SET default_table_access_method = heap;
 CREATE TABLE public."Combate" (
     "N_Personaje" text NOT NULL,
     "N_Poder" text NOT NULL,
-    "N_Objeto" text NOT NULL,
+    "N_Objeto" text DEFAULT 'No Objeto'::text NOT NULL,
     "Fecha" date NOT NULL,
     "Lugar" text NOT NULL
 );
@@ -39,7 +39,7 @@ CREATE TABLE public."Combate" (
 ALTER TABLE public."Combate" OWNER TO postgres;
 
 --
--- TOC entry 3445 (class 0 OID 25538)
+-- TOC entry 3446 (class 0 OID 25538)
 -- Dependencies: 256
 -- Data for Name: Combate; Type: TABLE DATA; Schema: public; Owner: postgres
 --
@@ -73,7 +73,7 @@ INSERT INTO public."Combate" ("N_Personaje", "N_Poder", "N_Objeto", "Fecha", "Lu
 
 
 --
--- TOC entry 3299 (class 2606 OID 25544)
+-- TOC entry 3300 (class 2606 OID 25544)
 -- Name: Combate Combate_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -82,33 +82,33 @@ ALTER TABLE ONLY public."Combate"
 
 
 --
--- TOC entry 3300 (class 2606 OID 25555)
+-- TOC entry 3301 (class 2606 OID 25588)
 -- Name: Combate Combate_N_Objeto_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Combate"
-    ADD CONSTRAINT "Combate_N_Objeto_fkey" FOREIGN KEY ("N_Objeto") REFERENCES public."Objeto"("Nombre") ON UPDATE CASCADE;
+    ADD CONSTRAINT "Combate_N_Objeto_fkey" FOREIGN KEY ("N_Objeto") REFERENCES public."Objeto"("Nombre") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
 --
--- TOC entry 3301 (class 2606 OID 25545)
+-- TOC entry 3302 (class 2606 OID 25593)
 -- Name: Combate Combate_N_Personaje_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Combate"
-    ADD CONSTRAINT "Combate_N_Personaje_fkey" FOREIGN KEY ("N_Personaje") REFERENCES public."Personaje"("Nombre") ON UPDATE CASCADE;
+    ADD CONSTRAINT "Combate_N_Personaje_fkey" FOREIGN KEY ("N_Personaje") REFERENCES public."Personaje"("Nombre") ON UPDATE CASCADE ON DELETE CASCADE NOT VALID;
 
 
 --
--- TOC entry 3302 (class 2606 OID 25550)
+-- TOC entry 3303 (class 2606 OID 25598)
 -- Name: Combate Combate_N_Poder_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY public."Combate"
-    ADD CONSTRAINT "Combate_N_Poder_fkey" FOREIGN KEY ("N_Poder") REFERENCES public."Poder"("Nombre") ON UPDATE CASCADE;
+    ADD CONSTRAINT "Combate_N_Poder_fkey" FOREIGN KEY ("N_Poder") REFERENCES public."Poder"("Nombre") ON UPDATE CASCADE ON DELETE SET DEFAULT NOT VALID;
 
 
--- Completed on 2023-06-26 19:01:26
+-- Completed on 2023-06-27 14:59:23
 
 --
 -- PostgreSQL database dump complete
