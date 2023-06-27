@@ -302,7 +302,7 @@ function AgPosee() {
                             <ErrorMessage name="obtencion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.obtencion}</div>)}/>
                             <Field type="text" name="obtencion" as="select">
                                 <option hidden selected value={-1}>Selecciona la forma de obtencion del poder</option>
-                                <option value={'Heredado'}>Heredado</option>
+                                <option value={'Hereditario'}>Heredado</option>
                                 <option value={'Natural'}>Natural</option>
                                 <option value={'Artificial'}>Artificial</option>
                             </Field>
