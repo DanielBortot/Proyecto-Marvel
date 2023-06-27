@@ -1,30 +1,35 @@
 import React from "react";
 import '../../assets/personajes.css';
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descPersonaje } from "../../reducers/personajesSlice";
+import axios from "axios";
 
-function CuadroPers ({img, tipo, nombre, genero, ojos, ocupacion, nacionalidad, marital}) {
+function CuadroPers (prop) {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
+    const {imagen, Nombre, Genero, Color_Ojos, Color_Pelo, ocupaciones, nacionalidades, E_Marital, Nom_Comic} = prop
 
-    const enviar = ()=> {
-        dispatch(descPersonaje({img: img, nombre: nombre, tipo: tipo, genero: genero, ojos: ojos, ocupacion: ocupacion, nacionalidad: nacionalidad, marital: marital}));
+    const enviar = async ()=> {
+        const dato = await (await axios.post('/api/villHer',{Nombre: Nombre})).data;
+        let val = {...prop, ...dato}
+        dispatch(descPersonaje(val));
+        navigate(`${Nombre}`);
     }
 
     return (
         <>
-            <Link to={`${nombre}`} style={{textDecoration: 'none'}}>
+            <div onClick={enviar} style={{textDecoration: 'none', cursor: "pointer"}}>
                 <div className="cajaPers" onClick={enviar}>
                     <div className="bordeImg">
-                        <img src={img} alt="..." className="imagen"/>
+                        <img src={imagen} alt="..." className="imagen"/>
                     </div>
 
                     <div className="tituloPers">
-                        <h3>{nombre}</h3>
-                        <p>{tipo}</p>
+                        <h3>{Nombre}</h3>
                     </div>
                 </div>
-            </Link>
+            </div>
         </>
     )
 }

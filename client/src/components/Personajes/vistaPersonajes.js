@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import '../../assets/personajes.css'
 import { CuadroPers } from "./cuadroPers";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
+import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { addPersonaje } from "../../reducers/personajesSlice";
 
 function VistaPersonajes () {
 
@@ -99,6 +102,17 @@ function VistaPersonajes () {
         },
     ];
 
+    const {contenido} = useSelector(state => state.personajes);
+    const dispatch = useDispatch();
+
+    useEffect(()=> {
+        const traerInfo = async () => {
+            const personajes = await (await axios.get('/api/personajes')).data;
+            dispatch(addPersonaje(personajes));
+        }
+        traerInfo();
+    },[]);
+
     return (
         <>
             <div className="tituloCont">
@@ -106,13 +120,13 @@ function VistaPersonajes () {
             </div>
             <div className="carrusel">
             <Carousel 
-                 responsive={responsive}
-                 infinite={true}
-                 centerMode={true}       
+                responsive={responsive}
+                infinite={true}
+                centerMode={true}       
             >
                 
                     {prueba.map(personaje => {
-                            return <CuadroPers img={personaje.img} tipo={personaje.tipo} nombre={personaje.nombre} genero={personaje.genero} ojos={personaje.color_ojos} ocupacion={personaje.ocupacion} nacionalidad={personaje.nacionalidad} marital={personaje.estado_marital} key={personaje.nombre}/>
+                            return <CuadroPers prop={personaje} key={personaje.nombre}/>
                         })}     
             </Carousel>
             </div>
@@ -120,7 +134,7 @@ function VistaPersonajes () {
                 <h2>Lista de personajes de marvel</h2>
             </div>
             <div className="vistaPers">
-                {prueba.map(personaje => {
+                {contenido.map(personaje => {
                     return <CuadroPers img={personaje.img} tipo={personaje.tipo} nombre={personaje.nombre} genero={personaje.genero} ojos={personaje.color_ojos} ocupacion={personaje.ocupacion} nacionalidad={personaje.nacionalidad} marital={personaje.estado_marital} key={personaje.nombre}/>
                 })}
             </div>

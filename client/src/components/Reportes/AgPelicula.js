@@ -141,7 +141,7 @@ function AgPelicula() {
                             <Field 
                                 type="text" 
                                 placeholder="Ganancia de la Pelicula"
-                                name="ganacia"
+                                name="ganancia"
                             />
                             <ErrorMessage name="coste" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.coste}</div>)}/>
                             <Field 

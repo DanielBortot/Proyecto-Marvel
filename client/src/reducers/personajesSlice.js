@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     contenido: [],
-    descripcion: {img: '', nombre: '', tipo: '', genero: '', ojos: '', ocupacion: '', nacionalidad: '', marital: ''}
+    descripcion: {}
 }
 
 export const personajesSlice = createSlice({
@@ -10,7 +10,7 @@ export const personajesSlice = createSlice({
     initialState: initialState,
     reducers: {
         addPersonaje: (state, action) =>{
-            state.contenido = [...state.contenido, action.payload];
+            state.contenido = action.payload;
         },
         removePersonaje: (state, action) => {
             const id = action.payload;
