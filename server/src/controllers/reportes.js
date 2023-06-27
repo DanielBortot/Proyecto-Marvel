@@ -190,38 +190,65 @@ const reportes = {
         res.send(creadores.rows);
     },
 
+    // poseeRep6: async (req,res) => {
+    //     const obtencion = 'Hereditario';
+    //     const palabra = 'Super%';
+    //     const datos = (await pool.query('SELECT "N_Personaje" "nombrePers", "N_Poder" "nombrePod", "Obtencion" obtencion FROM "Posee" WHERE (("Obtencion" = $1) AND ("N_Poder" LIKE  $2) AND ("N_Personaje" IN (SELECT "N_Villano" FROM "Villano" GROUP BY "N_Villano" HAVING COUNT(*) < 2)))',[obtencion,palabra])).rows;
+        
+    //     for (let i=0; i < datos.length; i++){
+    //         const poder = (await pool.query('SELECT "Descripcion" descripcion, "Imagen" "imagenPod" FROM "Poder" WHERE "Nombre"=$1',[datos[i].nombrePod])).rows;
+    //         const personaje = (await pool.query('SELECT "Genero" genero, "Color_Ojos" ojos, "Color_Pelo" pelo, "Nom_Comic" comic, "E_Marital" "eMarital", imagen "imagenPers" FROM "Personaje" WHERE "Nombre"=$1',[datos[i].nombrePers])).rows;
+    //         const nac = (await pool.query('SELECT "Nacionalidad" "Nac" FROM "Pers_Nac" WHERE "N_Personaje"=$1',[datos[i].nombrePers])).rows
+    //         const ocu = (await pool.query('SELECT "Ocupacion" "Ocup" FROM "Pers_Oc" WHERE "N_Personaje"=$1',[datos[i].nombrePers])).rows
+    //         const crea = (await pool.query('SELECT "N_Creador" "Nom_Creador" FROM "Pers_Creador" WHERE "N_Personaje"=$1',[datos[i].nombrePers])).rows
+    //         const villano = (await pool.query('SELECT "Alias" alias, "Objetivo" objetivo FROM "Villano" WHERE "N_Villano"=$1',[datos[i].nombrePers])).rows;
+    //         datos[i] = {...datos[i], ...poder[0], ...personaje[0], nacionalidades: nac, ocupaciones: ocu, creadores: crea, ...villano[0]};
+    //     }
+    //     res.send(datos);
+    // },
+
     poseeRep6: async (req,res) => {
         const obtencion = 'Hereditario';
         const palabra = 'Super%';
-        const datos = (await pool.query('SELECT * FROM "Posee" WHERE (("Obtencion" = $1) AND ("N_Poder" LIKE  $2) AND ("N_Personaje" IN (SELECT "N_Villano" FROM "Villano" GROUP BY "N_Villano" HAVING COUNT(*) < 2)))',[obtencion,palabra])).rows;
+        const datos = (await pool.query('SELECT DISTINCT "N_Poder" "nombrePod" FROM "Posee" WHERE (("Obtencion" = $1) AND ("N_Poder" LIKE  $2) AND ("N_Personaje" IN (SELECT "N_Villano" FROM "Villano" GROUP BY "N_Villano" HAVING COUNT(*) < 2)))',[obtencion,palabra])).rows;
+        
+        for (let i=0; i < datos.length; i++){
+            const poder = (await pool.query('SELECT "Descripcion" descripcion, "Imagen" "imagenPod" FROM "Poder" WHERE "Nombre"=$1',[datos[i].nombrePod])).rows;
+            datos[i] = {...datos[i], ...poder[0]};
+        }
         res.send(datos);
     },
 
     eliminarPosee: async (req,res) => {
-        const {nombrePers, nombrePod} = req.body;
-        await pool.query('DELETE from "Posee" WHERE "N_Personaje"=$1" AND "N_Poder"=$2',[nombrePers,nombrePod]);
+        const {nombrePod} = req.body;
+        await pool.query('DELETE from "Poder" WHERE "Nombre"=$2',[nombrePod]);
         res.send('borrado');
     },
 
-    updatePodPersVill: async (req,res) => {
-        const {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion,nombrePersNew,nombrePodNew} = req.body;
-        await pool.query('UPDATE "Personaje" SET "Nombre"=$1, "Genero"=$2, "Color_Ojos"=$3, "Color_Pelo"=$4, "Nom_Comic"=$5, "E_Marital"=$6, imagen=$7 WHERE "Nombre"=$8',[nombrePersNew,genero,ojos,pelo,comic,eMarital,imagenPers,nombrePers]);
-        await pool.query('DELETE FROM "Pers_Nac" WHERE "N_Personaje"=$1',[nombrePersNew]);
-        await pool.query('DELETE FROM "Pers_Oc" WHERE "N_Personaje"=$1',[nombrePersNew]);
-        await pool.query('DELETE FROM "Pers_Creador" WHERE "N_Personaje"=$1',[nombrePersNew]);
-        for (let i=0; i<nacionalidades.length; i++){
-            await pool.query('INSERT "Pers_Nac" SET "N_Personaje"=$1, "Nacionalidad"=$2',[nombrePersNew,nacionalidades[i].Nac]);
-        }
-        for (let i=0; i<ocupaciones.length; i++){
-            await pool.query('INSERT "Pers_Oc" SET "N_Personaje"=$1, "Ocupacion"=$2',[nombrePersNew,ocupaciones[i].Ocup]);
-        }
-        for (let i=0; i<creadores.length; i++){
-            await pool.query('INSERT "Pers_Creador" SET "N_Personaje"=$1, "N_Creador"=$2',[nombrePersNew,creadores[i].Nom_Creador]);
-        }
-        await pool.query('UPDATE "Villano" SET "Alias"=$1, "Objetivo"=$2 WHERE "N_Villano"=$3',[alias,objetivo,nombrePersNew]);
-        await pool.query('UPDATE "Poder" SET "Nombre"=$1, "Imagen"=$2, "Descripcion"=$3 WHERE "Nombre"=$4',[nombrePodNew,imagenPod,descripcion,nombrePod]);
-        await pool.query('UPDATE "Obtencion"=$1 WHERE "N_Personaje"=$2 AND "N_Poder"=$3',[obtencion,nombrePersNew,nombrePodNew]);
+    // updatePodPersVill: async (req,res) => {
+    //     const {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion,nombrePersNew,nombrePodNew} = req.body;
+    //     await pool.query('UPDATE "Personaje" SET "Nombre"=$1, "Genero"=$2, "Color_Ojos"=$3, "Color_Pelo"=$4, "Nom_Comic"=$5, "E_Marital"=$6, imagen=$7 WHERE "Nombre"=$8',[nombrePersNew,genero,ojos,pelo,comic,eMarital,imagenPers,nombrePers]);
+    //     await pool.query('DELETE FROM "Pers_Nac" WHERE "N_Personaje"=$1',[nombrePersNew]);
+    //     await pool.query('DELETE FROM "Pers_Oc" WHERE "N_Personaje"=$1',[nombrePersNew]);
+    //     await pool.query('DELETE FROM "Pers_Creador" WHERE "N_Personaje"=$1',[nombrePersNew]);
+    //     for (let i=0; i<nacionalidades.length; i++){
+    //         await pool.query('INSERT "Pers_Nac" SET "N_Personaje"=$1, "Nacionalidad"=$2',[nombrePersNew,nacionalidades[i].Nac]);
+    //     }
+    //     for (let i=0; i<ocupaciones.length; i++){
+    //         await pool.query('INSERT "Pers_Oc" SET "N_Personaje"=$1, "Ocupacion"=$2',[nombrePersNew,ocupaciones[i].Ocup]);
+    //     }
+    //     for (let i=0; i<creadores.length; i++){
+    //         await pool.query('INSERT "Pers_Creador" SET "N_Personaje"=$1, "N_Creador"=$2',[nombrePersNew,creadores[i].Nom_Creador]);
+    //     }
+    //     await pool.query('UPDATE "Villano" SET "Alias"=$1, "Objetivo"=$2 WHERE "N_Villano"=$3',[alias,objetivo,nombrePersNew]);
+    //     await pool.query('UPDATE "Poder" SET "Nombre"=$1, "Imagen"=$2, "Descripcion"=$3 WHERE "Nombre"=$4',[nombrePodNew,imagenPod,descripcion,nombrePod]);
+    //     await pool.query('UPDATE "Obtencion"=$1 WHERE "N_Personaje"=$2 AND "N_Poder"=$3',[obtencion,nombrePersNew,nombrePodNew]);
 
+    // },
+
+    updatePodPersVill: async (req,res) => {
+        const {nombrePod,imagenPod,descripcion,nombrePodNew} = req.body;
+        await pool.query('UPDATE "Poder" SET "Nombre"=$1, "Imagen"=$2, "Descripcion"=$3 WHERE "Nombre"=$4',[nombrePodNew,imagenPod,descripcion,nombrePod]);
     },
 
     addPodPersVill: async (req,res) => {
