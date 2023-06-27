@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario, eliminarUsuario} = require('../controllers/acciones');
-const {eliminarSerie, seriesRep2, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, peliculasRep5, buscPeliculas, updateMedioPelicula, addMedioPelicula, usuariosRepReg, buscPodPersVill, buscVillanos, buscPoderes, eliminarPosee, buscNacionalidades, buscOcupaciones, buscCreadores, addPodPersVill, poseeRep6} = require('../controllers/reportes');
+const {eliminarSerie, seriesRep2, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, peliculasRep5, buscPeliculas, updateMedioPelicula, addMedioPelicula, usuariosRepReg, buscPodPersVill, buscVillanos, buscPoderes, eliminarPosee, buscNacionalidades, buscOcupaciones, buscCreadores, addPodPersVill, poseeRep6, compPod, compPers, compAlias, updatePodPersVill} = require('../controllers/reportes');
 
 
 router.get('/personajes', personajes);
@@ -57,6 +57,9 @@ router.post('/addRep5', addMedioPelicula);
 router.post('/delRep6', eliminarPosee);
 router.post('/buscPodPersVill', buscPodPersVill);
 router.post('/addRep6', addPodPersVill);
+router.post('/compPers', compPers);
+router.post('/compPod', compPod);
+router.post('/compAlias', compAlias);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);
@@ -64,5 +67,6 @@ router.put('/upInfoUsu', updateInfoUsuario);
 
 router.put('/upRep2', updateMedioSerie);
 router.put('/upRep5', updateMedioPelicula);
+router.put('/upRep6', updatePodPersVill);
 
 module.exports = router;

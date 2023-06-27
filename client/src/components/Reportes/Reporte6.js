@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../../assets/Reporte5.css';
+import '../../assets/Reporte6.css';
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { datosReporte } from "../../reducers/reportesSlice";

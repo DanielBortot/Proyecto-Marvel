@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import ue from "underscore";
+import { Autocomplete, TextField } from "@mui/material";
 
-function modRep6() {
+
+function ModRep6() {
     const [errorDB, setErrorDB] = useState({});
     const {descReporte} = useSelector(state => state.reporte);
     const {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion} = descReporte;
@@ -49,7 +50,7 @@ function modRep6() {
             <div className="formContReg">
                 <Formik
                     initialValues={{
-                        nombrePers: nombrePers,
+                        nombrePersNew: nombrePers,
                         genero: genero,
                         ojos: ojos,
                         pelo: pelo,
@@ -58,7 +59,7 @@ function modRep6() {
                         imagenPers: imagenPers,
                         alias: alias,
                         objetivo: objetivo,
-                        nombrePod: nombrePod,
+                        nombrePodNew: nombrePod,
                         imagenPod: imagenPod,
                         descripcion: descripcion,
                         obtencion: obtencion
@@ -66,8 +67,8 @@ function modRep6() {
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombrePers){
-                            errores.nombrePers = 'Ingresa un nombre de personaje';
+                        if (!val.nombrePersNew){
+                            errores.nombrePersNew = 'Ingresa un nombre de personaje';
                         }
                         if (!val.genero){
                             errores.genero = 'Selecciona un genero';
@@ -90,8 +91,8 @@ function modRep6() {
                         if (!val.objetivo){
                             errores.objetivo = 'Ingresa el objetivo del villano';
                         }
-                        if (!val.nombrePod){
-                            errores.nombrePod = 'Ingresa o selecciona el nombre del poder';
+                        if (!val.nombrePodNew){
+                            errores.nombrePodNew = 'Ingresa o selecciona el nombre del poder';
                         }
                         if (!val.descripcion){
                             errores.descripcion = 'Ingresa la descripcion del poder';
@@ -111,10 +112,24 @@ function modRep6() {
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/buscPodPersVill', {nombrePers: val.nombrePers, nombrePod: val.nombrePod, aliasVill: val.alias, opPers: checked2, opVill: checked, opPod: checked3})).data;
-                        setErrorDB(error);
-                        if (!error.personaje && !error.alias && !error.poder && !error.posee){
-                            await axios.post('../api/addRep6', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea, opPers: checked2, opVill: checked, opPod: checked3});
+                        let error ={};
+                        if (val.nombrePersNew !== nombrePers){
+                            const e = await (await axios.post('../api/compPers',{nombrePers: val.nombrePersNew})).data;
+                            error = {...error,...e};
+                            setErrorDB(error);
+                        }
+                        if (val.alias !== alias){
+                            const e = await (await axios.post('../api/compAlias',{aliasVill: val.alias})).data;
+                            error = {...error,...e};
+                            setErrorDB(error);
+                        }
+                        if (val.nombrePodNew !== nombrePod){
+                            const e = await (await axios.post('../api/compPod',{nombrePod: val.nombrePodNew})).data;
+                            error = {...error,...e};
+                            setErrorDB(error);
+                        }
+                        if (!error.personaje && !error.alias && !error.poder){
+                            await axios.post('../api/upRep6', {...val, nombrePers: nombrePers, nombrePod: nombrePod, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
                             navigate('/Rep6');
                         }
                     }}
@@ -122,13 +137,12 @@ function modRep6() {
                     {({errors, handleBlur})=>(
                         <Form>
                             {errorDB.personaje && <div style={{fontSize: "15px", color: "red"}}>{errorDB.personaje}</div>}
-                            {errorDB.posee && <div style={{fontSize: "15px", color: "red"}}>{errorDB.posee}</div>}
                             
-                            <ErrorMessage name="nombrePers" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombrePers}</div>)}/>
+                            <ErrorMessage name="nombrePersNew" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombrePersNew}</div>)}/>
                             <Field 
                                 type="text" 
                                 placeholder="Nombre del Personaje"
-                                name="nombrePers"
+                                name="nombrePersNew"
                             />
                             <ErrorMessage name="ojos" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.ojos}</div>)}/>
                             <Field 
@@ -227,19 +241,13 @@ function modRep6() {
                             <hr/>
                             <hr/>
 
-                            <ErrorMessage name="nombrePod" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombrePod}</div>)}/>
+                            <ErrorMessage name="nombrePodNew" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombrePodNew}</div>)}/>
 
-                            <Field type="text" name="nombrePod" as="select">
-                                <option hidden selected value={-1}>Selecciona el Poder</option>
-                                {poderes.map(poder => (
-                                <option key={poder.Nombre} value={poder.Nombre}>{poder.Nombre}</option>
-                            ))}
-                            </Field>
                             {errorDB.poder && <div style={{fontSize: "15px", color: "red"}}>{errorDB.poder}</div>}
                             <Field 
                                 type="text" 
                                 placeholder="Nombre del Poder"
-                                name="nombrePod"
+                                name="nombrePodNew"
                             />
                             <ErrorMessage name="descripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.descripcion}</div>)}/>
                             <Field 
@@ -265,3 +273,5 @@ function modRep6() {
         </>
     );
 }
+
+export {ModRep6};

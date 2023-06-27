@@ -101,6 +101,38 @@ const reportes = {
         res.send('creado');
     },
 
+    compPod: async (req,res) => {
+        const {nombrePod} = req.body;
+        let errores = {};
+        const poderes = await pool.query('SELECT * FROM "Poder" WHERE "Nombre"=$1',[nombrePod]);
+
+        if (poderes.rowCount > 0) {
+            errores.poder = 'Ya existe un poder con ese nombre';
+        }
+        res.send(errores);
+    },
+
+    compPers: async (req,res) => {
+        const {nombrePers} = req.body;
+        let errores = {};
+        const personajes = await pool.query('SELECT * FROM "Personaje" WHERE "Nombre"=$1',[nombrePers]);
+
+        if (personajes.rowCount > 0) {
+            errores.personaje = 'Ya existe un personaje con ese nombre';
+        }
+        res.send(errores);
+    },
+
+    compAlias: async (req,res) => {
+        const {aliasVill} = req.body;
+        let errores = {};
+        const alias = await pool.query('SELECT * FROM "Villano" WHERE "Alias"=$1',[aliasVill]);
+
+        if (alias.rowCount > 0 && !opVill) {
+            errores.alias = 'Ya existe un villano con ese alias';
+        }
+        res.send(errores);
+    },
 
     buscPodPersVill: async (req,res) => {
         const {nombrePers, nombrePod, aliasVill, opPers, opVill, opPod} = req.body;
@@ -172,10 +204,24 @@ const reportes = {
     },
 
     updatePodPersVill: async (req,res) => {
-        const {tituloNew,titulo,fecha,compania,rating,sinopsis,imagen,director,distribuidor,duracion,ganancia,coste} = req.body;
-        await pool.query('UPDATE "Pelicula" SET "Director"=$1, "Distribuidor"=$2, "Duracion"=$3, "Ganancia"=$4, "Coste"=$5 WHERE "T_Pelicula"=$6', [director,distribuidor,duracion,ganancia,coste,titulo]);
-        await pool.query('UPDATE "Medio" SET "Titulo"=$1, "Fecha_Estreno"=$2, "Compania"=$3, "Rating"=$4, "Sinopsis"=$5, "Imagen"=$6 WHERE "Titulo"=$7',[tituloNew,fecha,compania,rating,sinopsis,imagen,titulo]);
-        res.send('actualizado');
+        const {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion,nombrePersNew,nombrePodNew} = req.body;
+        await pool.query('UPDATE "Personaje" SET "Nombre"=$1, "Genero"=$2, "Color_Ojos"=$3, "Color_Pelo"=$4, "Nom_Comic"=$5, "E_Marital"=$6, imagen=$7 WHERE "Nombre"=$8',[nombrePersNew,genero,ojos,pelo,comic,eMarital,imagenPers,nombrePers]);
+        await pool.query('DELETE FROM "Pers_Nac" WHERE "N_Personaje"=$1',[nombrePersNew]);
+        await pool.query('DELETE FROM "Pers_Oc" WHERE "N_Personaje"=$1',[nombrePersNew]);
+        await pool.query('DELETE FROM "Pers_Creador" WHERE "N_Personaje"=$1',[nombrePersNew]);
+        for (let i=0; i<nacionalidades.length; i++){
+            await pool.query('INSERT "Pers_Nac" SET "N_Personaje"=$1, "Nacionalidad"=$2',[nombrePersNew,nacionalidades[i].Nac]);
+        }
+        for (let i=0; i<ocupaciones.length; i++){
+            await pool.query('INSERT "Pers_Oc" SET "N_Personaje"=$1, "Ocupacion"=$2',[nombrePersNew,ocupaciones[i].Ocup]);
+        }
+        for (let i=0; i<creadores.length; i++){
+            await pool.query('INSERT "Pers_Creador" SET "N_Personaje"=$1, "N_Creador"=$2',[nombrePersNew,creadores[i].Nom_Creador]);
+        }
+        await pool.query('UPDATE "Villano" SET "Alias"=$1, "Objetivo"=$2 WHERE "N_Villano"=$3',[alias,objetivo,nombrePersNew]);
+        await pool.query('UPDATE "Poder" SET "Nombre"=$1, "Imagen"=$2, "Descripcion"=$3 WHERE "Nombre"=$4',[nombrePodNew,imagenPod,descripcion,nombrePod]);
+        await pool.query('UPDATE "Obtencion"=$1 WHERE "N_Personaje"=$2 AND "N_Poder"=$3',[obtencion,nombrePersNew,nombrePodNew]);
+
     },
 
     addPodPersVill: async (req,res) => {
