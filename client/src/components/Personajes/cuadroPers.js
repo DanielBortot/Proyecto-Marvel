@@ -5,11 +5,10 @@ import {useDispatch} from "react-redux";
 import { descPersonaje } from "../../reducers/personajesSlice";
 import axios from "axios";
 
-function CuadroPers (prop) {
+function CuadroPers ({prop}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const {imagen, Nombre, Genero, Color_Ojos, Color_Pelo, ocupaciones, nacionalidades, E_Marital, Nom_Comic} = prop
-
+    const {imagen, Nombre} = prop
     const enviar = async ()=> {
         const dato = await (await axios.post('/api/villHer',{Nombre: Nombre})).data;
         let val = {...prop, ...dato}
