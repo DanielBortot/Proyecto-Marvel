@@ -13,15 +13,18 @@ const acciones = {
     },
 
     villHer: async (req,res) => {
-        const {Nombre} = req.query;
+        const {Nombre} = req.body;
         let datos = {};
         const villano = (await pool.query('SELECT "Alias", "Objetivo" FROM "Villano" WHERE "N_Villano"=$1',[Nombre])).rows;
         const heroe = (await pool.query('SELECT "Alias", "Logotipo", "Color_Traje", "Archienemigo" FROM "Heroe" WHERE "N_Heroe"=$1',[Nombre])).rows;
         if (villano.length > 0){
-            datos = {...villano};
+            datos = {...villano[0], op: 1};
         }
-        if (heroe.length > 0){
-            datos = {...datos,...heroe};
+        else if (heroe.length > 0){
+            datos = {...heroe[0], op: 2};
+        }
+        else {
+            datos = {op: 3}
         }
         res.send(datos);
     },

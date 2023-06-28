@@ -214,12 +214,8 @@ const reportes = {
     poseeRep6: async (req,res) => {
         const obtencion = 'Hereditario';
         const palabra = 'Super%';
-        const datos = (await pool.query('SELECT DISTINCT "N_Poder" "nombrePod" FROM "Posee" WHERE (("Obtencion" = $1) AND ("N_Poder" LIKE  $2) AND ("N_Personaje" IN (SELECT "N_Villano" FROM "Villano" GROUP BY "N_Villano" HAVING COUNT(*) < 2)))',[obtencion,palabra])).rows;
+        const datos = (await pool.query('SELECT Pd."Nombre" "nombrePod", Pd."Imagen" "ImagenPod", Pd."Descripcion" descripcion FROM "Posee" AS Po JOIN "Poder" AS Pd ON (Po."N_Poder" = Pd."Nombre") JOIN "Villano" AS V ON (Po."N_Personaje" = V."N_Villano") WHERE (Po."Obtencion" = $1) AND (Po."N_Poder" LIKE $2) GROUP BY Pd."Nombre" HAVING COUNT (V."N_Villano") > 2',[obtencion,palabra])).rows;
         
-        for (let i=0; i < datos.length; i++){
-            const poder = (await pool.query('SELECT "Descripcion" descripcion, "Imagen" "imagenPod" FROM "Poder" WHERE "Nombre"=$1',[datos[i].nombrePod])).rows;
-            datos[i] = {...datos[i], ...poder[0]};
-        }
         res.send(datos);
     },
 
