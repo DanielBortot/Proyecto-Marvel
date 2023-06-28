@@ -4,8 +4,6 @@ import { CuadroPers } from "./cuadroPers";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
-import { useDispatch} from "react-redux";
-import { addPersonaje } from "../../reducers/personajesSlice";
 import { imagenes } from "../../assets/img/imgdb";
 
 function VistaPersonajes () {
@@ -103,17 +101,17 @@ function VistaPersonajes () {
         },
     ];
     const [personajes, setPersonajes] = useState([]);
-    const dispatch = useDispatch();
 
     useEffect(()=> {
         const traerInfo = async () => {
             const personajes = await (await axios.get('/api/personajes')).data;
             for (let i=0; i<personajes.length;i++){
                 const img = imagenes.find(img => img.pos == personajes[i].imagen);
-                personajes[i].imagen = img.img;
+                if (img){
+                    personajes[i].imagen = img.img;
+                }
             }
             setPersonajes(personajes);
-            dispatch(addPersonaje(personajes));
         }
         traerInfo();
     },[]);
@@ -131,7 +129,7 @@ function VistaPersonajes () {
             >
                 
                     {personajes.map(personaje => {
-                            return <CuadroPers prop={personaje} key={personaje.nombre}/>
+                            return <CuadroPers prop={personaje} key={personaje.Nombre}/>
                         })}     
             </Carousel>
             </div>
@@ -140,7 +138,7 @@ function VistaPersonajes () {
             </div>
             <div className="vistaPers">
                 {personajes.map(personaje => {
-                    return <CuadroPers prop={personaje}/>
+                    return <CuadroPers prop={personaje} key={personaje.Nombre}/>
                 })}
             </div>
         </>

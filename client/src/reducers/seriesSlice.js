@@ -1,22 +1,22 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    contenido: []
+    descripcion: {}
 }
 
 export const seriesSlice = createSlice({
     name: 'series',
     initialState: initialState,
     reducers: {
-        addSerie: (state, action) =>{
-            state.contenido = [...state.contenido, action.payload];
+        descSerie: (state, action) =>{
+            state.descripcion = action.payload;
         },
         removeSerie: (state, action) => {
             const id = action.payload;
-            state.contenido = state.contenido.filter(serie => serie.id !== id);
+            state.descripcion = state.contenido.filter(serie => serie.id !== id);
         }
     }
 });
 
-export const {addSerie, removeSerie} = seriesSlice.actions;
+export const {descSerie, removeSerie} = seriesSlice.actions;
 export default seriesSlice.reducer;

@@ -42,8 +42,12 @@ const acciones = {
     },
 
     peliculas: async (req, res) => {
-        const peliculas = await pool.query('SELECT * FROM prueba');
-        res.send(peliculas.rows);
+        const peliculas = (await pool.query('SELECT * FROM "Pelicula"')).rows;
+        for (let i=0; i<peliculas.length; i++){
+            const medio = (await pool.query('SELECT "Fecha_Estreno", "Compania", "Rating", "Sinopsis", "Imagen" FROM "Medio" WHERE "Titulo"=$1',[peliculas[i].T_Pelicula])).rows;
+            peliculas[i] = {...peliculas[i], ...medio[0]};
+        }
+        res.send(peliculas);
     },
 
     addPelicula: async (req, res) => {
@@ -59,8 +63,12 @@ const acciones = {
     },
 
     series: async (req, res) => {
-        const series = await pool.query('SELECT * FROM prueba');
-        res.send(series.rows);
+        const series = (await pool.query('SELECT * FROM "Serie"')).rows;
+        for (let i=0; i<series.length; i++){
+            const medio = (await pool.query('SELECT "Fecha_Estreno", "Compania", "Rating", "Sinopsis", "Imagen" FROM "Medio" WHERE "Titulo"=$1',[series[i].T_Serie])).rows;
+            series[i] = {...series[i], ...medio[0]};
+        }
+        res.send(series);
     },
 
     addSerie: async (req, res) => {

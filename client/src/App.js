@@ -34,6 +34,8 @@ import { ReporteReg } from './components/Reportes/ReporteReg';
 import { Reporte6 } from './components/Reportes/Reporte6';
 import { AgPosee } from './components/Reportes/AgPosee';
 import { ModRep6 } from './components/Reportes/modRep6';
+import { DescripcionSeries } from './components/Series/DescripcionSerie';
+import { DescripcionPeliculas } from './components/Peliculas/DescripcionPeli';
 
 function App() {
   return (
@@ -50,7 +52,9 @@ function App() {
                 <Route path='/personajes' element={<VistaPersonajes/>}/>
                 <Route path='/personajes/:nombre' element={<DescripcionPers/>}/>
                 <Route path='/series' element={<VistaSeries/>}/>
+                <Route path='/series/:titulo' element={<DescripcionSeries/>}/>
                 <Route path='/peliculas' element={<VistaPeliculas/>}/>
+                <Route path='/peliculas/:titulo' element={<DescripcionPeliculas/>}/>
                 <Route path='/juegos' element={<VistaJuegos/>}/>
                 <Route path='/comics' element={<VistaComics/>}/>
                 <Route path='/usuario' element={<DescUsuario/>}/>
