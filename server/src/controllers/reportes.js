@@ -253,6 +253,7 @@ const reportes = {
     updatePodPersVill: async (req,res) => {
         const {nombrePod,imagenPod,descripcion,nombrePodNew} = req.body;
         await pool.query('UPDATE "Poder" SET "Nombre"=$1, "Imagen"=$2, "Descripcion"=$3 WHERE "Nombre"=$4',[nombrePodNew,imagenPod,descripcion,nombrePod]);
+        res.send('actualizado')
     },
 
     addPodPersVill: async (req,res) => {

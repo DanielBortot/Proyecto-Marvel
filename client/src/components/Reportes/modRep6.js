@@ -42,7 +42,7 @@ function ModRep6() {
                             setErrorDB(error);
                         }
                         if (!error.poder){
-                            await axios.post('../api/upRep6', {...val});
+                            await axios.put('../api/upRep6', {...val, nombrePod: nombrePod});
                             navigate('/Rep6');
                         }
                     }}
