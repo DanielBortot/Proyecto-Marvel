@@ -1,11 +1,7 @@
-SELECT distinct Pd.* 
+SELECT Pd.*
 FROM "Posee" AS Po JOIN "Poder" AS Pd ON (Po."N_Poder" = Pd."Nombre")
-WHERE ((Po."Obtencion" = 'Hereditario') AND (Po."N_Poder" LIKE  'Super%') AND 
-	   (Po."N_Personaje" IN (SELECT "N_Villano" 
-						  FROM "Villano" 
-						  GROUP BY "N_Villano" 
-						  HAVING COUNT(*) < 2))) 
-	   
-	   
-	   
-	   	 
+					JOIN "Villano" AS V ON (Po."N_Personaje" = V."N_Villano")
+WHERE (Po."Obtencion" = 'Hereditario') AND (Po."N_Poder" LIKE  'Super%')
+GROUP BY Pd."Nombre"
+HAVING 	COUNT (V."N_Villano") > 2
+
