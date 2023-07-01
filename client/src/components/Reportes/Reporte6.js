@@ -4,6 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { datosReporte } from "../../reducers/reportesSlice";
 import { useDispatch } from "react-redux";
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function Reporte6 (){
 
@@ -37,13 +40,13 @@ function Reporte6 (){
                 <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep6'}>Crear Campo</Link>
                 <div className="rep6Cont">
                     <div className="rep6item"><span style={{fontWeight: 'bold'}}>Nombre del Poder</span></div>
-                    <div className="rep6item"><span style={{fontWeight: 'bold'}}>Descripcion</span></div>
+                    <div className="rep6item"><span style={{fontWeight: 'bold'}}>Descripción</span></div>
                     {reporte.map(rep => (
                         <>
                             <div className="rep6ContDato" key={rep.nombrePod}>
                                 <div className="rep6ContIcon">
-                                    <i className="fa-solid fa-trash" onClick={()=> eliminar(rep.nombrePod)}></i>
-                                    <i className="fa-solid fa-pen-to-square" onClick={()=> update(rep)}></i>
+                                    <FontAwesomeIcon icon={faTrash} onClick={()=> eliminar(rep.nombrePod)} style={{padding: '5px', cursor: 'pointer'}}/>
+                                    <FontAwesomeIcon icon={faPenToSquare} style={{padding: '5px', cursor: 'pointer'}} onClick={()=> update(rep)}/>
                                 </div>
                                 <div className="rep6item">{rep.nombrePod}</div>
                             </div>

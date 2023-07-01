@@ -1,0 +1,22 @@
+.botonRep {
+    
+    margin: auto;
+    width: 70%;
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.botonRep button {
+    margin: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background-color: #EC1D24;
+    padding: 10px;
+    color: white;
+    transition: all .4s ease;
+}
+
+.botonRep button:hover {
+    background-color: #af1b20;
+}

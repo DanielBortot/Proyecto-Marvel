@@ -69,7 +69,7 @@ function AgSerie() {
                         const error = await (await axios.post('../api/buscSeries', {T_Serie: val.titulo, op: checked})).data;
                         setErrorDB(error);
                         if (!error.titulo){
-                            await axios.post('../api/addRep2', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: 'aaaaa', episodios: val.episodios, creador: val.creador, canal: val.canal, tipo: val.tipo, op: checked});
+                            await axios.post('../api/addRep2', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', episodios: val.episodios, creador: val.creador, canal: val.canal, tipo: val.tipo, op: checked});
                             navigate('/Rep2');
                         }
                     }}

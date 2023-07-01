@@ -72,7 +72,7 @@ function VistaResumen () {
                                 <h5><span style={{fontWeight: 'bold'}}>Nombre:</span> {descUsuario.Nombre} {descUsuario.Apellido}</h5>
                                 <h5><span style={{fontWeight: 'bold'}}>Fecha de Nacimiento:</span> {descUsuario.Fecha_Nac}</h5>
                                 <h5><span style={{fontWeight: 'bold'}}>Email:</span> {descUsuario.Email}</h5>
-                                <h5><span style={{fontWeight: 'bold'}}>Fecha de Creacion:</span> {descUsuario.Fecha_Creacion}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Fecha de Creación:</span> {descUsuario.Fecha_Creacion}</h5>
                             </div>
                         </div>
                         <div className="tituloresumen">
@@ -85,8 +85,8 @@ function VistaResumen () {
                         <div className="tituloresumen">
                             <h1 className="p-15px">Resumen de suscripcion</h1>
                             <div className="p-15px resumenbar">
-                                <h5><span style={{fontWeight: 'bold'}}>Tipo de Suscripcion:</span> {sus.Tipo}</h5>
-                                <h5><span style={{fontWeight: 'bold'}}>Tarifa de la Suscripcion:</span> {sus.Tarifa}$</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Tipo de Suscripción:</span> {sus.Tipo}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Tarifa de la Suscripción:</span> {sus.Tarifa}$</h5>
                             </div>
                         </div>
                         <button className='btn btn-danger' style={{margin: '15px 0 10px 0'}} onClick={eliminar}>Eliminar Cuenta</button>

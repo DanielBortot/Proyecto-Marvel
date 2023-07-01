@@ -74,10 +74,10 @@ function AgPelicula() {
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/buscPelicula', {T_Pelicula: val.titulo, op: checked})).data;
+                        const error = await (await axios.post('../api/buscPeliculas', {T_Pelicula: val.titulo, op: checked})).data;
                         setErrorDB(error);
                         if (!error.titulo){
-                            await axios.post('../api/addRep5', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: 'aaaaa', director: val.director, distribuidor: val.distribuidor, duracion: val.duracion, ganancia: val.ganancia, coste: val.coste, tipo: val.tipo, op: checked});
+                            await axios.post('../api/addRep5', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', director: val.director, distribuidor: val.distribuidor, duracion: val.duracion, ganancia: val.ganancia, coste: val.coste, tipo: val.tipo, op: checked});
                             navigate('/Rep5');
                         }
                     }}
@@ -153,7 +153,7 @@ function AgPelicula() {
 
                             <Field type="text" name="tipo" as="select">
                                 <option hidden selected value={-1}>Selecciona el tipo de la pelicula</option>
-                                <option value={'Animada'}>Animada</option>
+                                <option value={'Animacion'}>Animada</option>
                                 <option value={'Live Action'}>Live Action</option>
                             </Field>
 

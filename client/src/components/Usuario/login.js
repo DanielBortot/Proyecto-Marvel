@@ -64,7 +64,7 @@ function Login() {
                         }
                         else {
                             usuario.map(u => {
-                                dispatch(datosUsuario({...u}));
+                                dispatch(datosUsuario({...u, op: true}));
                                 addDireccion(u.Direccion);
                                 return 0;
                             });

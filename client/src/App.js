@@ -36,6 +36,8 @@ import { AgPosee } from './components/Reportes/AgPosee';
 import { ModRep6 } from './components/Reportes/modRep6';
 import { DescripcionSeries } from './components/Series/DescripcionSerie';
 import { DescripcionPeliculas } from './components/Peliculas/DescripcionPeli';
+import { VistaRep } from './components/Reportes/VistaRep';
+import { ModSus } from './components/Usuario/modUsuario/modSus';
 
 function App() {
   return (
@@ -62,12 +64,14 @@ function App() {
                 <Route path='/usuario/info' element={<VistaInfo/>}/>
                 <Route path='/usuario/info/modi' element={<ModInfo/>}/>
                 <Route path='/usuario/suscr' element={<VistaSuscr/>}/>
+                <Route path='/usuario/suscr/modSus' element={<ModSus/>}></Route>
                 <Route path='/usuario/pago' element={<VistaPago/>}/>
                 <Route path='/usuario/historial' element={<VistaHistorial/>}/>
               </Route>
             </Route>
             <Route path='/inicioSesion' element={<Login/>}/>
             <Route path='/registro' element={<Register/>}/>
+            <Route path='/otros' element={<VistaRep/>}/>
             <Route path='/Rep2' element={<Reporte2/>}/>
             <Route path='/Rep2/addRep2' element={<AgSerie/>}/>
             <Route path='/Rep2/modRep2' element={<ModRep2/>}/>

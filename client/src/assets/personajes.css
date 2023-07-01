@@ -58,7 +58,7 @@
 .descCont {
     display: flex;
     padding-left: 30px;
-    max-width: 60%;
+    
 }
 
 .descContImg h2 {
@@ -67,6 +67,7 @@
 
 .descContImg img {
     box-shadow: 8px 5px 10px rgb(155, 154, 154);
+    max-width: 80%;
 }
 
 .descContTitu {

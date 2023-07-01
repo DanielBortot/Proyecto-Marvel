@@ -75,27 +75,27 @@ function AgPosee() {
                         pelo: '',
                         comic: '',
                         eMarital: '',
-                        imagenPers: 'aaaa',
+                        imagenPers: '1',
                         alias: '',
                         objetivo: '',
                         nombrePod: '',
-                        imagenPod: 'aaaa',
+                        imagenPod: '1',
                         descripcion: '',
                         obtencion: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombrePers && !checked && !checked2){
+                        if ((!val.nombrePers && !checked && !checked2) || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)){
                             errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
                         if (!val.genero && !checked && !checked2){
                             errores.genero = 'Selecciona un genero';
                         }
-                        if (!val.ojos && !checked && !checked2){
+                        if (!val.ojos && !checked && !checked2 || !/^[a-zA-Z]{1,50}$/.test(val.ojos)){
                             errores.ojos = 'Ingresa un color de ojos valido';
                         }
-                        if (!val.pelo && !checked && !checked2){
+                        if (!val.pelo && !checked && !checked2 || !/^[a-zA-Z]{1,50}$/.test(val.pelo)){
                             errores.pelo = 'Ingresa un color de pelo valido';
                         }
                         if (!val.comic && !checked && !checked2){

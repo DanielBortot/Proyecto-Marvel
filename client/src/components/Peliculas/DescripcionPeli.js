@@ -23,7 +23,7 @@ function DescripcionPeliculas () {
                         <p>RATING</p>
                         <p>DIRECTOR</p>
                         <p>DISTRIBUIDOR</p>
-                        <p>DURACION</p>
+                        <p>DURACIÓN</p>
                         <p>COSTE</p>
                         <p>GANANCIA</p>
                         <p>TIPO DE PELICULA</p>

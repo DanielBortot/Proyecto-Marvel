@@ -19,7 +19,7 @@ function EscogePerfil () {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Escoge un perifl</h2>
+                <h2 className="titulo">Escoge un perfil</h2>
             </div>
             <div className="row justify-content-center">                
                 {descPerfil.map(perfil => (

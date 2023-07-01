@@ -121,7 +121,7 @@ function ModInfo () {
                             
                             await axios.put('../../api/upInfoUsu',{Email: val.email || descUsuario.Email, Nombre: val.nombre || descUsuario.Nombre, Apellido: val.apellido || descUsuario.Apellido, Fecha_Nac: val.fecha || descUsuario.Fecha_Nac, Contrasena: val.Contrasena || descUsuario.Contrasena, Direccion: val.ciudad || descUsuario.Direccion, EmailAnt: descUsuario.Email});
 
-                            dispatch(datosUsuario({Email: val.email || descUsuario.Email, Nombre: val.nombre || descUsuario.Nombre, Apellido: val.apellido || descUsuario.Apellido, Fecha_Nac: val.fecha || descUsuario.Fecha_Nac, Contrasena: val.Contrasena || descUsuario.Contrasena, Direccion: val.ciudad || descUsuario.Direccion, EmailAnt: descUsuario.Email}));
+                            dispatch(datosUsuario({Email: val.email || descUsuario.Email, Nombre: val.nombre || descUsuario.Nombre, Apellido: val.apellido || descUsuario.Apellido, Fecha_Nac: val.fecha || descUsuario.Fecha_Nac, Fecha_Creacion: descUsuario.Fecha_Creacion, Contrasena: val.Contrasena || descUsuario.Contrasena, Direccion: val.ciudad || descUsuario.Direccion, Id_Suscripcion: descUsuario.Id_Suscripcion, op: false}));
 
                             navigate('/usuario/info');
                         }

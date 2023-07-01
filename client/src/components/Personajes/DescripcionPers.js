@@ -80,10 +80,10 @@ function DescripcionPers () {
                 <div className="descContTitu">
                     <div>
                         <p>NOMBRE</p>
-                        <p>GENERO</p>
+                        <p>GÉNERO</p>
                         <p>COLOR DE CABELLO</p>
                         <p>COLOR DE OJOS</p>
-                        <p>OCUPACION</p>
+                        <p>OCUPACIÓN</p>
                         <p>NACIONALIDAD</p>
                         <p>CREADORES</p>
                         <p>ESTADO MARITAL</p>

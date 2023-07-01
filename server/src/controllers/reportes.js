@@ -22,15 +22,16 @@ const reportes = {
         const datos = (await pool.query('SELECT "T_Serie" titulo, "N_Episodios" episodios, "Creador" creador, "Canal" canal, "Tipo" tipo FROM "Serie" WHERE "N_Episodios" > (SELECT AVG("N_Episodios") FROM "Serie")')).rows;
 
         for (let i=0; i < datos.length; i++){
+            const promedio = (await pool.query('SELECT AVG("N_Episodios") promedio FROM "Serie"')).rows;
             const medio = (await pool.query('SELECT "Fecha_Estreno" fecha, "Compania" compania, "Rating" rating, "Sinopsis" sinopsis, "Imagen" imagen FROM "Medio" WHERE "Titulo"=$1',[datos[i].titulo])).rows;
-            datos[i] = {...datos[i], ...medio[0]};
+            datos[i] = {...datos[i], ...medio[0], ...promedio[0]};
         }
         res.send(datos);
     },
 
     eliminarSerie: async (req,res) => {
         const {T_Serie} = req.body;
-        await pool.query('DELETE from "Serie" WHERE "T_Serie"=$1"',[T_Serie]);
+        await pool.query('DELETE FROM "Serie" WHERE "T_Serie"=$1',[T_Serie]);
         res.send('borrado');
     },
 
@@ -93,11 +94,11 @@ const reportes = {
     },
 
     addMedioPelicula: async (req,res) => {
-        const {titulo,fecha,compania,rating,sinopsis,imagen,director,distribuidor,duracion,ganancia,coste,op} = req.body;
+        const {titulo,fecha,compania,rating,sinopsis,imagen,director,distribuidor,duracion,ganancia,coste,op,tipo} = req.body;
         if (!op){
             await pool.query('INSERT INTO "Medio" ("Titulo", "Fecha_Estreno", "Compania", "Rating", "Sinopsis", "Imagen") VALUES ($1, $2, $3, $4, $5, $6)',[titulo,fecha,compania,rating,sinopsis,imagen]);
         }
-        await pool.query('INSERT INTO "Pelicula" ("T_Pelicula", "Director", "Distribuidor", "Duracion", "Ganancia", "Coste") VALUES ($1, $2, $3, $4, $5, $6)', [titulo,director,distribuidor,duracion,ganancia,coste]);
+        await pool.query('INSERT INTO "Pelicula" ("T_Pelicula", "Director", "Distribuidor", "Duracion", "Ganancia", "Coste", "Tipo") VALUES ($1, $2, $3, $4, $5, $6, $7)', [titulo,director,distribuidor,duracion,ganancia,coste,tipo]);
         res.send('creado');
     },
 

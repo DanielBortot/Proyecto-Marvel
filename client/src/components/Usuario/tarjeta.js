@@ -17,7 +17,7 @@ function Tarjeta () {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Ageregar Tarjeta</h2>
+                <h2 className="titulo">Agregar Tarjeta</h2>
             </div>
 
             <div className="formContReg">
@@ -72,7 +72,7 @@ function Tarjeta () {
 
                                 <ErrorMessage name="codigo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.codigo}</div>)}/>
 
-                                <Field type="text" id="codigo" name="codigo" placeholder="Codigo de Seguridad"/>
+                                <Field type="text" id="codigo" name="codigo" placeholder="Código de Seguridad"/>
 
                                 <ErrorMessage name="fecha" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fecha}</div>)}/>
 
