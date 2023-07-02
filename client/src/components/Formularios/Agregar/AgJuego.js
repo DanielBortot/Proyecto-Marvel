@@ -1,17 +1,32 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Autocomplete, TextField } from "@mui/material";
 
-function AgSerie() {
+function AgJuego() {
 
     const [errorDB, setErrorDB] = useState({});
+    const [plataformas, setPlataformas] = useState([]);
+    const [valPlat, setValPlat] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(()=> {
+        const getPlataformas = async () => {
+            const plat = await (await axios.get('../api/plataformas')).data;
+            setPlataformas(plat);
+        }
+        getPlataformas();
+    },[]);
+
+    const handleChangePlat = (e, newValue) => {
+        setValPlat(newValue);
+    }
 
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Agregar Serie</h2>
+                <h2 className="titulo">Agregar Juego</h2>
             </div>
             <div className="formContReg">
                 <Formik
@@ -22,16 +37,14 @@ function AgSerie() {
                         rating: '',
                         sinopsis: '',
                         imagen: '',
-                        episodios: '',
-                        creador: '',
-                        canal: '',
+                        distribuidor: '',
                         tipo: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
 
                         if (!val.titulo){
-                            errores.titulo = 'Introduzca el titulo de la serie';
+                            errores.titulo = 'Introduzca el titulo de la pelicula';
                         }
                         if (!val.fecha){
                             errores.fecha = 'Seleccione una fecha de creacion';
@@ -43,32 +56,29 @@ function AgSerie() {
                             errores.rating = 'Ingrese un rating valido del 1 al 5';
                         }
                         if (!val.sinopsis){
-                            errores.sinopsis = 'Ingrese la sinopsis de la serie';
+                            errores.sinopsis = 'Ingrese la sinopsis de la pelicula';
                         }
-                        if (!val.creador){
-                            errores.creador = 'Ingrese el nombre del creador de la serie';
-                        }
-                        if (!val.canal){
-                            errores.canal = 'Ingrese el nombre del canal donde se transmite la serie';
+                        if (!val.distribuidor){
+                            errores.distribuidor = 'Ingrese el nombre del distribuidor de la pelicula';
                         }
                         if (!val.tipo || val.tipo === -1){
-                            errores.tipo = 'Ingrese el tipo de la serie';
+                            errores.tipo = 'Ingrese el tipo de la pelicula';
                         }
-                        if (!val.episodios || isNaN(val.episodios) || parseInt(val.episodios) < 1){
-                            errores.episodios = 'Ingrese un numero de episodios valido';
+                        if (valPlat.length === 0){
+                            errores.plataforma = 'Ingrese la plataforma del juego'
                         }
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/buscSeries', {T_Serie: val.titulo})).data;
+                        const error = await (await axios.post('../api/buscJuegos', {T_Juego: val.titulo})).data;
                         setErrorDB(error);
                         if (!error.titulo){
-                            await axios.post('../api/addRep2', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', episodios: val.episodios, creador: val.creador, canal: val.canal, tipo: val.tipo});
-                            navigate('/Rep2');
+                            await axios.post('../api/addMedioJuego', {...val, plataformas: valPlat});
+                            navigate('/');
                         }
                     }}
                 >
-                    {({errors})=>(
+                    {({errors, handleBlur})=>(
                         <Form>
                             {errorDB.titulo && <div style={{fontSize: "15px", color: "red"}}>{errorDB.titulo}</div>}
                             <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
@@ -101,31 +111,36 @@ function AgSerie() {
                                 placeholder="Sinopsis"
                                 name="sinopsis"
                             />
-                            <ErrorMessage name="episodios" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.episodios}</div>)}/>
+                            <ErrorMessage name="distribuidor" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.distribuidor}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Numero de Episodios"
-                                name="episodios"
+                                placeholder="Nombre del Distribuidor"
+                                name="distribuidor"
                             />
-                            <ErrorMessage name="creador" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.creador}</div>)}/>
-                            <Field 
-                                type="text" 
-                                placeholder="Nombre del Creador"
-                                name="creador"
-                            />
-                            <ErrorMessage name="canal" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.canal}</div>)}/>
-                            <Field 
-                                type="text" 
-                                placeholder="Nombre del Canal"
-                                name="canal"
-                            />
+                            
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
 
                             <Field type="text" name="tipo" as="select">
-                                <option hidden selected value={-1}>Selecciona el tipo de la serie</option>
+                                <option hidden selected value={-1}>Selecciona el tipo de la pelicula</option>
                                 <option value={'Animacion'}>Animada</option>
                                 <option value={'Live Action'}>Live Action</option>
                             </Field>
+
+                            <ErrorMessage name="plataforma" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.plataforma}</div>)}/>
+
+                            <Autocomplete
+                                multiple
+                                limitTags={2}
+                                id="plataforma"
+                                options={plataformas}
+                                getOptionLabel={(option) => option.nombre}
+                                onChange={handleChangePlat}
+                                onBlur={handleBlur}
+                                renderInput={(params) => (
+                                    <TextField {...params} label="" placeholder="Creadores" />
+                                )}
+                                sx={{ width: '500px' }}
+                            />
 
                             <div className="botonReg" style={{marginTop: '30px'}}>
                                 <button type="submit">Guardar</button>
@@ -138,4 +153,4 @@ function AgSerie() {
     );
 }
 
-export {AgSerie};
+export {AgJuego};

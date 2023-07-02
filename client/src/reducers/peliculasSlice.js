@@ -13,7 +13,7 @@ export const peliculasSlice = createSlice({
         },
         removePelicula: (state, action) => {
             const id = action.payload;
-            state.descripcion = state.contenido.filter(pelicula => pelicula.id !== id);
+            state.descripcion = state.descripcion.filter(pelicula => pelicula.id !== id);
         }
     }
 });

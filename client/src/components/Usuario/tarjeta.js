@@ -5,6 +5,7 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
 import { datosTarjeta } from "../../reducers/tarjetaSlice"; 
 import { datosUsuario } from "../../reducers/usuarioSlice";
+import { datosSuscripcion } from "../../reducers/suscripcionSlice";
 import { useNavigate } from "react-router-dom";
 
 function Tarjeta () {
@@ -47,8 +48,14 @@ function Tarjeta () {
                             await axios.post('../api/addTarjeta',{N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha}); 
                             dispatch(datosTarjeta({N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha}));
                             dispatch(datosUsuario({...descUsuario, N_Tarjeta: val.tarjeta}));
+                            if (descUsuario.opSus){
+                                const sus = await (await axios.put('../../api/upSusUsu',{Id_Suscripcion: descUsuario.opSus, Email: descUsuario.Email})).data;
+                                dispatch(datosSuscripcion(...sus));
+                                dispatch(datosUsuario({...descUsuario, Id_Suscripcion: descUsuario.opSus}))
+                                navigate('/usuario/suscr');
+                            }
                         }
-                        if (!perfilUso.Nombre){
+                        if (!perfilUso.Nombre && !descUsuario.opSus){
                             await axios.post('../api/register',{...descUsuario, N_Tarjeta: val.tarjeta});
                             dispatch(datosTarjeta({N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha}));
                             dispatch(datosUsuario({...descUsuario, N_Tarjeta: val.tarjeta}));
@@ -58,7 +65,16 @@ function Tarjeta () {
                             await axios.put('../api/upUsuTarj', {N_Tarjeta: val.tarjeta, Email: descUsuario.Email});
                             dispatch(datosTarjeta({N_Tarjeta: val.tarjeta, Cod_Seguridad: val.codigo, Fecha_Ven: val.fecha}));
                             dispatch(datosUsuario({...descUsuario, N_Tarjeta: val.tarjeta}));
-                            navigate('/')
+                            if (descUsuario.opSus){
+                                const sus = await (await axios.put('../../api/upSusUsu',{Id_Suscripcion: descUsuario.opSus, Email: descUsuario.Email})).data;
+                                dispatch(datosSuscripcion(...sus));
+                                dispatch(datosUsuario({...descUsuario, Id_Suscripcion: descUsuario.opSus}))
+                                navigate('/usuario/suscr');
+                            }
+                            else {
+                                navigate('/')
+                            }
+                            
                         }
                         setErrorDB(tarjeta);
                     }}>

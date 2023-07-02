@@ -9,7 +9,6 @@ function AgPosee() {
 
     const [errorDB, setErrorDB] = useState({});
     const [checked, setChecked] = useState(false);
-    const [checked2, setChecked2] = useState(false);
     const [checked3, setChecked3] = useState(false);
     const [villanos, setVillanos] = useState([]);
     const [poderes, setPoderes] = useState([]);
@@ -23,10 +22,6 @@ function AgPosee() {
 
     const handleChange1 = e => {
         setChecked(e.target.checked);
-    }
-
-    const handleChange2 = e => {
-        setChecked2(e.target.checked);
     }
 
     const handleChange3 = e => {
@@ -86,22 +81,22 @@ function AgPosee() {
                     validate={(val)=>{
                         let errores = {};
 
-                        if ((!val.nombrePers && !checked && !checked2) || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)){
+                        if ((!val.nombrePers || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)) && !checked){
                             errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
-                        if (!val.genero && !checked && !checked2){
+                        if (!val.genero && !checked){
                             errores.genero = 'Selecciona un genero';
                         }
-                        if (!val.ojos && !checked && !checked2 || !/^[a-zA-Z]{1,50}$/.test(val.ojos)){
+                        if ((!val.ojos || !/^[a-zA-Z]{1,50}$/.test(val.ojos)) && !checked){
                             errores.ojos = 'Ingresa un color de ojos valido';
                         }
-                        if (!val.pelo && !checked && !checked2 || !/^[a-zA-Z]{1,50}$/.test(val.pelo)){
+                        if ((!val.pelo || !/^[a-zA-Z]{1,50}$/.test(val.pelo)) && !checked){
                             errores.pelo = 'Ingresa un color de pelo valido';
                         }
-                        if (!val.comic && !checked && !checked2){
+                        if (!val.comic && !checked){
                             errores.comic = 'Ingresa un nombre de comic';
                         }
-                        if (!val.eMarital && !checked && !checked2){
+                        if (!val.eMarital && !checked){
                             errores.eMarital = 'Selecciona el estado marital';
                         }
                         if (!val.alias){
@@ -119,22 +114,22 @@ function AgPosee() {
                         if (!val.obtencion){
                             errores.obtencion = 'Selecciona la forma de obtencion del poder';
                         }
-                        if (valNac.length === 0 && !checked && !checked2){
+                        if (valNac.length === 0 && !checked){
                             errores.nacionalidad = 'Selecciona las nacionalidades del personaje';
                         }
-                        if (valCrea.length === 0 && !checked && !checked2){
+                        if (valCrea.length === 0 && !checked){
                             errores.creador = 'Selecciona los creadores del personaje';
                         }
-                        if (valOcu.length === 0 && !checked && !checked2){
+                        if (valOcu.length === 0 && !checked){
                             errores.ocupacion = 'Selecciona las ocupaciones del personaje';
                         }
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/buscPodPersVill', {nombrePers: val.nombrePers, nombrePod: val.nombrePod, aliasVill: val.alias, opPers: checked2, opVill: checked, opPod: checked3})).data;
+                        const error = await (await axios.post('../api/buscPodPersVill', {nombrePers: val.nombrePers, nombrePod: val.nombrePod, aliasVill: val.alias, opVill: checked, opPod: checked3})).data;
                         setErrorDB(error);
                         if (!error.personaje && !error.alias && !error.poder && !error.posee){
-                            await axios.post('../api/addRep6', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea, opPers: checked2, opVill: checked, opPod: checked3});
+                            await axios.post('../api/addRep6', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea, opVill: checked, opPod: checked3});
                             navigate('/Rep6');
                         }
                     }}
@@ -168,7 +163,6 @@ function AgPosee() {
                                 placeholder="Color de Ojos"
                                 name="ojos"
                                 hidden={checked}
-                                disabled={checked2}
                             />
                             <ErrorMessage name="pelo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.pelo}</div>)}/>
                             <Field 
@@ -176,7 +170,6 @@ function AgPosee() {
                                 placeholder="Color de Pelo"
                                 name="pelo"
                                 hidden={checked}
-                                disabled={checked2}
                             />
                             <ErrorMessage name="comic" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.comic}</div>)}/>
                             <Field 
@@ -184,12 +177,8 @@ function AgPosee() {
                                 placeholder="Nombre del Comic en su Primera Aparicion"
                                 name="comic"
                                 hidden={checked}
-                                disabled={checked2}
                             />
-                            <div style={{display: 'flex', alignItems: 'center'}} hidden={checked}>
-                                <Switch checked={checked2} onChange={handleChange2} inputProps={{'aria-label': 'controlled'}}/>
-                                <label>{checked2 ? 'Crear un Personaje y un Villano' : 'Crear Solo un Villano'}</label>
-                            </div>
+                            
                             {errorDB.alias && <div style={{fontSize: "15px", color: "red"}}>{errorDB.alias}</div>}
                             <ErrorMessage name="alias" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.alias}</div>)}/>
                             <Field 
@@ -206,7 +195,7 @@ function AgPosee() {
                                 hidden={checked}
                             />
                             <ErrorMessage name="genero" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.genero}</div>)}/>
-                            <Field type="text" name="genero" as="select" hidden={checked} disabled={checked2}>
+                            <Field type="text" name="genero" as="select" hidden={checked}>
                                 <option hidden selected value={-1}>Selecciona el genero del personaje</option>
                                 <option value={'F'}>Femenino</option>
                                 <option value={'M'}>Masculino</option>
@@ -214,7 +203,7 @@ function AgPosee() {
                                 <option value={'Otro'}>Otro</option>
                             </Field>
                             <ErrorMessage name="eMarital" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.eMarital}</div>)}/>
-                            <Field type="text" name="eMarital" as="select" hidden={checked} disabled={checked2}>
+                            <Field type="text" name="eMarital" as="select" hidden={checked}>
                                 <option hidden selected value={-1}>Selecciona el estado marital del personaje</option>
                                 <option value={'Casado'}>Casado</option>
                                 <option value={'Viudo'}>Viudo</option>
@@ -235,7 +224,6 @@ function AgPosee() {
                                 )}
                                 sx={{ width: '500px' }}
                                 hidden={checked}
-                                disabled={checked2}
                             />
                             <ErrorMessage name="ocupacion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.ocupacion}</div>)}/>
                             <Autocomplete
@@ -251,7 +239,6 @@ function AgPosee() {
                                 )}
                                 sx={{ width: '500px' }}
                                 hidden={checked}
-                                disabled={checked2}
                             />
                             <ErrorMessage name="nacionalidad" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nacionalidad}</div>)}/>
                             <Autocomplete
@@ -267,7 +254,6 @@ function AgPosee() {
                                 )}
                                 sx={{ width: '500px' }}
                                 hidden={checked}
-                                disabled={checked2}
                             />
 
                             <hr/>

@@ -1,6 +1,19 @@
 const router = require('express').Router();
+
 const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario, eliminarUsuario, villHer} = require('../controllers/acciones');
-const {eliminarSerie, seriesRep2, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, peliculasRep5, buscPeliculas, updateMedioPelicula, addMedioPelicula, usuariosRepReg, buscPodPersVill, buscVillanos, buscPoderes, eliminarPosee, buscNacionalidades, buscOcupaciones, buscCreadores, addPodPersVill, poseeRep6, compPod, compPers, compAlias, updatePodPersVill} = require('../controllers/reportes');
+
+const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPosee, addPodPersVill, poseeRep6, updatePodPersVill} = require('../controllers/reportes');
+
+const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, buscPeliculas, updateMedioPelicula, addMedioPelicula, plataformas, addMedioJuego, buscJuegos} = require('../controllers/medios');
+
+const {compPod, buscPoderes} = require('../controllers/poderes');
+
+const {buscVillanos, buscNacionalidades, buscOcupaciones, buscCreadores, compPers, compAlias, addPersHeroe, addPersVill} = require('../controllers/personajes');
+
+const {addObjeto, buscObjeto} = require('../controllers/objetos');
+
+const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones} = require('../controllers/organizaciones');
+
 
 
 router.get('/personajes', personajes);
@@ -13,6 +26,8 @@ router.get('/poderes', buscPoderes);
 router.get('/nacionalidades', buscNacionalidades);
 router.get('/ocupaciones', buscOcupaciones);
 router.get('/creadores', buscCreadores);
+router.get('/plataformas', plataformas);
+router.get('/organizaciones', organizaciones);
 
 router.get('/Rep2Series', seriesRep2);
 router.get('/Rep5Peliculas', peliculasRep5);
@@ -61,6 +76,21 @@ router.post('/addRep6', addPodPersVill);
 router.post('/compPers', compPers);
 router.post('/compPod', compPod);
 router.post('/compAlias', compAlias);
+
+router.post('/addMedioJuego', addMedioJuego);
+router.post('/buscJuegos', buscJuegos);
+
+router.post('/addPersHeroe', addPersHeroe);
+router.post('/addPersVill', addPersVill);
+
+router.post('/addObjeto', addObjeto);
+router.post('/buscObjetos', buscObjeto);
+
+router.post('/buscOrg', buscOrganizacion);
+router.post('/addOrg', addOrganizacion);
+
+router.post('/buscSedes', buscSedes);
+router.post('/addSede', addSede);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

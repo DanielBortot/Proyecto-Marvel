@@ -84,8 +84,13 @@ const acciones = {
     },
 
     juegos: async (req, res) => {
-        const juegos = await pool.query('SELECT * FROM prueba');
-        res.send(juegos.rows);
+        const juegos = (await pool.query('SELECT * FROM "Juego"')).rows;
+        for (let i=0; i<juegos.length; i++){
+            const medio = (await pool.query('SELECT "Fecha_Estreno", "Compania", "Rating", "Sinopsis", "Imagen" FROM "Medio" WHERE "Titulo"=$1',[juegos[i].T_Juego])).rows;
+            const plat = (await pool.query('SELECT "Plataforma" FROM "Plat_Juego" WHERE "T_Juego"=$1',[juegos[i].T_Juego])).rows
+            juegos[i] = {...juegos[i], ...medio[0], plataformas: plat};
+        }
+        res.send(juegos);
     },
 
     addJuego: async (req, res) => {

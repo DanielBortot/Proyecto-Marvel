@@ -33,34 +33,13 @@ function ModInfo () {
     },[]);
 
     const paisRed = async (id) => {
-        paises.map(pais => {
-            if (pais.Id_Pais === id){
-                dispatch(setPais(pais));
-            }
-            return 0;
-        });
         const estados = await (await axios.post('/api/estados',{Id_Pais: id})).data;
         setEstados(estados);
     };
 
     const estadoRed = async (id) => {
-        estados.map(estado => {
-            if (estado.Id_Estado === id){
-                dispatch(setEstado(estado));
-            }
-            return 0;
-        });
         const ciudades = await (await axios.post('/api/ciudades', {Id_Estado: id})).data;
         setCiudades(ciudades);
-    }
-
-    const ciudadRed = (id) => {
-        ciudades.map(ciudad => {
-            if (ciudad.Id_Ciudad === id){
-                dispatch(setCiudad(ciudad));
-            }
-            return 0;
-        });
     }
 
     return(
@@ -108,8 +87,6 @@ function ModInfo () {
                         }
                         if (val.ciudad === -1){
                             errores.ciudad = 'Seleccione una ciudad';
-                        } else {
-                            ciudadRed(val.ciudad);
                         }
                         return errores;
                     }}
@@ -119,9 +96,17 @@ function ModInfo () {
 
                         if (!erroresBD.nombre && !erroresBD.apellido && !erroresBD.email){
                             
-                            await axios.put('../../api/upInfoUsu',{Email: val.email || descUsuario.Email, Nombre: val.nombre || descUsuario.Nombre, Apellido: val.apellido || descUsuario.Apellido, Fecha_Nac: val.fecha || descUsuario.Fecha_Nac, Contrasena: val.Contrasena || descUsuario.Contrasena, Direccion: val.ciudad || descUsuario.Direccion, EmailAnt: descUsuario.Email});
+                            await axios.put('../../api/upInfoUsu',{Email: val.email || descUsuario.Email, Nombre: val.nombre || descUsuario.Nombre, Apellido: val.apellido || descUsuario.Apellido, Fecha_Nac: val.fecha || descUsuario.Fecha_Nac, Contrasena: val.contra || descUsuario.Contrasena, Direccion: val.ciudad || descUsuario.Direccion, EmailAnt: descUsuario.Email});
 
-                            dispatch(datosUsuario({Email: val.email || descUsuario.Email, Nombre: val.nombre || descUsuario.Nombre, Apellido: val.apellido || descUsuario.Apellido, Fecha_Nac: val.fecha || descUsuario.Fecha_Nac, Fecha_Creacion: descUsuario.Fecha_Creacion, Contrasena: val.Contrasena || descUsuario.Contrasena, Direccion: val.ciudad || descUsuario.Direccion, Id_Suscripcion: descUsuario.Id_Suscripcion, op: false}));
+                            dispatch(datosUsuario({Email: val.email || descUsuario.Email, Nombre: val.nombre || descUsuario.Nombre, Apellido: val.apellido || descUsuario.Apellido, Fecha_Nac: val.fecha || descUsuario.Fecha_Nac, Fecha_Creacion: descUsuario.Fecha_Creacion, Contrasena: val.contra || descUsuario.Contrasena, Direccion: val.ciudad || descUsuario.Direccion, Id_Suscripcion: descUsuario.Id_Suscripcion, op: false}));
+
+                            const ciudad = await (await axios.post('/api/setCiudad',{Id_Ciudad: val.ciudad})).data;
+                            const estado = await (await axios.post('/api/setEstado',{Id_Estado: ciudad[0].Id_Estado})).data;
+                            const pais = await (await axios.post('/api/setPais',{Id_Pais: estado[0].Id_Pais})).data;
+                            
+                            dispatch(setCiudad({Id_Ciudad: val.ciudad, Nombre: ciudad[0].Nombre}));
+                            dispatch(setEstado({Id_Estado: estado[0].Id_Estado, Nombre: estado[0].Nombre}));
+                            dispatch(setPais({Id_Pais: pais[0].Id_Pais, Nombre: pais[0].Nombre}));
 
                             navigate('/usuario/info');
                         }

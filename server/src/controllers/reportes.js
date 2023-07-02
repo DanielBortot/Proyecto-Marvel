@@ -1,22 +1,6 @@
 const pool = require('../database');
 
 const reportes = {
-    buscSeries: async (req,res) => {
-        const {T_Serie, op} = req.body;
-        let errores = {};
-        const medios = await pool.query('SELECT * FROM "Medio" WHERE "Titulo"=$1',[T_Serie]);
-        const series = await pool.query('SELECT * FROM "Serie" WHERE "T_Serie"=$1',[T_Serie]);
-        if (medios.rowCount > 0 && !op){
-            errores.titulo = 'Ya existe una serie con ese titulo';
-        }
-        else if (medios.rowCount === 0 && op){
-            errores.titulo = 'El titulo que ha ingresado no existe en los Medios';
-        }
-        else if (series.rowCount > 0 && op){
-            errores.titulo = 'Ya existe una serie con ese titulo';
-        }
-        res.send(errores);
-    },
 
     seriesRep2: async (req,res) => {
         const datos = (await pool.query('SELECT "T_Serie" titulo, "N_Episodios" episodios, "Creador" creador, "Canal" canal, "Tipo" tipo FROM "Serie" WHERE "N_Episodios" > (SELECT AVG("N_Episodios") FROM "Serie")')).rows;
@@ -27,46 +11,6 @@ const reportes = {
             datos[i] = {...datos[i], ...medio[0], ...promedio[0]};
         }
         res.send(datos);
-    },
-
-    eliminarSerie: async (req,res) => {
-        const {T_Serie} = req.body;
-        await pool.query('DELETE FROM "Serie" WHERE "T_Serie"=$1',[T_Serie]);
-        res.send('borrado');
-    },
-
-    updateMedioSerie: async (req,res) => {
-        const {tituloNew,titulo,fecha,compania,rating,sinopsis,imagen,episodios,creador,canal,tipo} = req.body;
-        await pool.query('UPDATE "Serie" SET "N_Episodios"=$1, "Creador"=$2, "Canal"=$3, "Tipo"=$4 WHERE "T_Serie"=$5', [episodios,creador,canal,tipo,titulo]);
-        await pool.query('UPDATE "Medio" SET "Titulo"=$1, "Fecha_Estreno"=$2, "Compania"=$3, "Rating"=$4, "Sinopsis"=$5, "Imagen"=$6 WHERE "Titulo"=$7',[tituloNew,fecha,compania,rating,sinopsis,imagen,titulo]);
-        res.send('actualizado');
-    },
-
-    addMedioSerie: async (req,res) => {
-        const {titulo,fecha,compania,rating,sinopsis,imagen,episodios,creador,canal,tipo,op} = req.body;
-        if (!op){
-            await pool.query('INSERT INTO "Medio" ("Titulo", "Fecha_Estreno", "Compania", "Rating", "Sinopsis", "Imagen") VALUES ($1, $2, $3, $4, $5, $6)',[titulo,fecha,compania,rating,sinopsis,imagen]);
-        }
-        await pool.query('INSERT INTO "Serie" ("T_Serie", "N_Episodios", "Creador", "Canal", "Tipo") VALUES ($1, $2, $3, $4, $5)', [titulo,episodios,creador,canal,tipo]);
-        res.send('creado');
-    },
-
-
-    buscPeliculas: async (req,res) => {
-        const {T_Pelicula, op} = req.body;
-        let errores = {};
-        const medios = await pool.query('SELECT * FROM "Medio" WHERE "Titulo"=$1',[T_Pelicula]);
-        const peliculas = await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula"=$1',[T_Pelicula]);
-        if (medios.rowCount > 0 && !op){
-            errores.titulo = 'Ya existe una pelicula con ese titulo';
-        }
-        else if (medios.rowCount === 0 && op){
-            errores.titulo = 'El titulo que ha ingresado no existe en los medios';
-        }
-        else if (peliculas.rowCount > 0 && op){
-            errores.titulo = 'Ya existe una pelicula con ese titulo';
-        }
-        res.send(errores);
     },
 
     peliculasRep5: async (req,res) => {
@@ -80,63 +24,8 @@ const reportes = {
         res.send(datos);
     },
 
-    eliminarPelicula: async (req,res) => {
-        const {T_Pelicula} = req.body;
-        await pool.query('DELETE from "Pelicula" WHERE "T_Pelicula"=$1"',[T_Pelicula]);
-        res.send('borrado');
-    },
-
-    updateMedioPelicula: async (req,res) => {
-        const {tituloNew,titulo,fecha,compania,rating,sinopsis,imagen,director,distribuidor,duracion,ganancia,coste} = req.body;
-        await pool.query('UPDATE "Pelicula" SET "Director"=$1, "Distribuidor"=$2, "Duracion"=$3, "Ganancia"=$4, "Coste"=$5 WHERE "T_Pelicula"=$6', [director,distribuidor,duracion,ganancia,coste,titulo]);
-        await pool.query('UPDATE "Medio" SET "Titulo"=$1, "Fecha_Estreno"=$2, "Compania"=$3, "Rating"=$4, "Sinopsis"=$5, "Imagen"=$6 WHERE "Titulo"=$7',[tituloNew,fecha,compania,rating,sinopsis,imagen,titulo]);
-        res.send('actualizado');
-    },
-
-    addMedioPelicula: async (req,res) => {
-        const {titulo,fecha,compania,rating,sinopsis,imagen,director,distribuidor,duracion,ganancia,coste,op,tipo} = req.body;
-        if (!op){
-            await pool.query('INSERT INTO "Medio" ("Titulo", "Fecha_Estreno", "Compania", "Rating", "Sinopsis", "Imagen") VALUES ($1, $2, $3, $4, $5, $6)',[titulo,fecha,compania,rating,sinopsis,imagen]);
-        }
-        await pool.query('INSERT INTO "Pelicula" ("T_Pelicula", "Director", "Distribuidor", "Duracion", "Ganancia", "Coste", "Tipo") VALUES ($1, $2, $3, $4, $5, $6, $7)', [titulo,director,distribuidor,duracion,ganancia,coste,tipo]);
-        res.send('creado');
-    },
-
-    compPod: async (req,res) => {
-        const {nombrePod} = req.body;
-        let errores = {};
-        const poderes = await pool.query('SELECT * FROM "Poder" WHERE "Nombre"=$1',[nombrePod]);
-
-        if (poderes.rowCount > 0) {
-            errores.poder = 'Ya existe un poder con ese nombre';
-        }
-        res.send(errores);
-    },
-
-    compPers: async (req,res) => {
-        const {nombrePers} = req.body;
-        let errores = {};
-        const personajes = await pool.query('SELECT * FROM "Personaje" WHERE "Nombre"=$1',[nombrePers]);
-
-        if (personajes.rowCount > 0) {
-            errores.personaje = 'Ya existe un personaje con ese nombre';
-        }
-        res.send(errores);
-    },
-
-    compAlias: async (req,res) => {
-        const {aliasVill} = req.body;
-        let errores = {};
-        const alias = await pool.query('SELECT * FROM "Villano" WHERE "Alias"=$1',[aliasVill]);
-
-        if (alias.rowCount > 0 && !opVill) {
-            errores.alias = 'Ya existe un villano con ese alias';
-        }
-        res.send(errores);
-    },
-
     buscPodPersVill: async (req,res) => {
-        let {nombrePers, nombrePod, aliasVill, opPers, opVill, opPod} = req.body;
+        let {nombrePers, nombrePod, aliasVill, opVill, opPod} = req.body;
         let errores = {};
         if (opVill){
             const nom = (await pool.query('SELECT "N_Villano" "nombrePers" FROM "Villano" WHERE "Alias"=$1',[aliasVill])).rows;
@@ -148,14 +37,8 @@ const reportes = {
         const poderes = await pool.query('SELECT * FROM "Poder" WHERE "Nombre"=$1',[nombrePod]);
         const posee = await pool.query('SELECT * FROM "Posee" WHERE "N_Personaje"=$1 AND "N_Poder"=$2',[nombrePers,nombrePod]);
 
-        if (personajes.rowCount > 0 && !opPers && !opVill){
+        if ((personajes.rowCount > 0 || villanos.rowCount > 0) && !opVill){
             errores.personaje = 'Ya existe un personaje con ese nombre';
-        }
-        else if (personajes.rowCount === 0 && opPers && !opVill){
-            errores.personaje = 'El personaje que ha ingresado no existe';
-        }
-        else if (villanos.rowCount > 0 && opPers && !opVill){
-            errores.personaje = 'Ya existe un villano asociado al personaje ingresado';
         }
         if (alias.rowCount > 0 && !opVill) {
             errores.alias = 'Ya existe un villano con ese alias';
@@ -168,31 +51,6 @@ const reportes = {
         }
 
         res.send(errores);
-    },
-
-    buscVillanos: async (req,res) => {
-        const villanos = await pool.query('SELECT * FROM "Villano"');
-        res.send(villanos.rows);
-    },
-
-    buscPoderes: async (req,res) => {
-        const poderes = await pool.query('SELECT * FROM "Poder"');
-        res.send(poderes.rows);
-    },
-
-    buscNacionalidades: async (req,res) => {
-        const nacionalidades = await pool.query('SELECT * FROM "Nacionalidad"');
-        res.send(nacionalidades.rows);
-    },
-
-    buscOcupaciones: async (req,res) => {
-        const ocupaciones = await pool.query('SELECT * FROM "Ocupacion"');
-        res.send(ocupaciones.rows);
-    },
-
-    buscCreadores: async (req,res) => {
-        const creadores = await pool.query('SELECT * FROM "Creador"');
-        res.send(creadores.rows);
     },
 
     // poseeRep6: async (req,res) => {
@@ -254,8 +112,8 @@ const reportes = {
     },
 
     addPodPersVill: async (req,res) => {
-        let {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion,opPers,opVill,opPod} = req.body;
-        if (!opPers && !opVill){
+        let {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion,opVill,opPod} = req.body;
+        if (!opVill){
             await pool.query('INSERT INTO "Personaje" ("Nombre", "Genero", "Color_Ojos", "Color_Pelo", "Nom_Comic", "E_Marital", imagen) VALUES ($1, $2, $3, $4, $5, $6, $7)',[nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers]);
             for (let i = 0; i<nacionalidades.length; i++){
                 await pool.query('INSERT INTO "Pers_Nac" ("N_Personaje", "Nacionalidad") VALUES ($1, $2)',[nombrePers,nacionalidades[i].Nac]);
@@ -266,9 +124,6 @@ const reportes = {
             for (let i = 0; i<creadores.length; i++){
                 await pool.query('INSERT INTO "Pers_Creador" ("N_Personaje", "N_Creador") VALUES ($1, $2)',[nombrePers,creadores[i].Nom_Creador]);
             }
-            await pool.query('INSERT INTO "Villano" ("N_Villano", "Alias", "Objetivo") VALUES ($1, $2, $3)',[nombrePers,alias,objetivo]);
-        }
-        else if (opPers && !opVill){
             await pool.query('INSERT INTO "Villano" ("N_Villano", "Alias", "Objetivo") VALUES ($1, $2, $3)',[nombrePers,alias,objetivo]);
         }
         else {

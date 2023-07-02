@@ -2,17 +2,11 @@ import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Switch from '@mui/material/Switch';
 
 function AgPelicula() {
 
     const [errorDB, setErrorDB] = useState({})
-    const [checked, setChecked] = useState(false);
     const navigate = useNavigate();
-
-    const handleChange = e => {
-        setChecked(e.target.checked);
-    }
 
     return (
         <>
@@ -41,16 +35,16 @@ function AgPelicula() {
                         if (!val.titulo){
                             errores.titulo = 'Introduzca el titulo de la pelicula';
                         }
-                        if (!val.fecha && !checked){
+                        if (!val.fecha){
                             errores.fecha = 'Seleccione una fecha de creacion';
                         }
-                        if (!val.compania && !checked){
+                        if (!val.compania){
                             errores.compania = 'Ingrese la compañia';
                         }
-                        if ((!val.rating || isNaN(val.rating) || parseInt(val.rating) > 5 || parseInt(val.rating) < 1) && !checked){
+                        if ((!val.rating || isNaN(val.rating) || parseInt(val.rating) > 5 || parseInt(val.rating) < 1)){
                             errores.rating = 'Ingrese un rating valido del 1 al 5';
                         }
-                        if (!val.sinopsis && !checked){
+                        if (!val.sinopsis){
                             errores.sinopsis = 'Ingrese la sinopsis de la pelicula';
                         }
                         if (!val.director){
@@ -74,20 +68,16 @@ function AgPelicula() {
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/buscPeliculas', {T_Pelicula: val.titulo, op: checked})).data;
+                        const error = await (await axios.post('../api/buscPeliculas', {T_Pelicula: val.titulo})).data;
                         setErrorDB(error);
                         if (!error.titulo){
-                            await axios.post('../api/addRep5', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', director: val.director, distribuidor: val.distribuidor, duracion: val.duracion, ganancia: val.ganancia, coste: val.coste, tipo: val.tipo, op: checked});
+                            await axios.post('../api/addRep5', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', director: val.director, distribuidor: val.distribuidor, duracion: val.duracion, ganancia: val.ganancia, coste: val.coste, tipo: val.tipo});
                             navigate('/Rep5');
                         }
                     }}
                 >
                     {({errors})=>(
                         <Form>
-                            <div style={{display: 'flex', alignItems: 'center'}}>
-                                <Switch checked={checked} onChange={handleChange} inputProps={{'aria-label': 'controlled'}}/>
-                                <label>{checked ? 'Cambiar a modo Agregar Medio y Pelicula' : 'Cambiar a modo Agregar Solo Pelicula'}</label>
-                            </div>
                             {errorDB.titulo && <div style={{fontSize: "15px", color: "red"}}>{errorDB.titulo}</div>}
                             <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
                             <Field 

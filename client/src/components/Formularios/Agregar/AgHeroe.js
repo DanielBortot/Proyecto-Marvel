@@ -1,20 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { Autocomplete, TextField } from "@mui/material";
 
+function AgHeroe() {
 
-function Modpru() {
     const [errorDB, setErrorDB] = useState({});
-    const {descReporte} = useSelector(state => state.reporte);
-    const {nombrePers,genero,ojos,pelo,comic,eMarital,nacionalidades,ocupaciones,creadores,imagenPers,alias,objetivo,nombrePod,imagenPod,descripcion,obtencion} = descReporte;
-    const [listNac, setListNac] = useState([]);
+    const [villanos, setVillanos] = useState([]);
+    const [nacionalidades, setNacionalidades] = useState([]);
     const [valNac, setValNac] = useState([]);
-    const [listCrea, setListCrea] = useState([]);
+    const [creadores, setCreadores] = useState([]);
     const [valCrea, setValCrea] = useState([]);
-    const [listOcu, setListOcu] = useState([]);
+    const [ocupaciones, setOcupaciones] = useState([]);
     const [valOcu, setValOcu] = useState([]);
     const navigate = useNavigate();
 
@@ -32,15 +30,15 @@ function Modpru() {
 
     useEffect(()=> {
         const datos = async () => {
+            const vill = await (await axios.get('../api/villanos')).data;
             const nac = await (await axios.get('../api/nacionalidades')).data;
             const crea = await (await axios.get('../api/creadores')).data;
             const ocu = await (await axios.get('../api/ocupaciones')).data;
-            setListNac(nac);
-            setListCrea(crea);
-            setListOcu(ocu);
-            setValNac(nacionalidades);
-            setValCrea(creadores);
-            setValOcu(ocupaciones);
+            
+            setVillanos(vill);
+            setNacionalidades(nac);
+            setCreadores(crea);
+            setOcupaciones(ocu);
         }
         datos();
     },[]);
@@ -48,60 +46,52 @@ function Modpru() {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Agregar Relacion entre Villano y Poder</h2>
+                <h2 className="titulo">Agregar Heroe</h2>
             </div>
             <div className="formContReg">
                 <Formik
                     initialValues={{
-                        nombrePersNew: nombrePers,
-                        genero: genero,
-                        ojos: ojos,
-                        pelo: pelo,
-                        comic: comic,
-                        eMarital: eMarital,
-                        imagenPers: imagenPers,
-                        alias: alias,
-                        objetivo: objetivo,
-                        nombrePodNew: nombrePod,
-                        imagenPod: imagenPod,
-                        descripcion: descripcion,
-                        obtencion: obtencion
+                        nombrePers: '',
+                        genero: '',
+                        ojos: '',
+                        pelo: '',
+                        comic: '',
+                        eMarital: '',
+                        imagenPers: '1',
+                        alias: '',
+                        logotipo: '1',
+                        traje: '',
+                        archienemigo: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombrePersNew){
-                            errores.nombrePersNew = 'Ingresa un nombre de personaje';
+                        if (!val.nombrePers || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)){
+                            errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
-                        if (!val.genero){
+                        if (!val.genero || val.genero === -1){
                             errores.genero = 'Selecciona un genero';
                         }
-                        if (!val.ojos){
+                        if (!val.ojos || !/^[a-zA-Z]{1,50}$/.test(val.ojos)){
                             errores.ojos = 'Ingresa un color de ojos valido';
                         }
-                        if (!val.pelo){
+                        if (!val.pelo || !/^[a-zA-Z]{1,50}$/.test(val.pelo)){
                             errores.pelo = 'Ingresa un color de pelo valido';
                         }
                         if (!val.comic){
                             errores.comic = 'Ingresa un nombre de comic';
                         }
-                        if (!val.eMarital){
+                        if (!val.eMarital || val.eMarital === -1){
                             errores.eMarital = 'Selecciona el estado marital';
+                        }
+                        if (!val.archienemigo || val.archienemigo === -1){
+                            errores.archienemigo = 'Selecciona un archienemigo para el heroe';
                         }
                         if (!val.alias){
                             errores.alias = 'Ingresa o selecciona el alias del villano';
                         }
-                        if (!val.objetivo){
-                            errores.objetivo = 'Ingresa el objetivo del villano';
-                        }
-                        if (!val.nombrePodNew){
-                            errores.nombrePodNew = 'Ingresa o selecciona el nombre del poder';
-                        }
-                        if (!val.descripcion){
-                            errores.descripcion = 'Ingresa la descripcion del poder';
-                        }
-                        if (!val.obtencion){
-                            errores.obtencion = 'Selecciona la forma de obtencion del poder';
+                        if (!val.traje || !/^[a-zA-Z]{1,50}$/.test(val.ojos)){
+                            errores.traje = 'Ingrese un color de traje valido';
                         }
                         if (valNac.length === 0){
                             errores.nacionalidad = 'Selecciona las nacionalidades del personaje';
@@ -115,37 +105,24 @@ function Modpru() {
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        let error ={};
-                        if (val.nombrePersNew !== nombrePers){
-                            const e = await (await axios.post('../api/compPers',{nombrePers: val.nombrePersNew})).data;
-                            error = {...error,...e};
-                            setErrorDB(error);
-                        }
-                        if (val.alias !== alias){
-                            const e = await (await axios.post('../api/compAlias',{alias: val.alias, op: true})).data;
-                            error = {...error,...e};
-                            setErrorDB(error);
-                        }
-                        if (val.nombrePodNew !== nombrePod){
-                            const e = await (await axios.post('../api/compPod',{nombrePod: val.nombrePodNew})).data;
-                            error = {...error,...e};
-                            setErrorDB(error);
-                        }
-                        if (!error.personaje && !error.alias && !error.poder){
-                            await axios.post('../api/upRep6', {...val, nombrePers: nombrePers, nombrePod: nombrePod, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/Rep6');
+                        const error = await (await axios.post('../api/compPers', {nombrePers: val.nombrePers})).data;
+                        const error2 = await (await axios.post('../api/compAlias', {alias: val.alias, op: false})).data;
+                        setErrorDB({...error,...error2});
+                        if (!error.personaje && !error2.alias){
+                            await axios.post('../api/addPersHeroe', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
+                            navigate('/');
                         }
                     }}
                 >
                     {({errors, handleBlur})=>(
                         <Form>
                             {errorDB.personaje && <div style={{fontSize: "15px", color: "red"}}>{errorDB.personaje}</div>}
-                            
-                            <ErrorMessage name="nombrePersNew" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombrePersNew}</div>)}/>
+
+                            <ErrorMessage name="nombrePers" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombrePers}</div>)}/>
                             <Field 
                                 type="text" 
                                 placeholder="Nombre del Personaje"
-                                name="nombrePersNew"
+                                name="nombrePers"
                             />
                             <ErrorMessage name="ojos" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.ojos}</div>)}/>
                             <Field 
@@ -170,15 +147,22 @@ function Modpru() {
                             <ErrorMessage name="alias" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.alias}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Alias del Villano"
+                                placeholder="Alias del Heroe"
                                 name="alias"
                             />
-                            <ErrorMessage name="objetivo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.objetivo}</div>)}/>
+                            <ErrorMessage name="traje" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.traje}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Objetivo del Villano"
-                                name="objetivo"
+                                placeholder="Colores del traje del heroe"
+                                name="traje"
                             />
+                            <ErrorMessage name="archienemigo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.archienemigo}</div>)}/>
+                            <Field type="text" name="genero" as="select">
+                                <option hidden selected value={-1}>Selecciona el archienegimo del heroe</option>
+                                {villanos.map(villano => (
+                                    <option key={villano.N_Villano} value={villano.N_Villano}>{villano.N_Villano}</option>
+                                ))}
+                            </Field>
                             <ErrorMessage name="genero" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.genero}</div>)}/>
                             <Field type="text" name="genero" as="select">
                                 <option hidden selected value={-1}>Selecciona el genero del personaje</option>
@@ -200,9 +184,7 @@ function Modpru() {
                                 multiple
                                 limitTags={2}
                                 id="creador"
-                                isOptionEqualToValue={(option, value) => option.Nom_Creador === value.Nom_Creador}
-                                options={listCrea}
-                                defaultValue={[...creadores]}
+                                options={creadores}
                                 getOptionLabel={(option) => option.Nom_Creador}
                                 onChange={handleChangeCrea}
                                 onBlur={handleBlur}
@@ -216,10 +198,8 @@ function Modpru() {
                                 multiple
                                 limitTags={2}
                                 id="ocupacion"
-                                options={listOcu}
-                                defaultValue={[...ocupaciones]}
+                                options={ocupaciones}
                                 getOptionLabel={(option) => option.Ocup}
-                                isOptionEqualToValue={(option, value) => option.Ocup === value.Ocup}
                                 onChange={handleChangeOcu}
                                 onBlur={handleBlur}
                                 renderInput={(params) => (
@@ -232,10 +212,8 @@ function Modpru() {
                                 multiple
                                 limitTags={2}
                                 id="nacionalidad"
-                                options={listNac}
-                                defaultValue={[...nacionalidades]}
+                                options={nacionalidades}
                                 getOptionLabel={(option) => option.Nac}
-                                isOptionEqualToValue={(option, value) => option.Nac === value.Nac}
                                 onChange={handleChangeNac}
                                 onBlur={handleBlur}
                                 renderInput={(params) => (
@@ -243,31 +221,6 @@ function Modpru() {
                                 )}
                                 sx={{ width: '500px' }}
                             />
-
-                            <hr/>
-                            <hr/>
-
-                            <ErrorMessage name="nombrePodNew" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombrePodNew}</div>)}/>
-
-                            {errorDB.poder && <div style={{fontSize: "15px", color: "red"}}>{errorDB.poder}</div>}
-                            <Field 
-                                type="text" 
-                                placeholder="Nombre del Poder"
-                                name="nombrePodNew"
-                            />
-                            <ErrorMessage name="descripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.descripcion}</div>)}/>
-                            <Field 
-                                type="text" 
-                                placeholder="Descripcion del Poder"
-                                name="descripcion"
-                            />
-                            <ErrorMessage name="obtencion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.obtencion}</div>)}/>
-                            <Field type="text" name="obtencion" as="select">
-                                <option hidden selected value={-1}>Selecciona la forma de obtencion del poder</option>
-                                <option value={'Heredado'}>Heredado</option>
-                                <option value={'Natural'}>Natural</option>
-                                <option value={'Artificial'}>Artificial</option>
-                            </Field>
 
                             <div className="botonReg" style={{marginTop: '30px'}}>
                                 <button type="submit">Guardar</button>
@@ -280,4 +233,4 @@ function Modpru() {
     );
 }
 
-export {Modpru};
+export {AgHeroe};

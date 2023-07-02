@@ -130,6 +130,9 @@ function Register() {
                     }}
                     onSubmit={async (val)=>{
                         const erroresBD = await (await axios.post('api/buscUsuario',{Email: val.email, Nombre: val.nombre, Apellido: val.apellido})).data;
+                        const ciudad = await (await axios.post('/api/setCiudad',{Id_Ciudad: val.ciudad})).data;
+                        const estado = await (await axios.post('/api/setEstado',{Id_Estado: ciudad[0].Id_Estado})).data;
+                        const pais = await (await axios.post('/api/setPais',{Id_Pais: estado[0].Id_Pais})).data;
                         setErroresBD(erroresBD);
                         const date = new Date();
 
@@ -141,10 +144,16 @@ function Register() {
                                 await axios.post('api/register',{Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: val.ciudad, N_Tarjeta: null, Id_Suscripcion: 4, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha});
 
                                 dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: val.ciudad, N_Tarjeta: null, Id_Suscripcion: 4, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
+                                dispatch(setCiudad({Id_Ciudad: val.ciudad, Nombre: ciudad[0].Nombre}));
+                                dispatch(setEstado({Id_Estado: estado[0].Id_Estado, Nombre: estado[0].Nombre}));
+                                dispatch(setPais({Id_Pais: pais[0].Id_Pais, Nombre: pais[0].Nombre}));
                                 navigate('/perfil');
 
                             } else {
                                 dispatch(datosUsuario({Nombre: val.nombre, Apellido: val.apellido, Email: val.email, Contrasena: val.contra, Direccion: val.ciudad, N_Tarjeta: null, Id_Suscripcion: col+1, Fecha_Creacion: date.toLocaleDateString(), Fecha_Nac: val.fecha}));
+                                dispatch(setCiudad({Id_Ciudad: val.ciudad, Nombre: ciudad[0].Nombre}));
+                                dispatch(setEstado({Id_Estado: estado[0].Id_Estado, Nombre: estado[0].Nombre}));
+                                dispatch(setPais({Id_Pais: pais[0].Id_Pais, Nombre: pais[0].Nombre}));
                                 navigate('/registro/tarjeta');
                             }
                         }

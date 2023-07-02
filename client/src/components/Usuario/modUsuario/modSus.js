@@ -3,6 +3,7 @@ import '../../../assets/modSus.css';
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { datosSuscripcion } from "../../../reducers/suscripcionSlice";
+import { datosUsuario } from "../../../reducers/usuarioSlice";
 import { useNavigate } from "react-router-dom";
 
 function ModSus () {
@@ -12,9 +13,16 @@ function ModSus () {
     const navigate = useNavigate();
 
     const changeSus = async (id) => {
-        const sus = await (await axios.put('../../api/upSusUsu',{Id_Suscripcion: id, Email: descUsuario.Email})).data;
-        dispatch(datosSuscripcion(...sus));
-        navigate('/usuario/suscr');
+        if (id != 4 && !descUsuario.N_Tarjeta){
+            dispatch(datosUsuario({...descUsuario, opSus: id}));
+            navigate('/registro/tarjeta');
+        }
+        else {
+            const sus = await (await axios.put('../../api/upSusUsu',{Id_Suscripcion: id, Email: descUsuario.Email})).data;
+            dispatch(datosSuscripcion(...sus));
+            dispatch(datosUsuario({...descUsuario, Id_Suscripcion: id}))
+            navigate('/usuario/suscr');
+        }
     }
 
 
