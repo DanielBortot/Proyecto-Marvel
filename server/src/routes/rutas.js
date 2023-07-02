@@ -8,11 +8,23 @@ const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelic
 
 const {compPod, buscPoderes} = require('../controllers/poderes');
 
-const {buscVillanos, buscNacionalidades, buscOcupaciones, buscCreadores, compPers, compAlias, addPersHeroe, addPersVill} = require('../controllers/personajes');
+const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill} = require('../controllers/personajes');
 
 const {addObjeto, buscObjeto} = require('../controllers/objetos');
 
 const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones} = require('../controllers/organizaciones');
+
+const {buscPodPers, addPodPers, compPodPers} = require('../controllers/poderPers');
+
+const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPers');
+
+const {buscHerVill, addHerVill, compHerVill} = require('../controllers/HerVill');
+
+const {buscOrgMedio, addOrgMedio, compOrgMedio} = require('../controllers/orgMedio');
+
+const {buscPersMedio, addPersMedio, compPersMedio} = require('../controllers/persMedio');
+
+const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controllers/CivRela');
 
 
 
@@ -22,6 +34,8 @@ router.get('/series', series);
 router.get('/juegos', juegos);
 router.get('/paises', paises);
 router.get('/villanos', buscVillanos);
+router.get('/heroes', buscHeroes);
+router.get('/civiles', buscCiviles);
 router.get('/poderes', buscPoderes);
 router.get('/nacionalidades', buscNacionalidades);
 router.get('/ocupaciones', buscOcupaciones);
@@ -91,6 +105,31 @@ router.post('/addOrg', addOrganizacion);
 
 router.post('/buscSedes', buscSedes);
 router.post('/addSede', addSede);
+
+router.post('/buscPodPers', buscPodPers);
+router.post('/compPodPers', compPodPers);
+router.post('/addPodPers', addPodPers);
+
+router.post('/buscObjPers', buscObjPers);
+router.post('/compObjPers', compObjPers);
+router.post('/addObjPers', addObjPers);
+
+router.post('/buscHerVill', buscHerVill);
+router.post('/compHerVill', compHerVill);
+router.post('/addHerVill', addHerVill);
+
+router.post('/buscOrgMedio', buscOrgMedio);
+router.post('/compOrgMedio', compOrgMedio);
+router.post('/addOrgMedio', addOrgMedio);
+
+router.post('/buscPersMedio', buscPersMedio);
+router.post('/compPersMedio', compPersMedio);
+router.post('/addPersMedio', addPersMedio);
+
+router.post('/buscCivHer', buscCivHer);
+router.post('/buscCivVill', buscCivVill);
+router.post('/compCivPers', compCivPers);
+router.post('/addCivPers', addCivPers);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

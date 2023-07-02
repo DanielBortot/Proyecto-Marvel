@@ -52,6 +52,16 @@ const personajes = {
         res.send(creadores.rows);
     },
 
+    buscHeroes: async (req,res) => {
+        const heroes = await pool.query('SELECT * FROM "Heroe"');
+        res.send(heroes.rows);
+    },
+
+    buscCiviles: async (req,res) => {
+        const civ = await pool.query('SELECT * FROM "Civil"');
+        res.send(civ.rows);
+    },
+
     addPersHeroe: async (req,res) => {
         const {nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers,nacionalidades,ocupaciones,creadores,alias,logotipo,traje,archienemigo} = req.body;
 
