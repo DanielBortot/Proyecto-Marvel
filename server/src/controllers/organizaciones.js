@@ -36,6 +36,12 @@ const organizaciones = {
     organizaciones: async (req,res) => {
         const org = await pool.query('SELECT * FROM "Organizacion"');
         res.send(org.rows);
+    },
+
+    getSedes: async (req,res) => {
+        const {nombreOrg} = req.body;
+        const sedes = await pool.query('SELECT * FROM "Sede" WHERE "N_Org"=$1',[nombreOrg]);
+        res.send(sedes.rows);
     }
 }
 

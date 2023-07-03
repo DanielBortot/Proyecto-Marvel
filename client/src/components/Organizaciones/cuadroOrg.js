@@ -2,16 +2,16 @@ import React from "react";
 import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
-import { descSerie } from "../../reducers/seriesSlice";
+import { descOrganizacion } from "../../reducers/orgsSlice";
 
 
-function CuadroSeries ({prop}) {
+function CuadroOrganizaciones ({prop}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const {Imagen, T_Serie} = prop
+    const {Imagen, Nombre} = prop
     const enviar = ()=> {
-        dispatch(descSerie(prop));
-        navigate(`/series/${T_Serie}`);
+        dispatch(descOrganizacion(prop));
+        navigate(`/organizaciones/${Nombre}`);
     }
 
     return (
@@ -23,7 +23,7 @@ function CuadroSeries ({prop}) {
                     </div>
 
                     <div className="tituloPers">
-                        <h3>{T_Serie}</h3>
+                        <h3>{Nombre}</h3>
                     </div>
                 </div>
             </div>
@@ -31,4 +31,4 @@ function CuadroSeries ({prop}) {
     )
 }
 
-export {CuadroSeries};
+export {CuadroOrganizaciones};

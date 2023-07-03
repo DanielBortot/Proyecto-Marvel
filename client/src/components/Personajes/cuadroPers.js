@@ -13,7 +13,7 @@ function CuadroPers ({prop}) {
         const dato = await (await axios.post('/api/villHer',{Nombre: Nombre})).data;
         let val = {...prop, ...dato}
         dispatch(descPersonaje(val));
-        navigate(`${Nombre}`);
+        navigate(`/personajes/${Nombre}`);
     }
 
     return (

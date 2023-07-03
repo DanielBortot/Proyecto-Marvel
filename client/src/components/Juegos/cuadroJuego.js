@@ -11,7 +11,7 @@ function CuadroJuegos ({prop}) {
     const {Imagen, T_Juego} = prop
     const enviar = ()=> {
         dispatch(descJuego(prop));
-        navigate(`${T_Juego}`);
+        navigate(`/juegos/${T_Juego}`);
     }
 
     return (

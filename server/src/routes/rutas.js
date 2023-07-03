@@ -12,7 +12,7 @@ const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreado
 
 const {addObjeto, buscObjeto} = require('../controllers/objetos');
 
-const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones} = require('../controllers/organizaciones');
+const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes} = require('../controllers/organizaciones');
 
 const {buscPodPers, addPodPers, compPodPers} = require('../controllers/poderPers');
 
@@ -20,12 +20,13 @@ const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPer
 
 const {buscHerVill, addHerVill, compHerVill} = require('../controllers/HerVill');
 
-const {buscOrgMedio, addOrgMedio, compOrgMedio} = require('../controllers/orgMedio');
+const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio} = require('../controllers/orgMedio');
 
-const {buscPersMedio, addPersMedio, compPersMedio} = require('../controllers/persMedio');
+const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio} = require('../controllers/persMedio');
 
 const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controllers/CivRela');
 
+const {getPersOrg} = require('../controllers/persOrg');
 
 
 router.get('/personajes', personajes);
@@ -105,6 +106,7 @@ router.post('/addOrg', addOrganizacion);
 
 router.post('/buscSedes', buscSedes);
 router.post('/addSede', addSede);
+router.post('/getSedes', getSedes);
 
 router.post('/buscPodPers', buscPodPers);
 router.post('/compPodPers', compPodPers);
@@ -119,17 +121,21 @@ router.post('/compHerVill', compHerVill);
 router.post('/addHerVill', addHerVill);
 
 router.post('/buscOrgMedio', buscOrgMedio);
+router.post('/getOrgMedio', getOrgMedio);
 router.post('/compOrgMedio', compOrgMedio);
 router.post('/addOrgMedio', addOrgMedio);
 
 router.post('/buscPersMedio', buscPersMedio);
 router.post('/compPersMedio', compPersMedio);
 router.post('/addPersMedio', addPersMedio);
+router.post('/getPersMedio', getPersMedio);
 
 router.post('/buscCivHer', buscCivHer);
 router.post('/buscCivVill', buscCivVill);
 router.post('/compCivPers', compCivPers);
 router.post('/addCivPers', addCivPers);
+
+router.post('/getPersOrg', getPersOrg);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

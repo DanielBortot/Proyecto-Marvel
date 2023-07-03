@@ -1,13 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import '../../assets/personajes.css';
+import axios from "axios";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import { CuadroJuegos } from "../Juegos/cuadroJuego";
+import { CuadroSeries } from "../Series/cuadroSeries";
+import { CuadroPeliculas } from "../Peliculas/cuadroPelicula";
+import { imagenes } from "../../assets/img/imgdb";
+import { CuadroOrganizaciones } from "../Organizaciones/cuadroOrg";
 
 function DescripcionPers () {
     const {descripcion} = useSelector(state => state.personajes);
     const [gen, setGen] = useState('');
+    const [organizaciones, setOrganizaciones] = useState([]);
+    const [medios, setMedios] = useState([]);
     
     let {Nombre, Genero, Color_Pelo, Color_Ojos, ocupaciones, nacionalidades, creadores, Nom_Comic, E_Marital, op} = descripcion;
     useEffect(()=> {
+        const getDatos = async () => {
+            let meds = await (await axios.post('../api/getPersMedio', {nombrePers: Nombre})).data;
+            for (let i=0; i<meds.length;i++){
+                const img = imagenes.find(img => img.pos == meds[i].Imagen);
+                if (img){
+                    meds[i].Imagen = img.img;
+                }
+            }
+            let orgs = await (await axios.post('../api/getPersOrg',{nombrePers: Nombre})).data;
+            for (let i=0; i<orgs.length;i++){
+                const img = imagenes.find(img => img.pos == orgs[i].Imagen);
+                if (img){
+                    orgs[i].Imagen = img.img;
+                }
+            }
+            setMedios(meds);
+            setOrganizaciones(orgs);
+        }
+        getDatos();
         switch (Genero){
             case 'M':
                 setGen('Masculino');
@@ -69,6 +98,26 @@ function DescripcionPers () {
         }
     }
 
+    const responsive = {
+        superLargeDesktop: {
+          // the naming can be any, depends on you.
+          breakpoint: { max: 2000, min: 1024 },
+          items: 4
+        },
+        desktop: {
+          breakpoint: { max: 1024, min: 800 },
+          items: 4
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 2
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1
+        }
+    };
+
     return (
         <>
             <div className="descCont">
@@ -103,6 +152,46 @@ function DescripcionPers () {
                         {info()}
                     </div>
                 </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div className="tituloCont">
+                <h2>Medios a los que Pertenece</h2>
+            </div>
+            <div className="carrusel">
+            <Carousel 
+                responsive={responsive}
+                infinite={true}
+                centerMode={true}       
+            >
+                    {medios.map(med => {
+                            if (med.T_Serie){
+                                return <CuadroSeries prop={med} key={med.T_Serie}/>
+                            }
+                            else if (med.T_Pelicula){
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula}/>
+                            }
+                            else if (med.T_Juego){
+                                return <CuadroJuegos prop={med} key={med.T_Juego}/>
+                            }
+                        })}     
+            </Carousel>
+            </div>
+            <br/>
+            <div className="tituloCont">
+                <h2>Organizaciones a los que Pertenece</h2>
+            </div>
+            <div className="carrusel">
+            <Carousel 
+                responsive={responsive}
+                infinite={true}
+                centerMode={true}       
+            >
+                    {organizaciones.map(org => {
+                            return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
+                        })}     
+            </Carousel>
             </div>
         </>
     );

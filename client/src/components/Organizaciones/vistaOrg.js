@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import '../../assets/personajes.css'
-import { CuadroPers } from "./cuadroPers";
+import { CuadroOrganizaciones } from "./cuadroOrg";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 
-function VistaPersonajes () {
+function VistaOrgs () {
 
     const responsive = {
         superLargeDesktop: {
@@ -28,18 +28,18 @@ function VistaPersonajes () {
         }
     };
 
-    const [personajes, setPersonajes] = useState([]);
+    const [organizaciones, setOrganizaciones] = useState([]);
 
     useEffect(()=> {
         const traerInfo = async () => {
-            const personajes = await (await axios.get('/api/personajes')).data;
-            for (let i=0; i<personajes.length;i++){
-                const img = imagenes.find(img => img.pos == personajes[i].imagen);
+            const orgs = await (await axios.get('/api/organizaciones')).data;
+            for (let i=0; i<orgs.length;i++){
+                const img = imagenes.find(img => img.pos == orgs[i].imagen);
                 if (img){
-                    personajes[i].imagen = img.img;
+                    orgs[i].imagen = img.img;
                 }
             }
-            setPersonajes(personajes);
+            setOrganizaciones(orgs);
         }
         traerInfo();
     },[]);
@@ -55,8 +55,8 @@ function VistaPersonajes () {
                 infinite={true}
                 centerMode={true}       
             >
-                    {personajes.map(personaje => {
-                            return <CuadroPers prop={personaje} key={personaje.Nombre}/>
+                    {organizaciones.map(org => {
+                            return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
                         })}     
             </Carousel>
             </div>
@@ -64,12 +64,12 @@ function VistaPersonajes () {
                 <h2>Lista de personajes de marvel</h2>
             </div>
             <div className="vistaPers">
-                {personajes.map(personaje => {
-                    return <CuadroPers prop={personaje} key={personaje.Nombre}/>
+                {organizaciones.map(org => {
+                    return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
                 })}
             </div>
         </>
     );
 }
 
-export {VistaPersonajes};
+export {VistaOrgs};

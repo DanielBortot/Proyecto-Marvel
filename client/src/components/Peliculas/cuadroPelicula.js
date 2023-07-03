@@ -11,7 +11,7 @@ function CuadroPeliculas ({prop}) {
     const {Imagen, T_Pelicula} = prop
     const enviar = ()=> {
         dispatch(descPelicula(prop));
-        navigate(`${T_Pelicula}`);
+        navigate(`/peliculas/${T_Pelicula}`);
     }
 
     return (

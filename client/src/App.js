@@ -39,6 +39,8 @@ import { DescripcionPeliculas } from './components/Peliculas/DescripcionPeli';
 import { VistaRep } from './components/Reportes/VistaRep';
 import { ModSus } from './components/Usuario/modUsuario/modSus';
 import { DescripcionJuegos } from './components/Juegos/DescripcionJuego';
+import { DescripcionOrg } from './components/Organizaciones/DescripcionOrg';
+import { VistaOrgs } from './components/Organizaciones/vistaOrg';
 
 function App() {
   return (
@@ -60,6 +62,8 @@ function App() {
                 <Route path='/peliculas/:titulo' element={<DescripcionPeliculas/>}/>
                 <Route path='/juegos' element={<VistaJuegos/>}/>
                 <Route path='/juegos/:titulo' element={<DescripcionJuegos/>}/>
+                <Route path='/organizaciones' element={<VistaOrgs/>}/>
+                <Route path='/organizaciones/:nombre' element={<DescripcionOrg/>}/>
                 <Route path='/comics' element={<VistaComics/>}/>
                 <Route path='/usuario' element={<DescUsuario/>}/>
                 <Route path='/usuario/resumen' element={<VistaResumen/>}/>

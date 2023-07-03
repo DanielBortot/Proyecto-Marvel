@@ -3,7 +3,7 @@ import personajesReducer from "./reducers/personajesSlice";
 import peliculasReducer from "./reducers/peliculasSlice";
 import seriesReducer from "./reducers/seriesSlice";
 import juegosReducer from "./reducers/juegosSlice";
-import comicsReducer from "./reducers/comicsSlice";
+import orgsReducer from "./reducers/orgsSlice";
 import usuarioReducer from  "./reducers/usuarioSlice";
 import tarjetaReducer from "./reducers/tarjetaSlice";
 import perfilesReducer from "./reducers/perfilesSlice";
@@ -17,7 +17,7 @@ export default configureStore({
         peliculas: peliculasReducer,
         series: seriesReducer,
         juegos: juegosReducer,
-        comics: comicsReducer,
+        organizaciones: orgsReducer,
         usuario: usuarioReducer,
         tarjeta: tarjetaReducer,
         perfiles: perfilesReducer,
