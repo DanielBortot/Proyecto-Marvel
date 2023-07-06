@@ -24,6 +24,12 @@ const orgMedio = {
         res.send(medios);
     },
 
+    getMedOrga: async (req,res) => {
+        const {nombreMed} = req.body;
+        const orgs = await pool.query('SELECT * FROM "Organizacion" o, "Aparece" a WHERE o."Nombre"=a."N_Organizacion" and a."N_Titulo"=$1',[nombreMed]);
+        res.send(orgs.rows);
+    },
+
     compOrgMedio: async (req,res) => {
         const {nombreOrg, titulo} = req.body;
         let errores = {};

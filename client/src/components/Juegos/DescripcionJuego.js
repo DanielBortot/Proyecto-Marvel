@@ -1,11 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import '../../assets/personajes.css';
+import { imagenes } from "../../assets/img/imgdb";
+import axios from "axios";
+import { CuadroOrganizaciones } from "../Organizaciones/cuadroOrg";
+import { CuadroPers } from "../Personajes/cuadroPers";
 
 function DescripcionJuegos () {
     const {descripcion} = useSelector(state => state.juegos);
+    const [organizaciones, setOrganizaciones] = useState([]);
+    const [personajes, setPersonajes] = useState([]);
     
     let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Juego, plataformas, Distribuidor, Tipo, Imagen} = descripcion;
+
+    useEffect(()=> {
+        const getDatos = async ()=> {
+            let orgs = await (await axios.post('../api/getMedOrga', {nombreMed: T_Juego})).data;
+            for (let i=0; i<orgs.length;i++){
+                const img = imagenes.find(img => img.pos == orgs[i].Imagen);
+                if (img){
+                    orgs[i].Imagen = img.img;
+                }
+            }
+            let pers = await (await axios.post('../api/getMedPerso', {nombreMed: T_Juego})).data;
+            for (let i=0; i<pers.length;i++){
+                const img = imagenes.find(img => img.pos == pers[i].imagen);
+                if (img){
+                    pers[i].imagen = img.img;
+                }
+            } 
+            setOrganizaciones(orgs);
+            setPersonajes(pers);
+        }
+        getDatos();
+    },[]);
 
     return (
         <>
@@ -37,6 +65,26 @@ function DescripcionJuegos () {
                         <p>{Sinopsis}</p>
                     </div>
                 </div>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <div className="tituloCont">
+                <h2>Organizaciones que participan en el medio</h2>
+            </div>
+            <div className="vistaPers">
+                {organizaciones.map(org => {
+                    return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
+                })}
+            </div>
+            <br/>
+            <div className="tituloCont">
+                <h2>Personajes que participan en el medio</h2>
+            </div>
+            <div className="vistaPers">
+                {personajes.map(pers => {
+                    return <CuadroPers prop={pers} key={pers.Nombre}/>
+                })}
             </div>
         </>
     );

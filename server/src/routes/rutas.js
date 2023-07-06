@@ -20,9 +20,9 @@ const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPer
 
 const {buscHerVill, addHerVill, compHerVill} = require('../controllers/HerVill');
 
-const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio} = require('../controllers/orgMedio');
+const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio, getMedOrga} = require('../controllers/orgMedio');
 
-const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio} = require('../controllers/persMedio');
+const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso} = require('../controllers/persMedio');
 
 const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controllers/CivRela');
 
@@ -124,11 +124,13 @@ router.post('/buscOrgMedio', buscOrgMedio);
 router.post('/getOrgMedio', getOrgMedio);
 router.post('/compOrgMedio', compOrgMedio);
 router.post('/addOrgMedio', addOrgMedio);
+router.post('/getMedOrga', getMedOrga);
 
 router.post('/buscPersMedio', buscPersMedio);
 router.post('/compPersMedio', compPersMedio);
 router.post('/addPersMedio', addPersMedio);
 router.post('/getPersMedio', getPersMedio);
+router.post('/getMedPerso', getMedPerso);
 
 router.post('/buscCivHer', buscCivHer);
 router.post('/buscCivVill', buscCivVill);

@@ -38,7 +38,19 @@ const persMedio = {
             medios[i] = {...medios[i], ...serie[0], ...pelicula[0], ...juego[0]};
         } 
         res.send(medios);
-    }
+    },
+
+    getMedPerso: async (req,res) => {
+        const {nombreMed} = req.body;
+        const pers = (await pool.query('SELECT * FROM "Personaje" p, "Esta" e WHERE p."Nombre"=e."N_Personaje" and e."N_Titulo"=$1',[nombreMed])).rows;
+        for (let i=0; i<pers.length; i++){
+            const nac = (await pool.query('SELECT "Nacionalidad" "Nac" FROM "Pers_Nac" WHERE "N_Personaje"=$1',[pers[i].Nombre])).rows
+            const ocu = (await pool.query('SELECT "Ocupacion" "Ocup" FROM "Pers_Oc" WHERE "N_Personaje"=$1',[pers[i].Nombre])).rows
+            const crea = (await pool.query('SELECT "N_Creador" "Nom_Creador" FROM "Pers_Creador" WHERE "N_Personaje"=$1',[pers[i].Nombre])).rows;
+            pers[i] = {...pers[i], nacionalidades: nac, ocupaciones: ocu, creadores: crea}
+        }
+        res.send(pers);
+    },
 }
 
 module.exports = persMedio;
