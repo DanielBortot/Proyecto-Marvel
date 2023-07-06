@@ -22,6 +22,11 @@ const poderes = {
 
         await pool.query('INSERT INTO "Poder" VALUES ("Nombre", "Imagen", "Descripcion")',[nombrePod,imagenPod,descripcion]);
         res.send('creado');
+    },
+
+    getPoderes: async (req,res) => {
+        const pods = await pool.query('SELECT * FROM "Poder"');
+        res.send(pods.rows);
     }
 }
 

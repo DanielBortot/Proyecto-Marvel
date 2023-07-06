@@ -6,15 +6,15 @@ const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPose
 
 const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, buscPeliculas, updateMedioPelicula, addMedioPelicula, plataformas, addMedioJuego, buscJuegos} = require('../controllers/medios');
 
-const {compPod, buscPoderes} = require('../controllers/poderes');
+const {compPod, buscPoderes, getPoderes} = require('../controllers/poderes');
 
 const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill} = require('../controllers/personajes');
 
-const {addObjeto, buscObjeto} = require('../controllers/objetos');
+const {addObjeto, buscObjeto, getObjPers, getObjetos} = require('../controllers/objetos');
 
 const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes} = require('../controllers/organizaciones');
 
-const {buscPodPers, addPodPers, compPodPers} = require('../controllers/poderPers');
+const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod} = require('../controllers/poderPers');
 
 const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPers');
 
@@ -43,6 +43,8 @@ router.get('/ocupaciones', buscOcupaciones);
 router.get('/creadores', buscCreadores);
 router.get('/plataformas', plataformas);
 router.get('/organizaciones', organizaciones);
+router.get('/poderes', getPoderes);
+router.get('/getObjetos', getObjetos);
 
 router.get('/Rep2Series', seriesRep2);
 router.get('/Rep5Peliculas', peliculasRep5);
@@ -100,6 +102,7 @@ router.post('/addPersVill', addPersVill);
 
 router.post('/addObjeto', addObjeto);
 router.post('/buscObjetos', buscObjeto);
+router.post('/getObjPers', getObjPers);
 
 router.post('/buscOrg', buscOrganizacion);
 router.post('/addOrg', addOrganizacion);
@@ -111,6 +114,8 @@ router.post('/getSedes', getSedes);
 router.post('/buscPodPers', buscPodPers);
 router.post('/compPodPers', compPodPers);
 router.post('/addPodPers', addPodPers);
+router.post('/getPodPerso', getPodPerso);
+router.post('/getPersPod', getPersPod);
 
 router.post('/buscObjPers', buscObjPers);
 router.post('/compObjPers', compObjPers);

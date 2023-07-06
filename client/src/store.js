@@ -10,6 +10,8 @@ import perfilesReducer from "./reducers/perfilesSlice";
 import direccionReducer from "./reducers/direccionSlice";
 import suscripcionReducer from "./reducers/suscripcionSlice";
 import reporteReducer from "./reducers/reportesSlice";
+import poderesReducer from "./reducers/poderesSlice";
+import objetosReducer from "./reducers/objetosSlice";
 
 export default configureStore({
     reducer: {
@@ -23,6 +25,8 @@ export default configureStore({
         perfiles: perfilesReducer,
         direccion: direccionReducer,
         suscripcion: suscripcionReducer,
-        reporte: reporteReducer
+        reporte: reporteReducer,
+        poderes: poderesReducer,
+        objetos: objetosReducer
     }  
 })

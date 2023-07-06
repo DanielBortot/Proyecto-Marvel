@@ -25,6 +25,17 @@ const objetos = {
         }
 
         res.send('creado');
+    },
+
+    getObjPers: async (req,res) => {
+        const {nombrePers} = req.body;
+        const objs = await pool.query('SELECT * FROM "Objeto" WHERE "N_Personaje"=$1',[nombrePers]);
+        res.send(objs.rows);
+    },
+
+    getObjetos: async (req,res) => {
+        const objs = await pool.query('SELECT * FROM "Objeto"');
+        res.send(objs.rows);
     }
 }
 

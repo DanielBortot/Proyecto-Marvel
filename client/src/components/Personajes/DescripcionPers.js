@@ -9,12 +9,16 @@ import { CuadroSeries } from "../Series/cuadroSeries";
 import { CuadroPeliculas } from "../Peliculas/cuadroPelicula";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroOrganizaciones } from "../Organizaciones/cuadroOrg";
+import { CuadroPodPers } from "../Poderes/cuadroPodPers";
+import { CuadroObjeto } from "../Objetos/cuadroObjeto";
 
 function DescripcionPers () {
     const {descripcion} = useSelector(state => state.personajes);
     const [gen, setGen] = useState('');
     const [organizaciones, setOrganizaciones] = useState([]);
     const [medios, setMedios] = useState([]);
+    const [poderes, setPoderes] = useState([]);
+    const [objetos, setObjetos] = useState([]);
     
     let {Nombre, Genero, Color_Pelo, Color_Ojos, ocupaciones, nacionalidades, creadores, Nom_Comic, E_Marital, op} = descripcion;
     useEffect(()=> {
@@ -33,8 +37,24 @@ function DescripcionPers () {
                     orgs[i].Imagen = img.img;
                 }
             }
+            let pods = await (await axios.post('../api/getPodPerso',{nombrePers: Nombre})).data;
+            for (let i=0; i<pods.length;i++){
+                const img = imagenes.find(img => img.pos == pods[i].Imagen);
+                if (img){
+                    pods[i].Imagen = img.img;
+                }
+            }
+            let objs = await (await axios.post('../api/getObjPers',{nombrePers: Nombre})).data;
+            for (let i=0; i<objs.length;i++){
+                const img = imagenes.find(img => img.pos == objs[i].Imagen);
+                if (img){
+                    objs[i].Imagen = img.img;
+                }
+            }
             setMedios(meds);
             setOrganizaciones(orgs);
+            setPoderes(pods);
+            setObjetos(objs);
         }
         getDatos();
         switch (Genero){
@@ -192,6 +212,24 @@ function DescripcionPers () {
                             return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
                         })}     
             </Carousel>
+            </div>
+            <br/>
+            <div className="tituloCont">
+                <h2>Poderes que Pertenecen al Personaje</h2>
+            </div>
+            <div className="vistaPersM">
+                {poderes.map(pod => {
+                    return <CuadroPodPers prop={pod} key={pod.Nombre}/>
+                })}
+            </div>
+            <br/>
+            <div className="tituloCont">
+                <h2>Objetos que Pertenecen al Personaje</h2>
+            </div>
+            <div className="vistaPers">
+                {objetos.map(obj => {
+                    return <CuadroObjeto prop={obj} key={obj.Nombre}/>
+                })}
             </div>
         </>
     );

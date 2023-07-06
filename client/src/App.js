@@ -41,6 +41,10 @@ import { ModSus } from './components/Usuario/modUsuario/modSus';
 import { DescripcionJuegos } from './components/Juegos/DescripcionJuego';
 import { DescripcionOrg } from './components/Organizaciones/DescripcionOrg';
 import { VistaOrgs } from './components/Organizaciones/vistaOrg';
+import { DescripcionPod } from './components/Poderes/DescripcionPod';
+import { VistaPoderes } from './components/Poderes/vistaPoderes';
+import { DescripcionObj } from './components/Objetos/DescripcionObjeto';
+import { VistaObjetos } from './components/Objetos/vistaObjetos';
 
 function App() {
   return (
@@ -64,6 +68,10 @@ function App() {
                 <Route path='/juegos/:titulo' element={<DescripcionJuegos/>}/>
                 <Route path='/organizaciones' element={<VistaOrgs/>}/>
                 <Route path='/organizaciones/:nombre' element={<DescripcionOrg/>}/>
+                <Route path='/poderes' element={<VistaPoderes/>}/>
+                <Route path='/poderes/:nombre' element={<DescripcionPod/>}/>
+                <Route path='/objetos' element={<VistaObjetos/>}/>
+                <Route path='/objetos/:nombre' element={<DescripcionObj/>}/>
                 <Route path='/comics' element={<VistaComics/>}/>
                 <Route path='/usuario' element={<DescUsuario/>}/>
                 <Route path='/usuario/resumen' element={<VistaResumen/>}/>
