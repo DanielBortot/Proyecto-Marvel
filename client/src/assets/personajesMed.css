@@ -1,0 +1,34 @@
+.vistaPersM {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 4rem;
+    margin-top: 3rem;
+    padding: 0 3rem 3rem;
+}
+
+.cajaPersM {
+    box-shadow: 8px 5px 10px rgb(155, 154, 154);
+    display: flex;
+    gap: 10px;
+    transition: all 0.4s ease;
+}
+
+.cajaPersM:hover {
+    filter: brightness(40%);
+}
+
+.contPersM2, .contPersM3 {
+    margin-top: 15px;
+}
+
+.contPersM1 {
+    width: 45%;
+}
+
+.contPersM3 {
+    margin-left: 10px;
+}
+
+.cajaPers:hover {
+    filter: brightness(40%);
+}

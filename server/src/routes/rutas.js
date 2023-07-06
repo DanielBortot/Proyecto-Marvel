@@ -26,7 +26,7 @@ const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso} = 
 
 const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controllers/CivRela');
 
-const {getPersOrg} = require('../controllers/persOrg');
+const {getPersOrg, getOrgPerso} = require('../controllers/persOrg');
 
 
 router.get('/personajes', personajes);
@@ -138,6 +138,7 @@ router.post('/compCivPers', compCivPers);
 router.post('/addCivPers', addCivPers);
 
 router.post('/getPersOrg', getPersOrg);
+router.post('/getOrgPerso', getOrgPerso);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

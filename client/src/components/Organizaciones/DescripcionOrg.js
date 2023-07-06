@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import '../../assets/personajes.css';
+import '../../assets/personajesMed.css';
 import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -9,11 +10,13 @@ import { CuadroSeries } from "../Series/cuadroSeries";
 import { CuadroPeliculas } from "../Peliculas/cuadroPelicula";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroSedes } from "../Sedes/cuadroSedes";
+import { CuadroPersOrg } from "../Personajes/cuadroPersOrg";
 
 function DescripcionOrg () {
     const {descripcion} = useSelector(state => state.organizaciones);
     const [sedes, setSedes] = useState([]);
     const [medios, setMedios] = useState([]);
+    const [personajes, setPersonajes] = useState([]);
     
     let {Eslogan, Fundador, Lider, Lugar_Creacion, Nom_Comic, Nombre, Objetivo, Tipo, Imagen} = descripcion;
     useEffect(()=> {
@@ -32,8 +35,16 @@ function DescripcionOrg () {
                     seds[i].Imagen = img.img;
                 }
             }
+            let pers = await (await axios.post('../api/getOrgPerso', {nombreOrg: Nombre})).data;
+            for (let i=0; i<pers.length;i++){
+                const img = imagenes.find(img => img.pos == pers[i].imagen);
+                if (img){
+                    pers[i].imagen = img.img;
+                }
+            }
             setMedios(meds);
             setSedes(seds);
+            setPersonajes(pers);
         }
         getDatos();
     },[]);
@@ -130,6 +141,15 @@ function DescripcionOrg () {
                             return <CuadroSedes prop={sede} key={sede.Nombre}/>
                         })}     
             </Carousel>
+            </div>
+            <br/>
+            <div className="tituloCont">
+                <h2>Personajes que Pertenecen a la Organizacion</h2>
+            </div>
+            <div className="vistaPersM">
+                {personajes.map(pers => {
+                    return <CuadroPersOrg prop={pers} key={pers.Nombre}/>
+                })}
             </div>
         </>
     );

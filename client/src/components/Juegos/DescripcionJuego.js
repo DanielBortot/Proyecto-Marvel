@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import '../../assets/personajes.css';
+import '../../assets/personajesMed.css';
 import { imagenes } from "../../assets/img/imgdb";
 import axios from "axios";
-import { CuadroOrganizaciones } from "../Organizaciones/cuadroOrg";
-import { CuadroPers } from "../Personajes/cuadroPers";
+import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
+import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
 
 function DescripcionJuegos () {
     const {descripcion} = useSelector(state => state.juegos);
@@ -72,18 +73,18 @@ function DescripcionJuegos () {
             <div className="tituloCont">
                 <h2>Organizaciones que participan en el medio</h2>
             </div>
-            <div className="vistaPers">
+            <div className="vistaPersM">
                 {organizaciones.map(org => {
-                    return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
+                    return <CuadroOrgMedio prop={org} key={org.Nombre}/>
                 })}
             </div>
             <br/>
             <div className="tituloCont">
                 <h2>Personajes que participan en el medio</h2>
             </div>
-            <div className="vistaPers">
+            <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre}/>
+                    return <CuadroPersMedio prop={pers} key={pers.Nombre}/>
                 })}
             </div>
         </>
