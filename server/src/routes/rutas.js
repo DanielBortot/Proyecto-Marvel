@@ -18,7 +18,7 @@ const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod} = require(
 
 const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPers');
 
-const {buscHerVill, addHerVill, compHerVill} = require('../controllers/HerVill');
+const {buscHerVill, addHerVill, compHerVill, getHerVill, getRelacion} = require('../controllers/HerVill');
 
 const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio, getMedOrga} = require('../controllers/orgMedio');
 
@@ -124,6 +124,8 @@ router.post('/addObjPers', addObjPers);
 router.post('/buscHerVill', buscHerVill);
 router.post('/compHerVill', compHerVill);
 router.post('/addHerVill', addHerVill);
+router.post('/getHerVill', getHerVill);
+router.post('/getRelacion', getRelacion);
 
 router.post('/buscOrgMedio', buscOrgMedio);
 router.post('/getOrgMedio', getOrgMedio);

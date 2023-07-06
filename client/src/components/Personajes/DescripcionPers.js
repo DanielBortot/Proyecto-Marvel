@@ -11,6 +11,7 @@ import { imagenes } from "../../assets/img/imgdb";
 import { CuadroOrganizaciones } from "../Organizaciones/cuadroOrg";
 import { CuadroPodPers } from "../Poderes/cuadroPodPers";
 import { CuadroObjeto } from "../Objetos/cuadroObjeto";
+import { CuadroPers } from "./cuadroPers";
 
 function DescripcionPers () {
     const {descripcion} = useSelector(state => state.personajes);
@@ -19,6 +20,8 @@ function DescripcionPers () {
     const [medios, setMedios] = useState([]);
     const [poderes, setPoderes] = useState([]);
     const [objetos, setObjetos] = useState([]);
+    const [enfrenta, setEnfrenta] = useState([]);
+    const [relaciones, setRelaciones] = useState([]);
     
     let {Nombre, Genero, Color_Pelo, Color_Ojos, ocupaciones, nacionalidades, creadores, Nom_Comic, E_Marital, op} = descripcion;
     useEffect(()=> {
@@ -51,10 +54,26 @@ function DescripcionPers () {
                     objs[i].Imagen = img.img;
                 }
             }
+            let enf = await (await axios.post('../api/getHerVill',{nombrePers: Nombre, op: op})).data;
+            for (let i=0; i<enf.length;i++){
+                const img = imagenes.find(img => img.pos == enf[i].imagen);
+                if (img){
+                    enf[i].imagen = img.img;
+                }
+            }
+            let rela = await (await axios.post('../api/getRelacion',{nombrePers: Nombre, op: op})).data;
+            for (let i=0; i<rela.length;i++){
+                const img = imagenes.find(img => img.pos == rela[i].imagen);
+                if (img){
+                    rela[i].imagen = img.img;
+                }
+            }
             setMedios(meds);
             setOrganizaciones(orgs);
             setPoderes(pods);
             setObjetos(objs);
+            setEnfrenta(enf);
+            setRelaciones(rela);
         }
         getDatos();
         switch (Genero){
@@ -229,6 +248,24 @@ function DescripcionPers () {
             <div className="vistaPers">
                 {objetos.map(obj => {
                     return <CuadroObjeto prop={obj} key={obj.Nombre}/>
+                })}
+            </div>
+            <br/>
+            <div className="tituloCont">
+                <h2>Personajes a los que se enfrenta</h2>
+            </div>
+            <div className="vistaPers">
+                {enfrenta.map(pers => {
+                    return <CuadroPers prop={pers} key={pers.Nombre}/>
+                })}
+            </div>
+            <br/>
+            <div className="tituloCont">
+                <h2>Personajes Relacionados</h2>
+            </div>
+            <div className="vistaPers">
+                {relaciones.map(pers => {
+                    return <CuadroPers prop={pers} key={pers.Nombre}/>
                 })}
             </div>
         </>
