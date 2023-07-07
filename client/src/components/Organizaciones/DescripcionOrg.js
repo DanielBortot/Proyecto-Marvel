@@ -74,7 +74,7 @@ function DescripcionOrg () {
             <div className="descCont">
                 <div className="descContImg">
                     <h2>{Nombre}</h2>
-                    <img src={Imagen} alt="img"/>
+                    <img className="imagen2" src={Imagen} alt="img"/>
                 </div>
 
                 <div className="descContTitu">

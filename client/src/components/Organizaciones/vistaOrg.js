@@ -6,6 +6,7 @@ import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { useSelector } from "react-redux";
+import { HeaderPers } from "../headerpers";
 
 function VistaOrgs () {
 
@@ -60,6 +61,7 @@ function VistaOrgs () {
     return (
         <>
             {admin()}
+            <HeaderPers/>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
