@@ -23,6 +23,24 @@ function Header (){
         dispatch(delTarjeta());
     }
 
+    const otros = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (<Link className='custom-button btn btn-secondary px-4 py-4' to={'/otros'}>Otros</Link>);
+        }
+        else {
+            return (<></>);
+        }
+    }
+
+    const info = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (<></>);
+        }
+        else {
+            return (<Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/usuario/resumen'}><FontAwesomeIcon icon={faUser} style={{color: "#ffffff",width: 40,}} /></Link>);
+        }
+    }
+
     return (
         <div className="header">
             <div className="logo hed">FANATIC DB</div>
@@ -36,12 +54,12 @@ function Header (){
                     <Link className='custom-button btn btn-secondary px-4 py-4' to={'/organizaciones'}>Organizaciones</Link>
                     <Link className='custom-button btn btn-secondary px-4 py-4' to={'/poderes'}>Poderes</Link>
                     <Link className='custom-button btn btn-secondary px-4 py-4' to={'/objetos'}>Objetos</Link>
-                    <Link className='custom-button btn btn-secondary px-4 py-4' to={'/otros'}>Otros</Link>               
+                    {otros()}             
                 </li>
             </div>
             <div className="inisesion hed">
                 {(descUsuario.Nombre && perfilUso.Nombre) ? <Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/inicioSesion'} onClick={()=>delDatos()}>Logout</Link> : <Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/inicioSesion'}>Iniciar Sesión</Link>}
-                <Link className='custom-button2 btn btn-secondary px-4 py-4' to={'/usuario/resumen'}><FontAwesomeIcon icon={faUser} style={{color: "#ffffff",width: 40,}} /></Link>
+                {info()}
             </div>
         </div>
     );

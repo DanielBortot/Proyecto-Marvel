@@ -5,6 +5,7 @@ import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroSeries } from "./cuadroSeries";
+import { useSelector } from "react-redux";
 
 function VistaSeries () {
 
@@ -27,7 +28,7 @@ function VistaSeries () {
           items: 1
         }
     };
-
+    const {descUsuario} = useSelector(state => state.usuario);
     const [series, setSeries] = useState([]);
 
     useEffect(()=> {
@@ -43,9 +44,23 @@ function VistaSeries () {
         }
         traerInfo();
     },[]);
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+            <>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Serie</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Personaje/Serie</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Organizacion/Serie</button>
+            </>
+            );
+        }
+        return (<></>);
+    }
     
     return (
         <>
+            {admin()}
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>

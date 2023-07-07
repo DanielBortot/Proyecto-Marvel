@@ -5,6 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
+import { useSelector } from "react-redux";
 
 function VistaPersonajes () {
 
@@ -27,7 +28,7 @@ function VistaPersonajes () {
           items: 1
         }
     };
-
+    const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
 
     useEffect(()=> {
@@ -43,9 +44,26 @@ function VistaPersonajes () {
         }
         traerInfo();
     },[]);
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+            <>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Heroe</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Villano</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Civil</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Enfrentamiento</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Combate</button>
+            </>
+            );
+        }
+        return (<></>);
+    }
     
     return (
         <>
+            {admin()}
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>

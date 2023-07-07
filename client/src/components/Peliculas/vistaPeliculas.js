@@ -5,6 +5,7 @@ import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPeliculas } from "./cuadroPelicula";
+import { useSelector } from "react-redux";
 
 function VistaPeliculas () {
 
@@ -27,7 +28,7 @@ function VistaPeliculas () {
           items: 1
         }
     };
-
+    const {descUsuario} = useSelector(state => state.usuario);
     const [peliculas, setPeliculas] = useState([]);
 
     useEffect(()=> {
@@ -43,9 +44,23 @@ function VistaPeliculas () {
         }
         traerInfo();
     },[]);
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+            <>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Pelicula</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Personaje/Pelicula</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Organizacion/Pelicula</button>
+            </>
+            );
+        }
+        return (<></>);
+    }
     
     return (
         <>
+            {admin()}
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
