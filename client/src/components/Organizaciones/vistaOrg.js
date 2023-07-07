@@ -5,6 +5,7 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
+import { HeaderPers } from "../headerpers";
 
 function VistaOrgs () {
 
@@ -46,6 +47,7 @@ function VistaOrgs () {
     
     return (
         <>
+            <HeaderPers/>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>

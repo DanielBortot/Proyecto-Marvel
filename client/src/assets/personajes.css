@@ -26,6 +26,12 @@
     height: 300px;
 }
 
+.imagen2 {
+    object-fit: cover;
+    width: auto;
+    height: 500px;
+}
+
 .tituloPers {
     padding: 6px;
     background-color: rgb(85, 85, 85);
@@ -36,7 +42,7 @@
 
 .tituloPers h3 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 42px;
+    font-size: 2vw;
 }
 
 .tituloPers p {

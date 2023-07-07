@@ -162,7 +162,7 @@ function DescripcionPers () {
             <div className="descCont">
                 <div className="descContImg">
                     <h2>{descripcion.Nombre}</h2>
-                    <img src={descripcion.imagen} alt="img"/>
+                    <img className="imagen2" src={descripcion.imagen} alt="img"/>
                 </div>
 
                 <div className="descContTitu">

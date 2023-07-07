@@ -68,6 +68,7 @@ import img67 from "./wolverine.jpg"
 import img68 from "./xmen.jpg"
 import img69 from "./xmen2000.jpg"
 import img70 from "./zemo.jpg"
+import img71 from "./especspiderman.jpg"
 
 const imagenes = [
     {img : img1, pos: 1},
@@ -139,7 +140,8 @@ const imagenes = [
     {img : img67, pos: 67},
     {img : img68, pos: 68},
     {img : img69, pos: 69},
-    {img : img70, pos: 70}
+    {img : img70, pos: 70},
+    {img : img71, pos: 71}
     
  ]
 export {imagenes}

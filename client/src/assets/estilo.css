@@ -5,6 +5,13 @@
   position: 'sticky';
 }
 
+.header3 {
+  background: #202020;
+  padding: '0 10px';
+  position: 'sticky';
+  margin: 10px;
+}
+
 .custom-button {
     background-color: #EC1D24;
     font-family: 'Roboto', sans-serif;
@@ -27,6 +34,22 @@
     border-radius: 0px;
     cursor: pointer;
     margin: 0px auto;
+  }
+
+  .custom-button3 {
+    background-color: #202020;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 0px;
+    cursor: pointer;
+    margin: 0px auto;
+  }
+
+  .custom-button3:hover {
+    background-color: #EC1D24;
   }
 
   .custom-button:hover {

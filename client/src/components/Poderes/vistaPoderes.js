@@ -5,6 +5,8 @@ import 'react-multi-carousel/lib/styles.css';
 import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPoder } from "./cuadroPoder";
+import { HeaderPers } from "../headerpers";
+
 
 function VistaPoderes () {
 
@@ -46,6 +48,7 @@ function VistaPoderes () {
     
     return (
         <>
+            <HeaderPers/>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
