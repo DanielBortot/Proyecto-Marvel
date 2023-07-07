@@ -6,6 +6,7 @@ import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPoder } from "./cuadroPoder";
 import { HeaderPers } from "../headerpers";
+import { useSelector } from "react-redux";
 
 
 function VistaPoderes () {
@@ -29,7 +30,7 @@ function VistaPoderes () {
           items: 1
         }
     };
-
+    const {descUsuario} = useSelector(state => state.usuario);
     const [poderes, setPoderes] = useState([]);
 
     useEffect(()=> {
@@ -46,8 +47,21 @@ function VistaPoderes () {
         traerInfo();
     },[]);
     
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+            <>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Poder</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Poseedor de un Poder</button>
+            </>
+            );
+        }
+        return (<></>);
+    }
+
     return (
         <>
+            {admin()}
             <HeaderPers/>
             <div className="tituloCont">
                 <h2>Populares</h2>

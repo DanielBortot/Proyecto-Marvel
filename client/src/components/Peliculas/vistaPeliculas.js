@@ -50,8 +50,8 @@ function VistaPeliculas () {
             return (
             <>
                 <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Pelicula</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Personaje/Pelicula</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Organizacion/Pelicula</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Personaje a Pelicula</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Organizacion a Pelicula</button>
             </>
             );
         }

@@ -51,7 +51,7 @@ function VistaOrgs () {
             return (
             <>
                 <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Organizacion</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Personaje/Organizacion</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Personaje a la Organizacion</button>
             </>
             );
         }

@@ -6,6 +6,7 @@ import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroObjeto } from "./cuadroObjeto";
 import { HeaderPers } from "../headerpers";
+import { useSelector } from "react-redux";
 
 function VistaObjetos () {
 
@@ -28,7 +29,7 @@ function VistaObjetos () {
           items: 1
         }
     };
-
+    const {descUsuario} = useSelector(state => state.usuario);
     const [objetos, setObjetos] = useState([]);
 
     useEffect(()=> {
@@ -44,9 +45,22 @@ function VistaObjetos () {
         }
         traerInfo();
     },[]);
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+            <>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Objeto</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Creador de un Objeto</button>
+            </>
+            );
+        }
+        return (<></>);
+    }
     
     return (
         <>
+            {admin()}
             <HeaderPers/>
             <div className="tituloCont">
                 <h2>Populares</h2>

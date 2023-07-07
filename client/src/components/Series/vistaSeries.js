@@ -50,8 +50,8 @@ function VistaSeries () {
             return (
             <>
                 <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Serie</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Personaje/Serie</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Relacion Organizacion/Serie</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Personaje a Serie</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Organizacion a Serie</button>
             </>
             );
         }
