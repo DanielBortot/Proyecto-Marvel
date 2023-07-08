@@ -3,6 +3,7 @@ import '../../assets/personajesMed.css';
 import { Link, useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descPoder } from "../../reducers/poderesSlice";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function CuadroPodPers ({prop, email}) {
     const dispatch = useDispatch();
@@ -18,7 +19,7 @@ function CuadroPodPers ({prop, email}) {
             return (
                 <>
                     <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Poder</button>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Modificar Poder</Link>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/poderes/ModPosee'}>Modificar Poder</Link>
                 </>
             );
         }

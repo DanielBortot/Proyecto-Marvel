@@ -2,41 +2,31 @@ import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function AgSede() {
+function ModSede() {
 
     const [errorDB, setErrorDB] = useState({});
-    const [organizaciones, setOrganizaciones] = useState([]);
+    const {descReporte} = useSelector(state => state.reporte);
+    const {Nombre, N_Org, Tipo_Edif, Ubicacion, Imagen} = descReporte;
     const navigate = useNavigate();
-
-    useEffect(()=> {
-        const getDatos = async () => {
-            const org = await (await axios.get('../api/organizaciones')).data;
-            setOrganizaciones(org);
-        }
-        getDatos();
-    },[])
 
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Agregar Sede</h2>
+                <h2 className="titulo">Modificar Sede</h2>
             </div>
             <div className="formContReg">
                 <Formik
                     initialValues={{
-                        nombreSede: '',
-                        tipoEdif: '',
-                        ubicacion: '',
-                        imagen: '1',
-                        nombreOrg: ''
+                        nombreSede: Nombre,
+                        tipoEdif: Tipo_Edif,
+                        ubicacion: Ubicacion,
+                        imagen: Imagen
                     }}
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombreOrg || val.nombreOrg == -1){
-                            errores.nombreOrg = 'Seleccione la organizacion a la que pertenece la sede';
-                        }
                         if (!val.nombreSede){
                             errores.nombreSede = 'Escriba el nombre de la sede';
                         }
@@ -49,10 +39,13 @@ function AgSede() {
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/buscSedes', {nombreSede: val.nombreSede, nombreOrg: val.nombreOrg})).data;
+                        let error = {};
+                        if (val.nombreSede !== Nombre){
+                            error = await (await axios.post('../api/buscSedes', {nombreSede: val.nombreSede, nombreOrg: N_Org})).data;
+                        }
                         setErrorDB(error);
                         if (!error.nombreSede){
-                            await axios.post('../api/addOrg', {...val});
+                            await axios.put('../api/upOrg', {...val, nombreOrg: N_Org, nombreSedeVie: Nombre});
                             navigate('/');
                         }
                     }}
@@ -79,15 +72,6 @@ function AgSede() {
                                 name="ubicacion"
                             />
 
-                            <ErrorMessage name="nombreOrg" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombreOrg}</div>)}/>
-
-                            <Field type="text" name="nombreOrg" as="select">
-                                <option hidden selected value={-1}>Selecciona la organizacion</option>
-                                {organizaciones.map(org => (
-                                    <option key={org.Nombre} value={org.Nombre}>{org.Nombre}</option>
-                                ))}
-                            </Field>
-
                             <div className="botonReg" style={{marginTop: '30px'}}>
                                 <button type="submit">Guardar</button>
                             </div>
@@ -99,4 +83,4 @@ function AgSede() {
     );
 }
 
-export {AgSede};
+export {ModSede};

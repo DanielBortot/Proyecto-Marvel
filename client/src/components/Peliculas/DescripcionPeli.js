@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import { imagenes } from "../../assets/img/imgdb";
@@ -7,12 +7,14 @@ import axios from "axios";
 import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
 import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
 import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionPeliculas () {
     const {descripcion} = useSelector(state => state.peliculas);
     const {descUsuario} = useSelector(state => state.usuario);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
+    const dispatch = useDispatch();
     
     let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Pelicula, Director, Duracion, Coste, Ganancia, Distribuidor, Tipo, Imagen} = descripcion;
 
@@ -42,7 +44,7 @@ function DescripcionPeliculas () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Pelicula</Link>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/poderes/ModPoder'}>Modificar Pelicula</Link>
                     <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Pelicula</button>
                 </div>
             );

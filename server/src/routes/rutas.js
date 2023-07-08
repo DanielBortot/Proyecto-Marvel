@@ -4,25 +4,25 @@ const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, r
 
 const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPosee, addPodPersVill, poseeRep6, updatePodPersVill} = require('../controllers/reportes');
 
-const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, buscPeliculas, updateMedioPelicula, addMedioPelicula, plataformas, addMedioJuego, buscJuegos} = require('../controllers/medios');
+const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, buscPeliculas, updateMedioPelicula, addMedioPelicula, plataformas, addMedioJuego, buscJuegos, upMedioJuego} = require('../controllers/medios');
 
-const {compPod, buscPoderes, getPoderes} = require('../controllers/poderes');
+const {compPod, buscPoderes, getPoderes, upPoder} = require('../controllers/poderes');
 
-const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill} = require('../controllers/personajes');
+const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill, upPersHeroe, upPersVill} = require('../controllers/personajes');
 
-const {addObjeto, buscObjeto, getObjPers, getObjetos} = require('../controllers/objetos');
+const {addObjeto, buscObjeto, getObjPers, getObjetos, upObjeto} = require('../controllers/objetos');
 
-const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes} = require('../controllers/organizaciones');
+const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes, upOrganizacion, upSede} = require('../controllers/organizaciones');
 
-const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod} = require('../controllers/poderPers');
+const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod, upPodPers} = require('../controllers/poderPers');
 
 const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPers');
 
 const {buscHerVill, addHerVill, compHerVill, getHerVill, getRelacion} = require('../controllers/HerVill');
 
-const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio, getMedOrga} = require('../controllers/orgMedio');
+const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio, getMedOrga, upOrgMedio} = require('../controllers/orgMedio');
 
-const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso} = require('../controllers/persMedio');
+const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso, upPersMedio} = require('../controllers/persMedio');
 
 const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controllers/CivRela');
 
@@ -154,5 +154,17 @@ router.put('/upInfoUsu', updateInfoUsuario);
 router.put('/upRep2', updateMedioSerie);
 router.put('/upRep5', updateMedioPelicula);
 router.put('/upRep6', updatePodPersVill);
+
+router.put('/upPersHeroe', upPersHeroe);
+router.put('/upPersVill', upPersVill);
+
+router.put('/upObjeto', upObjeto);
+router.put('/upPoder', upPoder);
+router.put('/upMedioJuego', upMedioJuego);
+router.put('/upOrg', upOrganizacion);
+router.put('/upOrgMedio', upOrgMedio);
+router.put('/upPersMedio', upPersMedio);
+router.put('/upSede', upSede);
+router.put('/upPodPers', upPodPers);
 
 module.exports = router;

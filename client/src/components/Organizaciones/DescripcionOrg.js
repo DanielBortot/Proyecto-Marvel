@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import axios from "axios";
@@ -12,6 +12,7 @@ import { imagenes } from "../../assets/img/imgdb";
 import { CuadroSedes } from "../Sedes/cuadroSedes";
 import { CuadroPersOrg } from "../Personajes/cuadroPersOrg";
 import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionOrg () {
     const {descripcion} = useSelector(state => state.organizaciones);
@@ -19,6 +20,7 @@ function DescripcionOrg () {
     const [sedes, setSedes] = useState([]);
     const [medios, setMedios] = useState([]);
     const [personajes, setPersonajes] = useState([]);
+    const dispatch = useDispatch();
     
     let {Eslogan, Fundador, Lider, Lugar_Creacion, Nom_Comic, Nombre, Objetivo, Tipo, Imagen} = descripcion;
     useEffect(()=> {
@@ -75,7 +77,7 @@ function DescripcionOrg () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Organizacion</Link>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/organizaciones/ModOrganizacion'}>Modificar Organizacion</Link>
                     <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>
                 </div>
             );

@@ -37,9 +37,9 @@ function VistaOrgs () {
         const traerInfo = async () => {
             const orgs = await (await axios.get('/api/organizaciones')).data;
             for (let i=0; i<orgs.length;i++){
-                const img = imagenes.find(img => img.pos == orgs[i].imagen);
+                const img = imagenes.find(img => img.pos == orgs[i].Imagen);
                 if (img){
-                    orgs[i].imagen = img.img;
+                    orgs[i].Imagen = img.img;
                 }
             }
             setOrganizaciones(orgs);

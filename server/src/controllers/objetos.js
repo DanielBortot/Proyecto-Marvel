@@ -27,6 +27,19 @@ const objetos = {
         res.send('creado');
     },
 
+    upObjeto: async (req,res) => {
+        const {nombreObj,nombreObjVie,descripcion,material,tipo,imagen,nombrePers} = req.body;
+
+        if (nombrePers == 'no'){
+            await pool.query('UPDATE "Objeto" SET "Nombre"=$1, "Descripcion"=$2, "Material"=$3, "Tipo"=$4, "Imagen"=$5 WHERE "Nombre"=$6',[nombreObj,descripcion,material,tipo,imagen,nombreObjVie]);
+        }
+        else {
+            await pool.query('UPDATE "Objeto" SET "Nombre"=$1, "Descripcion"=$2, "Material"=$3, "Tipo"=$4, "Imagen"=$5, "N_Personaje"=$6 WHERE "Nombre"=$7',[nombreObj,descripcion,material,tipo,imagen,nombrePers,nombreObjVie]);
+        }
+
+        res.send('creado');
+    },
+
     getObjPers: async (req,res) => {
         const {nombrePers} = req.body;
         const objs = await pool.query('SELECT * FROM "Objeto" WHERE "N_Personaje"=$1',[nombrePers]);

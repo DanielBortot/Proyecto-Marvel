@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -13,6 +13,7 @@ import { CuadroOrganizaciones } from "../Organizaciones/cuadroOrg";
 import { CuadroPodPers } from "../Poderes/cuadroPodPers";
 import { CuadroObjeto } from "../Objetos/cuadroObjeto";
 import { CuadroPers } from "./cuadroPers";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionPers () {
     const {descripcion} = useSelector(state => state.personajes);
@@ -24,6 +25,7 @@ function DescripcionPers () {
     const [objetos, setObjetos] = useState([]);
     const [enfrenta, setEnfrenta] = useState([]);
     const [relaciones, setRelaciones] = useState([]);
+    const dispatch = useDispatch();
     
     let {Nombre, Genero, Color_Pelo, Color_Ojos, ocupaciones, nacionalidades, creadores, Nom_Comic, E_Marital, op} = descripcion;
     useEffect(()=> {
@@ -161,12 +163,32 @@ function DescripcionPers () {
 
     const admin = () => {
         if (descUsuario.Email === 'admin@gmail.com'){
-            return (
-                <div>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Personaje</Link>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
-                </div>
-            );
+            switch (op) {
+                case 1:
+                    return (
+                        <>
+                            <div>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModVillano'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
+                                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                            </div>
+                        </>);
+                case 2:
+                    return (
+                        <>
+                            <div>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModHeroe'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
+                                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                            </div>
+                        </>);
+                case 3:
+                    return (
+                        <>
+                            <div>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModCivil'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
+                                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                            </div>
+                        </>);
+            }
         }
         return (<></>);
     }

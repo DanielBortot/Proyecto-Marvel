@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import axios from "axios";
@@ -7,11 +7,13 @@ import 'react-multi-carousel/lib/styles.css';
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPers } from "../Personajes/cuadroPers";
 import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionPod () {
     const {descripcion} = useSelector(state => state.poderes);
     const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
+    const dispatch = useDispatch();
     
     let {Nombre, Descripcion, Imagen} = descripcion;
     useEffect(()=> {
@@ -52,7 +54,7 @@ function DescripcionPod () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Poder</Link>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/poderes/ModPoder'}>Modificar Poder</Link>
                     <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Poder</button>
                 </div>
             );

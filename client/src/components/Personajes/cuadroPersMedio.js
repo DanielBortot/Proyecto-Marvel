@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import { descPersonaje } from "../../reducers/personajesSlice";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function CuadroPersMedio ({prop, email}) {
     const dispatch = useDispatch();
@@ -21,8 +22,8 @@ function CuadroPersMedio ({prop, email}) {
         if (email && email === 'admin@gmail.com'){
             return (
                 <>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Modificar Organizacion</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/medios/ModPersMedio'}>Modificar Personaje</Link>
                 </>
             );
         }

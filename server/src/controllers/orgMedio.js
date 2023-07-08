@@ -44,7 +44,13 @@ const orgMedio = {
         const {nombreOrg, titulo, rol, estado} = req.body;
         await pool.query('INSERT INTO "Aparece" ("N_Organizacion", "N_Titulo", "Estado", "Rol") VALUES ($1, $2, $3, $4)',[nombreOrg,titulo,estado,rol]);
         res.send('creado');
-    }
+    },
+
+    upOrgMedio: async (req,res) => {
+        const {nombreOrg, titulo, rol, estado} = req.body;
+        await pool.query('UPDATE "Aparece" SET "Estado"=$1, "Rol"=$2 WHERE "N_Organizacion"=$3 AND "N_Titulo"=$4',[estado,rol,nombreOrg,titulo]);
+        res.send('modificado');
+    },
 }
 
 module.exports = orgMedio;

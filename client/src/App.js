@@ -57,6 +57,15 @@ import { AgPoseePers } from './components/Formularios/Agregar/AgPoseePers';
 import { AgEsta } from './components/Formularios/Agregar/AgEsta';
 import { AgAparece } from './components/Formularios/Agregar/AgAparece';
 import { AgJuego } from './components/Formularios/Agregar/AgJuego';
+import { ModHeroe } from './components/Formularios/Modificar/modHeroe';
+import { ModVillano } from './components/Formularios/Modificar/modVillano';
+import { ModOrganizacion } from './components/Formularios/Modificar/modOrganizacion';
+import { ModObjeto } from './components/Formularios/Modificar/modObjeto';
+import { ModPoder } from './components/Formularios/Modificar/modPoder';
+import { ModPoseePers } from './components/Formularios/Modificar/modPoseePers';
+import { ModEsta } from './components/Formularios/Modificar/modEsta';
+import { ModAparece } from './components/Formularios/Modificar/modAparece';
+import { ModJuego } from './components/Formularios/Modificar/modJuego';
 
 function App() {
   return (
@@ -95,32 +104,49 @@ function App() {
                 <Route path='/usuario/historial' element={<VistaHistorial/>}/>
 
                 <Route path='/personajes/AgHeroe' element={<AgHeroe/>}/>
+                <Route path='/personajes/ModHeroe' element={<ModHeroe/>}/>
                 <Route path='/personajes/AgVillano' element={<AgVillano/>}/>
+                <Route path='/personajes/ModVillano' element={<ModVillano/>}/>
                 <Route path='/personajes/AgCivil' element={<></>}/>
+                <Route path='/personajes/ModCivil' element={<></>}/>
                 <Route path='/personajes/AgRelacion' element={<AgRelacion/>}/>
                 <Route path='/personajes/AgEnfrentamiento' element={<AgEnfrenta/>}/>
                 <Route path='/personajes/AgCombate' element={<></>}/>
+                <Route path='/personajes/ModCombate' element={<></>}/>
 
                 <Route path='/organizaciones/AgOrganizacion' element={<AgOrganizacion/>}/>
+                <Route path='/organizaciones/ModOrganizacion' element={<ModOrganizacion/>}/>
                 <Route path='/organizaciones/AgPersOrg' element={<></>}/>
+                <Route path='/organizaciones/ModPersOrg' element={<></>}/>
 
                 <Route path='/objetos/AgObjeto' element={<AgObjeto/>}/>
+                <Route path='/objetos/ModObjeto' element={<ModObjeto/>}/>
                 <Route path='/objetos/AgCreador' element={<AgCrea/>}/>
 
                 <Route path='/poderes/AgPoder' element={<AgPoder/>}/>
+                <Route path='/poderes/ModPoder' element={<ModPoder/>}/>
                 <Route path='/poderes/AgPosee' element={<AgPoseePers/>}/>
+                <Route path='/poderes/ModPosee' element={<ModPoseePers/>}/>
 
                 <Route path='/peliculas/AgPelicula' element={<AgPelicula/>}/>
+                <Route path='/peliculas/ModPelicula' element={<ModRep5/>}/>
                 <Route path='/peliculas/AgPersPeli' element={<AgEsta/>}/>
+                <Route path='/peliculas/ModPersPeli' element={<ModEsta/>}/>
                 <Route path='/peliculas/AgOrgPeli' element={<AgAparece/>}/>
 
                 <Route path='/series/AgSerie' element={<AgSerie/>}/>
+                <Route path='/series/ModSerie' element={<ModRep2/>}/>
                 <Route path='/series/AgPersSerie' element={<AgEsta/>}/>
+                <Route path='/series/ModPersSerie' element={<ModEsta/>}/>
                 <Route path='/series/AgOrgSerie' element={<AgAparece/>}/>
 
                 <Route path='/juegos/AgJuego' element={<AgJuego/>}/>
+                <Route path='/juegos/ModJuego' element={<ModJuego/>}/>
                 <Route path='/juegos/AgPersJuego' element={<AgEsta/>}/>
                 <Route path='/juegos/AgOrgJuego' element={<AgAparece/>}/>
+
+                <Route path='/medios/ModOrgMedio' element={<ModAparece/>}/>
+                <Route path='/medios/ModPersMedio' element={<ModEsta/>}/>
               </Route>
             </Route>
             <Route path='/inicioSesion' element={<Login/>}/>

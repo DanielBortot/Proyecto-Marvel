@@ -24,6 +24,13 @@ const poderes = {
         res.send('creado');
     },
 
+    upPoder: async (req,res) => {
+        const {nombrePod,nombrePodVie,imagenPod,descripcion} = req.body;
+
+        await pool.query('UPDATE "Poder" SET "Nombre"=$1, "Imagen"=$2, "Descripcion"=$3 WHERE "Nombre"=$4',[nombrePod,imagenPod,descripcion,nombrePodVie]);
+        res.send('modificado');
+    },
+
     getPoderes: async (req,res) => {
         const pods = await pool.query('SELECT * FROM "Poder"');
         res.send(pods.rows);

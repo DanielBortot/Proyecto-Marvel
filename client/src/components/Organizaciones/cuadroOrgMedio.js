@@ -4,12 +4,14 @@ import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descOrganizacion } from "../../reducers/orgsSlice";
 import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 
-function CuadroOrgMedio ({prop, email}) {
+function CuadroOrgMedio ({prop, email, op}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {Imagen, Nombre} = prop
+    console.log(prop)
     const enviar = ()=> {
         dispatch(descOrganizacion(prop));
         navigate(`/organizaciones/${Nombre}`);
@@ -20,7 +22,7 @@ function CuadroOrgMedio ({prop, email}) {
             return (
                 <>
                     <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Modificar Organizacion</Link>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/medios/ModOrgMedio'}>Modificar Organizacion</Link>
                 </>
             );
         }

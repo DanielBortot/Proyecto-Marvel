@@ -2,54 +2,28 @@ import React, { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-function AgEsta() {
+function ModEsta() {
 
-    const [errorDB, setErrorDB] = useState({});
-    const [medios, setMedios] = useState([]);
-    const [personajes, setPersonajes] = useState([]);
-    const [selec, setSelec] = useState('');
+    const {descReporte} = useSelector(state => state.reporte);
+    const {N_Titulo, N_Personaje, Tipo_Actor, Actor, Rol} = descReporte
     const navigate = useNavigate();
-
-    useEffect(()=> {
-        const getPersonajes = async () => {
-            const pers = await (await axios.get('../api/personajes')).data;
-            setPersonajes(pers);
-        }
-        getPersonajes();
-    },[])
-
-    const getMedios = async (nombre) => {
-        const meds = await (await axios.post('../api/buscPersMedio',{nombrePers: nombre})).data;
-        setMedios(meds);
-        setSelec(nombre);
-    }
-
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Agregar un Personaje a un Medio</h2>
+                <h2 className="titulo">Modificar un Personaje en un Medio</h2>
             </div>
             <div className="formContReg">
                 <Formik
                     initialValues={{
-                        nombrePers: '',
-                        titulo: '',
-                        tipoAct: '',
-                        rol: '',
-                        nombreAct: ''
+                        tipoAct: Tipo_Actor,
+                        rol: Rol,
+                        nombreAct: Actor
                     }}
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombrePers || val.nombrePers === -1){
-                            errores.nombrePers = 'Seleccione el personaje';
-                        } else if (selec !== val.nombrePers){
-                            getMedios(val.nombrePers);
-                        }
-                        if (!val.titulo || val.titulo === -1){
-                            errores.titulo = 'Seleccione el titulo del medio';
-                        }
                         if (!val.rol || val.rol === -1){
                             errores.rol = 'Seleccione el rol del personaje en el medio';
                         }
@@ -62,33 +36,13 @@ function AgEsta() {
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/compPersMedio', {nombrePers: val.nombrePers, titulo: val.titulo})).data;
-                        setErrorDB(error);
-                        if (!error.esta){
-                            await axios.post('../api/addPersMedio', {...val});
-                            navigate('/');
-                        }
+                        
+                        await axios.put('../api/upPersMedio', {...val, nombrePers: N_Personaje, titulo: N_Titulo});
+                        navigate('/');
                     }}
                 >
                     {({errors})=>(
                         <Form>
-                            {errorDB.esta && <div style={{fontSize: "15px", color: "red"}}>{errorDB.esta}</div>}
-                            <ErrorMessage name="nombrePers" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombrePers}</div>)}/>
-                            <Field type="text" name="nombrePers" as="select">
-                                <option hidden selected value={-1}>Selecciona el personaje que desea relacionar</option>
-                                {personajes.map(org => (
-                                    <option key={org.Nombre} value={org.Nombre}>{org.Nombre}</option>
-                                ))}
-                            </Field>
-
-                            <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
-                            <Field type="text" name="titulo" as="select">
-                                <option hidden selected value={-1}>Selecciona el medio que desea relacionar</option>
-                                {medios.map(med => (
-                                    <option key={med.Titulo} value={med.Titulo}>{med.Titulo}</option>
-                                ))}
-                            </Field>
-
                             <ErrorMessage name="rol" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rol}</div>)}/>
                             <Field type="text" name="rol" as="select">
                                 <option hidden selected value={-1}>Selecciona el rol del personaje en el medio</option>
@@ -122,4 +76,4 @@ function AgEsta() {
     );
 }
 
-export {AgEsta};
+export {ModEsta};
