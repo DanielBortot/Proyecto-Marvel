@@ -6,9 +6,11 @@ import { imagenes } from "../../assets/img/imgdb";
 import axios from "axios";
 import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
 import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
+import { Link } from "react-router-dom";
 
 function DescripcionJuegos () {
     const {descripcion} = useSelector(state => state.juegos);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
     
@@ -36,12 +38,24 @@ function DescripcionJuegos () {
         getDatos();
     },[]);
 
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Juego</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Juego</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
+
     return (
         <>
             <div className="descCont">
                 <div className="descContImg">
                     <h2>{T_Juego}</h2>
-                    <img classname="imagen2" src={Imagen} alt="img"/>
+                    <img className="imagen2" src={Imagen} alt="img"/>
                 </div>
 
                 <div className="descContTitu">
@@ -66,6 +80,7 @@ function DescripcionJuegos () {
                         <p>{Sinopsis}</p>
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>

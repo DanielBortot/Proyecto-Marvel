@@ -6,9 +6,11 @@ import { imagenes } from "../../assets/img/imgdb";
 import axios from "axios";
 import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
 import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
+import { Link } from "react-router-dom";
 
 function DescripcionSeries () {
     const {descripcion} = useSelector(state => state.series);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
     
@@ -35,6 +37,18 @@ function DescripcionSeries () {
         }
         getDatos();
     },[]);
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Serie</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Serie</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
 
     return (
         <>
@@ -68,6 +82,7 @@ function DescripcionSeries () {
                         <p>{Sinopsis}</p>
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>

@@ -11,9 +11,11 @@ import { CuadroPeliculas } from "../Peliculas/cuadroPelicula";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroSedes } from "../Sedes/cuadroSedes";
 import { CuadroPersOrg } from "../Personajes/cuadroPersOrg";
+import { Link } from "react-router-dom";
 
 function DescripcionOrg () {
     const {descripcion} = useSelector(state => state.organizaciones);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [sedes, setSedes] = useState([]);
     const [medios, setMedios] = useState([]);
     const [personajes, setPersonajes] = useState([]);
@@ -69,6 +71,18 @@ function DescripcionOrg () {
         }
     };
 
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Organizacion</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
+
     return (
         <>
             <div className="descCont">
@@ -101,6 +115,7 @@ function DescripcionOrg () {
                         
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>

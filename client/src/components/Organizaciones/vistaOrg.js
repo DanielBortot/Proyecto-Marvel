@@ -7,6 +7,7 @@ import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { useSelector } from "react-redux";
 import { HeaderPers } from "../headerpers";
+import { Link } from "react-router-dom";
 
 function VistaOrgs () {
 
@@ -50,8 +51,8 @@ function VistaOrgs () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Organizacion</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Personaje a la Organizacion</button>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrganizacion'}>Agregar Organizacion</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersOrg'}>Agregar Personaje a la Organizacion</Link>
             </>
             );
         }

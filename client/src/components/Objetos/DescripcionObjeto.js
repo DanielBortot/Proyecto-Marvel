@@ -3,9 +3,11 @@ import { useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import 'react-multi-carousel/lib/styles.css';
+import { Link } from "react-router-dom";
 
 function DescripcionObj () {
     const {descripcion} = useSelector(state => state.objetos);
+    const {descUsuario} = useSelector(state => state.usuario);
     
     let {Nombre, Descripcion, Imagen, Material, Tipo, N_Personaje} = descripcion;
     
@@ -29,6 +31,18 @@ function DescripcionObj () {
           items: 1
         }
     };
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Objeto</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Objeto</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
 
     return (
         <>
@@ -56,6 +70,7 @@ function DescripcionObj () {
                         
                     </div>
                 </div>
+                {admin()}
             </div>
         </>
     );

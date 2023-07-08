@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function AgAparece() {
+function AgEsta() {
 
     const [errorDB, setErrorDB] = useState({});
     const [medios, setMedios] = useState([]);
@@ -122,4 +122,4 @@ function AgAparece() {
     );
 }
 
-export {AgAparece};
+export {AgEsta};

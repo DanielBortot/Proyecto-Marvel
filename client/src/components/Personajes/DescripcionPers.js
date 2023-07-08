@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import '../../assets/personajes.css';
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -15,6 +16,7 @@ import { CuadroPers } from "./cuadroPers";
 
 function DescripcionPers () {
     const {descripcion} = useSelector(state => state.personajes);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [gen, setGen] = useState('');
     const [organizaciones, setOrganizaciones] = useState([]);
     const [medios, setMedios] = useState([]);
@@ -157,11 +159,25 @@ function DescripcionPers () {
         }
     };
 
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Personaje</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
+
     return (
         <>
             <div className="descCont">
                 <div className="descContImg">
-                    <h2>{descripcion.Nombre}</h2>
+                    <div>
+                        <h2>{descripcion.Nombre}</h2>
+                    </div>
                     <img className="imagen2" src={descripcion.imagen} alt="img"/>
                 </div>
 
@@ -191,6 +207,7 @@ function DescripcionPers () {
                         {info()}
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>

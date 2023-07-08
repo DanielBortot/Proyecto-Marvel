@@ -6,9 +6,11 @@ import axios from "axios";
 import 'react-multi-carousel/lib/styles.css';
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPers } from "../Personajes/cuadroPers";
+import { Link } from "react-router-dom";
 
 function DescripcionPod () {
     const {descripcion} = useSelector(state => state.poderes);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
     
     let {Nombre, Descripcion, Imagen} = descripcion;
@@ -46,6 +48,18 @@ function DescripcionPod () {
         }
     };
 
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Poder</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Poder</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
+
     return (
         <>
             <div className="descCont">
@@ -66,6 +80,7 @@ function DescripcionPod () {
                         
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>

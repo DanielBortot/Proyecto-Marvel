@@ -6,6 +6,7 @@ import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroJuegos } from "./cuadroJuego";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function VistaJuegos () {
 
@@ -49,9 +50,9 @@ function VistaJuegos () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Juego</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Personaje a Juego</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Organizacion a Juego</button>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgJuego'}>Agregar Juego</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersJuego'}>Agregar Personaje a Juego</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgJuego'}>Agregar Organizacion a Juego</Link>
             </>
             );
         }

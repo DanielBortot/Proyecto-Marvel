@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function AgPoder() {
 
+    const [errorDB, setErrorDB] = useState({});
     const navigate = useNavigate();
 
     return (

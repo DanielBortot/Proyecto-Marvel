@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function AgPosee() {
+function AgPoseePers() {
 
     const [errorDB, setErrorDB] = useState({});
     const [poderes, setPoderes] = useState([]);
@@ -99,4 +99,4 @@ function AgPosee() {
     );
 }
 
-export {AgPosee};
+export {AgPoseePers};

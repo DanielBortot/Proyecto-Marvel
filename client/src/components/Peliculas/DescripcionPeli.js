@@ -6,9 +6,11 @@ import { imagenes } from "../../assets/img/imgdb";
 import axios from "axios";
 import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
 import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
+import { Link } from "react-router-dom";
 
 function DescripcionPeliculas () {
     const {descripcion} = useSelector(state => state.peliculas);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
     
@@ -35,6 +37,18 @@ function DescripcionPeliculas () {
         }
         getDatos();
     },[]);
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Pelicula</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Pelicula</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
 
     return (
         <>
@@ -72,6 +86,7 @@ function DescripcionPeliculas () {
                         <p>{Sinopsis}</p>
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>

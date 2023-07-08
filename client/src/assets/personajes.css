@@ -79,7 +79,7 @@
 .descContTitu {
     display: flex;
     padding: 45px 0 0 20px;
-    min-width: 60%;
+    min-width: 50%;
 }
 
 .descContTitu div:nth-child(1) {

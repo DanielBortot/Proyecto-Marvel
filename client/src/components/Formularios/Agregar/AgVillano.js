@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete, TextField } from "@mui/material";
 
-function AgPosee() {
+function AgVillano() {
 
     const [errorDB, setErrorDB] = useState({});
     const [nacionalidades, setNacionalidades] = useState([]);
@@ -64,7 +64,7 @@ function AgPosee() {
                         if (!val.nombrePers || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)){
                             errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
-                        if (!val.genero && !checked){
+                        if (!val.genero){
                             errores.genero = 'Selecciona un genero';
                         }
                         if (!val.ojos || !/^[a-zA-Z]{1,50}$/.test(val.ojos)){
@@ -218,4 +218,4 @@ function AgPosee() {
     );
 }
 
-export {AgPosee};
+export {AgVillano};
