@@ -96,7 +96,7 @@ function DescripcionPeliculas () {
             </div>
             <div className="vistaPersM">
                 {organizaciones.map(org => {
-                    return <CuadroOrgMedio prop={org} key={org.Nombre}/>
+                    return <CuadroOrgMedio prop={org} key={org.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
             <br/>
@@ -105,7 +105,7 @@ function DescripcionPeliculas () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPersMedio prop={pers} key={pers.Nombre}/>
+                    return <CuadroPersMedio prop={pers} key={pers.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
         </>

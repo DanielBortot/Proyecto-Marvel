@@ -223,13 +223,13 @@ function DescripcionPers () {
             >
                     {medios.map(med => {
                             if (med.T_Serie){
-                                return <CuadroSeries prop={med} key={med.T_Serie}/>
+                                return <CuadroSeries prop={med} key={med.T_Serie} email={descUsuario.Email}/>
                             }
                             else if (med.T_Pelicula){
-                                return <CuadroPeliculas prop={med} key={med.T_Pelicula}/>
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} email={descUsuario.Email}/>
                             }
                             else if (med.T_Juego){
-                                return <CuadroJuegos prop={med} key={med.T_Juego}/>
+                                return <CuadroJuegos prop={med} key={med.T_Juego} email={descUsuario.Email}/>
                             }
                         })}     
             </Carousel>
@@ -245,7 +245,7 @@ function DescripcionPers () {
                 centerMode={true}       
             >
                     {organizaciones.map(org => {
-                            return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
+                            return <CuadroOrganizaciones prop={org} key={org.Nombre} email={descUsuario.Email}/>
                         })}     
             </Carousel>
             </div>
@@ -255,7 +255,7 @@ function DescripcionPers () {
             </div>
             <div className="vistaPersM">
                 {poderes.map(pod => {
-                    return <CuadroPodPers prop={pod} key={pod.Nombre}/>
+                    return <CuadroPodPers prop={pod} key={pod.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
             <br/>
@@ -264,7 +264,7 @@ function DescripcionPers () {
             </div>
             <div className="vistaPers">
                 {objetos.map(obj => {
-                    return <CuadroObjeto prop={obj} key={obj.Nombre}/>
+                    return <CuadroObjeto prop={obj} key={obj.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
             <br/>

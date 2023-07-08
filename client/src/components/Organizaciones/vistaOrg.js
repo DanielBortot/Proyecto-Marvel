@@ -78,7 +78,7 @@ function VistaOrgs () {
             </Carousel>
             </div>
             <div className="tituloCont">
-                <h2>Lista de personajes de marvel</h2>
+                <h2>Lista de organizaciones de marvel</h2>
             </div>
             <div className="vistaPers">
                 {organizaciones.map(org => {

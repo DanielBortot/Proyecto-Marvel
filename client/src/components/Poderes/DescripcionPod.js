@@ -90,7 +90,7 @@ function DescripcionPod () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre}/>
+                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
         </>

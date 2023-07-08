@@ -131,13 +131,13 @@ function DescripcionOrg () {
             >
                     {medios.map(med => {
                             if (med.T_Serie){
-                                return <CuadroSeries prop={med} key={med.T_Serie}/>
+                                return <CuadroSeries prop={med} key={med.T_Serie} email={descUsuario.Email}/>
                             }
                             else if (med.T_Pelicula){
-                                return <CuadroPeliculas prop={med} key={med.T_Pelicula}/>
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} email={descUsuario.Email}/>
                             }
                             else if (med.T_Juego){
-                                return <CuadroJuegos prop={med} key={med.T_Juego}/>
+                                return <CuadroJuegos prop={med} key={med.T_Juego} email={descUsuario.Email}/>
                             }
                         })}     
             </Carousel>
@@ -163,7 +163,7 @@ function DescripcionOrg () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPersOrg prop={pers} key={pers.Nombre}/>
+                    return <CuadroPersOrg prop={pers} key={pers.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
         </>
