@@ -31,6 +31,12 @@ const poderes = {
         res.send('modificado');
     },
 
+    delPoder: async (req,res) => {
+        const {nombrePod} = req.body;
+        await pool.query('DELETE FROM "Poder" WHERE "Nombre"=$1',[nombrePod]);
+        res.send('eliminado');
+    },
+
     getPoderes: async (req,res) => {
         const pods = await pool.query('SELECT * FROM "Poder"');
         res.send(pods.rows);

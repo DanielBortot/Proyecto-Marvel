@@ -40,6 +40,12 @@ const objetos = {
         res.send('creado');
     },
 
+    delObjeto: async (req,res) => {
+        const {nombreObj} = req.body;
+        await pool.query('DELETE FROM "Objeto" WHERE "Nombre"=$1',[nombreObj]);
+        res.send('eliminado');
+    },
+
     getObjPers: async (req,res) => {
         const {nombrePers} = req.body;
         const objs = await pool.query('SELECT * FROM "Objeto" WHERE "N_Personaje"=$1',[nombrePers]);

@@ -40,12 +40,16 @@ function DescripcionJuegos () {
         getDatos();
     },[]);
 
+    const delDatos = async () => {
+        await axios.post('/api/delMedio',{titulo: T_Juego});
+    }
+
     const admin = () => {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/juegos/ModJuego'}>Modificar Juego</Link>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Juego</button>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/juegos'}>Eliminar Juego</Link>
                 </div>
             );
         }

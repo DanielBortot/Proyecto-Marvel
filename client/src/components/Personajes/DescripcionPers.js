@@ -161,6 +161,10 @@ function DescripcionPers () {
         }
     };
 
+    const delDatos = async () => {
+        await axios.post('/api/delPersonaje',{nombrePers: Nombre});
+    }
+
     const admin = () => {
         if (descUsuario.Email === 'admin@gmail.com'){
             switch (op) {
@@ -169,7 +173,7 @@ function DescripcionPers () {
                         <>
                             <div>
                                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModVillano'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
-                                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes'} onClick={delDatos}>Eliminar Personaje</Link>
                             </div>
                         </>);
                 case 2:
@@ -177,7 +181,7 @@ function DescripcionPers () {
                         <>
                             <div>
                                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModHeroe'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
-                                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes'} onClick={delDatos}>Eliminar Personaje</Link>
                             </div>
                         </>);
                 case 3:
@@ -185,7 +189,7 @@ function DescripcionPers () {
                         <>
                             <div>
                                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModCivil'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
-                                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes'} onClick={delDatos}>Eliminar Personaje</Link>
                             </div>
                         </>);
             }

@@ -4,15 +4,15 @@ const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, r
 
 const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPosee, addPodPersVill, poseeRep6, updatePodPersVill} = require('../controllers/reportes');
 
-const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, buscPeliculas, updateMedioPelicula, addMedioPelicula, plataformas, addMedioJuego, buscJuegos, upMedioJuego} = require('../controllers/medios');
+const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, buscPeliculas, updateMedioPelicula, addMedioPelicula, plataformas, addMedioJuego, buscJuegos, upMedioJuego, delMedio} = require('../controllers/medios');
 
-const {compPod, buscPoderes, getPoderes, upPoder} = require('../controllers/poderes');
+const {compPod, buscPoderes, getPoderes, upPoder, delPoder} = require('../controllers/poderes');
 
-const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill, upPersHeroe, upPersVill} = require('../controllers/personajes');
+const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill, upPersHeroe, upPersVill, delPersonaje} = require('../controllers/personajes');
 
-const {addObjeto, buscObjeto, getObjPers, getObjetos, upObjeto} = require('../controllers/objetos');
+const {addObjeto, buscObjeto, getObjPers, getObjetos, upObjeto, delObjeto} = require('../controllers/objetos');
 
-const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes, upOrganizacion, upSede} = require('../controllers/organizaciones');
+const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes, upOrganizacion, upSede, delOrganizacion} = require('../controllers/organizaciones');
 
 const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod, upPodPers} = require('../controllers/poderPers');
 
@@ -82,6 +82,7 @@ router.post('/delUsuario', eliminarUsuario);
 router.post('/delRep2', eliminarSerie);
 router.post('/buscSeries', buscSeries);
 router.post('/addRep2', addMedioSerie);
+router.post('/delMedio', delMedio);
 
 router.post('/delRep5', eliminarPelicula);
 router.post('/buscPeliculas', buscPeliculas);
@@ -99,13 +100,16 @@ router.post('/buscJuegos', buscJuegos);
 
 router.post('/addPersHeroe', addPersHeroe);
 router.post('/addPersVill', addPersVill);
+router.post('/delPersonaje', delPersonaje);
 
 router.post('/addObjeto', addObjeto);
 router.post('/buscObjetos', buscObjeto);
+router.post('/delObjeto', delObjeto);
 router.post('/getObjPers', getObjPers);
 
 router.post('/buscOrg', buscOrganizacion);
 router.post('/addOrg', addOrganizacion);
+router.post('/delOrg', delOrganizacion);
 
 router.post('/buscSedes', buscSedes);
 router.post('/addSede', addSede);
@@ -114,6 +118,7 @@ router.post('/getSedes', getSedes);
 router.post('/buscPodPers', buscPodPers);
 router.post('/compPodPers', compPodPers);
 router.post('/addPodPers', addPodPers);
+router.post('/delPoder', delPoder);
 router.post('/getPodPerso', getPodPerso);
 router.post('/getPersPod', getPersPod);
 

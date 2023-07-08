@@ -73,12 +73,16 @@ function DescripcionOrg () {
         }
     };
 
+    const delDatos = async () => {
+        await axios.post('/api/delOrg',{nombreOrg: Nombre});
+    }
+
     const admin = () => {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/organizaciones/ModOrganizacion'}>Modificar Organizacion</Link>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/organizaciones'}>Eliminar Organizacion</Link>
                 </div>
             );
         }

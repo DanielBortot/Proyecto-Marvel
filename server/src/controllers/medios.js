@@ -32,6 +32,11 @@ const medios = {
         res.send('creado');
     },
 
+    delMedio: async (req,res) => {
+        const {titutlo} = req.body;
+        await pool.query('DELETE FROM "Medio" WHERE "Titulo"=$1',[titutlo]);
+        res.send('eliminado');
+    },
 
     buscPeliculas: async (req,res) => {
         const {T_Pelicula} = req.body;

@@ -40,12 +40,16 @@ function DescripcionSeries () {
         getDatos();
     },[]);
 
+    const delDatos = async () => {
+        await axios.post('/api/delSerie',{titulo: T_Serie});
+    }
+
     const admin = () => {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/series/ModSerie'}>Modificar Serie</Link>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Serie</button>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/series'}>Eliminar Serie</Link>
                 </div>
             );
         }

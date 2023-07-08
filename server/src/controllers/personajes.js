@@ -135,6 +135,12 @@ const personajes = {
         await pool.query('UPDATE "Villano" SET "Alias"=$1, "Objetivo"=$2 WHERE "N_Villano"=$3',[alias,objetivo,nombrePers]);
 
         res.send('creado');
+    },
+
+    delPersonaje: async (req,res) => {
+        const {nombrePers} = req.body;
+        await pool.query('DELETE FROM "Personaje" WHERE "Nombre"=$1',[nombrePers]);
+        res.send('eliminado');
     }
 }
 

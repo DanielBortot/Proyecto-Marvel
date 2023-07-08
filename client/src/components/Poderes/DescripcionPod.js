@@ -30,32 +30,16 @@ function DescripcionPod () {
         getDatos();
     },[]);
 
-    const responsive = {
-        superLargeDesktop: {
-          // the naming can be any, depends on you.
-          breakpoint: { max: 2000, min: 1024 },
-          items: 4
-        },
-        desktop: {
-          breakpoint: { max: 1024, min: 800 },
-          items: 4
-        },
-        tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 2
-        },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1
-        }
-    };
+    const delDatos = async () => {
+        await axios.post('/api/delPoder',{nombrePod: Nombre});
+    }
 
     const admin = () => {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/poderes/ModPoder'}>Modificar Poder</Link>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Poder</button>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/poderes'}>Eliminar Poder</Link>
                 </div>
             );
         }

@@ -17,6 +17,12 @@ const organizaciones = {
         res.send('creado');
     },
 
+    delOrganizacion: async (req,res) => {
+        const {nombreOrg} = req.body;
+        await pool.query('DELETE FROM "Organizacion" WHERE "Nombre"=$1',[nombreOrg]);
+        res.send('eliminado');
+    },
+
     upOrganizacion: async (req,res) => {
         const {nombreOrg,nombreOrgVie,eslogan,lider,fundador,tipo,lugarCrea,comic,objetivo,imagen} = req.body;
         await pool.query('UPDATE "Organizacion" SET "Nombre"=$1, "Eslogan"=$2, "Lider"=$3, "Fundador"=$4, "Tipo"=$5, "Nom_Comic"=$6, "Imagen"=$7, "Objetivo"=$8, "Lugar_Creacion"=$9 WHERE "Nombre"=$10',[nombreOrg,eslogan,lider,fundador,tipo,comic,imagen,objetivo,lugarCrea,nombreOrgVie]);

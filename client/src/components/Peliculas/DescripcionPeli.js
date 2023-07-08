@@ -40,12 +40,16 @@ function DescripcionPeliculas () {
         getDatos();
     },[]);
 
+    const delDatos = async () => {
+        await axios.post('/api/delMedio',{titulo: T_Pelicula});
+    }
+
     const admin = () => {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/poderes/ModPoder'}>Modificar Pelicula</Link>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Pelicula</button>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/peliculas'}>Eliminar Pelicula</Link>
                 </div>
             );
         }
