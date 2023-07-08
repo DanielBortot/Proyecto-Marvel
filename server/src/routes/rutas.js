@@ -8,7 +8,7 @@ const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelic
 
 const {compPod, buscPoderes, getPoderes, upPoder, delPoder} = require('../controllers/poderes');
 
-const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill, upPersHeroe, upPersVill, delPersonaje} = require('../controllers/personajes');
+const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill, upPersHeroe, upPersVill, delPersonaje, addPersCiv, upPersCiv} = require('../controllers/personajes');
 
 const {addObjeto, buscObjeto, getObjPers, getObjetos, upObjeto, delObjeto} = require('../controllers/objetos');
 
@@ -26,7 +26,7 @@ const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso, up
 
 const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controllers/CivRela');
 
-const {getPersOrg, getOrgPerso} = require('../controllers/persOrg');
+const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, modOrgPers} = require('../controllers/persOrg');
 
 
 router.get('/personajes', personajes);
@@ -45,6 +45,7 @@ router.get('/plataformas', plataformas);
 router.get('/organizaciones', organizaciones);
 router.get('/poderes', getPoderes);
 router.get('/getObjetos', getObjetos);
+router.get('/getCargo', getCargo);
 
 router.get('/Rep2Series', seriesRep2);
 router.get('/Rep5Peliculas', peliculasRep5);
@@ -100,6 +101,7 @@ router.post('/buscJuegos', buscJuegos);
 
 router.post('/addPersHeroe', addPersHeroe);
 router.post('/addPersVill', addPersVill);
+router.post('/addPersCiv', addPersCiv);
 router.post('/delPersonaje', delPersonaje);
 
 router.post('/addObjeto', addObjeto);
@@ -151,6 +153,9 @@ router.post('/addCivPers', addCivPers);
 
 router.post('/getPersOrg', getPersOrg);
 router.post('/getOrgPerso', getOrgPerso);
+router.post('/buscOrgPers', buscOrgPers);
+router.post('/compOrgPers', compOrgPers);
+router.post('/addOrgPers', addOrgPers);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);
@@ -162,6 +167,7 @@ router.put('/upRep6', updatePodPersVill);
 
 router.put('/upPersHeroe', upPersHeroe);
 router.put('/upPersVill', upPersVill);
+router.put('/upPersCiv', upPersCiv);
 
 router.put('/upObjeto', upObjeto);
 router.put('/upPoder', upPoder);
@@ -171,5 +177,6 @@ router.put('/upOrgMedio', upOrgMedio);
 router.put('/upPersMedio', upPersMedio);
 router.put('/upSede', upSede);
 router.put('/upPodPers', upPodPers);
+router.put('/modOrgPers', modOrgPers);
 
 module.exports = router;

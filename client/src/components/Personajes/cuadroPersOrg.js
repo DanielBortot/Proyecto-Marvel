@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import { descPersonaje } from "../../reducers/personajesSlice";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function CuadroPersOrg ({prop, email}) {
     const dispatch = useDispatch();
@@ -22,7 +23,7 @@ function CuadroPersOrg ({prop, email}) {
             return (
                 <>
                     <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Modificar Personaje</Link>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/organizaciones/ModPersOrg'}>Modificar Personaje</Link>
                 </>
             );
         }

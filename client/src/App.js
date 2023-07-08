@@ -66,6 +66,10 @@ import { ModPoseePers } from './components/Formularios/Modificar/modPoseePers';
 import { ModEsta } from './components/Formularios/Modificar/modEsta';
 import { ModAparece } from './components/Formularios/Modificar/modAparece';
 import { ModJuego } from './components/Formularios/Modificar/modJuego';
+import { AgCivil } from './components/Formularios/Agregar/AgCivil';
+import { ModCivil } from './components/Formularios/Modificar/modCivil';
+import { AgPertenece } from './components/Formularios/Agregar/AgPertenece';
+import { ModPertenece } from './components/Formularios/Modificar/modPertenece';
 
 function App() {
   return (
@@ -107,8 +111,8 @@ function App() {
                 <Route path='/personajes/ModHeroe' element={<ModHeroe/>}/>
                 <Route path='/personajes/AgVillano' element={<AgVillano/>}/>
                 <Route path='/personajes/ModVillano' element={<ModVillano/>}/>
-                <Route path='/personajes/AgCivil' element={<></>}/>
-                <Route path='/personajes/ModCivil' element={<></>}/>
+                <Route path='/personajes/AgCivil' element={<AgCivil/>}/>
+                <Route path='/personajes/ModCivil' element={<ModCivil/>}/>
                 <Route path='/personajes/AgRelacion' element={<AgRelacion/>}/>
                 <Route path='/personajes/AgEnfrentamiento' element={<AgEnfrenta/>}/>
                 <Route path='/personajes/AgCombate' element={<></>}/>
@@ -116,8 +120,8 @@ function App() {
 
                 <Route path='/organizaciones/AgOrganizacion' element={<AgOrganizacion/>}/>
                 <Route path='/organizaciones/ModOrganizacion' element={<ModOrganizacion/>}/>
-                <Route path='/organizaciones/AgPersOrg' element={<></>}/>
-                <Route path='/organizaciones/ModPersOrg' element={<></>}/>
+                <Route path='/organizaciones/AgPersOrg' element={<AgPertenece/>}/>
+                <Route path='/organizaciones/ModPersOrg' element={<ModPertenece/>}/>
 
                 <Route path='/objetos/AgObjeto' element={<AgObjeto/>}/>
                 <Route path='/objetos/ModObjeto' element={<ModObjeto/>}/>
