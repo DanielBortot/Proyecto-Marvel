@@ -64,7 +64,11 @@ function AgSerie() {
                         setErrorDB(error);
                         if (!error.titulo){
                             await axios.post('../api/addRep2', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', episodios: val.episodios, creador: val.creador, canal: val.canal, tipo: val.tipo});
-                            navigate('/Rep2');
+                            if (window.location.pathname === '/series/AgSerie'){
+                                navigate('/series')
+                            } else {
+                                navigate('/Rep2');
+                            }
                         }
                     }}
                 >
