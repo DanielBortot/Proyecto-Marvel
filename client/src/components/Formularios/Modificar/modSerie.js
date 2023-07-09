@@ -13,7 +13,7 @@ function ModSerie () {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Agregar Serie</h2>
+                <h2 className="titulo">Modificar Serie</h2>
             </div>
             <div className="formContReg">
                 <Formik

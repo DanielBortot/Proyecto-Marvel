@@ -21,7 +21,7 @@ function AgPelicula() {
                         compania: '',
                         rating: '',
                         sinopsis: '',
-                        imagen: '',
+                        imagen: '73',
                         director: '',
                         distribuidor: '',
                         duracion: '',

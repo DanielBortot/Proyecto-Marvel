@@ -43,6 +43,7 @@ function AgHeroe() {
         datos();
     },[]);
 
+
     return (
         <>
             <div className="tituloContReg">
@@ -57,9 +58,9 @@ function AgHeroe() {
                         pelo: '',
                         comic: '',
                         eMarital: '',
-                        imagenPers: '1',
+                        imagenPers: '73',
                         alias: '',
-                        logotipo: '1',
+                        logotipo: '73',
                         traje: '',
                         archienemigo: ''
                     }}
@@ -110,7 +111,7 @@ function AgHeroe() {
                         setErrorDB({...error,...error2});
                         if (!error.personaje && !error2.alias){
                             await axios.post('../api/addPersHeroe', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >

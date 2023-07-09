@@ -70,11 +70,11 @@ function AgPosee() {
                         pelo: '',
                         comic: '',
                         eMarital: '',
-                        imagenPers: '1',
+                        imagenPers: '73',
                         alias: '',
                         objetivo: '',
                         nombrePod: '',
-                        imagenPod: '1',
+                        imagenPod: '73',
                         descripcion: '',
                         obtencion: ''
                     }}

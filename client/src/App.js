@@ -72,10 +72,12 @@ import { AgPertenece } from './components/Formularios/Agregar/AgPertenece';
 import { ModPertenece } from './components/Formularios/Modificar/modPertenece';
 import { ModSerie } from './components/Formularios/Modificar/modSerie';
 import { ModPelicula } from './components/Formularios/Modificar/modPelicula';
+import { ReproPeli } from './components/Peliculas/repropeli';
+import { ReproSerie } from './components/Series/reproserie';
 
 function App() {
   return (
-    <>
+    <div className='background'>
       <Header/>
       <div className='mx-3 my-2'>
           <Routes>  
@@ -120,6 +122,7 @@ function App() {
                 <Route path='/personajes/AgCombate' element={<></>}/>
                 <Route path='/personajes/ModCombate' element={<></>}/>
 
+
                 <Route path='/organizaciones/AgOrganizacion' element={<AgOrganizacion/>}/>
                 <Route path='/organizaciones/ModOrganizacion' element={<ModOrganizacion/>}/>
                 <Route path='/organizaciones/AgPersOrg' element={<AgPertenece/>}/>
@@ -139,12 +142,14 @@ function App() {
                 <Route path='/peliculas/AgPersPeli' element={<AgEsta/>}/>
                 <Route path='/peliculas/ModPersPeli' element={<ModEsta/>}/>
                 <Route path='/peliculas/AgOrgPeli' element={<AgAparece/>}/>
+                <Route path='/peliculas/repropeli' element={<ReproPeli/>}/>
 
                 <Route path='/series/AgSerie' element={<AgSerie/>}/>
                 <Route path='/series/ModSerie' element={<ModSerie/>}/>
                 <Route path='/series/AgPersSerie' element={<AgEsta/>}/>
                 <Route path='/series/ModPersSerie' element={<ModEsta/>}/>
                 <Route path='/series/AgOrgSerie' element={<AgAparece/>}/>
+                <Route path='/series/reproserie' element={<ReproSerie/>}/>
 
                 <Route path='/juegos/AgJuego' element={<AgJuego/>}/>
                 <Route path='/juegos/ModJuego' element={<ModJuego/>}/>
@@ -171,7 +176,7 @@ function App() {
           </Routes>
       </div>
       <Footer/>
-    </>
+    </div>
   );
 }
 

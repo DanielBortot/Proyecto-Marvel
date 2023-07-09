@@ -33,7 +33,7 @@ function AgOrganizacion() {
                         lugarCrea: '',
                         comic: '',
                         objetivo: '',
-                        imagen: '1'
+                        imagen: '73'
                     }}
                     validate={(val)=>{
                         let errores = {};
@@ -70,7 +70,7 @@ function AgOrganizacion() {
                         setErrorDB(error);
                         if (!error.nombreOrg){
                             await axios.post('../api/addOrg', {...val});
-                            navigate('/');
+                            navigate('/organizaciones');
                         }
                     }}
                 >

@@ -21,7 +21,7 @@ function AgSerie() {
                         compania: '',
                         rating: '',
                         sinopsis: '',
-                        imagen: '',
+                        imagen: '73',
                         episodios: '',
                         creador: '',
                         canal: '',

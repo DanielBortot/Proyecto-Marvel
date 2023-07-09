@@ -54,7 +54,7 @@ function AgCivil() {
                         pelo: '',
                         comic: '',
                         eMarital: '',
-                        imagenPers: '1'
+                        imagenPers: '73'
                     }}
                     validate={(val)=>{
                         let errores = {};
@@ -93,7 +93,7 @@ function AgCivil() {
                         setErrorDB(error);
                         if (!error.personaje){
                             await axios.post('../api/addPersCiv', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >

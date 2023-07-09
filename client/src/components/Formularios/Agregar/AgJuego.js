@@ -36,7 +36,7 @@ function AgJuego() {
                         compania: '',
                         rating: '',
                         sinopsis: '',
-                        imagen: '',
+                        imagen: '73',
                         distribuidor: '',
                         tipo: ''
                     }}

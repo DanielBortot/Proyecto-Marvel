@@ -54,7 +54,7 @@ function AgVillano() {
                         pelo: '',
                         comic: '',
                         eMarital: '',
-                        imagenPers: '1',
+                        imagenPers: '73',
                         alias: '',
                         objetivo: ''
                     }}
@@ -102,7 +102,7 @@ function AgVillano() {
                         setErrorDB({...error, ...error2});
                         if (!error.personaje && !error2.alias){
                             await axios.post('../api/addPersVill', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >

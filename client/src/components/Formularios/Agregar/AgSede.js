@@ -28,7 +28,7 @@ function AgSede() {
                         nombreSede: '',
                         tipoEdif: '',
                         ubicacion: '',
-                        imagen: '1',
+                        imagen: '73',
                         nombreOrg: ''
                     }}
                     validate={(val)=>{
