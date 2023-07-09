@@ -63,7 +63,7 @@ function ModObjeto() {
                         setErrorDB(error);
                         if (!error.nombreObj){
                             await axios.put('../api/upObjeto', {...val, nombreObjVie: Nombre});
-                            navigate('/');
+                            navigate('/objetos');
                         }
                     }}
                 >

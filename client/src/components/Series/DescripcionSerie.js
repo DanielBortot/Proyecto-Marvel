@@ -50,7 +50,6 @@ function DescripcionSeries () {
                 <div>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/series/ModSerie'}>Modificar Serie</Link>
                     <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/series'}>Eliminar Serie</Link>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/series/reproserie'}>Reproducir</Link>
                 </div>
             );
         }
@@ -90,6 +89,7 @@ function DescripcionSeries () {
                     </div>
                 </div>
                 {admin()}
+                <div><Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/series/reproserie'}>Reproducir</Link></div>
             </div>
             <br/>
             <br/>

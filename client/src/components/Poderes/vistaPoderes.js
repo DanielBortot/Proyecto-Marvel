@@ -62,8 +62,8 @@ function VistaPoderes () {
 
     return (
         <>
-            {admin()}
             <HeaderPers/>
+            {admin()}
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>

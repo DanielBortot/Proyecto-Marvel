@@ -17,7 +17,7 @@ function ReproPeli () {
                     controls
                     />
                 <h4>Tiempo de reproducción</h4>                   
-                <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" color= "secondary" /> 
+                <Slider defaultValue={1} aria-label="Default" valueLabelDisplay="auto" color= "secondary" /> 
                 <h4>Calificación</h4>
                 <Rating name="simple-controlled" value={value} onChange={(event, newValue) => { setValue(newValue); }}/>   
             </div>

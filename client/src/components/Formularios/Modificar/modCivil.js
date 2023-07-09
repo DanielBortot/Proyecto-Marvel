@@ -99,7 +99,7 @@ function ModCivil() {
                         setErrorDB(error);
                         if (!error.personaje){
                             await axios.put('../api/upPersCiv', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea, nombreVie: Nombre});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >

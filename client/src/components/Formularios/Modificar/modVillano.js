@@ -111,7 +111,7 @@ function ModVillano() {
                         setErrorDB({...error, ...error2});
                         if (!error.personaje && !error2.alias){
                             await axios.put('../api/putPersVill', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea, nombreVie: Nombre});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >

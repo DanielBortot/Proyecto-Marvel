@@ -78,7 +78,7 @@ function ModPelicula() {
                         }
                         if (!error.titulo){
                             await axios.put('../api/upRep5', {...val,titulo: T_Pelicula});
-                            navigate('/');
+                            navigate('/peliculas');
                         }
                     }}
                 >

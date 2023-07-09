@@ -50,7 +50,6 @@ function DescripcionPeliculas () {
                 <div>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/peliculas/ModPelicula'}>Modificar Pelicula</Link>
                     <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/peliculas'}>Eliminar Pelicula</Link>    
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/peliculas/repropeli'}>Reproducir</Link>
                 </div>
             );
         }
@@ -94,6 +93,7 @@ function DescripcionPeliculas () {
                     </div>
                 </div>
                 {admin()}
+                <div><Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/peliculas/repropeli'}>Reproducir</Link></div>
             </div>
             <br/>
             <br/>

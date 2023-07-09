@@ -76,7 +76,7 @@ function ModOrganizacion() {
                         setErrorDB(error);
                         if (!error.nombreOrg){
                             await axios.put('../api/upOrg', {...val, nombreOrgVie: Nombre});
-                            navigate('/');
+                            navigate('/organizaciones');
                         }
                     }}
                 >

@@ -69,7 +69,7 @@ function ModSerie () {
                         }
                         if (!error.titulo){
                             await axios.put('../api/upRep2', {...val,titulo: T_Serie});
-                            navigate('/');
+                            navigate('/series');
                         }
                     }}
                 >

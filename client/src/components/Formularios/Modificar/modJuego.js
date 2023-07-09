@@ -77,7 +77,7 @@ function ModJuego() {
                         setErrorDB(error);
                         if (!error.titulo){
                             await axios.post('../api/upMedioJuego', {...val, plataformas: valPlat, tituloVie: T_Juego});
-                            navigate('/');
+                            navigate('/juegos');
                         }
                     }}
                 >

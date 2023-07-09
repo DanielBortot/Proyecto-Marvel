@@ -43,7 +43,7 @@ function ModPoder() {
                         setErrorDB(error);
                         if (!error.poder){
                             await axios.put('../api/upPoder', {...val, nombrePodVie: Nombre});
-                            navigate('/');
+                            navigate('/poderes');
                         }
                     }}
                 >

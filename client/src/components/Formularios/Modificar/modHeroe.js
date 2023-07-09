@@ -119,7 +119,7 @@ function ModHeroe() {
                         setErrorDB({...error,...error2});
                         if (!error.personaje && !error2.alias){
                             await axios.put('../api/upPersHeroe', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea, nombreVie: Nombre});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >
