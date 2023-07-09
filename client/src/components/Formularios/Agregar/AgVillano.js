@@ -61,7 +61,7 @@ function AgVillano() {
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombrePers || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)){
+                        if (!val.nombrePers || !/^[a-zA-Z\s]{1,50}$/.test(val.nombrePers)){
                             errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
                         if (!val.genero){

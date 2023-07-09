@@ -70,6 +70,8 @@ import { AgCivil } from './components/Formularios/Agregar/AgCivil';
 import { ModCivil } from './components/Formularios/Modificar/modCivil';
 import { AgPertenece } from './components/Formularios/Agregar/AgPertenece';
 import { ModPertenece } from './components/Formularios/Modificar/modPertenece';
+import { ModSerie } from './components/Formularios/Modificar/modSerie';
+import { ModPelicula } from './components/Formularios/Modificar/modPelicula';
 
 function App() {
   return (
@@ -133,13 +135,13 @@ function App() {
                 <Route path='/poderes/ModPosee' element={<ModPoseePers/>}/>
 
                 <Route path='/peliculas/AgPelicula' element={<AgPelicula/>}/>
-                <Route path='/peliculas/ModPelicula' element={<ModRep5/>}/>
+                <Route path='/peliculas/ModPelicula' element={<ModPelicula/>}/>
                 <Route path='/peliculas/AgPersPeli' element={<AgEsta/>}/>
                 <Route path='/peliculas/ModPersPeli' element={<ModEsta/>}/>
                 <Route path='/peliculas/AgOrgPeli' element={<AgAparece/>}/>
 
                 <Route path='/series/AgSerie' element={<AgSerie/>}/>
-                <Route path='/series/ModSerie' element={<ModRep2/>}/>
+                <Route path='/series/ModSerie' element={<ModSerie/>}/>
                 <Route path='/series/AgPersSerie' element={<AgEsta/>}/>
                 <Route path='/series/ModPersSerie' element={<ModEsta/>}/>
                 <Route path='/series/AgOrgSerie' element={<AgAparece/>}/>

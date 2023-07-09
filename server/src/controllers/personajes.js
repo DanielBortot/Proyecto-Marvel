@@ -111,8 +111,7 @@ const personajes = {
         for (let i = 0; i<creadores.length; i++){
             await pool.query('INSERT INTO "Pers_Creador" ("N_Personaje", "N_Creador") VALUES ($1, $2)',[nombrePers,creadores[i].Nom_Creador]);
         }
-        await pool.query('INSERT INTO "Villano" ("N_Villano", "Alias", "Objetivo") VALUES ($1, $2, $3, $4, $5)',[nombrePers,alias,objetivo]);
-
+        await pool.query('INSERT INTO "Villano" ("N_Villano", "Alias", "Objetivo") VALUES ($1, $2, $3)',[nombrePers,alias,objetivo]);
         res.send('creado');
     },
 

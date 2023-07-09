@@ -66,7 +66,7 @@ function AgHeroe() {
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombrePers || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)){
+                        if (!val.nombrePers || !/^[a-zA-Z\s]{1,50}$/.test(val.nombrePers)){
                             errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
                         if (!val.genero || val.genero === -1){
@@ -157,7 +157,7 @@ function AgHeroe() {
                                 name="traje"
                             />
                             <ErrorMessage name="archienemigo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.archienemigo}</div>)}/>
-                            <Field type="text" name="genero" as="select">
+                            <Field type="text" name="archienemigo" as="select">
                                 <option hidden selected value={-1}>Selecciona el archienegimo del heroe</option>
                                 {villanos.map(villano => (
                                     <option key={villano.N_Villano} value={villano.N_Villano}>{villano.N_Villano}</option>
