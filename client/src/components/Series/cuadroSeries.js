@@ -3,9 +3,9 @@ import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descSerie } from "../../reducers/seriesSlice";
+import axios from "axios";
 
-
-function CuadroSeries ({prop, email}) {
+function CuadroSeries ({prop, email, medios, setMedios, pers, op}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {Imagen, T_Serie} = prop
@@ -13,10 +13,17 @@ function CuadroSeries ({prop, email}) {
         dispatch(descSerie(prop));
         navigate(`/series/${T_Serie}`);
     }
+    const delDatos = async ()=> {
+        if (op === 1){
+            await axios.post('/api/delPersMedio',{titulo: T_Serie, nombrePers: pers});
+            const series = medios.filter(ser => ser.Titulo !== T_Serie);
+            setMedios(series);
+        }
+    }
 
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
-            return (<button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Serie</button>);
+            return (<button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Serie</button>);
         }
         else {
             return (<></>);

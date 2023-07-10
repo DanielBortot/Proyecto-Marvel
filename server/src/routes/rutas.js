@@ -14,7 +14,7 @@ const {addObjeto, buscObjeto, getObjPers, getObjetos, upObjeto, delObjeto} = req
 
 const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes, upOrganizacion, upSede, delOrganizacion} = require('../controllers/organizaciones');
 
-const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod, upPodPers} = require('../controllers/poderPers');
+const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod, upPodPers, delPodPers} = require('../controllers/poderPers');
 
 const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPers');
 
@@ -22,11 +22,11 @@ const {buscHerVill, addHerVill, compHerVill, getHerVill, getRelacion} = require(
 
 const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio, getMedOrga, upOrgMedio} = require('../controllers/orgMedio');
 
-const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso, upPersMedio} = require('../controllers/persMedio');
+const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso, upPersMedio, delPersMedio} = require('../controllers/persMedio');
 
 const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controllers/CivRela');
 
-const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, modOrgPers} = require('../controllers/persOrg');
+const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, modOrgPers, delOrgPers} = require('../controllers/persOrg');
 
 
 router.get('/personajes', personajes);
@@ -120,6 +120,7 @@ router.post('/getSedes', getSedes);
 router.post('/buscPodPers', buscPodPers);
 router.post('/compPodPers', compPodPers);
 router.post('/addPodPers', addPodPers);
+router.post('/delPodPers', delPodPers);
 router.post('/delPoder', delPoder);
 router.post('/getPodPerso', getPodPerso);
 router.post('/getPersPod', getPersPod);
@@ -143,6 +144,7 @@ router.post('/getMedOrga', getMedOrga);
 router.post('/buscPersMedio', buscPersMedio);
 router.post('/compPersMedio', compPersMedio);
 router.post('/addPersMedio', addPersMedio);
+router.post('/delPersMedio', delPersMedio);
 router.post('/getPersMedio', getPersMedio);
 router.post('/getMedPerso', getMedPerso);
 
@@ -156,6 +158,7 @@ router.post('/getOrgPerso', getOrgPerso);
 router.post('/buscOrgPers', buscOrgPers);
 router.post('/compOrgPers', compOrgPers);
 router.post('/addOrgPers', addOrgPers);
+router.post('/delOrgPers', delOrgPers);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

@@ -3,9 +3,9 @@ import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descOrganizacion } from "../../reducers/orgsSlice";
+import axios from "axios";
 
-
-function CuadroOrganizaciones ({prop, email}) {
+function CuadroOrganizaciones ({prop, email, orgs, setOrgs, pers, op}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {Imagen, Nombre} = prop
@@ -14,9 +14,17 @@ function CuadroOrganizaciones ({prop, email}) {
         navigate(`/organizaciones/${Nombre}`);
     }
 
+    const delDatos = async ()=> {
+        if (op === 1){
+            await axios.post('/api/delOrgPers',{nombreOrg: Nombre, nombrePers: pers});
+            const organizaciones = orgs.filter(org => org.Nombre !== Nombre);
+            setOrgs(organizaciones);
+        }
+    }
+
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
-            return (<button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>);
+            return (<button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>);
         }
         else {
             return (<></>);

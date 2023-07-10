@@ -46,6 +46,12 @@ const persOrg = {
         res.send('creado');
     },
 
+    delOrgPers: async (req,res) => {
+        const {nombrePers, nombreOrg} = req.body;
+        await pool.query('DELETE FROM "Pertenece" "N_Personaje"=$1 AND "N_Organizacion"=$2',[nombrePers,nombreOrg]);
+        res.send('eliminado');
+    },
+
     modOrgPers: async (req,res) => {
         const {nombrePers, nombreOrg, cargo} = req.body;
         await pool.query('UPDATE "Pertenece" SET "Cod_Cargo"=$1 WHERE "N_Personaje"=$2 AND "N_Organizacion"=$3',[cargo,nombrePers,nombreOrg]);

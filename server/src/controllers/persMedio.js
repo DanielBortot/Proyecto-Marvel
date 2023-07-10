@@ -23,6 +23,14 @@ const persMedio = {
         res.send('creado');
     },
 
+    delPersMedio: async (req,res) => {
+        const {nombrePers, titulo} = req.body;
+        console.log(nombrePers);
+        console.log(titulo);
+        await pool.query('DELETE FROM "Esta" WHERE "N_Personaje"=$1 AND "N_Titulo"=$2',[nombrePers,titulo]);
+        res.send('eliminado');
+    },
+
     upPersMedio: async (req,res) => {
         const {nombrePers, titulo, tipoAct, rol, nombreAct} = req.body;
         await pool.query('UPDATE "Esta" SET "Tipo_Actor"=$1, "Rol"=$2, "Actor"=$3 WHERE "N_Personaje"=$4 AND "N_Titulo"=$5',[tipoAct,rol,nombreAct,nombrePers,titulo]);

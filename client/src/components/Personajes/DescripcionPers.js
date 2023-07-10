@@ -94,7 +94,7 @@ function DescripcionPers () {
                 setGen('Otro');
         }
     },[]);
-
+    console.log('sss')
     const infoTit = () => {
         if (op == 1){
             return (
@@ -249,13 +249,13 @@ function DescripcionPers () {
             >
                     {medios.map(med => {
                             if (med.T_Serie){
-                                return <CuadroSeries prop={med} key={med.T_Serie} email={descUsuario.Email}/>
+                                return <CuadroSeries prop={med} key={med.T_Serie} email={descUsuario.Email} medios={medios} setMedios={setMedios} pers={Nombre} op={1}/>
                             }
                             else if (med.T_Pelicula){
-                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} email={descUsuario.Email}/>
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} email={descUsuario.Email} medios={medios} setMedios={setMedios} pers={Nombre} op={1}/>
                             }
                             else if (med.T_Juego){
-                                return <CuadroJuegos prop={med} key={med.T_Juego} email={descUsuario.Email}/>
+                                return <CuadroJuegos prop={med} key={med.T_Juego} email={descUsuario.Email} medios={medios} setMedios={setMedios} pers={Nombre} op={1}/>
                             }
                         })}     
             </Carousel>
@@ -271,7 +271,7 @@ function DescripcionPers () {
                 centerMode={true}       
             >
                     {organizaciones.map(org => {
-                            return <CuadroOrganizaciones prop={org} key={org.Nombre} email={descUsuario.Email}/>
+                            return <CuadroOrganizaciones prop={org} key={org.Nombre} email={descUsuario.Email} orgs={organizaciones} setOrgs={setOrganizaciones} pers={Nombre} op={1}/>
                         })}     
             </Carousel>
             </div>
@@ -281,7 +281,7 @@ function DescripcionPers () {
             </div>
             <div className="vistaPersM">
                 {poderes.map(pod => {
-                    return <CuadroPodPers prop={pod} key={pod.Nombre} email={descUsuario.Email}/>
+                    return <CuadroPodPers prop={pod} key={pod.Nombre} email={descUsuario.Email} pods={poderes} setPods={setPoderes}/>
                 })}
             </div>
             <br/>

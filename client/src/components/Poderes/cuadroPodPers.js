@@ -4,21 +4,26 @@ import { Link, useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descPoder } from "../../reducers/poderesSlice";
 import { datosReporte } from "../../reducers/reportesSlice";
+import axios from "axios";
 
-function CuadroPodPers ({prop, email}) {
+function CuadroPodPers ({prop, email, setPods, pods}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const {Imagen, Nombre} = prop
+    const {Imagen, Nombre, N_Personaje} = prop
     const enviar = async ()=> {
         dispatch(descPoder(prop));
         navigate(`/poderes/${Nombre}`);
     }
-
+    const delDatos = async ()=> {
+        await axios.post('/api/delPodPers',{nombrePod: Nombre, nombrePers: N_Personaje});
+        const poderes = pods.filter(pod => pod.Nombre !== Nombre);;
+        setPods(poderes);
+    }
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
             return (
                 <>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Poder</button>
+                    <button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Poder</button>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/poderes/ModPosee'}>Modificar Poder</Link>
                 </>
             );

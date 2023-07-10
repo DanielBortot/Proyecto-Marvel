@@ -3,9 +3,9 @@ import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descPelicula } from "../../reducers/peliculasSlice";
+import axios from "axios";
 
-
-function CuadroPeliculas ({prop, email}) {
+function CuadroPeliculas ({prop, email, medios, setMedios, pers, op}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {Imagen, T_Pelicula} = prop
@@ -14,9 +14,17 @@ function CuadroPeliculas ({prop, email}) {
         navigate(`/peliculas/${T_Pelicula}`);
     }
 
+    const delDatos = async ()=> {
+        if (op === 1){
+            await axios.post('/api/delPersMedio',{titulo: T_Pelicula, nombrePers: pers});
+            const peliculas = medios.filter(pel => pel.Titulo !== T_Pelicula);
+            setMedios(peliculas);
+        }
+    }
+
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
-            return (<button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Pelicula</button>);
+            return (<button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Pelicula</button>);
         }
         else {
             return (<></>);
