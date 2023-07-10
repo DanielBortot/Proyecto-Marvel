@@ -33,8 +33,8 @@ const medios = {
     },
 
     delMedio: async (req,res) => {
-        const {titutlo} = req.body;
-        await pool.query('DELETE FROM "Medio" WHERE "Titulo"=$1',[titutlo]);
+        const {titulo} = req.body;
+        await pool.query('DELETE FROM "Medio" WHERE "Titulo"=$1',[titulo]);
         res.send('eliminado');
     },
 
