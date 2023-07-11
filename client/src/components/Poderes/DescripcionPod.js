@@ -1,15 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import axios from "axios";
 import 'react-multi-carousel/lib/styles.css';
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPers } from "../Personajes/cuadroPers";
+import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionPod () {
     const {descripcion} = useSelector(state => state.poderes);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
+    const dispatch = useDispatch();
     
     let {Nombre, Descripcion, Imagen} = descripcion;
     useEffect(()=> {
@@ -26,25 +30,21 @@ function DescripcionPod () {
         getDatos();
     },[]);
 
-    const responsive = {
-        superLargeDesktop: {
-          // the naming can be any, depends on you.
-          breakpoint: { max: 2000, min: 1024 },
-          items: 4
-        },
-        desktop: {
-          breakpoint: { max: 1024, min: 800 },
-          items: 4
-        },
-        tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 2
-        },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1
+    const delDatos = async () => {
+        await axios.post('/api/delPoder',{nombrePod: Nombre});
+    }
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/poderes/ModPoder'}>Modificar Poder</Link>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/poderes'}>Eliminar Poder</Link>
+                </div>
+            );
         }
-    };
+        return (<></>);
+    }
 
     return (
         <>
@@ -66,6 +66,7 @@ function DescripcionPod () {
                         
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>
@@ -75,7 +76,7 @@ function DescripcionPod () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre}/>
+                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
         </>

@@ -6,6 +6,7 @@ import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPeliculas } from "./cuadroPelicula";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function VistaPeliculas () {
 
@@ -49,9 +50,9 @@ function VistaPeliculas () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Pelicula</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Personaje a Pelicula</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Organizacion a Pelicula</button>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPelicula'}>Agregar Pelicula</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersPeli'}>Agregar Personaje a Pelicula</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgPeli'}>Agregar Organizacion a Pelicula</Link>
             </>
             );
         }

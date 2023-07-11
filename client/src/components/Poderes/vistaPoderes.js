@@ -7,6 +7,7 @@ import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPoder } from "./cuadroPoder";
 import { HeaderPers } from "../headerpers";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 
 function VistaPoderes () {
@@ -51,8 +52,8 @@ function VistaPoderes () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Poder</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Poseedor de un Poder</button>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPoder'}>Agregar Poder</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPoseePers'}>Agregar Poseedor de un Poder</Link>
             </>
             );
         }
@@ -61,8 +62,8 @@ function VistaPoderes () {
 
     return (
         <>
-            {admin()}
             <HeaderPers/>
+            {admin()}
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>

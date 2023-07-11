@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import { imagenes } from "../../assets/img/imgdb";
 import axios from "axios";
 import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
 import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
+import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionSeries () {
     const {descripcion} = useSelector(state => state.series);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
+    const dispatch = useDispatch();
     
     let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Serie, N_Episodios, Creador, Canal, Tipo, Imagen} = descripcion;
 
@@ -35,6 +39,22 @@ function DescripcionSeries () {
         }
         getDatos();
     },[]);
+
+    const delDatos = async () => {
+        await axios.post('/api/delSerie',{titulo: T_Serie});
+    }
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/series/ModSerie'}>Modificar Serie</Link>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/series'}>Eliminar Serie</Link>
+                </div>
+            );
+        }
+        return (<></>);
+    }
 
     return (
         <>
@@ -68,6 +88,8 @@ function DescripcionSeries () {
                         <p>{Sinopsis}</p>
                     </div>
                 </div>
+                {admin()}
+                <div><Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/series/reproserie'}>Reproducir</Link></div>
             </div>
             <br/>
             <br/>
@@ -77,7 +99,7 @@ function DescripcionSeries () {
             </div>
             <div className="vistaPersM">
                 {organizaciones.map(org => {
-                    return <CuadroOrgMedio prop={org} key={org.Nombre}/>
+                    return <CuadroOrgMedio prop={org} key={org.Nombre} email={descUsuario.Email} orgs={organizaciones} setOrgs={setOrganizaciones}/>
                 })}
             </div>
             <br/>
@@ -86,7 +108,7 @@ function DescripcionSeries () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPersMedio prop={pers} key={pers.Nombre}/>
+                    return <CuadroPersMedio prop={pers} key={pers.Nombre} email={descUsuario.Email} pers={personajes} setPers={setPersonajes}/>
                 })}
             </div>
         </>

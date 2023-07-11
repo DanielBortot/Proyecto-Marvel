@@ -4,7 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete, TextField } from "@mui/material";
 
-function AgPosee() {
+function AgVillano() {
 
     const [errorDB, setErrorDB] = useState({});
     const [nacionalidades, setNacionalidades] = useState([]);
@@ -54,17 +54,17 @@ function AgPosee() {
                         pelo: '',
                         comic: '',
                         eMarital: '',
-                        imagenPers: '1',
+                        imagenPers: '73',
                         alias: '',
                         objetivo: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombrePers || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)){
+                        if (!val.nombrePers || !/^[a-zA-Z\s]{1,50}$/.test(val.nombrePers)){
                             errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
-                        if (!val.genero && !checked){
+                        if (!val.genero){
                             errores.genero = 'Selecciona un genero';
                         }
                         if (!val.ojos || !/^[a-zA-Z]{1,50}$/.test(val.ojos)){
@@ -102,7 +102,7 @@ function AgPosee() {
                         setErrorDB({...error, ...error2});
                         if (!error.personaje && !error2.alias){
                             await axios.post('../api/addPersVill', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >
@@ -218,4 +218,4 @@ function AgPosee() {
     );
 }
 
-export {AgPosee};
+export {AgVillano};

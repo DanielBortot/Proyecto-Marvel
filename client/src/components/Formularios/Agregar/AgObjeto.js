@@ -29,7 +29,7 @@ function AgObjeto() {
                         descripcion: '',
                         material: '',
                         tipo: '',
-                        imagen: '',
+                        imagen: '73',
                         nombrePers: ''
                     }}
                     validate={(val)=>{
@@ -57,7 +57,7 @@ function AgObjeto() {
                         setErrorDB(error);
                         if (!error.nombreObj){
                             await axios.post('../api/addObjeto', {...val});
-                            navigate('/');
+                            navigate('/objetos');
                         }
                     }}
                 >

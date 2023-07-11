@@ -17,7 +17,7 @@ function AgAparece() {
             setOrganizaciones(orgs);
         }
         getOrganizaciones();
-    })
+    },[])
 
     const getMedios = async (nombre) => {
         const meds = await (await axios.post('../api/buscOrgMedio',{nombreOrg: nombre})).data;

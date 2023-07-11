@@ -17,6 +17,18 @@ const organizaciones = {
         res.send('creado');
     },
 
+    delOrganizacion: async (req,res) => {
+        const {nombreOrg} = req.body;
+        await pool.query('DELETE FROM "Organizacion" WHERE "Nombre"=$1',[nombreOrg]);
+        res.send('eliminado');
+    },
+
+    upOrganizacion: async (req,res) => {
+        const {nombreOrg,nombreOrgVie,eslogan,lider,fundador,tipo,lugarCrea,comic,objetivo,imagen} = req.body;
+        await pool.query('UPDATE "Organizacion" SET "Nombre"=$1, "Eslogan"=$2, "Lider"=$3, "Fundador"=$4, "Tipo"=$5, "Nom_Comic"=$6, "Imagen"=$7, "Objetivo"=$8, "Lugar_Creacion"=$9 WHERE "Nombre"=$10',[nombreOrg,eslogan,lider,fundador,tipo,comic,imagen,objetivo,lugarCrea,nombreOrgVie]);
+        res.send('modificado');
+    },
+
     buscSedes: async (req,res) => {
         const {nombreSede,nombreOrg} = req.body;
         let errores = {}
@@ -31,6 +43,12 @@ const organizaciones = {
         const {nombreSede,tipoEdif,ubicacion,imagen,nombreOrg} = req.body;
         await pool.query('INSERT INTO "Sede" ("Nombre", "Tipo_Edif", "Ubicacion", "Imagen", "N_Org") VALUES ($1, $2, $3, $4, $5)',[nombreSede,tipoEdif,ubicacion,imagen,nombreOrg]);
         res.send('creado');
+    },
+
+    upSede: async (req,res) => {
+        const {nombreSede,nombreSedeVie,tipoEdif,ubicacion,imagen,nombreOrg} = req.body;
+        await pool.query('UPDATE "Sede" SET "Nombre"=$1, "Tipo_Edif"=$2, "Ubicacion"=$3, "Imagen"=$4 WHERE "Nombre"=$5 AND "N_Org"=$6',[nombreSede,tipoEdif,ubicacion,imagen,nombreSedeVie,nombreOrg]);
+        res.send('modificado');
     },
 
     organizaciones: async (req,res) => {

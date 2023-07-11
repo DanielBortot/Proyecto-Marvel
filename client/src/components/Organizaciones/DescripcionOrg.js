@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import axios from "axios";
@@ -11,12 +11,16 @@ import { CuadroPeliculas } from "../Peliculas/cuadroPelicula";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroSedes } from "../Sedes/cuadroSedes";
 import { CuadroPersOrg } from "../Personajes/cuadroPersOrg";
+import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionOrg () {
     const {descripcion} = useSelector(state => state.organizaciones);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [sedes, setSedes] = useState([]);
     const [medios, setMedios] = useState([]);
     const [personajes, setPersonajes] = useState([]);
+    const dispatch = useDispatch();
     
     let {Eslogan, Fundador, Lider, Lugar_Creacion, Nom_Comic, Nombre, Objetivo, Tipo, Imagen} = descripcion;
     useEffect(()=> {
@@ -69,6 +73,22 @@ function DescripcionOrg () {
         }
     };
 
+    const delDatos = async () => {
+        await axios.post('/api/delOrg',{nombreOrg: Nombre});
+    }
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/organizaciones/ModOrganizacion'}>Modificar Organizacion</Link>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/organizaciones'}>Eliminar Organizacion</Link>
+                </div>
+            );
+        }
+        return (<></>);
+    }
+
     return (
         <>
             <div className="descCont">
@@ -101,6 +121,7 @@ function DescripcionOrg () {
                         
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>
@@ -116,13 +137,13 @@ function DescripcionOrg () {
             >
                     {medios.map(med => {
                             if (med.T_Serie){
-                                return <CuadroSeries prop={med} key={med.T_Serie}/>
+                                return <CuadroSeries prop={med} key={med.T_Serie} email={descUsuario.Email}/>
                             }
                             else if (med.T_Pelicula){
-                                return <CuadroPeliculas prop={med} key={med.T_Pelicula}/>
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} email={descUsuario.Email}/>
                             }
                             else if (med.T_Juego){
-                                return <CuadroJuegos prop={med} key={med.T_Juego}/>
+                                return <CuadroJuegos prop={med} key={med.T_Juego} email={descUsuario.Email}/>
                             }
                         })}     
             </Carousel>
@@ -148,7 +169,7 @@ function DescripcionOrg () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPersOrg prop={pers} key={pers.Nombre}/>
+                    return <CuadroPersOrg prop={pers} key={pers.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
         </>

@@ -73,7 +73,7 @@ function AgRelacion() {
                         setErrorDB(error);
                         if (!error.relacion){
                             await axios.post('../api/addCivPers', {nombrePers: nombre, nombreCiv: val.nombreCiv, op: checked});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >
@@ -90,7 +90,7 @@ function AgRelacion() {
 
                             <div style={{display: 'flex', alignItems: 'center'}}>
                                 <Switch checked={checked} onChange={handleChange} inputProps={{'aria-label': 'controlled'}}/>
-                                <label>{checked ? 'Relacionar Civil con un Heroe' : 'Relacionar Civil con un Villano'}</label>
+                                <label>{checked ? 'Relacionar Civil con un Villano' : 'Relacionar Civil con un Heore'}</label>
                             </div>
                             <ErrorMessage name="nombreVill" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombreVill}</div>)}/>
                             <Field type="text" name="nombreVill" as="select" hidden={!checked}>
@@ -102,7 +102,7 @@ function AgRelacion() {
 
                             <ErrorMessage name="nombreHer" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombreHer}</div>)}/>
                             <Field type="text" name="nombreHer" as="select" hidden={checked}>
-                                <option hidden selected value={-1}>Selecciona el Villano que desea relacionar</option>
+                                <option hidden selected value={-1}>Selecciona el Heroe que desea relacionar</option>
                                 {heroes.map(her => (
                                     <option key={her.N_Heroe} value={her.N_Heroe}>{her.Alias}</option>
                                 ))}

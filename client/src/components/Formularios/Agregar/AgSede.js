@@ -28,7 +28,7 @@ function AgSede() {
                         nombreSede: '',
                         tipoEdif: '',
                         ubicacion: '',
-                        imagen: '1',
+                        imagen: '73',
                         nombreOrg: ''
                     }}
                     validate={(val)=>{
@@ -49,9 +49,9 @@ function AgSede() {
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/buscSedes', {nombreSede: val.nombreOrg, nombreOrg: val.nombreOrg})).data;
+                        const error = await (await axios.post('../api/buscSedes', {nombreSede: val.nombreSede, nombreOrg: val.nombreOrg})).data;
                         setErrorDB(error);
-                        if (!error.nombreOrg){
+                        if (!error.nombreSede){
                             await axios.post('../api/addOrg', {...val});
                             navigate('/');
                         }

@@ -43,6 +43,7 @@ function AgHeroe() {
         datos();
     },[]);
 
+
     return (
         <>
             <div className="tituloContReg">
@@ -57,16 +58,16 @@ function AgHeroe() {
                         pelo: '',
                         comic: '',
                         eMarital: '',
-                        imagenPers: '1',
+                        imagenPers: '73',
                         alias: '',
-                        logotipo: '1',
+                        logotipo: '73',
                         traje: '',
                         archienemigo: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
 
-                        if (!val.nombrePers || !/^[a-zA-Z]{1,50}$/.test(val.nombrePers)){
+                        if (!val.nombrePers || !/^[a-zA-Z\s]{1,50}$/.test(val.nombrePers)){
                             errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
                         if (!val.genero || val.genero === -1){
@@ -110,7 +111,7 @@ function AgHeroe() {
                         setErrorDB({...error,...error2});
                         if (!error.personaje && !error2.alias){
                             await axios.post('../api/addPersHeroe', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/');
+                            navigate('/personajes');
                         }
                     }}
                 >
@@ -157,7 +158,7 @@ function AgHeroe() {
                                 name="traje"
                             />
                             <ErrorMessage name="archienemigo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.archienemigo}</div>)}/>
-                            <Field type="text" name="genero" as="select">
+                            <Field type="text" name="archienemigo" as="select">
                                 <option hidden selected value={-1}>Selecciona el archienegimo del heroe</option>
                                 {villanos.map(villano => (
                                     <option key={villano.N_Villano} value={villano.N_Villano}>{villano.N_Villano}</option>

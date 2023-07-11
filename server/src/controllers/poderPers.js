@@ -23,6 +23,18 @@ const poderPers = {
         res.send('creado');
     },
 
+    delPodPers: async (req,res) => {
+        const {nombrePers,nombrePod} = req.body;
+        await pool.query('DELETE FROM "Posee" WHERE "N_Personaje"=$1 AND "N_Poder"=$2',[nombrePers,nombrePod]);
+        res.send('eliminado');
+    },
+
+    upPodPers: async (req,res) => {
+        const {nombrePers, nombrePod, obtencion} = req.body;
+        await pool.query('UPDATE "Posee" SET "Obtencion"=$1 WHERE "N_Personaje"=$2 AND "N_Poder"=$3',[obtencion,nombrePers,nombrePod]);
+        res.send('modificado');
+    },
+
     getPodPerso: async (req,res) => {
         const {nombrePers} = req.body;
         const pods = await pool.query('SELECT * FROM "Posee" p INNER JOIN "Poder" po ON (p."N_Poder"=po."Nombre") WHERE p."N_Personaje"=$1',[nombrePers]);

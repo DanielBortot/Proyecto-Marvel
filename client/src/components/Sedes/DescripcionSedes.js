@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import 'react-multi-carousel/lib/styles.css';
+import { Link } from "react-router-dom";
 
 function DescripcionOrg () {
     const {descripcion} = useSelector(state => state.organizaciones);
+    const {descUsuario} = useSelector(state => state.usuario);
     
     let {Nombre, Tipo_Edif, Ubicacion, Imagen, N_Org} = descripcion;
     
@@ -28,6 +30,18 @@ function DescripcionOrg () {
           items: 1
         }
     };
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Sede</Link>
+                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Sede</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
 
     return (
         <>
@@ -53,6 +67,7 @@ function DescripcionOrg () {
                         
                     </div>
                 </div>
+                {admin()}
             </div>
         </>
     );

@@ -21,7 +21,7 @@ function AgPelicula() {
                         compania: '',
                         rating: '',
                         sinopsis: '',
-                        imagen: '',
+                        imagen: '73',
                         director: '',
                         distribuidor: '',
                         duracion: '',
@@ -72,7 +72,11 @@ function AgPelicula() {
                         setErrorDB(error);
                         if (!error.titulo){
                             await axios.post('../api/addRep5', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', director: val.director, distribuidor: val.distribuidor, duracion: val.duracion, ganancia: val.ganancia, coste: val.coste, tipo: val.tipo});
-                            navigate('/Rep5');
+                            if (window.location.pathname === '/peliculas/AgPelicula'){
+                                navigate('/peliculas')
+                            } else {
+                                navigate('/Rep5');
+                            }
                         }
                     }}
                 >

@@ -6,6 +6,7 @@ import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroSeries } from "./cuadroSeries";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 function VistaSeries () {
 
@@ -49,9 +50,9 @@ function VistaSeries () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Serie</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Personaje a Serie</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Organizacion a Serie</button>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgSerie'}>Agregar Serie</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersSerie'}>Agregar Personaje a Serie</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgSerie'}>Agregar Organizacion a Serie</Link>
             </>
             );
         }

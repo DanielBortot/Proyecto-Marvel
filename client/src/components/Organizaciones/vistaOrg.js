@@ -7,6 +7,7 @@ import axios from "axios";
 import { imagenes } from "../../assets/img/imgdb";
 import { useSelector } from "react-redux";
 import { HeaderPers } from "../headerpers";
+import { Link } from "react-router-dom";
 
 function VistaOrgs () {
 
@@ -36,9 +37,9 @@ function VistaOrgs () {
         const traerInfo = async () => {
             const orgs = await (await axios.get('/api/organizaciones')).data;
             for (let i=0; i<orgs.length;i++){
-                const img = imagenes.find(img => img.pos == orgs[i].imagen);
+                const img = imagenes.find(img => img.pos == orgs[i].Imagen);
                 if (img){
-                    orgs[i].imagen = img.img;
+                    orgs[i].Imagen = img.img;
                 }
             }
             setOrganizaciones(orgs);
@@ -50,8 +51,8 @@ function VistaOrgs () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Organizacion</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Personaje a la Organizacion</button>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrganizacion'}>Agregar Organizacion</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersOrg'}>Agregar Personaje a la Organizacion</Link>
             </>
             );
         }
@@ -60,8 +61,8 @@ function VistaOrgs () {
 
     return (
         <>
-            {admin()}
             <HeaderPers/>
+            {admin()}
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
@@ -77,7 +78,7 @@ function VistaOrgs () {
             </Carousel>
             </div>
             <div className="tituloCont">
-                <h2>Lista de personajes de marvel</h2>
+                <h2>Lista de organizaciones de marvel</h2>
             </div>
             <div className="vistaPers">
                 {organizaciones.map(org => {

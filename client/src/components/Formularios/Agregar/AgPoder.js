@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function AgPoder() {
 
+    const [errorDB, setErrorDB] = useState({});
     const navigate = useNavigate();
 
     return (
@@ -16,7 +17,7 @@ function AgPoder() {
                 <Formik
                     initialValues={{
                         nombrePod: '',
-                        imagenPod: '1',
+                        imagenPod: '73',
                         descripcion: ''
                         
                     }}
@@ -36,7 +37,7 @@ function AgPoder() {
                         setErrorDB(error);
                         if (!error.poder){
                             await axios.post('../api/addPoder', {...val});
-                            navigate('/');
+                            navigate('/poderes');
                         }
                     }}
                 >

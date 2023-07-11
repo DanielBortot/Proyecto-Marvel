@@ -50,8 +50,8 @@ function VistaObjetos () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Objeto</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Agregar Creador de un Objeto</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgObjeto'}>Agregar Objeto</button>
+                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgCrea'}>Agregar Creador de un Objeto</button>
             </>
             );
         }
@@ -60,8 +60,8 @@ function VistaObjetos () {
     
     return (
         <>
-            {admin()}
             <HeaderPers/>
+            {admin()}
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>

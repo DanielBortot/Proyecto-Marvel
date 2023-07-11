@@ -3,7 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function AgAparece() {
+function AgEsta() {
 
     const [errorDB, setErrorDB] = useState({});
     const [medios, setMedios] = useState([]);
@@ -17,7 +17,7 @@ function AgAparece() {
             setPersonajes(pers);
         }
         getPersonajes();
-    })
+    },[])
 
     const getMedios = async (nombre) => {
         const meds = await (await axios.post('../api/buscPersMedio',{nombrePers: nombre})).data;
@@ -122,4 +122,4 @@ function AgAparece() {
     );
 }
 
-export {AgAparece};
+export {AgEsta};

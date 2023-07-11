@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import { imagenes } from "../../assets/img/imgdb";
 import axios from "axios";
 import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
 import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
+import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionPeliculas () {
     const {descripcion} = useSelector(state => state.peliculas);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
+    const dispatch = useDispatch();
     
     let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Pelicula, Director, Duracion, Coste, Ganancia, Distribuidor, Tipo, Imagen} = descripcion;
 
@@ -35,6 +39,22 @@ function DescripcionPeliculas () {
         }
         getDatos();
     },[]);
+
+    const delDatos = async () => {
+        await axios.post('/api/delMedio',{titulo: T_Pelicula});
+    }
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <div>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(descripcion))}} style={{margin: '15px 0 15px 10px'}} to={'/peliculas/ModPelicula'}>Modificar Pelicula</Link>
+                    <Link className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}} to={'/peliculas'}>Eliminar Pelicula</Link>    
+                </div>
+            );
+        }
+        return (<></>);
+    }
 
     return (
         <>
@@ -72,6 +92,8 @@ function DescripcionPeliculas () {
                         <p>{Sinopsis}</p>
                     </div>
                 </div>
+                {admin()}
+                <div><Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/peliculas/repropeli'}>Reproducir</Link></div>
             </div>
             <br/>
             <br/>
@@ -81,7 +103,7 @@ function DescripcionPeliculas () {
             </div>
             <div className="vistaPersM">
                 {organizaciones.map(org => {
-                    return <CuadroOrgMedio prop={org} key={org.Nombre}/>
+                    return <CuadroOrgMedio prop={org} key={org.Nombre} email={descUsuario.Email} orgs={organizaciones} setOrgs={setOrganizaciones}/>
                 })}
             </div>
             <br/>
@@ -90,7 +112,7 @@ function DescripcionPeliculas () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPersMedio prop={pers} key={pers.Nombre}/>
+                    return <CuadroPersMedio prop={pers} key={pers.Nombre} email={descUsuario.Email} pers={personajes} setPers={setPersonajes}/>
                 })}
             </div>
         </>

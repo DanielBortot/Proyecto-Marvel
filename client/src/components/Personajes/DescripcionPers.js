@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -12,9 +13,11 @@ import { CuadroOrganizaciones } from "../Organizaciones/cuadroOrg";
 import { CuadroPodPers } from "../Poderes/cuadroPodPers";
 import { CuadroObjeto } from "../Objetos/cuadroObjeto";
 import { CuadroPers } from "./cuadroPers";
+import { datosReporte } from "../../reducers/reportesSlice";
 
 function DescripcionPers () {
     const {descripcion} = useSelector(state => state.personajes);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [gen, setGen] = useState('');
     const [organizaciones, setOrganizaciones] = useState([]);
     const [medios, setMedios] = useState([]);
@@ -22,6 +25,7 @@ function DescripcionPers () {
     const [objetos, setObjetos] = useState([]);
     const [enfrenta, setEnfrenta] = useState([]);
     const [relaciones, setRelaciones] = useState([]);
+    const dispatch = useDispatch();
     
     let {Nombre, Genero, Color_Pelo, Color_Ojos, ocupaciones, nacionalidades, creadores, Nom_Comic, E_Marital, op} = descripcion;
     useEffect(()=> {
@@ -90,7 +94,7 @@ function DescripcionPers () {
                 setGen('Otro');
         }
     },[]);
-
+    console.log('sss')
     const infoTit = () => {
         if (op == 1){
             return (
@@ -157,11 +161,49 @@ function DescripcionPers () {
         }
     };
 
+    const delDatos = async () => {
+        await axios.post('/api/delPersonaje',{nombrePers: Nombre});
+    }
+
+    const admin = () => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            switch (op) {
+                case 1:
+                    return (
+                        <>
+                            <div>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModVillano'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes'} onClick={delDatos}>Eliminar Personaje</Link>
+                            </div>
+                        </>);
+                case 2:
+                    return (
+                        <>
+                            <div>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModHeroe'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes'} onClick={delDatos}>Eliminar Personaje</Link>
+                            </div>
+                        </>);
+                case 3:
+                    return (
+                        <>
+                            <div>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes/ModCivil'} onClick={()=>{dispatch(datosReporte(descripcion))}}>Modificar Personaje</Link>
+                                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/personajes'} onClick={delDatos}>Eliminar Personaje</Link>
+                            </div>
+                        </>);
+            }
+        }
+        return (<></>);
+    }
+
     return (
         <>
             <div className="descCont">
                 <div className="descContImg">
-                    <h2>{descripcion.Nombre}</h2>
+                    <div>
+                        <h2>{descripcion.Nombre}</h2>
+                    </div>
                     <img className="imagen2" src={descripcion.imagen} alt="img"/>
                 </div>
 
@@ -191,6 +233,7 @@ function DescripcionPers () {
                         {info()}
                     </div>
                 </div>
+                {admin()}
             </div>
             <br/>
             <br/>
@@ -206,13 +249,13 @@ function DescripcionPers () {
             >
                     {medios.map(med => {
                             if (med.T_Serie){
-                                return <CuadroSeries prop={med} key={med.T_Serie}/>
+                                return <CuadroSeries prop={med} key={med.T_Serie} email={descUsuario.Email} medios={medios} setMedios={setMedios} pers={Nombre} op={1}/>
                             }
                             else if (med.T_Pelicula){
-                                return <CuadroPeliculas prop={med} key={med.T_Pelicula}/>
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} email={descUsuario.Email} medios={medios} setMedios={setMedios} pers={Nombre} op={1}/>
                             }
                             else if (med.T_Juego){
-                                return <CuadroJuegos prop={med} key={med.T_Juego}/>
+                                return <CuadroJuegos prop={med} key={med.T_Juego} email={descUsuario.Email} medios={medios} setMedios={setMedios} pers={Nombre} op={1}/>
                             }
                         })}     
             </Carousel>
@@ -228,7 +271,7 @@ function DescripcionPers () {
                 centerMode={true}       
             >
                     {organizaciones.map(org => {
-                            return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
+                            return <CuadroOrganizaciones prop={org} key={org.Nombre} email={descUsuario.Email} orgs={organizaciones} setOrgs={setOrganizaciones} pers={Nombre} op={1}/>
                         })}     
             </Carousel>
             </div>
@@ -238,7 +281,7 @@ function DescripcionPers () {
             </div>
             <div className="vistaPersM">
                 {poderes.map(pod => {
-                    return <CuadroPodPers prop={pod} key={pod.Nombre}/>
+                    return <CuadroPodPers prop={pod} key={pod.Nombre} email={descUsuario.Email} pods={poderes} setPods={setPoderes}/>
                 })}
             </div>
             <br/>
@@ -247,7 +290,7 @@ function DescripcionPers () {
             </div>
             <div className="vistaPers">
                 {objetos.map(obj => {
-                    return <CuadroObjeto prop={obj} key={obj.Nombre}/>
+                    return <CuadroObjeto prop={obj} key={obj.Nombre} email={descUsuario.Email}/>
                 })}
             </div>
             <br/>
