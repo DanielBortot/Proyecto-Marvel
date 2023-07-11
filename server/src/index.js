@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const app = express();
 const bodyParser = require('body-parser');
 const routes = require('./routes/rutas');
@@ -8,6 +9,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.set('PORT', process.env.PORT || 3000);
+
+app.use(session({
+    secret:'123',
+    resave: true,
+    saveUninitialized: true
+}))
 
 app.use((req, res, next)=> {
     res.header('Access-Control-Allow-Origin', '*'),

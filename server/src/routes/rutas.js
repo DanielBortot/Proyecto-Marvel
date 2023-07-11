@@ -29,6 +29,28 @@ const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controlle
 const {getPersOrg, getOrgPerso} = require('../controllers/persOrg');
 
 
+router.post('/sesion', (req,res) => {
+    const {descUsuario, descPerfil, perfilUso, descTarjeta, ciudad, estado, pais} = req.body
+    req.session.user = descUsuario;
+    req.session.perfiles = descPerfil;
+    req.session.perfil = perfilUso;
+    req.session.tarjeta = descTarjeta;
+    req.session.ciudad = ciudad;
+    req.session.estado = estado;
+    req.session.pais = pais;
+    res.send('guardado');
+});
+
+router.get('/getSesion', (req,res)=> {
+    res.send(req.session);
+});
+
+router.get('/delSesion', (req,res) => {
+    req.session.destroy();
+    res.send('del');
+})
+
+
 router.get('/personajes', personajes);
 router.get('/peliculas', peliculas);
 router.get('/series', series);

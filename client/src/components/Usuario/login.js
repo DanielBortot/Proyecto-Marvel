@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { datosUsuario, delUsuario } from "../../reducers/usuarioSlice";
 import { datosTarjeta, delTarjeta } from "../../reducers/tarjetaSlice";
-import { datosPerfil, delPerfiles } from "../../reducers/perfilesSlice";
+import { datosPerfil, delPerfiles, setPerfil } from "../../reducers/perfilesSlice";
 import { useNavigate } from "react-router-dom";
 import { setCiudad, setEstado, setPais, delDireccion } from "../../reducers/direccionSlice";
 import { delSuscripcion } from "../../reducers/suscripcionSlice";
@@ -15,6 +15,8 @@ import { delSuscripcion } from "../../reducers/suscripcionSlice";
 function Login() {
 
     const [errorDB, setErrorDB] = useState({});
+    const {descUsuario} = useSelector(state => state.usuario);
+    const {descPerfil} = useSelector(state => state.perfiles);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -33,6 +35,20 @@ function Login() {
         dispatch(delPerfiles());
         dispatch(delSuscripcion());
         dispatch(delTarjeta());
+        const getSesion = async () => {
+            const {user, perfiles, perfil, tarjeta, ciudad, estado, pais} = await (await axios.get('/api/getSesion')).data;
+            if (perfiles && perfiles.length > 0){
+                dispatch(datosUsuario(user));
+                dispatch(datosPerfil(...perfiles));
+                dispatch(setPerfil(perfil));
+                dispatch(datosTarjeta(tarjeta));
+                dispatch(setCiudad(ciudad));
+                dispatch(setEstado(estado));
+                dispatch(setPais(pais));
+                navigate('/');
+            }
+        }
+        getSesion();
     },[]);
 
     return (

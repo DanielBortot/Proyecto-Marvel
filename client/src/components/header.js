@@ -9,18 +9,20 @@ import { delPerfiles } from "../reducers/perfilesSlice";
 import { delDireccion } from "../reducers/direccionSlice";
 import { delSuscripcion } from "../reducers/suscripcionSlice";
 import { delTarjeta } from "../reducers/tarjetaSlice";
+import axios from "axios";
 
 function Header (){
     const {descUsuario} = useSelector(state => state.usuario);
     const {perfilUso} = useSelector(state => state.perfiles);
     const dispatch = useDispatch();
 
-    const delDatos = () => {
+    const delDatos = async () => {
         dispatch(delDireccion());
         dispatch(delUsuario());
         dispatch(delPerfiles());
         dispatch(delSuscripcion());
         dispatch(delTarjeta());
+        await axios.get('/api/delSesion');
     }
 
     const otros = () => {
