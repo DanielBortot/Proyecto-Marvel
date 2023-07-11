@@ -20,7 +20,7 @@ const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPer
 
 const {buscHerVill, addHerVill, compHerVill, getHerVill, getRelacion} = require('../controllers/HerVill');
 
-const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio, getMedOrga, upOrgMedio} = require('../controllers/orgMedio');
+const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio, getMedOrga, upOrgMedio, delOrgMedio} = require('../controllers/orgMedio');
 
 const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso, upPersMedio, delPersMedio} = require('../controllers/persMedio');
 
@@ -139,6 +139,7 @@ router.post('/buscOrgMedio', buscOrgMedio);
 router.post('/getOrgMedio', getOrgMedio);
 router.post('/compOrgMedio', compOrgMedio);
 router.post('/addOrgMedio', addOrgMedio);
+router.post('/delOrgMedio', delOrgMedio);
 router.post('/getMedOrga', getMedOrga);
 
 router.post('/buscPersMedio', buscPersMedio);

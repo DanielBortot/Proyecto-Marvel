@@ -96,7 +96,7 @@ function DescripcionJuegos () {
             </div>
             <div className="vistaPersM">
                 {organizaciones.map(org => {
-                    return <CuadroOrgMedio prop={org} key={org.Nombre} email={descUsuario.Email}/>
+                    return <CuadroOrgMedio prop={org} key={org.Nombre} email={descUsuario.Email} orgs={organizaciones} setOrgs={setOrganizaciones}/>
                 })}
             </div>
             <br/>
@@ -105,7 +105,7 @@ function DescripcionJuegos () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPersMedio prop={pers} key={pers.Nombre} email={descUsuario.Email}/>
+                    return <CuadroPersMedio prop={pers} key={pers.Nombre} email={descUsuario.Email} pers={personajes} setPers={setPersonajes}/>
                 })}
             </div>
         </>

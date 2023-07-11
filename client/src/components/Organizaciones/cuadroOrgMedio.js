@@ -5,23 +5,28 @@ import {useDispatch} from "react-redux";
 import { descOrganizacion } from "../../reducers/orgsSlice";
 import { Link } from "react-router-dom";
 import { datosReporte } from "../../reducers/reportesSlice";
+import axios from "axios";
 
-
-function CuadroOrgMedio ({prop, email, op}) {
+function CuadroOrgMedio ({prop, email, op, orgs, setOrgs}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const {Imagen, Nombre} = prop
-    console.log(prop)
+    const {Imagen, Nombre, N_Titulo} = prop
     const enviar = ()=> {
         dispatch(descOrganizacion(prop));
         navigate(`/organizaciones/${Nombre}`);
+    }
+
+    const delDatos = async ()=> {
+        await axios.post('/api/delOrgMedio',{nombreOrg: Nombre, titulo: N_Titulo});
+        const organizaciones = orgs.filter(org => org.Nombre !== Nombre);;
+        setOrgs(organizaciones);
     }
 
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
             return (
                 <>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>
+                    <button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/medios/ModOrgMedio'}>Modificar Organizacion</Link>
                 </>
             );

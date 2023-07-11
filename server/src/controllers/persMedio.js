@@ -25,8 +25,6 @@ const persMedio = {
 
     delPersMedio: async (req,res) => {
         const {nombrePers, titulo} = req.body;
-        console.log(nombrePers);
-        console.log(titulo);
         await pool.query('DELETE FROM "Esta" WHERE "N_Personaje"=$1 AND "N_Titulo"=$2',[nombrePers,titulo]);
         res.send('eliminado');
     },

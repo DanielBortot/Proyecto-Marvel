@@ -7,10 +7,10 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { datosReporte } from "../../reducers/reportesSlice";
 
-function CuadroPersMedio ({prop, email}) {
+function CuadroPersMedio ({prop, email, pers, setPers}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const {imagen, Nombre} = prop
+    const {imagen, Nombre, N_Titulo} = prop
     const enviar = async ()=> {
         const dato = await (await axios.post('/api/villHer',{Nombre: Nombre})).data;
         let val = {...prop, ...dato}
@@ -18,11 +18,17 @@ function CuadroPersMedio ({prop, email}) {
         navigate(`/personajes/${Nombre}`);
     }
 
+    const delDatos = async ()=> {
+        await axios.post('/api/delPersMedio',{nombrePers: Nombre, titulo: N_Titulo});
+        const personajes = pers.filter(per => per.Nombre !== Nombre);;
+        setPers(personajes);
+    }
+
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
             return (
                 <>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
+                    <button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>
                     <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/medios/ModPersMedio'}>Modificar Personaje</Link>
                 </>
             );
