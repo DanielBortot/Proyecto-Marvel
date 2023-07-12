@@ -9,10 +9,10 @@ import { imagenPerfil } from "../../assets/img/imgSelect";
 import { delUsuario } from "../../reducers/usuarioSlice";
 import { delDireccion } from "../../reducers/direccionSlice";
 import { delTarjeta } from "../../reducers/tarjetaSlice";
-import { delPerfiles } from "../../reducers/perfilesSlice";
+import { delPerfiles, setPerfil } from "../../reducers/perfilesSlice";
 
 function VistaResumen () {
-    const {descPerfil} = useSelector(state => state.perfiles);
+    const {descPerfil, perfilUso} = useSelector(state => state.perfiles);
     const {descUsuario} = useSelector(state => state.usuario);
     const {descTarjeta} = useSelector(state => state.tarjeta);
     const [sus, setSuscri] = useState({})
@@ -39,6 +39,17 @@ function VistaResumen () {
         navigate('/inicioSesion');
     }
 
+    const elegir = (perfil) => {
+        if (perfilUso.Id_Perfil !== perfil.Id_Perfil){
+            return (
+                <div>
+                    <button className='btn btn-danger'onClick={()=>dispatch(setPerfil(perfil))}>Elegir Perfil</button>
+                </div>
+            );
+        }
+        return (<></>);
+    }
+
     return (
         <> 
             <div className="container">
@@ -60,6 +71,7 @@ function VistaResumen () {
                                             <div className="card-body" key={perfil.Id_Perfil}>      
                                                 <h5 className="card-title">{perfil.Nombre}</h5>
                                             </div>
+                                            {elegir(perfil)}
                                         </div>
                                     ))}
                                 </div>
