@@ -17,6 +17,7 @@ function ReporteReg (){
     return (
         <>  
             <div className="repReg">
+                <h3>Usuarios que residan en Venezuela y tengan la suscripción VIP</h3>
                 <div className="repRegCont">
                     <div className="repRegitem"><span style={{fontWeight: 'bold'}}>Email</span></div>
                     <div className="repRegitem"><span style={{fontWeight: 'bold'}}>Nombre</span></div>

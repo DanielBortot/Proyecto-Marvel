@@ -37,6 +37,7 @@ function Reporte6 (){
     return (
         <>  
             <div className="rep6">
+                <h3>Poderes que son heredados y que tengan en su nombre la cadena “Super”. Además dicho poder lo deben tener al menos 2 villanos</h3>
                 <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep6'}>Crear Campo</Link>
                 <div className="rep6Cont">
                     <div className="rep6item"><span style={{fontWeight: 'bold'}}>Nombre del Poder</span></div>

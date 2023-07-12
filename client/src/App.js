@@ -77,7 +77,7 @@ import { ReproSerie } from './components/Series/reproserie';
 
 function App() {
   return (
-    <div className='background'>
+    <div>
       <Header/>
       <div className='mx-3 my-2'>
           <Routes>  

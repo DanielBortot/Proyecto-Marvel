@@ -1,0 +1,5 @@
+SELECT "Lugar", COUNT(DISTINCT "Fecha")
+FROM "Combate"
+GROUP BY "Lugar"
+ORDER BY COUNT(DISTINCT "Fecha") DESC 
+LIMIT 3;

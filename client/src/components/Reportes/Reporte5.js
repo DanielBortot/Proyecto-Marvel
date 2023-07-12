@@ -38,6 +38,7 @@ function Reporte5 (){
     return (
         <>  
             <div className="rep5">
+                <h3>Películas que tengan más de 2 horas y media de duración, sean de tipo animada, cuya ganancia sea mayor al promedio de todas las películas del mismo tipo</h3>
                 <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep5'}>Crear Campo</Link>
                 <div className="rep5Cont">
                     <div className="rep5item"><span style={{fontWeight: 'bold'}}>Película</span></div>

@@ -40,6 +40,7 @@ function Reporte2 (){
     return (
         <>  
             <div className="rep2">
+                <h3>Series que han tenido más episodios que el promedio</h3>
                 <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep2'}>Crear Campo</Link>
                 <div className="rep2Cont">
                     <div className="rep2item"><span style={{fontWeight: 'bold'}}>Serie</span></div>
