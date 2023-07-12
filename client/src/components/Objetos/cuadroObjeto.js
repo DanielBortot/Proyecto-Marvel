@@ -3,8 +3,9 @@ import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descObjeto } from "../../reducers/objetosSlice";
+import axios from "axios";
 
-function CuadroObjeto ({prop, email}) {
+function CuadroObjeto ({prop, email, objs, setObjs}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {Imagen, Nombre} = prop
@@ -13,9 +14,15 @@ function CuadroObjeto ({prop, email}) {
         navigate(`/objetos/${Nombre}`);
     }
 
+    const delDatos = async () => {
+        await axios.put('/api/upTieneObj',{nombreObj: Nombre});
+        const objetos = objs.filter(obj => obj.Nombre !== Nombre);
+        setObjs(objetos);
+    }
+
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
-            return (<button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Objeto</button>);
+            return (<button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Objeto</button>);
         }
         else {
             return (<></>);

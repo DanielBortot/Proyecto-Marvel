@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import { descPelicula } from "../../reducers/peliculasSlice";
 import axios from "axios";
 
-function CuadroPeliculas ({prop, email, medios, setMedios, pers, op}) {
+function CuadroPeliculas ({prop, email, medios, setMedios, pers, op, org}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {Imagen, T_Pelicula} = prop
@@ -17,9 +17,12 @@ function CuadroPeliculas ({prop, email, medios, setMedios, pers, op}) {
     const delDatos = async ()=> {
         if (op === 1){
             await axios.post('/api/delPersMedio',{titulo: T_Pelicula, nombrePers: pers});
-            const peliculas = medios.filter(pel => pel.Titulo !== T_Pelicula);
-            setMedios(peliculas);
         }
+        if (op === 2){
+            await axios.post('/api/delOrgMedio',{titulo: T_Pelicula, nombreOrg: org});
+        }
+        const peliculas = medios.filter(ser => ser.Titulo !== T_Pelicula);
+        setMedios(peliculas);
     }
 
     const admin = ()=> {

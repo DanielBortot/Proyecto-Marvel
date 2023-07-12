@@ -39,6 +39,25 @@
     transition: all .4s ease;
 }
 
+.formContRegIn {
+    display: flex;
+    margin: 10px 15px 0 0;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.formContRegIn input {
+    width: 20%;
+    height: 40px;
+    margin: 0.5rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgba(164, 164, 165, 0.39);
+    padding: 10px;
+    outline: none;
+    transition: all .4s ease;
+}
+
 .formContReg form select {
     width: 70%;
     height: 40px;
@@ -54,6 +73,11 @@
 
 .formContReg form input:focus {
     background-color: rgb(196, 194, 194);
+}
+
+.formContRegIn input:focus {
+    background-color: rgb(160, 158, 158);
+    color: rgb(219, 219, 219);
 }
 
 .suscripcionReg {

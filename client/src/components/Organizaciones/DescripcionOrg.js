@@ -137,13 +137,13 @@ function DescripcionOrg () {
             >
                     {medios.map(med => {
                             if (med.T_Serie){
-                                return <CuadroSeries prop={med} key={med.T_Serie} email={descUsuario.Email}/>
+                                return <CuadroSeries prop={med} key={med.T_Serie} email={descUsuario.Email} medios={medios} setMedios={setMedios} org={Nombre} op={2}/>
                             }
                             else if (med.T_Pelicula){
-                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} email={descUsuario.Email}/>
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} email={descUsuario.Email} medios={medios} setMedios={setMedios} org={Nombre} op={2}/>
                             }
                             else if (med.T_Juego){
-                                return <CuadroJuegos prop={med} key={med.T_Juego} email={descUsuario.Email}/>
+                                return <CuadroJuegos prop={med} key={med.T_Juego} email={descUsuario.Email} medios={medios} setMedios={setMedios} org={Nombre} op={2}/>
                             }
                         })}     
             </Carousel>

@@ -94,7 +94,7 @@ function DescripcionPers () {
                 setGen('Otro');
         }
     },[]);
-    console.log('sss')
+    
     const infoTit = () => {
         if (op == 1){
             return (
@@ -290,7 +290,7 @@ function DescripcionPers () {
             </div>
             <div className="vistaPers">
                 {objetos.map(obj => {
-                    return <CuadroObjeto prop={obj} key={obj.Nombre} email={descUsuario.Email}/>
+                    return <CuadroObjeto prop={obj} key={obj.Nombre} email={descUsuario.Email} objs={objetos} setObjs={setObjetos}/>
                 })}
             </div>
             <br/>

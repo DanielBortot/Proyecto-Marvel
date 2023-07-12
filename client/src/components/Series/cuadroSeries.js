@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import { descSerie } from "../../reducers/seriesSlice";
 import axios from "axios";
 
-function CuadroSeries ({prop, email, medios, setMedios, pers, op}) {
+function CuadroSeries ({prop, email, medios, setMedios, pers, op, org}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {Imagen, T_Serie} = prop
@@ -16,9 +16,12 @@ function CuadroSeries ({prop, email, medios, setMedios, pers, op}) {
     const delDatos = async ()=> {
         if (op === 1){
             await axios.post('/api/delPersMedio',{titulo: T_Serie, nombrePers: pers});
-            const series = medios.filter(ser => ser.Titulo !== T_Serie);
-            setMedios(series);
         }
+        if (op === 2){
+            await axios.post('/api/delOrgMedio',{titulo: T_Serie, nombreOrg: org});
+        }
+        const series = medios.filter(ser => ser.Titulo !== T_Serie);
+        setMedios(series);
     }
 
     const admin = ()=> {

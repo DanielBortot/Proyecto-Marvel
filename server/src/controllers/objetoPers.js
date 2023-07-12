@@ -21,7 +21,19 @@ const objetoPers = {
         const {nombrePers, nombreObj} = req.body;
         await pool.query('INSERT INTO "Crea" ("N_Personaje", "N_Objeto") VALUES ($1, $2)',[nombrePers,nombreObj]);
         res.send('creado');
-    }
+    },
+
+    getCrea: async (req,res) => {
+        const {nombreObj} = req.body;
+        const pers = await pool.query('SELECT * FROM "Personaje" WHERE "Nombre" IN (SELECT "N_Personaje" FROM "Crea" WHERE "N_Objeto"=$1)',[nombreObj]);
+        res.send(pers.rows);
+    },
+    
+    delCrea: async (req,res) => {
+        const {nombreObj, nombrePers} = req.body;
+        await pool.query('DELETE FROM "Crea" WHERE "N_Objeto"=$1 AND "N_Personaje"=$2',[nombreObj,nombrePers]);
+        res.send('eliminado');
+    }, 
 }
 
 module.exports = objetoPers;

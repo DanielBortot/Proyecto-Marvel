@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import { descPersonaje } from "../../reducers/personajesSlice";
 import axios from "axios";
 
-function CuadroPers ({prop, email}) {
+function CuadroPers ({prop, email, pod, pers, setPers, op, obj}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {imagen, Nombre} = prop
@@ -16,9 +16,20 @@ function CuadroPers ({prop, email}) {
         navigate(`/personajes/${Nombre}`);
     }
 
+    const delDatos = async () => {
+        if (op === 3){
+            await axios.post('/api/delPodPers',{nombrePers: Nombre, nombrePod: pod});
+        }
+        else if (op === 4){
+            await axios.post('/api/delCrea',{nombrePers: Nombre, nombreObj: obj});
+        }
+        const personajes = pers.filter(per => per.Nombre !== Nombre);
+        setPers(personajes);
+    }
+
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
-            return (<button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>);
+            return (<button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Personaje</button>);
         }
         else {
             return (<></>);

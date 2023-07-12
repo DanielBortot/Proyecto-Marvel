@@ -32,6 +32,7 @@ function VistaOrgs () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [organizaciones, setOrganizaciones] = useState([]);
+    const [orgsFil, setOrgsFil] = useState([]);
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -43,6 +44,7 @@ function VistaOrgs () {
                 }
             }
             setOrganizaciones(orgs);
+            setOrgsFil(orgs);
         }
         traerInfo();
     },[]);
@@ -59,10 +61,23 @@ function VistaOrgs () {
         return (<></>);
     }
 
+    const handleChange = e => {
+        if (!e.target.value){
+            setOrgsFil(organizaciones);
+        }
+        else {
+            const filtro = organizaciones.filter(org => org.Nombre.toLowerCase().includes(e.target.value.toLowerCase()));
+            setOrgsFil(filtro);
+        }
+    }
+
     return (
         <>
             <HeaderPers/>
             {admin()}
+            <div className="formContRegIn">
+                <input type="text" placeholder="Buscar Organizacion" onChange={handleChange}/>
+            </div>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
@@ -72,7 +87,7 @@ function VistaOrgs () {
                 infinite={true}
                 centerMode={true}       
             >
-                    {organizaciones.map(org => {
+                    {orgsFil.map(org => {
                             return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
                         })}     
             </Carousel>
@@ -81,7 +96,7 @@ function VistaOrgs () {
                 <h2>Lista de organizaciones de marvel</h2>
             </div>
             <div className="vistaPers">
-                {organizaciones.map(org => {
+                {orgsFil.map(org => {
                     return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
                 })}
             </div>

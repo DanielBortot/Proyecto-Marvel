@@ -31,6 +31,7 @@ function VistaObjetos () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [objetos, setObjetos] = useState([]);
+    const [objsFil, setObjsFil] = useState([]);
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -42,6 +43,7 @@ function VistaObjetos () {
                 }
             }
             setObjetos(objs);
+            setObjsFil(objs);
         }
         traerInfo();
     },[]);
@@ -57,11 +59,24 @@ function VistaObjetos () {
         }
         return (<></>);
     }
+
+    const handleChange = e => {
+        if (!e.target.value){
+            setObjsFil(objetos);
+        }
+        else {
+            const filtro = objetos.filter(obj => obj.Nombre.toLowerCase().includes(e.target.value.toLowerCase()));
+            setObjsFil(filtro);
+        }
+    }
     
     return (
         <>
             <HeaderPers/>
             {admin()}
+            <div className="formContRegIn">
+                <input type="text" placeholder="Buscar Objeto" onChange={handleChange}/>
+            </div>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
@@ -71,7 +86,7 @@ function VistaObjetos () {
                 infinite={true}
                 centerMode={true}       
             >
-                    {objetos.map(obj => {
+                    {objsFil.map(obj => {
                             return <CuadroObjeto prop={obj} key={obj.Nombre}/>
                         })}     
             </Carousel>
@@ -80,7 +95,7 @@ function VistaObjetos () {
                 <h2>Lista de objetos de marvel</h2>
             </div>
             <div className="vistaPers">
-                {objetos.map(obj => {
+                {objsFil.map(obj => {
                     return <CuadroObjeto prop={obj} key={obj.Nombre}/>
                 })}
             </div>

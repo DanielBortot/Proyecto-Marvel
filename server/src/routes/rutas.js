@@ -10,13 +10,13 @@ const {compPod, buscPoderes, getPoderes, upPoder, delPoder} = require('../contro
 
 const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill, upPersHeroe, upPersVill, delPersonaje, addPersCiv, upPersCiv} = require('../controllers/personajes');
 
-const {addObjeto, buscObjeto, getObjPers, getObjetos, upObjeto, delObjeto} = require('../controllers/objetos');
+const {addObjeto, buscObjeto, getObjPers, getObjetos, upObjeto, delObjeto, upTieneObj} = require('../controllers/objetos');
 
 const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes, upOrganizacion, upSede, delOrganizacion} = require('../controllers/organizaciones');
 
 const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod, upPodPers, delPodPers} = require('../controllers/poderPers');
 
-const {buscObjPers, addObjPers, compObjPers} = require('../controllers/objetoPers');
+const {buscObjPers, addObjPers, compObjPers, getCrea, delCrea} = require('../controllers/objetoPers');
 
 const {buscHerVill, addHerVill, compHerVill, getHerVill, getRelacion} = require('../controllers/HerVill');
 
@@ -150,6 +150,8 @@ router.post('/getPersPod', getPersPod);
 router.post('/buscObjPers', buscObjPers);
 router.post('/compObjPers', compObjPers);
 router.post('/addObjPers', addObjPers);
+router.post('/getCrea', getCrea);
+router.post('/delCrea', delCrea);
 
 router.post('/buscHerVill', buscHerVill);
 router.post('/compHerVill', compHerVill);
@@ -196,6 +198,7 @@ router.put('/upPersVill', upPersVill);
 router.put('/upPersCiv', upPersCiv);
 
 router.put('/upObjeto', upObjeto);
+router.put('/upTieneObj', upTieneObj);
 router.put('/upPoder', upPoder);
 router.put('/upMedioJuego', upMedioJuego);
 router.put('/upOrg', upOrganizacion);

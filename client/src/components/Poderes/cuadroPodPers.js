@@ -16,7 +16,7 @@ function CuadroPodPers ({prop, email, setPods, pods}) {
     }
     const delDatos = async ()=> {
         await axios.post('/api/delPodPers',{nombrePod: Nombre, nombrePers: N_Personaje});
-        const poderes = pods.filter(pod => pod.Nombre !== Nombre);;
+        const poderes = pods.filter(pod => pod.Nombre !== Nombre);
         setPods(poderes);
     }
     const admin = ()=> {

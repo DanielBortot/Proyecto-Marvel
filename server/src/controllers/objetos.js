@@ -40,6 +40,12 @@ const objetos = {
         res.send('creado');
     },
 
+    upTieneObj: async (req,res) => {
+        const {nombreObj} = req.body;
+        await pool.query('UPDATE "Objeto" SET "N_Personaje"=NULL WHERE "Nombre"=$1',[nombreObj]);
+        res.send('creado');
+    },
+
     delObjeto: async (req,res) => {
         const {nombreObj} = req.body;
         await pool.query('DELETE FROM "Objeto" WHERE "Nombre"=$1',[nombreObj]);

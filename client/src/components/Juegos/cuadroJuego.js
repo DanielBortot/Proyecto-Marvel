@@ -5,7 +5,7 @@ import {useDispatch} from "react-redux";
 import { descJuego } from "../../reducers/juegosSlice";
 import axios from "axios";
 
-function CuadroJuegos ({prop, email, medios, setMedios, pers, op}) {
+function CuadroJuegos ({prop, email, medios, setMedios, pers, op, org}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {Imagen, T_Juego} = prop
@@ -17,9 +17,12 @@ function CuadroJuegos ({prop, email, medios, setMedios, pers, op}) {
     const delDatos = async ()=> {
         if (op === 1){
             await axios.post('/api/delPersMedio',{titulo: T_Juego, nombrePers: pers});
-            const juegos = medios.filter(jue => jue.Titulo !== T_Juego);
-            setMedios(juegos);
         }
+        if (op === 2){
+            await axios.post('/api/delOrgMedio',{titulo: T_Juego, nombreOrg: org});
+        }
+        const juegos = medios.filter(ser => ser.Titulo !== T_Juego);
+        setMedios(juegos);
     }
 
     const admin = ()=> {

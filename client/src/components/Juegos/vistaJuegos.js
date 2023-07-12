@@ -31,6 +31,7 @@ function VistaJuegos () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [juegos, setJuegos] = useState([]);
+    const [juegosFil, setJuegosFil] = useState([]);
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -42,6 +43,7 @@ function VistaJuegos () {
                 }
             }
             setJuegos(juegos);
+            setJuegosFil(juegos);
         }
         traerInfo();
     },[]);
@@ -59,9 +61,22 @@ function VistaJuegos () {
         return (<></>);
     }
 
+    const handleChange = e => {
+        if (!e.target.value){
+            setJuegosFil(juegos);
+        }
+        else {
+            const filtro = juegos.filter(juego => juego.T_Juego.toLowerCase().includes(e.target.value.toLowerCase()));
+            setJuegosFil(filtro);
+        }
+    }
+
     return (
         <>
             {admin()}
+            <div className="formContRegIn">
+                <input type="text" placeholder="Buscar Juego" onChange={handleChange}/>
+            </div>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
@@ -72,7 +87,7 @@ function VistaJuegos () {
                 centerMode={true}       
             >
                 
-                    {juegos.map(juego => {
+                    {juegosFil.map(juego => {
                             return <CuadroJuegos prop={juego} key={juego.T_Juego}/>
                         })}     
             </Carousel>
@@ -81,7 +96,7 @@ function VistaJuegos () {
                 <h2>Lista de juegos de marvel</h2>
             </div>
             <div className="vistaPers">
-                {juegos.map(juego => {
+                {juegosFil.map(juego => {
                     return <CuadroJuegos prop={juego} key={juego.T_Juego}/>
                 })}
             </div>

@@ -20,7 +20,6 @@ export const usuarioSlice = createSlice({
     reducers: {
         datosUsuario: (state, action) =>{
             state.descUsuario = {...action.payload};
-            console.log(state.descUsuario);
             if (action.payload.op){
                 state.descUsuario = {...state.descUsuario, Fecha_Nac: action.payload.Fecha_Nac.slice(0,10)};
             }

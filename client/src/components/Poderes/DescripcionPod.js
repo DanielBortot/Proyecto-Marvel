@@ -51,7 +51,7 @@ function DescripcionPod () {
             <div className="descCont">
                 <div className="descContImg">
                     <h2>{Nombre}</h2>
-                    <img classname="imagen2" src={Imagen} alt="img"/>
+                    <img className="imagen2" src={Imagen} alt="img"/>
                 </div>
 
                 <div className="descContTitu">
@@ -76,7 +76,7 @@ function DescripcionPod () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email}/>
+                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} pod={Nombre} pers={personajes} setPers={setPersonajes} op={3}/>
                 })}
             </div>
         </>

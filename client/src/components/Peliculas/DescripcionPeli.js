@@ -61,7 +61,7 @@ function DescripcionPeliculas () {
             <div className="descCont">
                 <div className="descContImg">
                     <h2>{T_Pelicula}</h2>
-                    <img classname="imagen2" src={Imagen} alt="img"/>
+                    <img className="imagen2" src={Imagen} alt="img"/>
                 </div>
 
                 <div className="descContTitu">

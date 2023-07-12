@@ -33,6 +33,7 @@ function VistaPoderes () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [poderes, setPoderes] = useState([]);
+    const [podsFil, setPodsFil] = useState([]);
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -44,6 +45,7 @@ function VistaPoderes () {
                 }
             }
             setPoderes(pods);
+            setPodsFil(pods);
         }
         traerInfo();
     },[]);
@@ -60,10 +62,23 @@ function VistaPoderes () {
         return (<></>);
     }
 
+    const handleChange = e => {
+        if (!e.target.value){
+            setPodsFil(poderes);
+        }
+        else {
+            const filtro = poderes.filter(pod => pod.Nombre.toLowerCase().includes(e.target.value.toLowerCase()));
+            setPodsFil(filtro);
+        }
+    }
+
     return (
         <>
             <HeaderPers/>
             {admin()}
+            <div className="formContRegIn">
+                <input type="text" placeholder="Buscar Poder" onChange={handleChange}/>
+            </div>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
@@ -73,7 +88,7 @@ function VistaPoderes () {
                 infinite={true}
                 centerMode={true}       
             >
-                    {poderes.map(pod => {
+                    {podsFil.map(pod => {
                             return <CuadroPoder prop={pod} key={pod.Nombre}/>
                         })}     
             </Carousel>
@@ -82,7 +97,7 @@ function VistaPoderes () {
                 <h2>Lista de poderes de marvel</h2>
             </div>
             <div className="vistaPers">
-                {poderes.map(pod => {
+                {podsFil.map(pod => {
                     return <CuadroPoder prop={pod} key={pod.Nombre}/>
                 })}
             </div>

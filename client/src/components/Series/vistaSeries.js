@@ -31,6 +31,7 @@ function VistaSeries () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [series, setSeries] = useState([]);
+    const [seriesFil, setSeriesFil] = useState([]);
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -42,6 +43,7 @@ function VistaSeries () {
                 }
             }
             setSeries(series);
+            setSeriesFil(series);
         }
         traerInfo();
     },[]);
@@ -58,10 +60,23 @@ function VistaSeries () {
         }
         return (<></>);
     }
+
+    const handleChange = e => {
+        if (!e.target.value){
+            setSeriesFil(series);
+        }
+        else {
+            const filtro = series.filter(ser => ser.T_Serie.toLowerCase().includes(e.target.value.toLowerCase()));
+            setSeriesFil(filtro);
+        }
+    }
     
     return (
         <>
             {admin()}
+            <div className="formContRegIn">
+                <input type="text" placeholder="Buscar Serie" onChange={handleChange}/>
+            </div>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
@@ -72,7 +87,7 @@ function VistaSeries () {
                 centerMode={true}       
             >
                 
-                    {series.map(serie => {
+                    {seriesFil.map(serie => {
                             return <CuadroSeries prop={serie} key={serie.T_Serie}/>
                         })}     
             </Carousel>
@@ -81,7 +96,7 @@ function VistaSeries () {
                 <h2>Lista de series de marvel</h2>
             </div>
             <div className="vistaPers">
-                {series.map(serie => {
+                {seriesFil.map(serie => {
                     return <CuadroSeries prop={serie} key={serie.T_Serie}/>
                 })}
             </div>

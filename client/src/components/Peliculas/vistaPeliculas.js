@@ -31,6 +31,7 @@ function VistaPeliculas () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [peliculas, setPeliculas] = useState([]);
+    const [pelisFil, setPelisFil] = useState([]);
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -42,6 +43,7 @@ function VistaPeliculas () {
                 }
             }
             setPeliculas(peliculas);
+            setPelisFil(peliculas);
         }
         traerInfo();
     },[]);
@@ -58,10 +60,23 @@ function VistaPeliculas () {
         }
         return (<></>);
     }
+
+    const handleChange = e => {
+        if (!e.target.value){
+            setPelisFil(peliculas);
+        }
+        else {
+            const filtro = peliculas.filter(peli => peli.T_Pelicula.toLowerCase().includes(e.target.value.toLowerCase()));
+            setPelisFil(filtro);
+        }
+    }
     
     return (
         <>
             {admin()}
+            <div className="formContRegIn">
+                <input type="text" placeholder="Buscar Pelicula" onChange={handleChange}/>
+            </div>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
@@ -72,7 +87,7 @@ function VistaPeliculas () {
                 centerMode={true}       
             >
                 
-                    {peliculas.map(pelicula => {
+                    {pelisFil.map(pelicula => {
                             return <CuadroPeliculas prop={pelicula} key={pelicula.T_Pelicula}/>
                         })}     
             </Carousel>
@@ -81,7 +96,7 @@ function VistaPeliculas () {
                 <h2>Lista de peliculas de marvel</h2>
             </div>
             <div className="vistaPers">
-                {peliculas.map(pelicula => {
+                {pelisFil.map(pelicula => {
                     return <CuadroPeliculas prop={pelicula} key={pelicula.T_Pelicula}/>
                 })}
             </div>

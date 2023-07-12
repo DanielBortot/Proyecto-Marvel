@@ -32,6 +32,7 @@ function VistaPersonajes () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
+    const [persFil, setPersFil] = useState([]);
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -43,6 +44,7 @@ function VistaPersonajes () {
                 }
             }
             setPersonajes(personajes);
+            setPersFil(personajes);
         }
         traerInfo();
     },[]);
@@ -63,10 +65,23 @@ function VistaPersonajes () {
         return (<></>);
     }
     
+    const handleChange = e => {
+        if (!e.target.value){
+            setPersFil(personajes);
+        }
+        else {
+            const filtro = personajes.filter(pers => pers.Nombre.toLowerCase().includes(e.target.value.toLowerCase()));
+            setPersFil(filtro);
+        }
+    }
+
     return (
         <>           
             <HeaderPers/>
             {admin()}
+            <div className="formContRegIn">
+                <input type="text" placeholder="Buscar Personaje" onChange={handleChange}/>
+            </div>
             <div className="tituloCont">
                 <h2>Populares</h2>
             </div>
@@ -76,7 +91,7 @@ function VistaPersonajes () {
                 infinite={true}
                 centerMode={true}       
             >
-                    {personajes.map(personaje => {
+                    {persFil.map(personaje => {
                             return <CuadroPers prop={personaje} key={personaje.Nombre}/>
                         })}     
             </Carousel>
@@ -85,7 +100,7 @@ function VistaPersonajes () {
                 <h2>Lista de personajes de marvel</h2>
             </div>
             <div className="vistaPers">
-                {personajes.map(personaje => {
+                {persFil.map(personaje => {
                     return <CuadroPers prop={personaje} key={personaje.Nombre}/>
                 })}
             </div>
