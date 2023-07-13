@@ -8,10 +8,12 @@ import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
 import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
 import { Link } from "react-router-dom";
 import { datosReporte } from "../../reducers/reportesSlice";
+import { descPeliHist } from "../../reducers/peliculasSlice";
 
 function DescripcionPeliculas () {
     const {descripcion} = useSelector(state => state.peliculas);
     const {descUsuario} = useSelector(state => state.usuario);
+    const {perfilUso} = useSelector(state => state.perfiles);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
     const dispatch = useDispatch();
@@ -38,6 +40,7 @@ function DescripcionPeliculas () {
             setPersonajes(pers);
         }
         getDatos();
+        dispatch(descPeliHist({Titulo: T_Pelicula, Id_Perfil: perfilUso.Id_Perfil, Duracion: Duracion, op: 0}));
     },[]);
 
     const delDatos = async () => {

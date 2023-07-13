@@ -2,7 +2,7 @@ import React from "react";
 import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
-import { descPelicula } from "../../reducers/peliculasSlice";
+import { descPeliHist, descPelicula } from "../../reducers/peliculasSlice";
 import axios from "axios";
 
 function CuadroPeliculas ({prop, email, medios, setMedios, pers, op, org}) {
@@ -10,8 +10,14 @@ function CuadroPeliculas ({prop, email, medios, setMedios, pers, op, org}) {
     const navigate = useNavigate()
     const {Imagen, T_Pelicula} = prop
     const enviar = ()=> {
-        dispatch(descPelicula(prop));
-        navigate(`/peliculas/${T_Pelicula}`);
+        if (op !== 5) {
+            dispatch(descPelicula(prop));
+            navigate(`/peliculas/${T_Pelicula}`);
+        }
+        else {
+            dispatch(descPeliHist(prop));
+            navigate('/peliculas/repropeli');
+        }
     }
 
     const delDatos = async ()=> {

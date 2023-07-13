@@ -2,7 +2,7 @@ import React from "react";
 import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
-import { descSerie } from "../../reducers/seriesSlice";
+import { descSerie, descSerieHist } from "../../reducers/seriesSlice";
 import axios from "axios";
 
 function CuadroSeries ({prop, email, medios, setMedios, pers, op, org}) {
@@ -10,8 +10,14 @@ function CuadroSeries ({prop, email, medios, setMedios, pers, op, org}) {
     const navigate = useNavigate()
     const {Imagen, T_Serie} = prop
     const enviar = ()=> {
-        dispatch(descSerie(prop));
-        navigate(`/series/${T_Serie}`);
+        if (op !== 5){
+            dispatch(descSerie(prop));
+            navigate(`/series/${T_Serie}`);
+        }
+        else {
+            dispatch(descSerieHist(prop));
+            navigate('/series/reproserie');
+        }
     }
     const delDatos = async ()=> {
         if (op === 1){

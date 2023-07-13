@@ -28,6 +28,8 @@ const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controlle
 
 const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, modOrgPers, delOrgPers} = require('../controllers/persOrg');
 
+const {getHist, addHist, upHist} = require('../controllers/historial');
+
 
 router.post('/sesion', (req,res) => {
     const {descUsuario, descPerfil, perfilUso, descTarjeta, ciudad, estado, pais} = req.body
@@ -185,6 +187,9 @@ router.post('/compOrgPers', compOrgPers);
 router.post('/addOrgPers', addOrgPers);
 router.post('/delOrgPers', delOrgPers);
 
+router.post('/addHist', addHist);
+router.post('/getHist', getHist);
+
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);
 router.put('/upInfoUsu', updateInfoUsuario);
@@ -207,5 +212,6 @@ router.put('/upPersMedio', upPersMedio);
 router.put('/upSede', upSede);
 router.put('/upPodPers', upPodPers);
 router.put('/modOrgPers', modOrgPers);
+router.put('/upHist', upHist);
 
 module.exports = router;
