@@ -1,23 +1,98 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import '../assets/personajes.css'
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
+import axios from "axios";
+import { imagenes } from "../assets/img/imgdb";
+import { CuadroPeliculas } from "./Peliculas/cuadroPelicula";
+import { useSelector } from "react-redux";
+import { CuadroSeries } from "./Series/cuadroSeries";
+import { CuadroJuegos } from "./Juegos/cuadroJuego";
 
 function VistaInicio () {
-    // const {descUsuario} = useSelector(state => state.usuario);
-    // const {perfilUso, descPerfil} = useSelector(state => state.perfiles);
-    // const {descTarjeta} = useSelector(state => state.tarjeta);
-    // const {Pais, Estado, Ciudad} = useSelector(state => state.direccion);
-    
-    // useEffect(()=> {
-    //     const sesion = async () => {
-    //         const {perfiles} = await (await axios.get('/api/getSesion')).data;
-    //         if (!perfiles || perfiles.length === 0){
-    //             await axios.post('/api/sesion',{descUsuario: descUsuario, descPerfil: descPerfil, perfilUso: perfilUso, descTarjeta: descTarjeta, ciudad: Ciudad, estado: Estado, pais: Pais});
-    //         }
-    //     }
-    //     sesion();
-    // }, []);
 
+    const responsive = {
+        superLargeDesktop: {
+          // the naming can be any, depends on you.
+          breakpoint: { max: 2000, min: 1024 },
+          items: 4
+        },
+        desktop: {
+          breakpoint: { max: 1024, min: 800 },
+          items: 4
+        },
+        tablet: {
+          breakpoint: { max: 1024, min: 464 },
+          items: 2
+        },
+        mobile: {
+          breakpoint: { max: 464, min: 0 },
+          items: 1
+        }
+    };
+    const {perfilUso} = useSelector(state => state.perfiles);
+    const [medios, setMedios] = useState([]);
+    const [mediosFil, setMediosFil] = useState([]);
+
+    useEffect(()=> {
+        const traerInfo = async () => {
+            const medios = await (await axios.post('/api/getHist',{perfil: perfilUso.Id_Perfil})).data;
+            for (let i=0; i<medios.length;i++){
+                const img = imagenes.find(img => img.pos == medios[i].Imagen);
+                if (img){
+                    medios[i].Imagen = img.img;
+                }
+            }
+            setMedios(medios);
+            setMediosFil(medios);
+        }
+        traerInfo();
+    },[]);
+
+    const handleChange = e => {
+        if (!e.target.value){
+            setMediosFil(medios);
+        }
+        else {
+            const filtro = medios.filter(med => med.Titulo.toLowerCase().includes(e.target.value.toLowerCase()));
+            setMediosFil(filtro);
+        }
+    }
+    
     return (
-        <h1>Inicio</h1>
+        <>
+            <div className="formContRegIn">
+                <input type="text" placeholder="Buscar Medio" onChange={handleChange}/>
+            </div>
+            <div className="tituloCont">
+                <h2>Populares</h2>
+            </div>
+            <div className="carrusel">
+            <Carousel 
+                responsive={responsive}
+                infinite={true}
+                centerMode={true}       
+            >
+                    {mediosFil.map(med => {
+                            if (med.T_Serie){
+                                return <CuadroSeries prop={med} key={med.T_Serie} op={5}/>
+                            }
+                            else if (med.T_Pelicula){
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} op={5}/>
+                            }
+                            else if (med.T_Juego){
+                                return <CuadroJuegos prop={med} key={med.T_Juego} op={5}/>
+                            }
+                        })}        
+            </Carousel>
+            </div>
+            <div className="tituloCont">
+                <h2>Lista de peliculas de marvel</h2>
+            </div>
+            <div className="vistaPers">
+                
+            </div>
+        </>
     );
 }
 

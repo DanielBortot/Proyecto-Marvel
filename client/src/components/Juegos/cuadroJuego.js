@@ -2,7 +2,7 @@ import React from "react";
 import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
-import { descJuego } from "../../reducers/juegosSlice";
+import { descJuego, descJuegoHist } from "../../reducers/juegosSlice";
 import axios from "axios";
 
 function CuadroJuegos ({prop, email, medios, setMedios, pers, op, org}) {
@@ -10,8 +10,14 @@ function CuadroJuegos ({prop, email, medios, setMedios, pers, op, org}) {
     const navigate = useNavigate()
     const {Imagen, T_Juego} = prop
     const enviar = ()=> {
-        dispatch(descJuego(prop));
-        navigate(`/juegos/${T_Juego}`);
+        if (op !== 5){
+            dispatch(descJuego(prop));
+            navigate(`/juegos/${T_Juego}`);
+        }
+        else {
+            dispatch(descJuegoHist(prop));
+            navigate('/juegos/reprojuego')
+        }
     }
 
     const delDatos = async ()=> {

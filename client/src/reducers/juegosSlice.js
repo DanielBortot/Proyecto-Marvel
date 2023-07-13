@@ -1,7 +1,8 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
-    descripcion: []
+    descripcion: [],
+    juegoHist: {}
 }
 
 export const juegosSlice = createSlice({
@@ -11,6 +12,9 @@ export const juegosSlice = createSlice({
         descJuego: (state, action) =>{
             state.descripcion = action.payload;
         },
+        descJuegoHist: (state, action) =>{
+            state.juegoHist = action.payload;
+        },
         removeJuego: (state, action) => {
             const id = action.payload;
             state.descripcion = state.descripcion.filter(juego => juego.id !== id);
@@ -18,5 +22,5 @@ export const juegosSlice = createSlice({
     }
 });
 
-export const {descJuego, removeJuego} = juegosSlice.actions;
+export const {descJuego, removeJuego, descJuegoHist} = juegosSlice.actions;
 export default juegosSlice.reducer;

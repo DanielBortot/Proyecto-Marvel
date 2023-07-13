@@ -1,6 +1,6 @@
 .vistaPersM {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 500px));
     gap: 4rem;
     margin-top: 3rem;
     padding: 0 3rem 3rem;

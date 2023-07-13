@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
@@ -8,10 +8,19 @@ import axios from "axios";
 function CuadroPers ({prop, email, pod, pers, setPers, op, obj}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const [val, setVal] = useState({});
     const {imagen, Nombre} = prop
+
+    useEffect(()=> {
+        const datos = async () => {
+            const dato = await (await axios.post('/api/villHer',{Nombre: Nombre})).data;
+            let val = {...prop, ...dato}
+            setVal(val);
+        }
+        datos();
+    },[])
+
     const enviar = async ()=> {
-        const dato = await (await axios.post('/api/villHer',{Nombre: Nombre})).data;
-        let val = {...prop, ...dato}
         dispatch(descPersonaje(val));
         navigate(`/personajes/${Nombre}`);
     }
@@ -46,7 +55,8 @@ function CuadroPers ({prop, email, pod, pers, setPers, op, obj}) {
                         </div>
 
                         <div className="tituloPers">
-                            <h3>{Nombre}</h3>
+                            <h3>{val.Alias ? val.Alias : Nombre}</h3>
+                            <p>{val.Alias ? Nombre : ''}</p>
                         </div>
                     </div>
                 </div>
