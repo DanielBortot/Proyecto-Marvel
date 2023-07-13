@@ -8,15 +8,17 @@ import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
 import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
 import { Link } from "react-router-dom";
 import { datosReporte } from "../../reducers/reportesSlice";
+import { descSerieHist } from "../../reducers/seriesSlice";
 
 function DescripcionSeries () {
     const {descripcion} = useSelector(state => state.series);
     const {descUsuario} = useSelector(state => state.usuario);
+    const {perfilUso} = useSelector(state => state.perfiles);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
     const dispatch = useDispatch();
     
-    let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Serie, N_Episodios, Creador, Canal, Tipo, Imagen} = descripcion;
+    let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Serie, N_Episodios, Creador, Canal, Tipo, Imagen, Duracion} = descripcion;
 
     useEffect(()=> {
         const getDatos = async ()=> {
@@ -38,6 +40,7 @@ function DescripcionSeries () {
             setPersonajes(pers);
         }
         getDatos();
+        dispatch(descSerieHist({Titulo: T_Serie, Id_Perfil: perfilUso.Id_Perfil, Duracion: Duracion, N_Episodios, op: 0}));
     },[]);
 
     const delDatos = async () => {

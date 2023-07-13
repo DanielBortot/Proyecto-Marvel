@@ -15,7 +15,7 @@ function CuadroSeries ({prop, email, medios, setMedios, pers, op, org}) {
             navigate(`/series/${T_Serie}`);
         }
         else {
-            dispatch(descSerieHist(prop));
+            dispatch(descSerieHist({...prop, op: 1}));
             navigate('/series/reproserie');
         }
     }

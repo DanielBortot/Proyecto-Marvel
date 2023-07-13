@@ -2,16 +2,15 @@ const pool = require('../database');
 
 const historial = {
     addHist: async (req,res) => {
-        const {calificacion, tVista, perfil, titulo, inicio} = req.body;
-        await pool.query('INSERT INTO "Historial" ("N_Titulo", "Id_Perfil", "Calificacion", "Hora_Inicio", "Tiempo_Reproduccion") VALUES ($1, $2, $3, $4, $5)',[titulo,perfil,calificacion, new Date(),tVista]);
-        const hist = await pool.query('SELECT MAX("Hora_Inicio") tiempo FROM "Historial";');
+        const {calificacion, tVista, perfil, titulo} = req.body;
+        await pool.query('INSERT INTO "Historial" ("N_Titulo", "Id_Perfil", "Calificacion", "Tiempo_Reproduccion") VALUES ($1, $2, $3, $4)',[titulo,perfil,calificacion,tVista]);
+        const hist = await pool.query('SELECT MAX("Id_Hist") idhist FROM "Historial" WHERE "Id_Perfil"=$1 AND "N_Titulo"=$2',[perfil,titulo]);
         res.send(hist.rows);
     },
 
     upHist: async (req,res) => {
-        const {calificacion, tVista, perfil, titulo, inicio} = req.body;
-        console.log(req.body);
-        await pool.query('UPDATE "Historial" SET "Calificacion"=$1, "Tiempo_Reproduccion"=$2 WHERE "N_Titulo"=$3 AND "Id_Perfil"=$4 AND "Hora_Inicio"=$5',[calificacion,tVista,titulo,perfil,inicio]);
+        const {calificacion, tVista, perfil, titulo, idHist} = req.body;
+        await pool.query('UPDATE "Historial" SET "Calificacion"=$1, "Tiempo_Reproduccion"=$2 WHERE "N_Titulo"=$3 AND "Id_Perfil"=$4 AND "Id_Hist"=$5',[calificacion,tVista,titulo,perfil,idHist]);
         res.send('modificado');
     },
 

@@ -15,7 +15,7 @@ function CuadroPeliculas ({prop, email, medios, setMedios, pers, op, org}) {
             navigate(`/peliculas/${T_Pelicula}`);
         }
         else {
-            dispatch(descPeliHist(prop));
+            dispatch(descPeliHist({...prop, op: 1}));
             navigate('/peliculas/repropeli');
         }
     }
