@@ -45,11 +45,20 @@
     font-size: 2vw;
 }
 
+.tituloPers h4 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 200%;
+}
+
 .tituloPers p {
     position: absolute;
     bottom: -15px;
     right: 10px;
 
+}
+
+.tituloMed {
+    font-size: 1vw;
 }
 
 .cajaPers {
