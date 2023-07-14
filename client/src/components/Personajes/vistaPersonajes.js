@@ -10,8 +10,19 @@ import { HeaderPers } from "../headerpers";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import ClipLoader from "react-spinners/ClipLoader";
 
 function VistaPersonajes () {
+
+
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 4000)
+    }, [])
 
     const responsive = {
         superLargeDesktop: {
@@ -78,37 +89,50 @@ function VistaPersonajes () {
     }
 
     return (
-        <>           
-            <HeaderPers/>
-            <div className="row">
-                <div className="col-9">{admin()}</div>   
-                <div className="col-3 formContRegIn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                    <input type="text" placeholder="Buscar Personaje" onChange={handleChange}/>
+        <>   
+            {loading ?
+                <ClipLoader
+                    color={'#ec1d24'}
+                    loading={loading}
+                    size={100}
+                    aria-label="Loading Spinner"
+                    data-testid="loader" 
+                    speedMultiplier={.5}
+                />  
+            :
+            <div>
+                <HeaderPers/>
+                <div className="row">
+                    <div className="col-9">{admin()}</div>   
+                    <div className="col-3 formContRegIn">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                        <input type="text" placeholder="Buscar Personaje" onChange={handleChange}/>
+                    </div>
+                </div>
+                <div className="tituloCont">
+                    <h2>Populares</h2>
+                </div>
+                <div className="carrusel">
+                <Carousel 
+                    responsive={responsive}
+                    infinite={true}
+                    centerMode={true}       
+                >
+                        {persFil.map(personaje => {
+                                return <CuadroPers prop={personaje} key={personaje.Nombre}/>
+                            })}     
+                </Carousel>
+                </div>
+                <div className="tituloCont">
+                    <h2>Lista de personajes de marvel</h2>
+                </div>
+                <div className="vistaPers">
+                    {persFil.map(personaje => {
+                        return <CuadroPers prop={personaje} key={personaje.Nombre}/>
+                    })}
                 </div>
             </div>
-            <div className="tituloCont">
-                <h2>Populares</h2>
-            </div>
-            <div className="carrusel">
-            <Carousel 
-                responsive={responsive}
-                infinite={true}
-                centerMode={true}       
-            >
-                    {persFil.map(personaje => {
-                            return <CuadroPers prop={personaje} key={personaje.Nombre}/>
-                        })}     
-            </Carousel>
-            </div>
-            <div className="tituloCont">
-                <h2>Lista de personajes de marvel</h2>
-            </div>
-            <div className="vistaPers">
-                {persFil.map(personaje => {
-                    return <CuadroPers prop={personaje} key={personaje.Nombre}/>
-                })}
-            </div>
+            }
         </>
     );
 }
