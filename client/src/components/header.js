@@ -44,7 +44,7 @@ function Header (){
     }
 
     return (
-        <div className="header">
+        <div className="header" style={{height: '84px'}}>
             <div className="logo hed">FANATIC DB</div>
             <div className="botones hed">
                 <li style={{listStyle: 'none'}}>
