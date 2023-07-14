@@ -56,7 +56,7 @@ function CuadroPers ({prop, email, pod, pers, setPers, op, obj}) {
 
                         <div className="tituloPers">
                             <h3>{val.Alias ? val.Alias : Nombre}</h3>
-                            <p>{val.Alias ? Nombre : ''}</p>
+                            <h5>{val.Alias ? Nombre : ''}</h5>
                         </div>
                     </div>
                 </div>

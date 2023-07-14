@@ -8,6 +8,8 @@ import { CuadroPeliculas } from "./Peliculas/cuadroPelicula";
 import { useSelector } from "react-redux";
 import { CuadroSeries } from "./Series/cuadroSeries";
 import { CuadroJuegos } from "./Juegos/cuadroJuego";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 function VistaInicio () {
 
@@ -61,8 +63,11 @@ function VistaInicio () {
     
     return (
         <>
-            <div className="formContRegIn">
-                <input type="text" placeholder="Buscar Medio" onChange={handleChange}/>
+            <div className="row">
+                <div className="col-3 formContRegIn">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                    <input type="text" placeholder="Buscar Medio" onChange={handleChange}/>
+                </div>
             </div>
             <div className="tituloCont">
                 <h2>Populares</h2>

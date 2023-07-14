@@ -10,6 +10,7 @@
 
 .vistaPers {
     display: grid;
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
     gap: 4rem;
     margin-top: 3rem;
@@ -42,7 +43,7 @@
 
 .tituloPers h3 {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 2vw;
+    font-size: 200%;
 }
 
 .tituloPers h4 {
@@ -53,6 +54,14 @@
 .tituloPers p {
     position: absolute;
     bottom: -15px;
+    right: 10px;
+
+}
+
+.tituloPers h5 {
+    font-family: 'Bebas Neue', sans-serif;
+    position: absolute;
+    bottom: -5px;
     right: 10px;
 
 }

@@ -166,7 +166,7 @@ function ModHeroe() {
                                 name="traje"
                             />
                             <ErrorMessage name="archienemigo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.archienemigo}</div>)}/>
-                            <Field type="text" name="genero" as="select">
+                            <Field type="text" name="archienemigo" as="select">
                                 <option hidden selected value={-1}>Selecciona el archienegimo del heroe</option>
                                 {villanos.map(villano => (
                                     <option key={villano.N_Villano} value={villano.N_Villano}>{villano.N_Villano}</option>

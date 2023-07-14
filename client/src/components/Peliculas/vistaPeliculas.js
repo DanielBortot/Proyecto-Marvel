@@ -7,6 +7,8 @@ import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPeliculas } from "./cuadroPelicula";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 function VistaPeliculas () {
 
@@ -73,9 +75,12 @@ function VistaPeliculas () {
     
     return (
         <>
-            {admin()}
-            <div className="formContRegIn">
-                <input type="text" placeholder="Buscar Pelicula" onChange={handleChange}/>
+            <div className="row">
+                <div className="col-9">{admin()}</div>   
+                <div className="col-3 formContRegIn">
+                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                    <input type="text" placeholder="Buscar Película" onChange={handleChange}/>
+                </div>
             </div>
             <div className="tituloCont">
                 <h2>Populares</h2>

@@ -42,12 +42,12 @@
 .formContRegIn {
     display: flex;
     margin: 10px 15px 0 0;
-    width: 100%;
+    width: 20%;
     justify-content: flex-end;
 }
 
 .formContRegIn input {
-    width: 20%;
+    width: 100%;
     height: 40px;
     margin: 0.5rem;
     border-radius: 8px;
