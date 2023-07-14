@@ -96,6 +96,7 @@ const personajes = {
             await pool.query('INSERT INTO "Pers_Creador" ("N_Personaje", "N_Creador") VALUES ($1, $2)',[nombrePers,creadores[i].Nom_Creador]);
         }
         await pool.query('UPDATE "Heroe" SET "Alias"=$1, "Logotipo"=$2, "Color_Traje"=$3, "Archienemigo"=$4 WHERE "N_Heroe"=$5',[alias,logotipo,traje,archienemigo,nombrePers]);
+        res.send('modificado')
     },
 
     addPersVill: async (req,res) => {
@@ -133,7 +134,7 @@ const personajes = {
         }
         await pool.query('UPDATE "Villano" SET "Alias"=$1, "Objetivo"=$2 WHERE "N_Villano"=$3',[alias,objetivo,nombrePers]);
 
-        res.send('creado');
+        res.send('modificado');
     },
 
     addPersCiv: async (req,res) => {
@@ -171,7 +172,7 @@ const personajes = {
             await pool.query('INSERT INTO "Pers_Creador" ("N_Personaje", "N_Creador") VALUES ($1, $2)',[nombrePers,creadores[i].Nom_Creador]);
         }
 
-        res.send('creado');
+        res.send('modificado');
     },
 
     delPersonaje: async (req,res) => {
