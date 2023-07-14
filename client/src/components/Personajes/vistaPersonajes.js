@@ -50,8 +50,6 @@ function VistaPersonajes () {
                 if (img){
                     personajes[i].imagen = img.img;
                 }
-                const dato = await (await axios.post('/api/villHer',{Nombre: personajes[i].Nombre})).data;
-                personajes[i] = {...personajes[i], ...dato}
             }
             setPersonajes(personajes);
             setPersFil(personajes);

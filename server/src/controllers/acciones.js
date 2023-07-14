@@ -7,7 +7,19 @@ const acciones = {
             const nac = (await pool.query('SELECT "Nacionalidad" "Nac" FROM "Pers_Nac" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
             const ocu = (await pool.query('SELECT "Ocupacion" "Ocup" FROM "Pers_Oc" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
             const crea = (await pool.query('SELECT "N_Creador" "Nom_Creador" FROM "Pers_Creador" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows;
-            personajes[i] = {...personajes[i], nacionalidades: nac, ocupaciones: ocu, creadores: crea}
+            let datos = {};
+            const villano = (await pool.query('SELECT "Alias", "Objetivo" FROM "Villano" WHERE "N_Villano"=$1',[personajes[i].Nombre])).rows;
+            const heroe = (await pool.query('SELECT "Alias", "Logotipo", "Color_Traje", "Archienemigo" FROM "Heroe" WHERE "N_Heroe"=$1',[personajes[i].Nombre])).rows;
+            if (villano.length > 0){
+            datos = {...villano[0], op: 1};
+            }
+            else if (heroe.length > 0){
+                datos = {...heroe[0], op: 2};
+            }
+            else {
+                datos = {op: 3}
+            }
+            personajes[i] = {...personajes[i], ...datos, nacionalidades: nac, ocupaciones: ocu, creadores: crea}
         }
         res.send(personajes);
     },
