@@ -89,7 +89,7 @@ function VistaInicio () {
                         </div>
                     </div>
                     <div className="tituloCont">
-                        <h2>Populares</h2>
+                        <h2>Continuar viendo</h2>
                     </div>
                     <div className="carrusel">
                     <Carousel 
@@ -111,7 +111,7 @@ function VistaInicio () {
                     </Carousel>
                     </div>
                     <div className="tituloCont">
-                        <h2>Lista de peliculas de marvel</h2>
+                        <h2>Recomendaciones</h2>
                     </div>
                     <div className="vistaPers">
                     </div>   
