@@ -17,13 +17,6 @@ function VistaPersonajes () {
 
     const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        setLoading(true)
-        setTimeout(() => {
-            setLoading(false)
-        }, 4000)
-    }, [])
-
     const responsive = {
         superLargeDesktop: {
           // the naming can be any, depends on you.
@@ -49,15 +42,19 @@ function VistaPersonajes () {
 
     useEffect(()=> {
         const traerInfo = async () => {
+            setLoading(true)
             const personajes = await (await axios.get('/api/personajes')).data;
             for (let i=0; i<personajes.length;i++){
                 const img = imagenes.find(img => img.pos == personajes[i].imagen);
                 if (img){
                     personajes[i].imagen = img.img;
                 }
+                const dato = await (await axios.post('/api/villHer',{Nombre: personajes[i].Nombre})).data;
+                personajes[i] = {...personajes[i], ...dato}
             }
             setPersonajes(personajes);
             setPersFil(personajes);
+            setLoading(false);
         }
         traerInfo();
     },[]);
@@ -89,7 +86,8 @@ function VistaPersonajes () {
     }
 
     return (
-        <>   
+        <>
+            <HeaderPers/>
             {loading ?
                 <ClipLoader
                     color={'#ec1d24'}
@@ -101,7 +99,6 @@ function VistaPersonajes () {
                 />  
             :
             <div>
-                <HeaderPers/>
                 <div className="row">
                     <div className="col-9">{admin()}</div>   
                     <div className="col-3 formContRegIn">

@@ -8,20 +8,10 @@ import axios from "axios";
 function CuadroPers ({prop, email, pod, pers, setPers, op, obj}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
-    const [val, setVal] = useState({});
-    const {imagen, Nombre} = prop
-
-    useEffect(()=> {
-        const datos = async () => {
-            const dato = await (await axios.post('/api/villHer',{Nombre: Nombre})).data;
-            let val = {...prop, ...dato}
-            setVal(val);
-        }
-        datos();
-    },[])
+    const {imagen, Nombre, Alias} = prop;
 
     const enviar = async ()=> {
-        dispatch(descPersonaje(val));
+        dispatch(descPersonaje(prop));
         navigate(`/personajes/${Nombre}`);
     }
 
@@ -55,8 +45,8 @@ function CuadroPers ({prop, email, pod, pers, setPers, op, obj}) {
                         </div>
 
                         <div className="tituloPers">
-                            <h3>{val.Alias ? val.Alias : Nombre}</h3>
-                            <h5>{val.Alias ? Nombre : ''}</h5>
+                            <h3>{Alias ? Alias : Nombre}</h3>
+                            <h5>{Alias ? Nombre : ''}</h5>
                         </div>
                     </div>
                 </div>
