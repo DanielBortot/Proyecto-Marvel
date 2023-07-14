@@ -10,8 +10,11 @@ import { HeaderPers } from "../headerpers";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import ClipLoader from "react-spinners/ClipLoader";
 
 function VistaOrgs () {
+
+    const [loading, setLoading] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -38,6 +41,7 @@ function VistaOrgs () {
 
     useEffect(()=> {
         const traerInfo = async () => {
+            setLoading(true)
             const orgs = await (await axios.get('/api/organizaciones')).data;
             for (let i=0; i<orgs.length;i++){
                 const img = imagenes.find(img => img.pos == orgs[i].Imagen);
@@ -47,6 +51,7 @@ function VistaOrgs () {
             }
             setOrganizaciones(orgs);
             setOrgsFil(orgs);
+            setLoading(false);
         }
         traerInfo();
     },[]);
@@ -76,35 +81,50 @@ function VistaOrgs () {
     return (
         <>
             <HeaderPers/>
-            <div className="row">
-                <div className="col-9">{admin()}</div>   
-                <div className="col-3 formContRegIn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                    <input type="text" placeholder="Buscar Organización" onChange={handleChange}/>
-                </div>
-            </div>
-            <div className="tituloCont">
-                <h2>Populares</h2>
-            </div>
-            <div className="carrusel">
-            <Carousel 
-                responsive={responsive}
-                infinite={true}
-                centerMode={true}       
-            >
-                    {orgsFil.map(org => {
+            {loading ?
+                <div className="loading">
+                    <ClipLoader
+                        color={'#ec1d24'}
+                        loading={loading}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader" 
+                        speedMultiplier={.5}
+                    /> 
+                </div> 
+            :
+                <div>
+                    <div className="row">
+                        <div className="col-9">{admin()}</div>   
+                        <div className="col-3 formContRegIn">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                            <input type="text" placeholder="Buscar Organización" onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Populares</h2>
+                    </div>
+                    <div className="carrusel">
+                    <Carousel 
+                        responsive={responsive}
+                        infinite={true}
+                        centerMode={true}       
+                    >
+                            {orgsFil.map(org => {
+                                    return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
+                                })}     
+                    </Carousel>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Lista de organizaciones de marvel</h2>
+                    </div>
+                    <div className="vistaPers">
+                        {orgsFil.map(org => {
                             return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
-                        })}     
-            </Carousel>
-            </div>
-            <div className="tituloCont">
-                <h2>Lista de organizaciones de marvel</h2>
-            </div>
-            <div className="vistaPers">
-                {orgsFil.map(org => {
-                    return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
-                })}
-            </div>
+                        })}
+                    </div>
+                </div>
+            }
         </>
     );
 }

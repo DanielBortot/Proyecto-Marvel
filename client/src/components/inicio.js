@@ -10,8 +10,12 @@ import { CuadroSeries } from "./Series/cuadroSeries";
 import { CuadroJuegos } from "./Juegos/cuadroJuego";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import ClipLoader from "react-spinners/ClipLoader";
+
 
 function VistaInicio () {
+
+    const [loading, setLoading] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -38,6 +42,7 @@ function VistaInicio () {
 
     useEffect(()=> {
         const traerInfo = async () => {
+            setLoading(true)
             const medios = await (await axios.post('/api/getHist',{perfil: perfilUso.Id_Perfil})).data;
             for (let i=0; i<medios.length;i++){
                 const img = imagenes.find(img => img.pos == medios[i].Imagen);
@@ -47,6 +52,7 @@ function VistaInicio () {
             }
             setMedios(medios);
             setMediosFil(medios);
+            setLoading(false);
         }
         traerInfo();
     },[]);
@@ -62,41 +68,55 @@ function VistaInicio () {
     }
     
     return (
-        <>
-            <div className="row">
-                <div className="col-3 formContRegIn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                    <input type="text" placeholder="Buscar Medio" onChange={handleChange}/>
+        <>  
+            {loading ?
+                <div className="loading">
+                    <ClipLoader
+                        color={'#ec1d24'}
+                        loading={loading}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader" 
+                        speedMultiplier={.5}
+                    /> 
+                </div> 
+            :
+                <div>
+                    <div className="row">
+                        <div className="col-3 formContRegIn">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                            <input type="text" placeholder="Buscar Medio" onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Populares</h2>
+                    </div>
+                    <div className="carrusel">
+                    <Carousel 
+                        responsive={responsive}
+                        infinite={true}
+                        centerMode={true}       
+                    >
+                            {mediosFil.map(med => {
+                                    if (med.T_Serie){
+                                        return <CuadroSeries prop={med} key={med.T_Serie} op={5}/>
+                                    }
+                                    else if (med.T_Pelicula){
+                                        return <CuadroPeliculas prop={med} key={med.T_Pelicula} op={5}/>
+                                    }
+                                    else if (med.T_Juego){
+                                        return <CuadroJuegos prop={med} key={med.T_Juego} op={5}/>
+                                    }
+                                })}        
+                    </Carousel>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Lista de peliculas de marvel</h2>
+                    </div>
+                    <div className="vistaPers">
+                    </div>   
                 </div>
-            </div>
-            <div className="tituloCont">
-                <h2>Populares</h2>
-            </div>
-            <div className="carrusel">
-            <Carousel 
-                responsive={responsive}
-                infinite={true}
-                centerMode={true}       
-            >
-                    {mediosFil.map(med => {
-                            if (med.T_Serie){
-                                return <CuadroSeries prop={med} key={med.T_Serie} op={5}/>
-                            }
-                            else if (med.T_Pelicula){
-                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} op={5}/>
-                            }
-                            else if (med.T_Juego){
-                                return <CuadroJuegos prop={med} key={med.T_Juego} op={5}/>
-                            }
-                        })}        
-            </Carousel>
-            </div>
-            <div className="tituloCont">
-                <h2>Lista de peliculas de marvel</h2>
-            </div>
-            <div className="vistaPers">
-                
-            </div>
+            }
         </>
     );
 }

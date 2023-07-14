@@ -9,8 +9,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import ClipLoader from "react-spinners/ClipLoader";
 
 function VistaSeries () {
+
+    const [loading, setLoading] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -37,6 +40,7 @@ function VistaSeries () {
 
     useEffect(()=> {
         const traerInfo = async () => {
+            setLoading(true)
             const series = await (await axios.get('/api/series')).data;
             for (let i=0; i<series.length;i++){
                 const img = imagenes.find(img => img.pos == series[i].Imagen);
@@ -46,6 +50,7 @@ function VistaSeries () {
             }
             setSeries(series);
             setSeriesFil(series);
+            setLoading(false);
         }
         traerInfo();
     },[]);
@@ -74,37 +79,52 @@ function VistaSeries () {
     }
     
     return (
-        <>
-            <div className="row">
-                <div className="col-9">{admin()}</div>   
-                <div className="col-3 formContRegIn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                    <input type="text" placeholder="Buscar Serie" onChange={handleChange}/>
-                </div>
-            </div>
-            <div className="tituloCont">
-                <h2>Populares</h2>
-            </div>
-            <div className="carrusel">
-            <Carousel 
-                responsive={responsive}
-                infinite={true}
-                centerMode={true}       
-            >
-                
-                    {seriesFil.map(serie => {
+        <>  
+            {loading ?
+                <div className="loading">
+                    <ClipLoader
+                        color={'#ec1d24'}
+                        loading={loading}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader" 
+                        speedMultiplier={.5}
+                    /> 
+                </div> 
+            :
+                <div>
+                    <div className="row">
+                        <div className="col-9">{admin()}</div>   
+                        <div className="col-3 formContRegIn">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                            <input type="text" placeholder="Buscar Serie" onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Populares</h2>
+                    </div>
+                    <div className="carrusel">
+                    <Carousel 
+                        responsive={responsive}
+                        infinite={true}
+                        centerMode={true}       
+                    >
+                        
+                            {seriesFil.map(serie => {
+                                    return <CuadroSeries prop={serie} key={serie.T_Serie}/>
+                                })}     
+                    </Carousel>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Lista de series de marvel</h2>
+                    </div>
+                    <div className="vistaPers">
+                        {seriesFil.map(serie => {
                             return <CuadroSeries prop={serie} key={serie.T_Serie}/>
-                        })}     
-            </Carousel>
-            </div>
-            <div className="tituloCont">
-                <h2>Lista de series de marvel</h2>
-            </div>
-            <div className="vistaPers">
-                {seriesFil.map(serie => {
-                    return <CuadroSeries prop={serie} key={serie.T_Serie}/>
-                })}
-            </div>
+                        })}
+                    </div>
+                </div>
+            }
         </>
     );
 }

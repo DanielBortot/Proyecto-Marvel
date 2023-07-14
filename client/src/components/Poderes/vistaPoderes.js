@@ -10,8 +10,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import ClipLoader from "react-spinners/ClipLoader";
 
 function VistaPoderes () {
+
+    const [loading, setLoading] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -38,6 +41,7 @@ function VistaPoderes () {
 
     useEffect(()=> {
         const traerInfo = async () => {
+            setLoading(true)
             const pods = await (await axios.get('/api/poderes')).data;
             for (let i=0; i<pods.length;i++){
                 const img = imagenes.find(img => img.pos == pods[i].Imagen);
@@ -47,6 +51,7 @@ function VistaPoderes () {
             }
             setPoderes(pods);
             setPodsFil(pods);
+            setLoading(false);
         }
         traerInfo();
     },[]);
@@ -76,35 +81,50 @@ function VistaPoderes () {
     return (
         <>
             <HeaderPers/>
-            <div className="row">
-                <div className="col-9">{admin()}</div>   
-                <div className="col-3 formContRegIn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                    <input type="text" placeholder="Buscar Poder" onChange={handleChange}/>
-                </div>
-            </div>
-            <div className="tituloCont">
-                <h2>Populares</h2>
-            </div>
-            <div className="carrusel">
-            <Carousel 
-                responsive={responsive}
-                infinite={true}
-                centerMode={true}       
-            >
-                    {podsFil.map(pod => {
+            {loading ?
+                <div className="loading">
+                    <ClipLoader
+                        color={'#ec1d24'}
+                        loading={loading}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader" 
+                        speedMultiplier={.5}
+                    /> 
+                </div> 
+            :
+                <div>
+                    <div className="row">
+                        <div className="col-9">{admin()}</div>   
+                        <div className="col-3 formContRegIn">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                            <input type="text" placeholder="Buscar Poder" onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Populares</h2>
+                    </div>
+                    <div className="carrusel">
+                    <Carousel 
+                        responsive={responsive}
+                        infinite={true}
+                        centerMode={true}       
+                    >
+                            {podsFil.map(pod => {
+                                    return <CuadroPoder prop={pod} key={pod.Nombre}/>
+                                })}     
+                    </Carousel>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Lista de poderes de marvel</h2>
+                    </div>
+                    <div className="vistaPers">
+                        {podsFil.map(pod => {
                             return <CuadroPoder prop={pod} key={pod.Nombre}/>
-                        })}     
-            </Carousel>
-            </div>
-            <div className="tituloCont">
-                <h2>Lista de poderes de marvel</h2>
-            </div>
-            <div className="vistaPers">
-                {podsFil.map(pod => {
-                    return <CuadroPoder prop={pod} key={pod.Nombre}/>
-                })}
-            </div>
+                        })}
+                    </div>
+                </div>
+            }
         </>
     );
 }

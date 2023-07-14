@@ -9,8 +9,11 @@ import { HeaderPers } from "../headerpers";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import ClipLoader from "react-spinners/ClipLoader";
 
 function VistaObjetos () {
+
+    const [loading, setLoading] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -37,6 +40,7 @@ function VistaObjetos () {
 
     useEffect(()=> {
         const traerInfo = async () => {
+            setLoading(true)
             const objs = await (await axios.get('/api/getObjetos')).data;
             for (let i=0; i<objs.length;i++){
                 const img = imagenes.find(img => img.pos == objs[i].Imagen);
@@ -46,6 +50,7 @@ function VistaObjetos () {
             }
             setObjetos(objs);
             setObjsFil(objs);
+            setLoading(false);
         }
         traerInfo();
     },[]);
@@ -75,35 +80,50 @@ function VistaObjetos () {
     return (
         <>
             <HeaderPers/>
-            <div className="row">
-                <div className="col-9">{admin()}</div>   
-                <div className="col-3 formContRegIn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                    <input type="text" placeholder="Buscar Objeto" onChange={handleChange}/>
-                </div>
-            </div>
-            <div className="tituloCont">
-                <h2>Populares</h2>
-            </div>
-            <div className="carrusel">
-            <Carousel 
-                responsive={responsive}
-                infinite={true}
-                centerMode={true}       
-            >
-                    {objsFil.map(obj => {
+            {loading ?
+                <div className="loading">
+                    <ClipLoader
+                        color={'#ec1d24'}
+                        loading={loading}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader" 
+                        speedMultiplier={.5}
+                    /> 
+                </div> 
+            :
+                <div>
+                    <div className="row">
+                        <div className="col-9">{admin()}</div>   
+                        <div className="col-3 formContRegIn">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                            <input type="text" placeholder="Buscar Objeto" onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Populares</h2>
+                    </div>
+                    <div className="carrusel">
+                    <Carousel 
+                        responsive={responsive}
+                        infinite={true}
+                        centerMode={true}       
+                    >
+                            {objsFil.map(obj => {
+                                    return <CuadroObjeto prop={obj} key={obj.Nombre}/>
+                                })}     
+                    </Carousel>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Lista de objetos de marvel</h2>
+                    </div>
+                    <div className="vistaPers">
+                        {objsFil.map(obj => {
                             return <CuadroObjeto prop={obj} key={obj.Nombre}/>
-                        })}     
-            </Carousel>
-            </div>
-            <div className="tituloCont">
-                <h2>Lista de objetos de marvel</h2>
-            </div>
-            <div className="vistaPers">
-                {objsFil.map(obj => {
-                    return <CuadroObjeto prop={obj} key={obj.Nombre}/>
-                })}
-            </div>
+                        })}
+                    </div>
+                </div>
+            }
         </>
     );
 }

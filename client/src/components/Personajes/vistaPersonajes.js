@@ -89,14 +89,16 @@ function VistaPersonajes () {
         <>
             <HeaderPers/>
             {loading ?
-                <ClipLoader
-                    color={'#ec1d24'}
-                    loading={loading}
-                    size={100}
-                    aria-label="Loading Spinner"
-                    data-testid="loader" 
-                    speedMultiplier={.5}
-                />  
+                <div className="loading">
+                    <ClipLoader
+                        color={'#ec1d24'}
+                        loading={loading}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader" 
+                        speedMultiplier={.5}
+                    /> 
+                </div> 
             :
             <div>
                 <div className="row">

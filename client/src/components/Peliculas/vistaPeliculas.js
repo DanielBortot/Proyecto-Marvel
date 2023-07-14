@@ -9,8 +9,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import ClipLoader from "react-spinners/ClipLoader";
 
 function VistaPeliculas () {
+
+    const [loading, setLoading] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -37,6 +40,7 @@ function VistaPeliculas () {
 
     useEffect(()=> {
         const traerInfo = async () => {
+            setLoading(true)
             const peliculas = await (await axios.get('/api/peliculas')).data;
             for (let i=0; i<peliculas.length;i++){
                 const img = imagenes.find(img => img.pos == peliculas[i].Imagen);
@@ -46,6 +50,7 @@ function VistaPeliculas () {
             }
             setPeliculas(peliculas);
             setPelisFil(peliculas);
+            setLoading(false);
         }
         traerInfo();
     },[]);
@@ -75,36 +80,51 @@ function VistaPeliculas () {
     
     return (
         <>
-            <div className="row">
-                <div className="col-9">{admin()}</div>   
-                <div className="col-3 formContRegIn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                    <input type="text" placeholder="Buscar Película" onChange={handleChange}/>
+        {loading ?
+                <div className="loading">
+                    <ClipLoader
+                        color={'#ec1d24'}
+                        loading={loading}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader" 
+                        speedMultiplier={.5}
+                    /> 
+                </div> 
+            :
+            <div>
+                <div className="row">
+                    <div className="col-9">{admin()}</div>   
+                    <div className="col-3 formContRegIn">
+                        <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                        <input type="text" placeholder="Buscar Película" onChange={handleChange}/>
+                    </div>
+                </div>
+                <div className="tituloCont">
+                    <h2>Populares</h2>
+                </div>
+                <div className="carrusel">
+                <Carousel 
+                    responsive={responsive}
+                    infinite={true}
+                    centerMode={true}       
+                >
+                    
+                        {pelisFil.map(pelicula => {
+                                return <CuadroPeliculas prop={pelicula} key={pelicula.T_Pelicula}/>
+                            })}     
+                </Carousel>
+                </div>
+                <div className="tituloCont">
+                    <h2>Lista de peliculas de marvel</h2>
+                </div>
+                <div className="vistaPers">
+                    {pelisFil.map(pelicula => {
+                        return <CuadroPeliculas prop={pelicula} key={pelicula.T_Pelicula}/>
+                    })}
                 </div>
             </div>
-            <div className="tituloCont">
-                <h2>Populares</h2>
-            </div>
-            <div className="carrusel">
-            <Carousel 
-                responsive={responsive}
-                infinite={true}
-                centerMode={true}       
-            >
-                
-                    {pelisFil.map(pelicula => {
-                            return <CuadroPeliculas prop={pelicula} key={pelicula.T_Pelicula}/>
-                        })}     
-            </Carousel>
-            </div>
-            <div className="tituloCont">
-                <h2>Lista de peliculas de marvel</h2>
-            </div>
-            <div className="vistaPers">
-                {pelisFil.map(pelicula => {
-                    return <CuadroPeliculas prop={pelicula} key={pelicula.T_Pelicula}/>
-                })}
-            </div>
+        }
         </>
     );
 }

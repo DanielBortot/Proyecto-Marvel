@@ -9,8 +9,11 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
+import ClipLoader from "react-spinners/ClipLoader";
 
 function VistaJuegos () {
+
+    const [loading, setLoading] = useState(false);
 
     const responsive = {
         superLargeDesktop: {
@@ -37,6 +40,7 @@ function VistaJuegos () {
 
     useEffect(()=> {
         const traerInfo = async () => {
+            setLoading(true)
             const juegos = await (await axios.get('/api/juegos')).data;
             for (let i=0; i<juegos.length;i++){
                 const img = imagenes.find(img => img.pos == juegos[i].Imagen);
@@ -46,6 +50,7 @@ function VistaJuegos () {
             }
             setJuegos(juegos);
             setJuegosFil(juegos);
+            setLoading(false);
         }
         traerInfo();
     },[]);
@@ -74,37 +79,52 @@ function VistaJuegos () {
     }
 
     return (
-        <>
-            <div className="row">
-                <div className="col-9">{admin()}</div>   
-                <div className="col-3 formContRegIn">
-                    <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                    <input type="text" placeholder="Buscar Juego" onChange={handleChange}/>
-                </div>
-            </div>
-            <div className="tituloCont">
-                <h2>Populares</h2>
-            </div>
-            <div className="carrusel">
-            <Carousel 
-                responsive={responsive}
-                infinite={true}
-                centerMode={true}       
-            >
-                
-                    {juegosFil.map(juego => {
+        <>  
+            {loading ?
+                <div className="loading">
+                    <ClipLoader
+                        color={'#ec1d24'}
+                        loading={loading}
+                        size={100}
+                        aria-label="Loading Spinner"
+                        data-testid="loader" 
+                        speedMultiplier={.5}
+                    /> 
+                </div> 
+            :
+                <div>
+                    <div className="row">
+                        <div className="col-9">{admin()}</div>   
+                        <div className="col-3 formContRegIn">
+                            <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
+                            <input type="text" placeholder="Buscar Juego" onChange={handleChange}/>
+                        </div>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Populares</h2>
+                    </div>
+                    <div className="carrusel">
+                    <Carousel 
+                        responsive={responsive}
+                        infinite={true}
+                        centerMode={true}       
+                    >
+                        
+                            {juegosFil.map(juego => {
+                                    return <CuadroJuegos prop={juego} key={juego.T_Juego}/>
+                                })}     
+                    </Carousel>
+                    </div>
+                    <div className="tituloCont">
+                        <h2>Lista de juegos de marvel</h2>
+                    </div>
+                    <div className="vistaPers">
+                        {juegosFil.map(juego => {
                             return <CuadroJuegos prop={juego} key={juego.T_Juego}/>
-                        })}     
-            </Carousel>
-            </div>
-            <div className="tituloCont">
-                <h2>Lista de juegos de marvel</h2>
-            </div>
-            <div className="vistaPers">
-                {juegosFil.map(juego => {
-                    return <CuadroJuegos prop={juego} key={juego.T_Juego}/>
-                })}
-            </div>
+                        })}
+                    </div>
+                </div>
+            } 
         </>
     );
 }

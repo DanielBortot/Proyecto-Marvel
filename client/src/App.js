@@ -74,6 +74,10 @@ import { ModSerie } from './components/Formularios/Modificar/modSerie';
 import { ModPelicula } from './components/Formularios/Modificar/modPelicula';
 import { ReproPeli } from './components/Peliculas/repropeli';
 import { ReproSerie } from './components/Series/reproserie';
+import { Reporte1 } from './components/Reportes/Reporte1';
+import { Reporte3 } from './components/Reportes/Reporte3';
+import { Reporte4 } from './components/Reportes/Reporte4';
+import { Reporte8 } from './components/Reportes/Reporte8';
 
 function App() {
   return (
@@ -173,6 +177,10 @@ function App() {
             <Route path='/Rep6' element={<Reporte6/>}/>
             <Route path='/Rep6/addRep6' element={<AgPosee/>}/>
             <Route path='/Rep6/modRep6' element={<ModRep6/>}/>
+            <Route path='/Rep1' element={<Reporte1/>}/>
+            <Route path='/Rep3' element={<Reporte3/>}/>
+            <Route path='/Rep4' element={<Reporte4/>}/>
+            <Route path='/Rep8' element={<Reporte8/>}/>
           </Routes>
       </div>
       <Footer/>

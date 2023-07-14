@@ -2,6 +2,16 @@ const pool = require('../database');
 
 const reportes = {
 
+    persRep1: async (req,res) => {
+        const datos = (await pool.query('SELECT Pe."Nombre" FROM "Personaje" AS Pe LEFT JOIN "Heroe" AS H ON Pe."Nombre" = H."N_Heroe" LEFT JOIN "Villano" AS V ON Pe."Nombre" = V."N_Villano" WHERE Pe."Nombre" IN (SELECT "N_Personaje" FROM "Posee" WHERE "Obtencion" = "Artificial") AND Pe."Nombre" IN (SELECT "N_Personaje" FROM "Pertenece" WHERE "Cod_Cargo" = 100) AND (H."N_Heroe" IS NOT NULL OR V."N_Villano" IS NOT NULL);')).rows;
+        
+        for (let i=0; i < datos.length; i++){
+            const personajes = await pool.query('SELECT * FROM "Personaje" WHERE "Nombre"=$1',[nombrePers]);
+            datos[i] = {...datos[i],...personajes[0]};
+        }
+        res.send(datos);
+    },
+
     seriesRep2: async (req,res) => {
         const datos = (await pool.query('SELECT "T_Serie" titulo, "N_Episodios" episodios, "Creador" creador, "Canal" canal, "Tipo" tipo FROM "Serie" WHERE "N_Episodios" > (SELECT AVG("N_Episodios") FROM "Serie")')).rows;
 
