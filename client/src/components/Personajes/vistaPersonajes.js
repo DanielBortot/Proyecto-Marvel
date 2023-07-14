@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import ClipLoader from "react-spinners/ClipLoader";
+import { ChosPers } from "./escojerPers"
 
 function VistaPersonajes () {
 
@@ -123,7 +124,7 @@ function VistaPersonajes () {
                 </Carousel>
                 </div>
                 <div className="tituloCont">
-                    <h2>Lista de personajes de marvel</h2>
+                        <ChosPers/>
                 </div>
                 <div className="vistaPers">
                     {persFil.map(personaje => {

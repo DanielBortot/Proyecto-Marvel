@@ -1,8 +1,13 @@
-.tituloCont {
+.tituloCont2 {
     font-family: 'Roboto', sans-serif;
-    width: 100%;
+    align-items: center;
+    display: flex;
+}
+
+.tituloCont {
     border-bottom: 2px solid black;
 }
+
 
 .tituloCont h2 {
     text-shadow: 5px 2px 4px rgb(185, 185, 185);
