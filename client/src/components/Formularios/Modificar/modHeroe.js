@@ -12,11 +12,11 @@ function ModHeroe() {
     const {Nombre, Genero, Color_Pelo, Color_Ojos, ocupaciones, nacionalidades, creadores, Nom_Comic, E_Marital, imagen, Alias, Logotipo, Color_Traje, Archienemigo} = descReporte;
     const [villanos, setVillanos] = useState([])
     const [listNac, setListNac] = useState([]);
-    const [valNac, setValNac] = useState([]);
+    const [valNac, setValNac] = useState(nacionalidades);
     const [listCrea, setListCrea] = useState([]);
-    const [valCrea, setValCrea] = useState([]);
+    const [valCrea, setValCrea] = useState(creadores);
     const [listOcup, setListOcup] = useState([]);
-    const [valOcu, setValOcu] = useState([]);
+    const [valOcu, setValOcu] = useState(ocupaciones);
     const navigate = useNavigate();
 
     const handleChangeNac = (e, newValue) => {
@@ -196,6 +196,7 @@ function ModHeroe() {
                                 options={listCrea}
                                 defaultValue={[...creadores]}
                                 getOptionLabel={(option) => option.Nom_Creador}
+                                isOptionEqualToValue={(option, value) => option.Nom_Creador === value.Nom_Creador}
                                 onChange={handleChangeCrea}
                                 onBlur={handleBlur}
                                 renderInput={(params) => (
@@ -211,6 +212,7 @@ function ModHeroe() {
                                 options={listOcup}
                                 defaultValue={[...ocupaciones]}
                                 getOptionLabel={(option) => option.Ocup}
+                                isOptionEqualToValue={(option, value) => option.Ocup === value.Ocup}
                                 onChange={handleChangeOcu}
                                 onBlur={handleBlur}
                                 renderInput={(params) => (
@@ -226,6 +228,7 @@ function ModHeroe() {
                                 options={listNac}
                                 defaultValue={[...nacionalidades]}
                                 getOptionLabel={(option) => option.Nac}
+                                isOptionEqualToValue={(option, value) => option.Nac === value.Nac}
                                 onChange={handleChangeNac}
                                 onBlur={handleBlur}
                                 renderInput={(params) => (
