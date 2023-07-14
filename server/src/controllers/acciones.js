@@ -8,8 +8,9 @@ const acciones = {
             const ocu = (await pool.query('SELECT "Ocupacion" "Ocup" FROM "Pers_Oc" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
             const crea = (await pool.query('SELECT "N_Creador" "Nom_Creador" FROM "Pers_Creador" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows;
             let datos = {};
-            const villano = (await pool.query('SELECT "Alias", "Objetivo" FROM "Villano" WHERE "N_Villano"=$1',[personajes[i].Nombre])).rows;
-            const heroe = (await pool.query('SELECT "Alias", "Logotipo", "Color_Traje", "Archienemigo" FROM "Heroe" WHERE "N_Heroe"=$1',[personajes[i].Nombre])).rows;
+            const villano = (await pool.query('SELECT * FROM "Villano" WHERE "N_Villano"=$1',[personajes[i].Nombre])).rows;
+            const heroe = (await pool.query('SELECT * FROM "Heroe" WHERE "N_Heroe"=$1',[personajes[i].Nombre])).rows;
+            const civil = (await pool.query('SELECT * FROM "Civil" WHERE "N_Civil"=$1',[personajes[i].Nombre])).rows;
             if (villano.length > 0){
             datos = {...villano[0], op: 1};
             }
@@ -17,7 +18,7 @@ const acciones = {
                 datos = {...heroe[0], op: 2};
             }
             else {
-                datos = {op: 3}
+                datos = {...civil[0], op: 3}
             }
             personajes[i] = {...personajes[i], ...datos, nacionalidades: nac, ocupaciones: ocu, creadores: crea}
         }
