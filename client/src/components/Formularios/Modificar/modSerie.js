@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 function ModSerie () {
     const [errorDB, setErrorDB] = useState({});
     const {descReporte} = useSelector(state => state.reporte);
-    const {T_Serie, Fecha_Estreno, Compania, Rating, Sinopsis, Imagen, N_Episodios, Creador, Canal, Tipo} = descReporte;
+    const {T_Serie, Fecha_Estreno, Compania, Rating, Sinopsis, Imagen, N_Episodios, Creador, Canal, Tipo, Duracion, Suscripcion} = descReporte;
     const navigate = useNavigate();
 
     return (
@@ -27,7 +27,9 @@ function ModSerie () {
                         episodios: N_Episodios,
                         creador: Creador,
                         canal: Canal,
-                        tipo: Tipo
+                        tipo: Tipo,
+                        duracion: Duracion,
+                        suscripcion: Suscripcion
                     }}
                     validate={(val)=>{
                         let errores = {};
@@ -58,6 +60,12 @@ function ModSerie () {
                         }
                         if (!val.episodios || isNaN(val.episodios) || parseInt(val.episodios) < 1){
                             errores.episodios = 'Ingrese un numero de episodios valido';
+                        }
+                        if (!val.duracion || isNaN(val.duracion) || parseInt(val.duracion) < 1){
+                            errores.duracion = 'Ingrese una duracion valida en minutos';
+                        }
+                        if (!val.suscripcion || val.suscripcion === -1){
+                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
                         }
                         return errores;
                     }}
@@ -112,6 +120,12 @@ function ModSerie () {
                                 placeholder="Numero de Episodios"
                                 name="episodios"
                             />
+                            <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.duracion}</div>)}/>
+                            <Field 
+                                type="text" 
+                                placeholder="Duracion de la Serie en Minutos"
+                                name="duracion"
+                            />
                             <ErrorMessage name="creador" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.creador}</div>)}/>
                             <Field 
                                 type="text" 
@@ -124,6 +138,16 @@ function ModSerie () {
                                 placeholder="Nombre del Canal"
                                 name="canal"
                             />
+
+                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
+                            <Field type="text" name="suscripcion" as="select">
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion de la serie</option>
+                                <option value={1}>Gold</option>
+                                <option value={2}>Premium</option>
+                                <option value={3}>Vip</option>
+                                <option value={4}>Free</option>
+                            </Field>
+                            
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
 
                             <Field type="text" name="tipo" as="select">

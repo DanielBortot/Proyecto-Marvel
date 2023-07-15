@@ -18,7 +18,7 @@ function DescripcionPeliculas () {
     const [personajes, setPersonajes] = useState([]);
     const dispatch = useDispatch();
     
-    let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Pelicula, Director, Duracion, Coste, Ganancia, Distribuidor, Tipo, Imagen} = descripcion;
+    let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Pelicula, Director, Duracion, Coste, Ganancia, Distribuidor, Tipo, Imagen, Suscripcion} = descripcion;
 
     useEffect(()=> {
         const getDatos = async ()=> {
@@ -59,6 +59,21 @@ function DescripcionPeliculas () {
         return (<></>);
     }
 
+    const suscrip = () => {
+        switch (Suscripcion){
+            case 1:
+                return <p>Gold</p>
+            case 2:
+                return <p>Premium</p>
+            case 3:
+                return <p>Vip</p>
+            case 4:
+                return <p>Free</p>
+            default:
+                return <p>Bloqueado</p>
+        }
+    }
+
     return (
         <>
             <div className="descCont">
@@ -79,6 +94,8 @@ function DescripcionPeliculas () {
                         <p>COSTE</p>
                         <p>GANANCIA</p>
                         <p>TIPO DE PELICULA</p>
+                        <p>DURACION PROMEDIO</p>
+                        <p>SUSCRIPCION</p>
                         <p>SINOPSIS</p>
                     </div>
                     <div>
@@ -92,6 +109,8 @@ function DescripcionPeliculas () {
                         <p>{Coste}$</p>
                         <p>{Ganancia}$</p>
                         <p>{Tipo}</p>
+                        <p>{Duracion} minutos</p>
+                        {suscrip()}
                         <p>{Sinopsis}</p>
                     </div>
                 </div>

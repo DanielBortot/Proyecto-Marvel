@@ -2,8 +2,17 @@ const pool = require('../database');
 
 const orgMedio = {
     buscOrgMedio: async (req,res) => {
-        const {nombreOrg} = req.body;
-        const meds = await pool.query('SELECT * FROM "Medio" WHERE "Titulo" NOT IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg]);
+        const {nombreOrg,op} = req.body;
+        let meds = [];
+        if (op === 1){
+            meds = await pool.query('SELECT * FROM "Medio" me INNER JOIN "Pelicula" pe ON (me."Titulo"=pe."T_Pelicula") WHERE pe."T_Pelicula" NOT IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg]);
+        }
+        if (op === 2){
+            meds = await pool.query('SELECT * FROM "Medio" me INNER JOIN "Serie" se ON (me."Titulo"=se."T_Serie") WHERE se."T_Serie" NOT IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg]);
+        }
+        if (op === 3){
+            meds = await pool.query('SELECT * FROM "Medio" me INNER JOIN "Juego" ju ON (me."Titulo"=ju."T_Juego") WHERE ju."T_Juego" NOT IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg]);
+        }
         res.send(meds.rows);
     },
 

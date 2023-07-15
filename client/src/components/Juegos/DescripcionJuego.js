@@ -16,7 +16,7 @@ function DescripcionJuegos () {
     const [personajes, setPersonajes] = useState([]);
     const dispatch = useDispatch();
     
-    let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Juego, plataformas, Distribuidor, Tipo, Imagen} = descripcion;
+    let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Juego, plataformas, Distribuidor, Tipo, Imagen, Duracion, Suscripcion} = descripcion;
 
     useEffect(()=> {
         const getDatos = async ()=> {
@@ -56,6 +56,21 @@ function DescripcionJuegos () {
         return (<></>);
     }
 
+    const suscrip = () => {
+        switch (Suscripcion){
+            case 1:
+                return <p>Gold</p>
+            case 2:
+                return <p>Premium</p>
+            case 3:
+                return <p>Vip</p>
+            case 4:
+                return <p>Free</p>
+            default:
+                return <p>Bloqueado</p>
+        }
+    }
+
     return (
         <>
             <div className="descCont">
@@ -73,6 +88,8 @@ function DescripcionJuegos () {
                         <p>DISTRIBUIDOR</p>
                         <p>PLATAFORMAS</p>
                         <p>TIPO DE JUEGO</p>
+                        <p>DURACION PROMEDIO</p>
+                        <p>SUSCRIPCION</p>
                         <p>SINOPSIS</p>
                     </div>
                     <div>
@@ -81,8 +98,10 @@ function DescripcionJuegos () {
                         <p>{Compania}</p>
                         <p>{Rating} Estrella/s</p>
                         <p>{Distribuidor}</p>
-                        <p>{(plataformas.map(plat => plat.nombre).join(', ')) || 'Sin informacion'}</p>
+                        <p>{(plataformas.map(plat => plat.Plataforma).join(', ')) || 'Sin informacion'}</p>
                         <p>{Tipo}</p>
+                        <p>{Duracion} minutos</p>
+                        {suscrip()}
                         <p>{Sinopsis}</p>
                     </div>
                 </div>

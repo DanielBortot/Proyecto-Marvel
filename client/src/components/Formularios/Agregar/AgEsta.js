@@ -20,7 +20,17 @@ function AgEsta() {
     },[])
 
     const getMedios = async (nombre) => {
-        const meds = await (await axios.post('../api/buscPersMedio',{nombrePers: nombre})).data;
+        let op = 0;
+        if (window.location.pathname === '/peliculas/AgPersPeli'){
+            op=1;
+        }
+        else if (window.location.pathname === '/series/AgPersSerie'){
+            op=2;
+        }
+        else {
+            op=3;
+        }
+        const meds = await (await axios.post('../api/buscPersMedio',{nombrePers: nombre, op: op})).data;
         setMedios(meds);
         setSelec(nombre);
     }

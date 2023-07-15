@@ -11,7 +11,7 @@ function ModJuego() {
     const {descReporte} = useSelector(state => state.reporte);
     const {Fecha_Estreno, Compania, Rating, Sinopsis, T_Juego, plataformas, Distribuidor, Tipo, Imagen, Duracion, Suscripcion} = descReporte;
     const [listPlataformas, setListPlataformas] = useState([]);
-    const [valPlat, setValPlat] = useState([]);
+    const [valPlat, setValPlat] = useState(plataformas);
     const navigate = useNavigate();
 
     useEffect(()=> {
@@ -43,7 +43,8 @@ function ModJuego() {
                         distribuidor: Distribuidor,
                         tipo: Tipo,
                         duracion: Duracion,
-                        suscripcion: Suscripcion
+                        suscripcion: Suscripcion,
+                        plataforma: valPlat
 
                     }}
                     validate={(val)=>{
@@ -73,19 +74,24 @@ function ModJuego() {
                         if (!val.duracion || val.duracion === -1){
                             errores.duracion = 'Ingrese la duración del juego en minutos';
                         }          
-                        if ((!val.suscripcion || isNaN(val.suscripcion) || parseInt(val.suscripcion) > 4 || parseInt(val.suscripcion) < 0)){
-                            errores.suscripcion = 'Ingrese un rating valido del 0 al 4';
-                        }    
+                        if (!val.suscripcion || val.suscripcion === -1){
+                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
+                        }   
                         if (valPlat.length === 0){
                             errores.plataforma = 'Ingrese la plataforma del juego'
                         }
+                        console.log(errores);
+                        console.log(errores);
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
-                        const error = await (await axios.post('../api/buscJuegos', {T_Juego: val.titulo})).data;
+                        let error = {};
+                        if (val.titulo !== T_Juego){
+                            error = await (await axios.post('../api/buscJuegos', {T_Juego: val.titulo})).data;
+                        }
                         setErrorDB(error);
                         if (!error.titulo){
-                            await axios.post('../api/upMedioJuego', {...val, plataformas: valPlat, tituloVie: T_Juego});
+                            await axios.put('../api/upMedioJuego', {...val, plataformas: valPlat, tituloVie: T_Juego});
                             navigate('/juegos');
                         }
                     }}
@@ -130,19 +136,28 @@ function ModJuego() {
                                 name="distribuidor"
                             />
                             
-                            <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
+                            <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.duracion}</div>)}/>
                             <Field 
                                 type="integer" 
                                 placeholder="Duración"
                                 name="duracion"
                             />
 
-                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
-                            <Field 
-                                type="integer" 
-                                placeholder="Suscripción del 0 - 4"
-                                name="suscripcion"
-                            />
+                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
+                            <Field type="text" name="suscripcion" as="select">
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion del juego</option>
+                                <option value={1}>Gold</option>
+                                <option value={2}>Premium</option>
+                                <option value={3}>Vip</option>
+                                <option value={4}>Free</option>
+                            </Field>
+
+                            <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
+                            <Field type="text" name="tipo" as="select">
+                                <option hidden selected value={-1}>Selecciona el tipo de juego</option>
+                                <option value={'2D'}>2D</option>
+                                <option value={'3D'}>3D</option>
+                            </Field>
 
                             <ErrorMessage name="plataforma" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.plataforma}</div>)}/>
 
@@ -152,11 +167,12 @@ function ModJuego() {
                                 id="plataforma"
                                 options={listPlataformas}
                                 defaultValue={[...plataformas]}
-                                getOptionLabel={(option) => option.nombre}
+                                getOptionLabel={(option) => option.Plataforma}
+                                isOptionEqualToValue={(option, value) => option.Plataforma === value.Plataforma}
                                 onChange={handleChangePlat}
                                 onBlur={handleBlur}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="" placeholder="Creadores" />
+                                    <TextField {...params} label="" placeholder="Plataformas" />
                                 )}
                                 sx={{ width: '500px' }}
                             />

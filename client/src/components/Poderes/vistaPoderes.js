@@ -61,7 +61,7 @@ function VistaPoderes () {
             return (
             <>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPoder'}>Agregar Poder</Link>
-                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPoseePers'}>Agregar Poseedor de un Poder</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPosee'}>Agregar Poseedor de un Poder</Link>
             </>
             );
         }

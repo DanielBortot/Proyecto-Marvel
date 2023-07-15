@@ -27,7 +27,8 @@ function AgPelicula() {
                         duracion: '',
                         tipo: '',
                         coste: '',
-                        ganancia: ''
+                        ganancia: '',
+                        suscripcion: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
@@ -65,13 +66,16 @@ function AgPelicula() {
                         if (!val.tipo || val.tipo === -1){
                             errores.tipo = 'Ingrese el tipo de la pelicula';
                         }
+                        if (!val.suscripcion || val.suscripcion === -1){
+                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
+                        }
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
                         const error = await (await axios.post('../api/buscPeliculas', {T_Pelicula: val.titulo})).data;
                         setErrorDB(error);
                         if (!error.titulo){
-                            await axios.post('../api/addRep5', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', director: val.director, distribuidor: val.distribuidor, duracion: val.duracion, ganancia: val.ganancia, coste: val.coste, tipo: val.tipo});
+                            await axios.post('../api/addRep5', {...val});
                             if (window.location.pathname === '/peliculas/AgPelicula'){
                                 navigate('/peliculas')
                             } else {
@@ -143,6 +147,16 @@ function AgPelicula() {
                                 placeholder="Coste de la Pelicula"
                                 name="coste"
                             />
+
+                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
+                            <Field type="text" name="suscripcion" as="select">
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion de la pelicula</option>
+                                <option value={1}>Gold</option>
+                                <option value={2}>Premium</option>
+                                <option value={3}>Vip</option>
+                                <option value={4}>Free</option>
+                            </Field>
+
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
 
                             <Field type="text" name="tipo" as="select">

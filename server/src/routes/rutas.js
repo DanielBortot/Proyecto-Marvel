@@ -6,7 +6,7 @@ const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPose
 
 const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, buscPeliculas, updateMedioPelicula, addMedioPelicula, plataformas, addMedioJuego, buscJuegos, upMedioJuego, delMedio} = require('../controllers/medios');
 
-const {compPod, buscPoderes, getPoderes, upPoder, delPoder} = require('../controllers/poderes');
+const {compPod, buscPoderes, getPoderes, upPoder, delPoder, addPoder} = require('../controllers/poderes');
 
 const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreadores, buscCiviles, compPers, compAlias, addPersHeroe, addPersVill, upPersHeroe, upPersVill, delPersonaje, addPersCiv, upPersCiv} = require('../controllers/personajes');
 
@@ -146,6 +146,7 @@ router.post('/compPodPers', compPodPers);
 router.post('/addPodPers', addPodPers);
 router.post('/delPodPers', delPodPers);
 router.post('/delPoder', delPoder);
+router.post('/addPoder', addPoder);
 router.post('/getPodPerso', getPodPerso);
 router.post('/getPersPod', getPersPod);
 

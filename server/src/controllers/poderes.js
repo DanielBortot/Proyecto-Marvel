@@ -20,7 +20,7 @@ const poderes = {
     addPoder: async (req,res) => {
         const {nombrePod,imagenPod,descripcion} = req.body;
 
-        await pool.query('INSERT INTO "Poder" VALUES ("Nombre", "Imagen", "Descripcion")',[nombrePod,imagenPod,descripcion]);
+        await pool.query('INSERT INTO "Poder" ("Nombre", "Imagen", "Descripcion") VALUES ($1, $2, $3)',[nombrePod,imagenPod,descripcion]);
         res.send('creado');
     },
 
