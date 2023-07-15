@@ -40,6 +40,8 @@ function VistaPersonajes () {
     const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
     const [persFil, setPersFil] = useState([]);
+    const [filtro, setFiltro] = useState(0);
+    const [input, setInput] = useState('');
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -58,6 +60,39 @@ function VistaPersonajes () {
         traerInfo();
     },[]);
 
+    useEffect(()=>{
+        if (!input){
+            setPersFil(personajes.filter(per => {
+                switch (filtro){
+                    case 0:
+                        return true;
+                    case 1:
+                        return per.N_Heroe !== undefined;
+                    case 2:
+                        return per.N_Villano !== undefined;
+                    case 3:
+                        return per.N_Civil !== undefined;
+                }
+            }));
+        }
+        else {
+            setPersFil(personajes.filter(per => {
+                switch (filtro){
+                    case 0:
+                        return per.Nombre.toLowerCase().includes(input.toLowerCase());
+                    case 1:
+                        return per.N_Heroe !== undefined && per.Nombre.toLowerCase().includes(input.toLowerCase());
+                    case 2:
+                        return per.N_Villano !== undefined && per.Nombre.toLowerCase().includes(input.toLowerCase());
+                    case 3:
+                        return per.N_Civil !== undefined && per.Nombre.toLowerCase().includes(input.toLowerCase());
+                    default:
+                        return true;
+                }
+            }));
+        }
+    },[input,filtro])
+
     const admin = () => {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
@@ -73,19 +108,9 @@ function VistaPersonajes () {
         }
         return (<></>);
     }
-    
-    const handleChange = e => {
-        if (!e.target.value){
-            setPersFil(personajes);
-        }
-        else {
-            const filtro = personajes.filter(pers => pers.Nombre.toLowerCase().includes(e.target.value.toLowerCase()));
-            setPersFil(filtro);
-        }
-    }
 
     return (
-        <>  
+        <>
             <HeaderPers/>
             {loading ?
                 <div className="loading">
@@ -104,7 +129,7 @@ function VistaPersonajes () {
                     <div className="col-9">{admin()}</div>   
                     <div className="col-3 formContRegIn">
                         <FontAwesomeIcon icon={faMagnifyingGlass} size="2x" style={{padding:'10px'}}/>
-                        <input type="text" placeholder="Buscar Personaje" onChange={handleChange}/>
+                        <input type="text" placeholder="Buscar Personaje" onChange={e=>setInput(e.target.value)}/>
                     </div>
                 </div>
                 <div className="tituloCont">
@@ -122,7 +147,7 @@ function VistaPersonajes () {
                 </Carousel>
                 </div>
                 <div className="tituloCont">
-                        <ChosPers/>
+                        <ChosPers setFil={setFiltro}/>
                 </div>
                 <div className="vistaPers">
                     {persFil.map(personaje => {
