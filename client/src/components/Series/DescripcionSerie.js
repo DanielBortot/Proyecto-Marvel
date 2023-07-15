@@ -18,7 +18,7 @@ function DescripcionSeries () {
     const [personajes, setPersonajes] = useState([]);
     const dispatch = useDispatch();
     
-    let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Serie, N_Episodios, Creador, Canal, Tipo, Imagen, Duracion} = descripcion;
+    let {Fecha_Estreno, Compania, Rating, Sinopsis, T_Serie, N_Episodios, Creador, Canal, Tipo, Imagen, Duracion, Suscripcion} = descripcion;
 
     useEffect(()=> {
         const getDatos = async ()=> {
@@ -59,6 +59,21 @@ function DescripcionSeries () {
         return (<></>);
     }
 
+    const suscrip = () => {
+        switch (Suscripcion){
+            case 1:
+                return <p>Gold</p>
+            case 2:
+                return <p>Premium</p>
+            case 3:
+                return <p>Vip</p>
+            case 4:
+                return <p>Free</p>
+            default:
+                return <p>Bloqueado</p>
+        }
+    }
+
     return (
         <>
             <div className="descCont">
@@ -77,6 +92,8 @@ function DescripcionSeries () {
                         <p>CREADOR</p>
                         <p>CANAL</p>
                         <p>TIPO DE SERIE</p>
+                        <p>DURACION PROMEDIO</p>
+                        <p>SUSCRIPCION</p>
                         <p>SINOPSIS</p>
                     </div>
                     <div>
@@ -88,6 +105,8 @@ function DescripcionSeries () {
                         <p>{Creador}</p>
                         <p>{Canal}</p>
                         <p>{Tipo}</p>
+                        <p>{Duracion} minutos</p>
+                        {suscrip()}
                         <p>{Sinopsis}</p>
                     </div>
                 </div>

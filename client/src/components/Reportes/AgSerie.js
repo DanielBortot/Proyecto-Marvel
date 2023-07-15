@@ -25,7 +25,9 @@ function AgSerie() {
                         episodios: '',
                         creador: '',
                         canal: '',
-                        tipo: ''
+                        tipo: '',
+                        duracion: '',
+                        suscripcion: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
@@ -57,13 +59,19 @@ function AgSerie() {
                         if (!val.episodios || isNaN(val.episodios) || parseInt(val.episodios) < 1){
                             errores.episodios = 'Ingrese un numero de episodios valido';
                         }
+                        if (!val.duracion || isNaN(val.duracion) || parseInt(val.duracion) < 1){
+                            errores.duracion = 'Ingrese una duracion valida en minutos';
+                        }
+                        if (!val.suscripcion || val.suscripcion === -1){
+                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
+                        }
                         return errores;
                     }}
                     onSubmit={ async (val)=> {
                         const error = await (await axios.post('../api/buscSeries', {T_Serie: val.titulo})).data;
                         setErrorDB(error);
                         if (!error.titulo){
-                            await axios.post('../api/addRep2', {titulo: val.titulo, fecha: val.fecha, compania: val.compania, rating: val.rating, sinopsis: val.sinopsis, imagen: '1', episodios: val.episodios, creador: val.creador, canal: val.canal, tipo: val.tipo});
+                            await axios.post('../api/addRep2', {...val});
                             if (window.location.pathname === '/series/AgSerie'){
                                 navigate('/series')
                             } else {
@@ -111,6 +119,12 @@ function AgSerie() {
                                 placeholder="Numero de Episodios"
                                 name="episodios"
                             />
+                            <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.duracion}</div>)}/>
+                            <Field 
+                                type="text" 
+                                placeholder="Duracion de la Serie en Minutos"
+                                name="duracion"
+                            />
                             <ErrorMessage name="creador" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.creador}</div>)}/>
                             <Field 
                                 type="text" 
@@ -123,6 +137,16 @@ function AgSerie() {
                                 placeholder="Nombre del Canal"
                                 name="canal"
                             />
+
+                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
+                            <Field type="text" name="suscripcion" as="select">
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion de la serie</option>
+                                <option value={1}>Gold</option>
+                                <option value={2}>Premium</option>
+                                <option value={3}>Vip</option>
+                                <option value={4}>Free</option>
+                            </Field>
+
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
 
                             <Field type="text" name="tipo" as="select">

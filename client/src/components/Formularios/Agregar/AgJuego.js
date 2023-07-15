@@ -36,9 +36,12 @@ function AgJuego() {
                         compania: '',
                         rating: '',
                         sinopsis: '',
+                        distribuidor: '',
                         imagen: '73',
                         duracion: '',
-                        suscripcion: ''
+                        suscripcion: '',
+                        tipo: '',
+                        plataforma: ''
                     }}
                     validate={(val)=>{
                         let errores = {};
@@ -65,8 +68,12 @@ function AgJuego() {
                             errores.duracion = 'Ingrese la duración del juego en minutos';
                         }
                         
-                        if ((!val.suscripcion || isNaN(val.suscripcion) || parseInt(val.suscripcion) > 4 || parseInt(val.suscripcion) < 0)){
-                            errores.suscripcion = 'Ingrese un rating valido del 0 al 4';
+                        if (!val.suscripcion || val.suscripcion === -1){
+                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
+                        }
+
+                        if (!val.tipo || val.tipo === -1){
+                            errores.tipo = 'Ingrese el tipo del juego';
                         }
 
                         if (valPlat.length === 0){
@@ -79,7 +86,7 @@ function AgJuego() {
                         setErrorDB(error);
                         if (!error.titulo){
                             await axios.post('../api/addMedioJuego', {...val, plataformas: valPlat});
-                            navigate('/');
+                            navigate('/juegos');
                         }
                     }}
                 >
@@ -123,19 +130,28 @@ function AgJuego() {
                                 name="distribuidor"
                             />
                             
-                            <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
+                            <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.duracion}</div>)}/>
                             <Field 
                                 type="integer" 
                                 placeholder="Duración"
                                 name="duracion"
                             />
 
-                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
-                            <Field 
-                                type="integer" 
-                                placeholder="Suscripción del 0 - 4"
-                                name="suscripcion"
-                            />
+                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
+                            <Field type="text" name="suscripcion" as="select">
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion del juego</option>
+                                <option value={1}>Gold</option>
+                                <option value={2}>Premium</option>
+                                <option value={3}>Vip</option>
+                                <option value={4}>Free</option>
+                            </Field>
+
+                            <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
+                            <Field type="text" name="tipo" as="select">
+                                <option hidden selected value={-1}>Selecciona el tipo de juego</option>
+                                <option value={'2D'}>2D</option>
+                                <option value={'3D'}>3D</option>
+                            </Field>
 
                             <ErrorMessage name="plataforma" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.plataforma}</div>)}/>
 
@@ -144,11 +160,11 @@ function AgJuego() {
                                 limitTags={2}
                                 id="plataforma"
                                 options={plataformas}
-                                getOptionLabel={(option) => option.nombre}
+                                getOptionLabel={(option) => option.Plataforma}
                                 onChange={handleChangePlat}
                                 onBlur={handleBlur}
                                 renderInput={(params) => (
-                                    <TextField {...params} label="" placeholder="Plataforma" />
+                                    <TextField {...params} label="" placeholder="Plataformas" />
                                 )}
                                 sx={{ width: '500px' }}
                             />

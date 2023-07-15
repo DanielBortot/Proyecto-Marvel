@@ -8,7 +8,7 @@ function ModPelicula() {
 
     const [errorDB, setErrorDB] = useState({});
     const {descReporte} = useSelector(state => state.reporte);
-    const {T_Pelicula, Fecha_Estreno, Compania, Rating, Sinopsis, Imagen, Director, Distribuidor, Duracion, Tipo, Ganancia, Coste} = descReporte;
+    const {T_Pelicula, Fecha_Estreno, Compania, Rating, Sinopsis, Imagen, Director, Distribuidor, Duracion, Tipo, Ganancia, Coste, Suscripcion} = descReporte;
     const navigate = useNavigate();
 
     return (
@@ -30,7 +30,8 @@ function ModPelicula() {
                         duracion: Duracion,
                         tipo: Tipo,
                         coste: Coste,
-                        ganancia: Ganancia
+                        ganancia: Ganancia,
+                        suscripcion: Suscripcion
                     }}
                     validate={(val)=>{
                         let errores = {};
@@ -67,6 +68,9 @@ function ModPelicula() {
                         }
                         if (!val.tipo || val.tipo === -1){
                             errores.tipo = 'Ingrese el tipo de la pelicula';
+                        }
+                        if (!val.suscripcion || val.suscripcion === -1){
+                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
                         }
                         return errores;
                     }}
@@ -145,11 +149,21 @@ function ModPelicula() {
                                 placeholder="Coste de la Pelicula"
                                 name="coste"
                             />
+
+                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
+                            <Field type="text" name="suscripcion" as="select">
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion de la pelicula</option>
+                                <option value={1}>Gold</option>
+                                <option value={2}>Premium</option>
+                                <option value={3}>Vip</option>
+                                <option value={4}>Free</option>
+                            </Field>
+
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
 
                             <Field type="text" name="tipo" as="select">
                                 <option hidden selected value={-1}>Selecciona el tipo de la pelicula</option>
-                                <option value={'Animada'}>Animada</option>
+                                <option value={'Animacion'}>Animada</option>
                                 <option value={'Live Action'}>Live Action</option>
                             </Field>
 

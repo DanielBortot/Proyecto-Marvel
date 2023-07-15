@@ -20,7 +20,17 @@ function AgAparece() {
     },[])
 
     const getMedios = async (nombre) => {
-        const meds = await (await axios.post('../api/buscOrgMedio',{nombreOrg: nombre})).data;
+        let op = 0;
+        if (window.location.pathname === '/peliculas/AgOrgPeli'){
+            op=1;
+        }
+        else if (window.location.pathname === '/series/AgOrgSerie'){
+            op=2;
+        }
+        else {
+            op=3;
+        }
+        const meds = await (await axios.post('../api/buscOrgMedio',{nombreOrg: nombre, op: op})).data;
         setMedios(meds);
         setSelec(nombre);
     }
