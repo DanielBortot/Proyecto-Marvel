@@ -89,7 +89,7 @@ const medios = {
         await pool.query('UPDATE "Medio" SET "Titulo"=$1, "Fecha_Estreno"=$2, "Compania"=$3, "Rating"=$4, "Sinopsis"=$5, "Imagen"=$6 WHERE "Titulo"=$7',[titulo,fecha,compania,rating,sinopsis,imagen,tituloVie]);
         await pool.query('UPDATE "Juego" SET "Distribuidor"=$1, "Tipo"=$2 WHERE "T_Juego"=$3', [distribuidor,tipo,titulo]);
         await pool.query('DELETE FROM "Plat_Juego" WHERE "T_Juego"=$1',[titulo]);
-        for (let i=0; i<plataformas.length; i++){
+        for (let i=0; i<plataformas.length; i++){ElementInternals
             await pool.query('INSERT INTO "Plat_Juego" ("T_Juego", "Plataforma") VALUES ($1, $2)',[titulo,plataformas[i].nombre]);
         }
         res.send('modificado');
