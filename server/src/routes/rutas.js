@@ -28,7 +28,7 @@ const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controlle
 
 const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, modOrgPers, delOrgPers} = require('../controllers/persOrg');
 
-const {getHist, addHist, upHist} = require('../controllers/historial');
+const {getHist, addHist, upHist, getRec} = require('../controllers/historial');
 
 
 router.post('/sesion', (req,res) => {
@@ -194,6 +194,7 @@ router.post('/delOrgPers', delOrgPers);
 
 router.post('/addHist', addHist);
 router.post('/getHist', getHist);
+router.post('/getRec', getRec);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

@@ -38,6 +38,7 @@ function VistaInicio () {
     };
     const {perfilUso} = useSelector(state => state.perfiles);
     const [medios, setMedios] = useState([]);
+    const [mediosRec, setMediosRec] = useState([]);
     const [mediosFil, setMediosFil] = useState([]);
 
     useEffect(()=> {
@@ -50,7 +51,15 @@ function VistaInicio () {
                     medios[i].Imagen = img.img;
                 }
             }
+            const medRec = await (await axios.post('/api/getRec',{perfil: perfilUso.Id_Perfil})).data;
+            for (let i=0; i<medRec.length;i++){
+                const img = imagenes.find(img => img.pos == medRec[i].Imagen);
+                if (img){
+                    medRec[i].Imagen = img.img;
+                }
+            }
             setMedios(medios);
+            setMediosRec(medRec);
             setMediosFil(medios);
             setLoading(false);
         }
@@ -114,6 +123,17 @@ function VistaInicio () {
                         <h2>Recomendaciones</h2>
                     </div>
                     <div className="vistaPers">
+                        {mediosRec.map(med => {
+                            if (med.T_Serie){
+                                return <CuadroSeries prop={med} key={med.T_Serie} op={5}/>
+                            }
+                            else if (med.T_Pelicula){
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} op={5}/>
+                            }
+                            else if (med.T_Juego){
+                                return <CuadroJuegos prop={med} key={med.T_Juego} op={5}/>
+                            }
+                        })}
                     </div>   
                 </div>
             }
