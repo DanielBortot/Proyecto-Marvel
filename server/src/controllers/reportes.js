@@ -163,8 +163,8 @@ const reportes = {
     heroesFRep8: async (req,res) => {
         const genero = 'F';
         const tipo = 'Animacion';
-        const datos = await pool.query('SELECT * FROM "Personaje" WHERE "Nombre" IN (SELECT "N_Personaje" FROM "Esta" WHERE "N_Titulo" IN (SELECT Me."Titulo" FROM "Medio" AS Me JOIN "Pelicula" AS  Pe ON (Me."Titulo" = Pe."T_Pelicula") WHERE (Pe."Tipo" = $1)) OR "N_Titulo" IN (SELECT Me."Titulo" FROM "Medio" AS Me JOIN "Serie" AS S ON (Me."Titulo" = S."T_Serie") WHERE (S."Tipo" = $2))) AND "Nombre" IN (SELECT "N_Heroe" FROM "Heroe") AND "Genero" = $3',[tipo,tipo,genero]);
-        
+        const datos = await pool.query('SELECT "N_Personaje", "N_Titulo" FROM "Esta" WHERE ("N_Titulo" IN (SELECT Me."Titulo" FROM "Medio" AS Me JOIN "Pelicula" AS  Pe ON (Me."Titulo" = Pe."T_Pelicula") WHERE (Pe."Tipo" = $1)) OR "N_Titulo" IN (SELECT Me."Titulo" FROM "Medio" AS Me JOIN "Serie" AS  S ON (Me."Titulo" = S."T_Serie") WHERE (S."Tipo" = $2))) AND ("N_Personaje" IN (SELECT "N_Heroe" FROM "Heroe")) AND ("N_Personaje" IN (SELECT "Nombre" FROM "Personaje" WHERE "Genero" = $3));',[tipo,tipo,genero]);
+
         res.send(datos.rows);
     }
 }

@@ -23,14 +23,13 @@ function Reporte8 (){
                     <div className="rep2item"><span style={{fontWeight: 'bold'}}>Medio</span></div>
                     {reporte.map(rep => (
                         <>
-                            <div className="rep2ContDato" key={rep.titulo}>
-                                <div className="rep2item">{rep.titulo}</div>
+                            <div className="rep2ContDato" key={rep.N_Personaje}>
+                                <div className="rep2item">{rep.N_Personaje}</div>
                             </div>
-                            <div className="rep2item">{rep.episodios}</div>
+                            <div className="rep2item">{rep.N_Titulo}</div>
                         </>
                     ))}
                 </div>
-                <div style={{margin: '15px auto 10px 15px', fontWeight: 'bold'}}>Promedio de Episodios: {promedio}</div>
             </div>
         </>
     );
