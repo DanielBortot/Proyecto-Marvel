@@ -11,25 +11,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function Reporte1 (){
 
     const [reporte, setReporte] = useState([]);
-    const [promedio, setPromedio] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const traerDatos = async ()=> {
+        const datos = await (await axios.get('/api/persRep1')).data;
+        setReporte(datos);
+    }
+
     useEffect(()=> {
-        const traerDatos = async ()=> {
-            const datos = await (await axios.get('/api/Rep2Series')).data;
-            setReporte(datos);
-            console.log(datos);
-            setPromedio(Math.floor(datos[0].promedio))
-        }
         traerDatos();
     },[])
 
     const eliminar = async (id) => {
         await axios.post('/api/delRep2', {T_Serie: id});
         let lista = [...reporte];
-        lista = lista.filter(rep => rep.titulo !== id);
+        lista = lista.filter(rep => rep.Titulo !== id);
         setReporte(lista);
+        traerDatos();
     }
 
     const update = async (val) => {
@@ -52,13 +51,12 @@ function Reporte1 (){
                                     <FontAwesomeIcon icon={faTrash} onClick={()=> eliminar(rep.titulo)} style={{padding: '5px', cursor: 'pointer'}}/>
                                     <FontAwesomeIcon icon={faPenToSquare} style={{padding: '5px', cursor: 'pointer'}} onClick={()=> update(rep)}/>
                                 </div>
-                                <div className="rep2item">{rep.titulo}</div>
+                                <div className="rep2item">{rep.Nombre}</div>
                             </div>
-                            <div className="rep2item">{rep.episodios}</div>
+                            <div className="rep2item">{rep.N_Organizacion}</div>
                         </>
                     ))}
                 </div>
-                <div style={{margin: '15px auto 10px 15px', fontWeight: 'bold'}}>Promedio de Episodios: {promedio}</div>
             </div>
         </>
     );

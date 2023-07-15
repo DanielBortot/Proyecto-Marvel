@@ -2,7 +2,7 @@ const router = require('express').Router();
 
 const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario, eliminarUsuario, villHer} = require('../controllers/acciones');
 
-const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPosee, addPodPersVill, poseeRep6, updatePodPersVill} = require('../controllers/reportes');
+const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPosee, addPodPersVill, poseeRep6, updatePodPersVill, persRep1} = require('../controllers/reportes');
 
 const {eliminarSerie, buscSeries, updateMedioSerie, addMedioSerie, eliminarPelicula, buscPeliculas, updateMedioPelicula, addMedioPelicula, plataformas, addMedioJuego, buscJuegos, upMedioJuego, delMedio} = require('../controllers/medios');
 
@@ -75,6 +75,7 @@ router.get('/Rep2Series', seriesRep2);
 router.get('/Rep5Peliculas', peliculasRep5);
 router.get('/RepRegistro', usuariosRepReg);
 router.get('/Rep6Poderes', poseeRep6);
+router.get('/persRep1', persRep1);
 
 router.delete('/removePersonaje/:id', removePersonaje);
 router.delete('/removePelicula/:id', removePelicula);

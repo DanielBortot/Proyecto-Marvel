@@ -3,34 +3,27 @@ const pool = require('../database');
 const reportes = {
 
     persRep1: async (req,res) => {
-        const datos = (await pool.query('SELECT Pe."Nombre" FROM "Personaje" AS Pe LEFT JOIN "Heroe" AS H ON Pe."Nombre" = H."N_Heroe" LEFT JOIN "Villano" AS V ON Pe."Nombre" = V."N_Villano" WHERE Pe."Nombre" IN (SELECT "N_Personaje" FROM "Posee" WHERE "Obtencion" = "Artificial") AND Pe."Nombre" IN (SELECT "N_Personaje" FROM "Pertenece" WHERE "Cod_Cargo" = 100) AND (H."N_Heroe" IS NOT NULL OR V."N_Villano" IS NOT NULL);')).rows;
+        const obtencion = 'Artificial';
+        const cargo = 100;
+        const datos = (await pool.query('SELECT * FROM "Personaje" AS Pe LEFT JOIN "Heroe" AS H ON Pe."Nombre" = H."N_Heroe" LEFT JOIN "Villano" AS V ON Pe."Nombre" = V."N_Villano" LEFT JOIN "Pertenece" per ON per."N_Personaje"= Pe."Nombre" WHERE Pe."Nombre" IN (SELECT "N_Personaje" FROM "Posee" WHERE "Obtencion" = $1) AND Pe."Nombre" IN (SELECT "N_Personaje" FROM "Pertenece" WHERE "Cod_Cargo" = $2) AND (H."N_Heroe" IS NOT NULL OR V."N_Villano" IS NOT NULL);',[obtencion,cargo])).rows;
         
-        for (let i=0; i < datos.length; i++){
-            const personajes = await pool.query('SELECT * FROM "Personaje" WHERE "Nombre"=$1',[nombrePers]);
-            datos[i] = {...datos[i],...personajes[0]};
-        }
+        console.log(datos);
         res.send(datos);
     },
 
     seriesRep2: async (req,res) => {
-        const datos = (await pool.query('SELECT "T_Serie" titulo, "N_Episodios" episodios, "Creador" creador, "Canal" canal, "Tipo" tipo FROM "Serie" WHERE "N_Episodios" > (SELECT AVG("N_Episodios") FROM "Serie")')).rows;
+        const datos = (await pool.query('SELECT * FROM "Serie" se INNER JOIN "Medio" me ON (se."T_Serie"=me."Titulo") WHERE se."N_Episodios" > (SELECT AVG("N_Episodios") FROM "Serie") ORDER BY se."N_Episodios" DESC')).rows;
 
         for (let i=0; i < datos.length; i++){
             const promedio = (await pool.query('SELECT AVG("N_Episodios") promedio FROM "Serie"')).rows;
-            const medio = (await pool.query('SELECT "Fecha_Estreno" fecha, "Compania" compania, "Rating" rating, "Sinopsis" sinopsis, "Imagen" imagen FROM "Medio" WHERE "Titulo"=$1',[datos[i].titulo])).rows;
-            datos[i] = {...datos[i], ...medio[0], ...promedio[0]};
+            datos[i] = {...datos[i], ...promedio[0]};
         }
         res.send(datos);
     },
 
     peliculasRep5: async (req,res) => {
         const tipo = 'Animacion';
-        const datos = (await pool.query('SELECT "T_Pelicula" titulo, "Director" director, "Duracion" duracion, "Coste" coste, "Ganancia" ganancia, "Distribuidor" distribuidor, "Tipo" tipo FROM "Pelicula" WHERE (("Duracion" > 150) AND ("Tipo" = $1) AND ("Ganancia" >= (SELECT AVG ("Ganancia") FROM "Pelicula" WHERE "Tipo" = $2))) ORDER BY "Coste"',[tipo,tipo])).rows;
-
-        for (let i=0; i < datos.length; i++){
-            const medio = (await pool.query('SELECT "Fecha_Estreno" fecha, "Compania" compania, "Rating" rating, "Sinopsis" sinopsis, "Imagen" imagen FROM "Medio" WHERE "Titulo"=$1',[datos[i].titulo])).rows;
-            datos[i] = {...datos[i], ...medio[0]};
-        }
+        const datos = (await pool.query('SELECT * FROM "Pelicula" pe INNER JOIN "Medio" me ON (pe."T_Pelicula"=me."Titulo") WHERE ((me."Duracion" > 150) AND (pe."Tipo" = $1) AND (pe."Ganancia" >= (SELECT AVG ("Ganancia") FROM "Pelicula" WHERE "Tipo" = $2))) ORDER BY "Coste"',[tipo,tipo])).rows;
         res.send(datos);
     },
 

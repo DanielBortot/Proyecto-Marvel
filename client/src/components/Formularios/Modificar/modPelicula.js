@@ -82,7 +82,12 @@ function ModPelicula() {
                         }
                         if (!error.titulo){
                             await axios.put('../api/upRep5', {...val,titulo: T_Pelicula});
-                            navigate('/peliculas');
+                            if (window.location.pathname === '/peliculas/ModPelicula'){
+                                navigate('/peliculas');
+                            }
+                            else {
+                                navigate('/Rep5');
+                            }
                         }
                     }}
                 >

@@ -14,11 +14,12 @@ function Reporte6 (){
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const traerDatos = async ()=> {
+        const datos = await (await axios.get('/api/Rep6Poderes')).data;
+        setReporte(datos);
+    }
+
     useEffect(()=> {
-        const traerDatos = async ()=> {
-            const datos = await (await axios.get('/api/Rep6Poderes')).data;
-            setReporte(datos);
-        }
         traerDatos();
     },[]);
 
@@ -27,6 +28,7 @@ function Reporte6 (){
         let lista = [...reporte];
         lista = lista.filter(rep => rep.nombrePod !== idPod);
         setReporte(lista);
+        traerDatos();
     }
 
     const update = async (val) => {
@@ -38,7 +40,11 @@ function Reporte6 (){
         <>  
             <div className="rep6">
                 <h3>Poderes que son heredados y que tengan en su nombre la cadena “Super”. Además dicho poder lo deben tener al menos 2 villanos</h3>
-                <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep6'}>Crear Campo</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep6Her'}>Crear Heroe</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep6Vill'}>Crear Villano</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep6Civ'}>Crear Civil</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep6Pod'}>Crear Poder</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 10px 15px'}} to={'addRep6Posee'}>Crear Relacion Entre Personaje y Poder</Link>
                 <div className="rep6Cont">
                     <div className="rep6item"><span style={{fontWeight: 'bold'}}>Nombre del Poder</span></div>
                     <div className="rep6item"><span style={{fontWeight: 'bold'}}>Descripción</span></div>

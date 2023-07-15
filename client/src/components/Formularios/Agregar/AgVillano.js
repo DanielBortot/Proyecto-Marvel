@@ -102,7 +102,11 @@ function AgVillano() {
                         setErrorDB({...error, ...error2});
                         if (!error.personaje && !error2.alias){
                             await axios.post('../api/addPersVill', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/personajes');
+                            if (window.location.pathname === '/personajes/AgVillano'){
+                                navigate('/personajes')
+                            } else {
+                                navigate('/Rep6');
+                            }
                         }
                     }}
                 >

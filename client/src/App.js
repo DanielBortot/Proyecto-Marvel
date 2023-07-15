@@ -169,10 +169,16 @@ function App() {
             <Route path='/otros' element={<VistaRep/>}/>
             <Route path='/Rep2' element={<Reporte2/>}/>
             <Route path='/Rep2/addRep2' element={<AgSerie/>}/>
-            <Route path='/Rep2/modRep2' element={<ModRep2/>}/>
+            <Route path='/Rep2/ModRep2' element={<ModSerie/>}/>
             <Route path='/Rep5' element={<Reporte5/>}/>
+            <Route path='/Rep5/addRep6Her' element={<AgHeroe/>}/>
+            <Route path='/Rep5/addRep6Vill' element={<AgVillano/>}/>
+            <Route path='/Rep5/addRep6Civ' element={<AgCivil/>}/>
+            <Route path='/Rep5/addRep6Pod' element={<AgPoder/>}/>
+            <Route path='/Rep5/addRep6Posee' element={<AgPoseePers/>}/>
             <Route path='/Rep5/addRep5' element={<AgPelicula/>}/>
-            <Route path='/Rep5/modRep5' element={<ModRep5/>}/>
+            <Route path='/Rep5/addRep5' element={<AgPelicula/>}/>
+            <Route path='/Rep5/ModRep5' element={<ModPelicula/>}/>
             <Route path='/RepReg' element={<ReporteReg/>}/>
             <Route path='/Rep6' element={<Reporte6/>}/>
             <Route path='/Rep6/addRep6' element={<AgPosee/>}/>

@@ -111,7 +111,11 @@ function AgHeroe() {
                         setErrorDB({...error,...error2});
                         if (!error.personaje && !error2.alias){
                             await axios.post('../api/addPersHeroe', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/personajes');
+                            if (window.location.pathname === '/personajes/AgHeroe'){
+                                navigate('/personajes')
+                            } else {
+                                navigate('/Rep6');
+                            }
                         }
                     }}
                 >

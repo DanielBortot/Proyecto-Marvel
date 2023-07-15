@@ -76,10 +76,11 @@ const medios = {
 
     addMedioJuego: async (req,res) => {
         const {titulo, fecha, compania, rating, sinopsis, imagen, distribuidor, tipo, plataformas, duracion, suscripcion} = req.body;
+        console.log(req.body);
         await pool.query('INSERT INTO "Medio" ("Titulo", "Fecha_Estreno", "Compania", "Rating", "Sinopsis", "Imagen", "Duracion", "Suscripcion") VALUES ($1, $2, $3, $4, $5, $6,$7, $8)',[titulo,fecha,compania,rating,sinopsis,imagen,duracion,suscripcion]);
         await pool.query('INSERT INTO "Juego" ("T_Juego", "Distribuidor", "Tipo") VALUES ($1, $2, $3)', [titulo,distribuidor,tipo]);
         for (let i=0; i<plataformas.length; i++){
-            await pool.query('INSERT INTO "Plat_Juego" ("T_Juego", "Plataforma") VALUES ($1, $2)',[titulo,plataformas[i].nombre]);
+            await pool.query('INSERT INTO "Plat_Juego" ("T_Juego", "Plataforma") VALUES ($1, $2)',[titulo,plataformas[i].Plataforma]);
         }
         res.send('creado');
     },

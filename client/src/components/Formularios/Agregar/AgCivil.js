@@ -93,7 +93,11 @@ function AgCivil() {
                         setErrorDB(error);
                         if (!error.personaje){
                             await axios.post('../api/addPersCiv', {...val, nacionalidades: valNac, ocupaciones: valOcu, creadores: valCrea});
-                            navigate('/personajes');
+                            if (window.location.pathname === '/personajes/AgCivil'){
+                                navigate('/personajes')
+                            } else {
+                                navigate('/Rep6');
+                            }
                         }
                     }}
                 >

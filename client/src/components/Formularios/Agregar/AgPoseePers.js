@@ -59,7 +59,11 @@ function AgPoseePers() {
                         setErrorDB(error);
                         if (!error.posee){
                             await axios.post('../api/addPodPers', {...val});
-                            navigate('/poderes');
+                            if (window.location.pathname === '/poderes/AgPosee'){
+                                navigate('/poderes')
+                            } else {
+                                navigate('/Rep6');
+                            }
                         }
                     }}
                 >

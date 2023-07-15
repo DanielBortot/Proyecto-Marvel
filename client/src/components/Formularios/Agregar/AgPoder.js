@@ -37,7 +37,11 @@ function AgPoder() {
                         setErrorDB(error);
                         if (!error.poder){
                             await axios.post('../api/addPoder', {...val});
-                            navigate('/poderes');
+                            if (window.location.pathname === '/poderes/AgPoder'){
+                                navigate('/poderes')
+                            } else {
+                                navigate('/Rep6');
+                            }
                         }
                     }}
                 >
