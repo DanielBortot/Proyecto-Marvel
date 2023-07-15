@@ -19,19 +19,20 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ccc;
+  background: #929292;
+;
   border-radius: 4px;
 }
 
 /* Cambiamos el fondo y agregamos una sombra cuando esté en hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #b3b3b3;
+  background: #EC1D24;
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
 /* Cambiamos el fondo cuando esté en active */
 ::-webkit-scrollbar-thumb:active {
-  background-color: #999999;
+  background-color: #EC1D24;
 }
 
 ::-webkit-scrollbar-track {

@@ -9,7 +9,7 @@ function ModJuego() {
 
     const [errorDB, setErrorDB] = useState({});
     const {descReporte} = useSelector(state => state.reporte);
-    const {Fecha_Estreno, Compania, Rating, Sinopsis, T_Juego, plataformas, Distribuidor, Tipo, Imagen} = descReporte;
+    const {Fecha_Estreno, Compania, Rating, Sinopsis, T_Juego, plataformas, Distribuidor, Tipo, Imagen, Duracion, Suscripcion} = descReporte;
     const [listPlataformas, setListPlataformas] = useState([]);
     const [valPlat, setValPlat] = useState([]);
     const navigate = useNavigate();
@@ -41,13 +41,16 @@ function ModJuego() {
                         sinopsis: Sinopsis,
                         imagen: Imagen,
                         distribuidor: Distribuidor,
-                        tipo: Tipo
+                        tipo: Tipo,
+                        duracion: Duracion,
+                        suscripcion: Suscripcion
+
                     }}
                     validate={(val)=>{
                         let errores = {};
 
                         if (!val.titulo){
-                            errores.titulo = 'Introduzca el titulo de la pelicula';
+                            errores.titulo = 'Introduzca el titulo del juego';
                         }
                         if (!val.fecha){
                             errores.fecha = 'Seleccione una fecha de creacion';
@@ -59,14 +62,20 @@ function ModJuego() {
                             errores.rating = 'Ingrese un rating valido del 1 al 5';
                         }
                         if (!val.sinopsis){
-                            errores.sinopsis = 'Ingrese la sinopsis de la pelicula';
+                            errores.sinopsis = 'Ingrese la sinopsis del juego';
                         }
                         if (!val.distribuidor){
-                            errores.distribuidor = 'Ingrese el nombre del distribuidor de la pelicula';
+                            errores.distribuidor = 'Ingrese el nombre del distribuidor del juego';
                         }
                         if (!val.tipo || val.tipo === -1){
-                            errores.tipo = 'Ingrese el tipo de la pelicula';
+                            errores.tipo = 'Ingrese el tipo del juego';
                         }
+                        if (!val.duracion || val.duracion === -1){
+                            errores.duracion = 'Ingrese la duración del juego en minutos';
+                        }          
+                        if ((!val.suscripcion || isNaN(val.suscripcion) || parseInt(val.suscripcion) > 4 || parseInt(val.suscripcion) < 0)){
+                            errores.suscripcion = 'Ingrese un rating valido del 0 al 4';
+                        }    
                         if (valPlat.length === 0){
                             errores.plataforma = 'Ingrese la plataforma del juego'
                         }
@@ -121,13 +130,19 @@ function ModJuego() {
                                 name="distribuidor"
                             />
                             
-                            <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
+                            <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
+                            <Field 
+                                type="integer" 
+                                placeholder="Duración"
+                                name="duracion"
+                            />
 
-                            <Field type="text" name="tipo" as="select">
-                                <option hidden selected value={-1}>Selecciona el tipo de la pelicula</option>
-                                <option value={'Animacion'}>Animada</option>
-                                <option value={'Live Action'}>Live Action</option>
-                            </Field>
+                            <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
+                            <Field 
+                                type="integer" 
+                                placeholder="Suscripción del 0 - 4"
+                                name="suscripcion"
+                            />
 
                             <ErrorMessage name="plataforma" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.plataforma}</div>)}/>
 
