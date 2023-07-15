@@ -76,7 +76,6 @@ const medios = {
 
     addMedioJuego: async (req,res) => {
         const {titulo, fecha, compania, rating, sinopsis, imagen, distribuidor, tipo, plataformas, duracion, suscripcion} = req.body;
-        console.log(req.body);
         await pool.query('INSERT INTO "Medio" ("Titulo", "Fecha_Estreno", "Compania", "Rating", "Sinopsis", "Imagen", "Duracion", "Suscripcion") VALUES ($1, $2, $3, $4, $5, $6,$7, $8)',[titulo,fecha,compania,rating,sinopsis,imagen,duracion,suscripcion]);
         await pool.query('INSERT INTO "Juego" ("T_Juego", "Distribuidor", "Tipo") VALUES ($1, $2, $3)', [titulo,distribuidor,tipo]);
         for (let i=0; i<plataformas.length; i++){
@@ -91,7 +90,7 @@ const medios = {
         await pool.query('UPDATE "Juego" SET "Distribuidor"=$1, "Tipo"=$2 WHERE "T_Juego"=$3', [distribuidor,tipo,titulo]);
         await pool.query('DELETE FROM "Plat_Juego" WHERE "T_Juego"=$1',[titulo]);
         for (let i=0; i<plataformas.length; i++){
-            await pool.query('INSERT INTO "Plat_Juego" ("T_Juego", "Plataforma") VALUES ($1, $2)',[titulo,plataformas[i].nombre]);
+            await pool.query('INSERT INTO "Plat_Juego" ("T_Juego", "Plataforma") VALUES ($1, $2)',[titulo,plataformas[i].Plataforma]);
         }
         res.send('modificado');
     },
