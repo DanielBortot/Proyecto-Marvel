@@ -24,9 +24,13 @@ function EscogePerfil () {
             <div className="row justify-content-center">                
                 {descPerfil.map(perfil => (
                     <div className="col-1 d-flex justify-content-center m-5" key={perfil.Id_Perfil}>
-                        <div>
-                            <img onClick={()=>escoger(perfil)} src={imagenPerfil.find(i => i.pos === perfil.Imagen).img} alt={perfil.Nombre} width={200} height={200}/>
-                            <h4>{perfil.Nombre}</h4>
+                        <div className="combo">
+                            <div>
+                                <img onClick={()=>escoger(perfil)} src={imagenPerfil.find(i => i.pos === perfil.Imagen).img} alt={perfil.Nombre} width={200} height={200}/>
+                            </div>
+                            <div>
+                                <h4>{perfil.Nombre}</h4>
+                            </div>
                         </div>
                     </div>
                 ))}

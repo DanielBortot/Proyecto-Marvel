@@ -61,13 +61,15 @@ function VistaResumen () {
                         <div className="tituloresumen">
                             <div className="row">
                                 <h1 className=" col ">Perfiles</h1>
-                                <div className="col justify-content-right"><Link className='btn btn-danger' to={'/perfil'}>Agregar nuevo perfil</Link></div>
+                                <div className="col barperfil"><Link className='btn btn-danger' to={'/perfil'}>Agregar nuevo perfil</Link></div>
                             </div>
                             <div className="p-15px resumenbar">
                                 <div className="row">
                                     {descPerfil.map(perfil => (
-                                        <div className="col" key={perfil.Id_Perfil}>
-                                            <img src={imagenPerfil.find(i => i.pos === perfil.Imagen).img} alt={perfil.Nombre} width={150} height={150}/>
+                                        <div className="col perfilbox" key={perfil.Id_Perfil}>
+                                            <div>
+                                                <img src={imagenPerfil.find(i => i.pos === perfil.Imagen).img} alt={perfil.Nombre} width={150} height={150}/>
+                                            </div>
                                             <div className="card-body" key={perfil.Id_Perfil}>      
                                                 <h5 className="card-title">{perfil.Nombre}</h5>
                                             </div>

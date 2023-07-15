@@ -24,3 +24,19 @@
 .menubar {
     margin-top: 25px;
 }
+
+.barperfil {
+    justify-content: right;
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.barperfil a {
+    align-items: center;
+    display: flex;
+}
+
+.perfilbox div {
+    display: flex;
+    justify-content: center;
+}
