@@ -21,6 +21,17 @@ const reportes = {
         res.send(datos);
     },
 
+    objetosRep3: async (req,res) => {
+        const datos = await pool.query('SELECT "N_Objeto", COUNT ("N_Objeto") cant FROM (SELECT "N_Objeto", "Fecha" FROM  "Combate"  GROUP BY "N_Objeto", "Fecha") AS FOO GROUP BY "N_Objeto" ORDER BY COUNT("N_Objeto") DESC LIMIT 5');
+
+        res.send(datos.rows);
+    },
+
+    localiRep4: async (req,res) => {
+        const datos = await pool.query('SELECT "Lugar", COUNT(DISTINCT "Fecha") cant FROM "Combate" GROUP BY "Lugar" ORDER BY COUNT(DISTINCT "Fecha") DESC LIMIT 3');
+        res.send(datos.rows);
+    },
+
     peliculasRep5: async (req,res) => {
         const tipo = 'Animacion';
         const datos = (await pool.query('SELECT * FROM "Pelicula" pe INNER JOIN "Medio" me ON (pe."T_Pelicula"=me."Titulo") WHERE ((me."Duracion" > 150) AND (pe."Tipo" = $1) AND (pe."Ganancia" >= (SELECT AVG ("Ganancia") FROM "Pelicula" WHERE "Tipo" = $2))) ORDER BY "Coste"',[tipo,tipo])).rows;
@@ -146,6 +157,14 @@ const reportes = {
         const suscripcion = 'Vip';
         const pais = 'Venezuela';
         const datos = await pool.query('SELECT U."Email", U."Nombre", U."Apellido", U."Fecha_Nac" FROM "Usuario" U JOIN "Suscripcion" S ON (U."Id_Suscripcion" = S."ID") WHERE ((S."Tipo" = $1) AND (U."Direccion" IN (SELECT "Id_Ciudad" FROM "Ciudad" WHERE "Id_Estado" IN (SELECT "Id_Estado" FROM "Estado" WHERE "Id_Pais" IN (SELECT "Id_Pais" FROM "Pais" WHERE "Nombre" = $2)))))', [suscripcion,pais]);
+        res.send(datos.rows);
+    },
+
+    heroesFRep8: async (req,res) => {
+        const genero = 'F';
+        const tipo = 'Animacion';
+        const datos = await pool.query('SELECT * FROM "Personaje" WHERE "Nombre" IN (SELECT "N_Personaje" FROM "Esta" WHERE "N_Titulo" IN (SELECT Me."Titulo" FROM "Medio" AS Me JOIN "Pelicula" AS  Pe ON (Me."Titulo" = Pe."T_Pelicula") WHERE (Pe."Tipo" = $1)) OR "N_Titulo" IN (SELECT Me."Titulo" FROM "Medio" AS Me JOIN "Serie" AS S ON (Me."Titulo" = S."T_Serie") WHERE (S."Tipo" = $2))) AND "Nombre" IN (SELECT "N_Heroe" FROM "Heroe") AND "Genero" = $3',[tipo,tipo,genero]);
+        
         res.send(datos.rows);
     }
 }
