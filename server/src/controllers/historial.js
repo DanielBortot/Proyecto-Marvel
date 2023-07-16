@@ -17,8 +17,12 @@ const historial = {
     getHist: async (req,res) => {
         const {perfil} = req.body;
         //const medios = (await pool.query('SELECT * FROM "Historial" h INNER JOIN "Medio" me ON (h."N_Titulo"=me."Titulo") WHERE "Id_Perfil"=$1',[perfil])).rows;
+        let medios = [];
+        const medios1 = (await pool.query('SELECT * FROM "Historial" h INNER JOIN "Medio" me ON (h."N_Titulo"=me."Titulo") WHERE h."Id_Perfil"=$1 AND h."Tiempo_Reproduccion"<>me."Duracion" AND "Id_Hist" IN (SELECT MAX("Id_Hist") FROM "Historial" WHERE "Id_Perfil"=$2 GROUP BY "N_Titulo") AND h."N_Titulo" NOT IN (SELECT "T_Serie" FROM "Serie")',[perfil,perfil])).rows;
 
-        const medios = (await pool.query('SELECT * FROM "Historial" h INNER JOIN "Medio" me ON (h."N_Titulo"=me."Titulo") WHERE h."Id_Perfil"=$1 AND h."Tiempo_Reproduccion"<>me."Duracion" AND "Id_Hist" IN (SELECT MAX("Id_Hist") FROM "Historial" WHERE "Id_Perfil"=$2 GROUP BY "N_Titulo")',[perfil,perfil])).rows;
+        const medios2 = (await pool.query('SELECT * FROM "Historial" h INNER JOIN "Medio" me ON (h."N_Titulo"=me."Titulo") INNER JOIN "Serie" se ON (h."N_Titulo"=se."T_Serie") WHERE h."Id_Perfil"=$1 AND se."N_Episodios"<>(h."Tiempo_Reproduccion" / me."Duracion") AND "Id_Hist" IN (SELECT MAX("Id_Hist") FROM "Historial" WHERE "Id_Perfil"=$2 GROUP BY "N_Titulo")',[perfil,perfil])).rows;
+
+        medios = [...medios1, ...medios2];
 
         for (let i=0; i<medios.length; i++){
             const serie = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie"=$1',[medios[i].Titulo])).rows;
