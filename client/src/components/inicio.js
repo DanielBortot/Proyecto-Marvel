@@ -125,13 +125,13 @@ function VistaInicio () {
                     <div className="vistaPers">
                         {mediosRec.map(med => {
                             if (med.T_Serie){
-                                return <CuadroSeries prop={med} key={med.T_Serie} op={5}/>
+                                return <CuadroSeries prop={med} key={med.T_Serie}/>
                             }
                             else if (med.T_Pelicula){
-                                return <CuadroPeliculas prop={med} key={med.T_Pelicula} op={5}/>
+                                return <CuadroPeliculas prop={med} key={med.T_Pelicula}/>
                             }
                             else if (med.T_Juego){
-                                return <CuadroJuegos prop={med} key={med.T_Juego} op={5}/>
+                                return <CuadroJuegos prop={med} key={med.T_Juego}/>
                             }
                         })}
                     </div>   

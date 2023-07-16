@@ -11,7 +11,7 @@ function ReproPeli () {
     const [idHist, setIdHist] = useState('');
     const {peliHist} = useSelector(state => state.peliculas);
     const {Titulo, Id_Perfil, Calificacion, Tiempo_Reproduccion, Duracion, op, Id_Hist} = peliHist;
-    console.log(peliHist)
+    
     useEffect(()=>{
         const datos = async () => {
             if (op === 1){
