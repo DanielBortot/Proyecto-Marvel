@@ -25,7 +25,7 @@ function DescripcionOrg () {
     let {Eslogan, Fundador, Lider, Lugar_Creacion, Nom_Comic, Nombre, Objetivo, Tipo, Imagen} = descripcion;
     useEffect(()=> {
         const getDatos = async () => {
-            let meds = await (await axios.post('../api/getOrgMedio', {nombreOrg: Nombre})).data;
+            let meds = await (await axios.post('../api/getOrgMedio', {nombreOrg: Nombre, suscrip: descUsuario.Id_Suscripcion})).data;
             for (let i=0; i<meds.length;i++){
                 const img = imagenes.find(img => img.pos == meds[i].Imagen);
                 if (img){

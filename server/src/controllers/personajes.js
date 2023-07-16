@@ -66,6 +66,17 @@ const personajes = {
         const {nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers,nacionalidades,ocupaciones,creadores,alias,logotipo,traje,archienemigo} = req.body;
 
         await pool.query('INSERT INTO "Personaje" ("Nombre", "Genero", "Color_Ojos", "Color_Pelo", "Nom_Comic", "E_Marital", imagen) VALUES ($1, $2, $3, $4, $5, $6, $7)',[nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers]);
+
+        const {imagen, tipo, desc, material, nombre} = {
+            imagen: '/static/media/marvel.44665a2082472d0597ec.jpg',
+            tipo: 'No Posee',
+            desc: 'No Posee',
+            material: 'No Posee',
+            nombre: `No posee ${nombrePers}`
+        }
+
+        await pool.query('INSERT INTO "Objeto" ("Nombre", "Descripcion", "Material", "Tipo", "Imagen", "N_Personaje") VALUES ($1, $2, $3, $4, $5, $6)',[nombre,desc,material,tipo,imagen,nombrePers]);
+
         for (let i = 0; i<nacionalidades.length; i++){
             await pool.query('INSERT INTO "Pers_Nac" ("N_Personaje", "Nacionalidad") VALUES ($1, $2)',[nombrePers,nacionalidades[i].Nac]);
         }
@@ -103,6 +114,17 @@ const personajes = {
         const {nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers,nacionalidades,ocupaciones,creadores,alias,objetivo} = req.body;
 
         await pool.query('INSERT INTO "Personaje" ("Nombre", "Genero", "Color_Ojos", "Color_Pelo", "Nom_Comic", "E_Marital", imagen) VALUES ($1, $2, $3, $4, $5, $6, $7)',[nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers]);
+
+        const {imagen, tipo, desc, material, nombre} = {
+            imagen: '/static/media/marvel.44665a2082472d0597ec.jpg',
+            tipo: 'No Posee',
+            desc: 'No Posee',
+            material: 'No Posee',
+            nombre: `No posee ${nombrePers}`
+        }
+
+        await pool.query('INSERT INTO "Objeto" ("Nombre", "Descripcion", "Material", "Tipo", "Imagen", "N_Personaje") VALUES ($1, $2, $3, $4, $5, $6)',[nombre,desc,material,tipo,imagen,nombrePers]);
+
         for (let i = 0; i<nacionalidades.length; i++){
             await pool.query('INSERT INTO "Pers_Nac" ("N_Personaje", "Nacionalidad") VALUES ($1, $2)',[nombrePers,nacionalidades[i].Nac]);
         }
@@ -141,6 +163,17 @@ const personajes = {
         const {nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers,nacionalidades,ocupaciones,creadores} = req.body;
 
         await pool.query('INSERT INTO "Personaje" ("Nombre", "Genero", "Color_Ojos", "Color_Pelo", "Nom_Comic", "E_Marital", imagen) VALUES ($1, $2, $3, $4, $5, $6, $7)',[nombrePers,genero,ojos,pelo,comic,eMarital,imagenPers]);
+
+        const {imagen, tipo, desc, material, nombre} = {
+            imagen: '/static/media/marvel.44665a2082472d0597ec.jpg',
+            tipo: 'No Posee',
+            desc: 'No Posee',
+            material: 'No Posee',
+            nombre: `No posee ${nombrePers}`
+        }
+
+        await pool.query('INSERT INTO "Objeto" ("Nombre", "Descripcion", "Material", "Tipo", "Imagen", "N_Personaje") VALUES ($1, $2, $3, $4, $5, $6)',[nombre,desc,material,tipo,imagen,nombrePers]);
+
         for (let i = 0; i<nacionalidades.length; i++){
             await pool.query('INSERT INTO "Pers_Nac" ("N_Personaje", "Nacionalidad") VALUES ($1, $2)',[nombrePers,nacionalidades[i].Nac]);
         }

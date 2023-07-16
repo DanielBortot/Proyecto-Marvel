@@ -41,7 +41,7 @@ function VistaPeliculas () {
     useEffect(()=> {
         const traerInfo = async () => {
             setLoading(true)
-            const peliculas = await (await axios.get('/api/peliculas')).data;
+            const peliculas = await (await axios.post('/api/peliculas',{suscrip: descUsuario.Id_Suscripcion})).data;
             for (let i=0; i<peliculas.length;i++){
                 const img = imagenes.find(img => img.pos == peliculas[i].Imagen);
                 if (img){

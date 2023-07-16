@@ -37,7 +37,7 @@ function DescripcionPers () {
     let {Nombre, Genero, Color_Pelo, Color_Ojos, ocupaciones, nacionalidades, creadores, Nom_Comic, E_Marital, op} = descripcion;
     useEffect(()=> {
         const getDatos = async () => {
-            let meds = await (await axios.post('../api/getPersMedio', {nombrePers: Nombre})).data;
+            let meds = await (await axios.post('../api/getPersMedio', {nombrePers: Nombre, suscrip: descUsuario.Id_Suscripcion})).data;
             for (let i=0; i<meds.length;i++){
                 const img = imagenes.find(img => img.pos == meds[i].Imagen);
                 if (img){

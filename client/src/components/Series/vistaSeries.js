@@ -41,7 +41,7 @@ function VistaSeries () {
     useEffect(()=> {
         const traerInfo = async () => {
             setLoading(true)
-            const series = await (await axios.get('/api/series')).data;
+            const series = await (await axios.post('/api/series', {suscrip: descUsuario.Id_Suscripcion})).data;
             for (let i=0; i<series.length;i++){
                 const img = imagenes.find(img => img.pos == series[i].Imagen);
                 if (img){

@@ -17,8 +17,21 @@ const orgMedio = {
     },
 
     getOrgMedio: async (req,res) => {
-        const {nombreOrg} = req.body;
-        const medios = (await pool.query('SELECT * FROM "Medio" WHERE "Titulo" IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg])).rows;
+        const {nombreOrg, suscrip} = req.body;
+        let medios = [];
+        if (suscrip === 3){
+            medios = (await pool.query('SELECT * FROM "Medio" WHERE "Titulo" IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg])).rows;
+        }
+        if (suscrip === 2){
+            medios = (await pool.query('SELECT * FROM "Medio" WHERE ("Suscripcion"=2 OR "Suscripcion"=1 OR "Suscripcion"=4) AND "Titulo" IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg])).rows;
+        }
+        if (suscrip === 1){
+            medios = (await pool.query('SELECT * FROM "Medio" WHERE ("Suscripcion"=1 OR "Suscripcion"=4) AND "Titulo" IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg])).rows;
+        }
+        if (suscrip === 4){
+            medios = (await pool.query('SELECT * FROM "Medio" WHERE "Suscripcion"=4 AND "Titulo" IN (SELECT "N_Titulo" FROM "Aparece" WHERE "N_Organizacion"=$1)',[nombreOrg])).rows;
+        }
+
         for (let i=0; i<medios.length; i++){
             const serie = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie"=$1',[medios[i].Titulo])).rows;
             const pelicula = (await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula"=$1',[medios[i].Titulo])).rows;

@@ -56,9 +56,9 @@ router.get('/delSesion', (req,res) => {
 
 
 router.get('/personajes', personajes);
-router.get('/peliculas', peliculas);
-router.get('/series', series);
-router.get('/juegos', juegos);
+router.post('/peliculas', peliculas);
+router.post('/series', series);
+router.post('/juegos', juegos);
 router.get('/paises', paises);
 router.get('/villanos', buscVillanos);
 router.get('/heroes', buscHeroes);

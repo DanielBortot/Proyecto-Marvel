@@ -41,7 +41,7 @@ function VistaJuegos () {
     useEffect(()=> {
         const traerInfo = async () => {
             setLoading(true)
-            const juegos = await (await axios.get('/api/juegos')).data;
+            const juegos = await (await axios.post('/api/juegos',{suscrip: descUsuario.Id_Suscripcion})).data;
             for (let i=0; i<juegos.length;i++){
                 const img = imagenes.find(img => img.pos == juegos[i].Imagen);
                 if (img){
