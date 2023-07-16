@@ -18,7 +18,7 @@ const historial = {
         const {perfil} = req.body;
         //const medios = (await pool.query('SELECT * FROM "Historial" h INNER JOIN "Medio" me ON (h."N_Titulo"=me."Titulo") WHERE "Id_Perfil"=$1',[perfil])).rows;
 
-        const medios = (await pool.query('SELECT * FROM "Historial" h INNER JOIN "Medio" me ON (h."N_Titulo"=me."Titulo") WHERE "Id_Perfil"=$1 AND "Id_Hist" IN (SELECT MAX("Id_Hist") FROM "Historial" WHERE "Id_Perfil"=$2 GROUP BY "N_Titulo")',[perfil,perfil])).rows;
+        const medios = (await pool.query('SELECT * FROM "Historial" h INNER JOIN "Medio" me ON (h."N_Titulo"=me."Titulo") WHERE h."Id_Perfil"=$1 AND h."Tiempo_Reproduccion"<>me."Duracion" AND "Id_Hist" IN (SELECT MAX("Id_Hist") FROM "Historial" WHERE "Id_Perfil"=$2 GROUP BY "N_Titulo")',[perfil,perfil])).rows;
 
         for (let i=0; i<medios.length; i++){
             const serie = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie"=$1',[medios[i].Titulo])).rows;
