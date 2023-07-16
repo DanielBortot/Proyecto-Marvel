@@ -31,20 +31,20 @@ function ModSus () {
         <>
             <div className="modSusCont">
                 <div className="modSusItem" onClick={()=>changeSus(1)}>
-                    <h2>Gold</h2>
-                    <h3>5.99$</h3>
+                    <h2>Free</h2>
+                    <h3>0$$</h3>
                 </div>
                 <div className="modSusItem" onClick={()=>changeSus(2)}>
+                    <h2>Gold</h2>
+                    <h3>4.99$</h3>
+                </div>
+                <div className="modSusItem" onClick={()=>changeSus(3)}>
                     <h2>Premium</h2>
                     <h3>9.99$</h3>
                 </div>
-                <div className="modSusItem" onClick={()=>changeSus(3)}>
+                <div className="modSusItem" onClick={()=>changeSus(4)}>
                     <h2>Vip</h2>
                     <h3>14.99$</h3>
-                </div>
-                <div className="modSusItem" onClick={()=>changeSus(4)}>
-                    <h2>Free</h2>
-                    <h3>0$</h3>
                 </div>
             </div>
         </>
