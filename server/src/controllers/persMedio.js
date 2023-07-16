@@ -47,17 +47,17 @@ const persMedio = {
     getPersMedio: async (req,res) => {
         const {nombrePers, suscrip} = req.body;
         let medios = [];
-        if (suscrip === 3){
+        if (suscrip === 4){
             medios = (await pool.query('SELECT * FROM "Medio" WHERE "Titulo" IN (SELECT "N_Titulo" FROM "Esta" WHERE "N_Personaje"=$1)',[nombrePers])).rows;
         }
+        if (suscrip === 3){
+            medios = (await pool.query('SELECT * FROM "Medio" WHERE ("Suscripcion" BETWEEN 1 AND 3) AND "Titulo" IN (SELECT "N_Titulo" FROM "Esta" WHERE "N_Personaje"=$1)',[nombrePers])).rows;
+        }
         if (suscrip === 2){
-            medios = (await pool.query('SELECT * FROM "Medio" WHERE ("Suscripcion"=2 OR "Suscripcion"=1 OR "Suscripcion"=4) AND "Titulo" IN (SELECT "N_Titulo" FROM "Esta" WHERE "N_Personaje"=$1)',[nombrePers])).rows;
+            medios = (await pool.query('SELECT * FROM "Medio" WHERE ("Suscripcion" BETWEEN 1 AND 2) AND "Titulo" IN (SELECT "N_Titulo" FROM "Esta" WHERE "N_Personaje"=$1)',[nombrePers])).rows;
         }
         if (suscrip === 1){
-            medios = (await pool.query('SELECT * FROM "Medio" WHERE ("Suscripcion"=1 OR "Suscripcion"=4) AND "Titulo" IN (SELECT "N_Titulo" FROM "Esta" WHERE "N_Personaje"=$1)',[nombrePers])).rows;
-        }
-        if (suscrip === 4){
-            medios = (await pool.query('SELECT * FROM "Medio" WHERE "Suscripcion"=4 AND "Titulo" IN (SELECT "N_Titulo" FROM "Esta" WHERE "N_Personaje"=$1)',[nombrePers])).rows;
+            medios = (await pool.query('SELECT * FROM "Medio" WHERE "Suscripcion"=1 AND "Titulo" IN (SELECT "N_Titulo" FROM "Esta" WHERE "N_Personaje"=$1)',[nombrePers])).rows;
         }
 
         for (let i=0; i<medios.length; i++){

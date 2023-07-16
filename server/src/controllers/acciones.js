@@ -63,17 +63,17 @@ const acciones = {
     peliculas: async (req, res) => {
         const {suscrip} = req.body;
         let peliculas = [];
-        if (suscrip === 3){
+        if (suscrip === 4){
             peliculas = (await pool.query('SELECT * FROM "Pelicula"')).rows;
         }
+        if (suscrip === 3){
+            peliculas = (await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion" BETWEEN 1 AND 3)')).rows;
+        }
         if (suscrip === 2){
-            peliculas = (await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=2 OR "Suscripcion"=1 OR "Suscripcion"=4)')).rows;
+            peliculas = (await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion" BETWEEN 1 AND 2)')).rows;
         }
         if (suscrip === 1){
-            peliculas = (await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=1 OR "Suscripcion"=4)')).rows;
-        }
-        if (suscrip === 4){
-            peliculas = (await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=4)')).rows;
+            peliculas = (await pool.query('SELECT * FROM "Pelicula" WHERE "T_Pelicula" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=1)')).rows;
         }
         for (let i=0; i<peliculas.length; i++){
             const medio = (await pool.query('SELECT * FROM "Medio" WHERE "Titulo"=$1',[peliculas[i].T_Pelicula])).rows;
@@ -102,17 +102,17 @@ const acciones = {
     series: async (req, res) => {
         const {suscrip} = req.body;
         let series = [];
-        if (suscrip === 3){
+        if (suscrip === 4){
             series = (await pool.query('SELECT * FROM "Serie"')).rows;
         }
+        if (suscrip === 3){
+            series = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion" BETWEEN 1 AND 3)')).rows;
+        }
         if (suscrip === 2){
-            series = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=2 OR "Suscripcion"=1 OR "Suscripcion"=4)')).rows;
+            series = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion" BETWEEN 1 AND 2)')).rows;
         }
         if (suscrip === 1){
-            series = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=1 OR "Suscripcion"=4)')).rows;
-        }
-        if (suscrip === 4){
-            series = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=4)')).rows;
+            series = (await pool.query('SELECT * FROM "Serie" WHERE "T_Serie" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=1)')).rows;
         }
         for (let i=0; i<series.length; i++){
             const medio = (await pool.query('SELECT * FROM "Medio" WHERE "Titulo"=$1',[series[i].T_Serie])).rows;
@@ -141,17 +141,17 @@ const acciones = {
     juegos: async (req, res) => {
         const {suscrip} = req.body;
         let juegos = [];
-        if (suscrip === 3){
+        if (suscrip === 4){
             juegos = (await pool.query('SELECT * FROM "Juego"')).rows;
         }
+        if (suscrip === 3){
+            juegos = (await pool.query('SELECT * FROM "Juego" WHERE "T_Juego" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion" BETWEEN 1 AND 3)')).rows;
+        }
         if (suscrip === 2){
-            juegos = (await pool.query('SELECT * FROM "Juego" WHERE "T_Juego" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=2 OR "Suscripcion"=1 OR "Suscripcion"=4)')).rows;
+            juegos = (await pool.query('SELECT * FROM "Juego" WHERE "T_Juego" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion" BETWEEN 1 AND 3)')).rows;
         }
         if (suscrip === 1){
-            juegos = (await pool.query('SELECT * FROM "Juego" WHERE "T_Juego" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=1 OR "Suscripcion"=4)')).rows;
-        }
-        if (suscrip === 4){
-            juegos = (await pool.query('SELECT * FROM "Juego" WHERE "T_Juego" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=4)')).rows;
+            juegos = (await pool.query('SELECT * FROM "Juego" WHERE "T_Juego" IN (SELECT "Titulo" FROM "Medio" WHERE "Suscripcion"=1)')).rows;
         }
         for (let i=0; i<juegos.length; i++){
             const medio = (await pool.query('SELECT * FROM "Medio" WHERE "Titulo"=$1',[juegos[i].T_Juego])).rows;
