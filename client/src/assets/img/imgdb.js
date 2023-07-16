@@ -71,6 +71,22 @@ import img70 from "./zemo.jpg"
 import img71 from "./especspiderman.jpg"
 import img72 from "./avengersorg.jpg"
 import img73 from "./marvel.jpg"
+import img74 from "./arco.jpg"
+import img75 from "./arnes.jpg"
+import img76 from "./cetroloki.png"
+import img77 from "./gemapoder.jpg"
+import img78 from "./mark1.jpg"
+import img79 from "./mark3.jpg"
+import img80 from "./mjolnir.jpg"
+import img81 from "./escudo.jpg"
+import img82 from "./avjuego.jpg"
+import img83 from "./smjuego.jpg"
+import img84 from "./mcjuego.jpg"
+import img85 from "./xmen2.jpg"
+import img86 from "./pepper.jpg"
+import img87 from "./ciclop.jpg"
+import img88 from "./magneto.jpg"
+import img89 from "./spidergwen.jpg"
 
 const imagenes = [
     {img : img1, pos: 1},
@@ -145,7 +161,22 @@ const imagenes = [
     {img : img70, pos: 70},
     {img : img71, pos: 71},
     {img : img72, pos: 72},
-    {img : img73, pos: 73}
-    
+    {img : img73, pos: 73},
+    {img : img74, pos: 74},
+    {img : img75, pos: 75},
+    {img : img76, pos: 76},
+    {img : img77, pos: 77},
+    {img : img78, pos: 78},
+    {img : img79, pos: 79},
+    {img : img80, pos: 80},
+    {img : img81, pos: 81},
+    {img : img82, pos: 82},
+    {img : img83, pos: 83},
+    {img : img84, pos: 84},
+    {img : img85, pos: 85},
+    {img : img86, pos: 86},
+    {img : img87, pos: 87},
+    {img : img88, pos: 88},
+    {img : img89, pos: 89}
  ]
 export {imagenes}
