@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import '../../assets/personajes.css';
 import { useNavigate } from "react-router-dom";
 import {useDispatch} from "react-redux";
 import { descPersonaje } from "../../reducers/personajesSlice";
 import axios from "axios";
 
-function CuadroPers ({prop, email, pod, pers, setPers, op, obj}) {
+function CuadroPers ({prop, email, pod, pers, setPers, op, obj, per, act, setAct}) {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {imagen, Nombre, Alias} = prop;
-
     const enviar = async ()=> {
         dispatch(descPersonaje(prop));
+        setAct(!act);
         navigate(`/personajes/${Nombre}`);
     }
 
@@ -21,6 +21,22 @@ function CuadroPers ({prop, email, pod, pers, setPers, op, obj}) {
         }
         else if (op === 4){
             await axios.post('/api/delCrea',{nombrePers: Nombre, nombreObj: obj});
+        }
+        else if (op === 5){
+            if (per.N_Villano){
+                await axios.post('/api/delCivRela',{nombrePers: per.Nombre, nombreCiv: Nombre, op: true});
+            }
+            else {
+                await axios.post('/api/delCivRela',{nombrePers: per.Nombre, nombreCiv: Nombre, op: false});
+            }
+        }
+        else if (op === 6){
+            if (per.N_Villano){
+                await axios.post('/api/delHerVill', {nombreHer: Nombre, nombreVill: per.N_Villano});
+            }
+            else{
+                await axios.post('/api/delHerVill', {nombreHer: per.N_Heroe, nombreVill: Nombre});
+            }
         }
         const personajes = pers.filter(per => per.Nombre !== Nombre);
         setPers(personajes);

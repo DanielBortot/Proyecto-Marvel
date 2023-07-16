@@ -30,6 +30,7 @@ function DescripcionPers () {
     const [enfrenta, setEnfrenta] = useState([]);
     const [relaciones, setRelaciones] = useState([]);
     const [combates, setCombates] = useState([]);
+    const [actualizar, setActualizar] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -79,7 +80,6 @@ function DescripcionPers () {
                 }
             }
             let combs = await (await axios.post('../api/getCombates', {buscar: Nombre, op: 1})).data;
-
             setMedios(meds);
             setOrganizaciones(orgs);
             setPoderes(pods);
@@ -102,7 +102,7 @@ function DescripcionPers () {
             default:
                 setGen('Otro');
         }
-    },[]);
+    },[actualizar]);
     
     const infoTit = () => {
         if (op == 1){
@@ -346,7 +346,7 @@ function DescripcionPers () {
             </div>
             <div className="vistaPers">
                 {enfrenta.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre}/>
+                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} per={descripcion} pers={enfrenta} setPers={setEnfrenta} act={actualizar} setAct={setActualizar} op={6}/>
                 })}
             </div>
             <br/>
@@ -355,7 +355,7 @@ function DescripcionPers () {
             </div>
             <div className="vistaPers">
                 {relaciones.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre}/>
+                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} per={descripcion} pers={relaciones} setPers={setRelaciones} act={actualizar} setAct={setActualizar} op={5}/>
                 })}
             </div>
         </>

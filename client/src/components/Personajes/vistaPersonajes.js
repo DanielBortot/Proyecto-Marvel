@@ -42,6 +42,7 @@ function VistaPersonajes () {
     const [persFil, setPersFil] = useState([]);
     const [filtro, setFiltro] = useState(0);
     const [input, setInput] = useState('');
+    const [actualizar, setActualizar] = useState(false);
 
     useEffect(()=> {
         const traerInfo = async () => {
@@ -142,7 +143,7 @@ function VistaPersonajes () {
                     centerMode={true}       
                 >
                         {persFil.map(personaje => {
-                                return <CuadroPers prop={personaje} key={personaje.Nombre}/>
+                                return <CuadroPers prop={personaje} key={personaje.Nombre} act={actualizar} setAct={setActualizar}/>
                             })}     
                 </Carousel>
                 </div>
@@ -151,7 +152,7 @@ function VistaPersonajes () {
                 </div>
                 <div className="vistaPers">
                     {persFil.map(personaje => {
-                        return <CuadroPers prop={personaje} key={personaje.Nombre}/>
+                        return <CuadroPers prop={personaje} key={personaje.Nombre} act={actualizar} setAct={setActualizar}/>
                     })}
                 </div>
             </div>
