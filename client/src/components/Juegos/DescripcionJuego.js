@@ -8,10 +8,12 @@ import { CuadroOrgMedio } from "../Organizaciones/cuadroOrgMedio";
 import { CuadroPersMedio } from "../Personajes/cuadroPersMedio";
 import { Link } from "react-router-dom";
 import { datosReporte } from "../../reducers/reportesSlice";
+import { descJuegoHist } from "../../reducers/juegosSlice";
 
 function DescripcionJuegos () {
     const {descripcion} = useSelector(state => state.juegos);
     const {descUsuario} = useSelector(state => state.usuario);
+    const {perfilUso} = useSelector(state => state.perfiles);
     const [organizaciones, setOrganizaciones] = useState([]);
     const [personajes, setPersonajes] = useState([]);
     const dispatch = useDispatch();
@@ -38,6 +40,7 @@ function DescripcionJuegos () {
             setPersonajes(pers);
         }
         getDatos();
+        dispatch(descJuegoHist({Titulo: T_Juego, Id_Perfil: perfilUso.Id_Perfil, Duracion: Duracion, op: 0}))
     },[]);
 
     const delDatos = async () => {

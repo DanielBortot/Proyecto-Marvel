@@ -161,35 +161,37 @@ function App() {
                 <Route path='/juegos/ModJuego' element={<ModJuego/>}/>
                 <Route path='/juegos/AgPersJuego' element={<AgEsta/>}/>
                 <Route path='/juegos/AgOrgJuego' element={<AgAparece/>}/>
-                <Route path='/juegos/reproJuegos' element={<ReproJuego/>}/>
+                <Route path='/juegos/reprojuego' element={<ReproJuego/>}/>
 
                 <Route path='/medios/ModOrgMedio' element={<ModAparece/>}/>
                 <Route path='/medios/ModPersMedio' element={<ModEsta/>}/>
+
+
+                <Route path='/otros' element={<VistaRep/>}/>
+                <Route path='/Rep2' element={<Reporte2/>}/>
+                <Route path='/Rep2/addRep2' element={<AgSerie/>}/>
+                <Route path='/Rep2/ModRep2' element={<ModSerie/>}/>
+                <Route path='/Rep5' element={<Reporte5/>}/>
+                <Route path='/Rep5/addRep6Her' element={<AgHeroe/>}/>
+                <Route path='/Rep5/addRep6Vill' element={<AgVillano/>}/>
+                <Route path='/Rep5/addRep6Civ' element={<AgCivil/>}/>
+                <Route path='/Rep5/addRep6Pod' element={<AgPoder/>}/>
+                <Route path='/Rep5/addRep6Posee' element={<AgPoseePers/>}/>
+                <Route path='/Rep5/addRep5' element={<AgPelicula/>}/>
+                <Route path='/Rep5/addRep5' element={<AgPelicula/>}/>
+                <Route path='/Rep5/ModRep5' element={<ModPelicula/>}/>
+                <Route path='/RepReg' element={<ReporteReg/>}/>
+                <Route path='/Rep6' element={<Reporte6/>}/>
+                <Route path='/Rep6/addRep6' element={<AgPosee/>}/>
+                <Route path='/Rep6/modRep6' element={<ModRep6/>}/>
+                <Route path='/Rep1' element={<Reporte1/>}/>
+                <Route path='/Rep3' element={<Reporte3/>}/>
+                <Route path='/Rep4' element={<Reporte4/>}/>
+                <Route path='/Rep8' element={<Reporte8/>}/>
               </Route>
             </Route>
             <Route path='/inicioSesion' element={<Login/>}/>
             <Route path='/registro' element={<Register/>}/>
-            <Route path='/otros' element={<VistaRep/>}/>
-            <Route path='/Rep2' element={<Reporte2/>}/>
-            <Route path='/Rep2/addRep2' element={<AgSerie/>}/>
-            <Route path='/Rep2/ModRep2' element={<ModSerie/>}/>
-            <Route path='/Rep5' element={<Reporte5/>}/>
-            <Route path='/Rep5/addRep6Her' element={<AgHeroe/>}/>
-            <Route path='/Rep5/addRep6Vill' element={<AgVillano/>}/>
-            <Route path='/Rep5/addRep6Civ' element={<AgCivil/>}/>
-            <Route path='/Rep5/addRep6Pod' element={<AgPoder/>}/>
-            <Route path='/Rep5/addRep6Posee' element={<AgPoseePers/>}/>
-            <Route path='/Rep5/addRep5' element={<AgPelicula/>}/>
-            <Route path='/Rep5/addRep5' element={<AgPelicula/>}/>
-            <Route path='/Rep5/ModRep5' element={<ModPelicula/>}/>
-            <Route path='/RepReg' element={<ReporteReg/>}/>
-            <Route path='/Rep6' element={<Reporte6/>}/>
-            <Route path='/Rep6/addRep6' element={<AgPosee/>}/>
-            <Route path='/Rep6/modRep6' element={<ModRep6/>}/>
-            <Route path='/Rep1' element={<Reporte1/>}/>
-            <Route path='/Rep3' element={<Reporte3/>}/>
-            <Route path='/Rep4' element={<Reporte4/>}/>
-            <Route path='/Rep8' element={<Reporte8/>}/>
           </Routes>
       </div>
       <Footer/>

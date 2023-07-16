@@ -11,7 +11,7 @@ function ReproJuego () {
     const [idHist, setIdHist] = useState('');
     const {juegoHist} = useSelector(state => state.juegos);
     const {Titulo, Id_Perfil, Calificacion, Tiempo_Reproduccion, Duracion, op, Id_Hist} = juegoHist;
-    console.log(juegoHist)
+    
     useEffect(()=>{
         const datos = async () => {
             if (op === 1){

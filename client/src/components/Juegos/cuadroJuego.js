@@ -15,7 +15,7 @@ function CuadroJuegos ({prop, email, medios, setMedios, pers, op, org}) {
             navigate(`/juegos/${T_Juego}`);
         }
         else {
-            dispatch(descJuegoHist(prop));
+            dispatch(descJuegoHist({...prop, op: 1}));
             navigate('/juegos/reprojuego')
         }
     }
