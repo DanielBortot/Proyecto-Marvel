@@ -109,7 +109,7 @@ function DescripcionJuegos () {
                     </div>
                 </div>
                 {admin()}
-                <div><Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/juegos/reprojuegos'}>Reproducir</Link></div>
+                <div><Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'/juegos/reprojuego'}>Reproducir</Link></div>
             </div>
             <br/>
             <br/>
