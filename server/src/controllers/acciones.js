@@ -25,6 +25,12 @@ const acciones = {
         res.send(personajes);
     },
 
+    personajesPopulares: async (req, res) => {
+        const personajesPopulares = (await pool.query('SELECT * FROM "Personaje" WHERE "Nombre" IN (SELECT "N_Personaje" FROM "Esta" WHERE "N_Titulo" IN (SELECT "Titulo" FROM "Medio" WHERE "Rating" > 4))')).rows;
+        res.send(personajesPopulares);
+    },
+
+
     villHer: async (req,res) => {
         const {Nombre} = req.body;
         let datos = {};
@@ -63,6 +69,11 @@ const acciones = {
         res.send(peliculas);
     },
 
+    peliculasPopulares: async (req, res) => {
+        const peliculasPopulares = (await pool.query('SELECT * FROM "Medio" WHERE "Rating" > 4 AND "Titulo" IN (SELECT "T_Pelicula" FROM "Pelicula")')).rows;
+        res.send(peliculasPopulares);
+    },
+
     addPelicula: async (req, res) => {
         const {cont1, cont2 ,cont3} = req.body;
         await pool.query('INSERT INTO prueba (cont1, cont2, cont3) VALUES ($1, $2, $3)', [cont1, cont2, cont3]);
@@ -82,6 +93,11 @@ const acciones = {
             series[i] = {...series[i], ...medio[0]};
         }
         res.send(series);
+    },
+
+    seriesPopulares: async (req, res) => {
+        const seriesPopulares = (await pool.query('SELECT * FROM "Medio" WHERE "Rating" > 4 AND "Titulo" IN (SELECT "T_Serie" FROM "Serie")')).rows;
+        res.send(seriesPopulares);
     },
 
     addSerie: async (req, res) => {
@@ -104,6 +120,11 @@ const acciones = {
             juegos[i] = {...juegos[i], ...medio[0], plataformas: plat};
         }
         res.send(juegos);
+    },
+
+    juegosPopulares: async (req, res) => {
+        const juegosPopulares = (await pool.query('SELECT * FROM "Medio" WHERE "Rating" > 4 AND "Titulo" IN (SELECT "T_Juego" FROM "Juego")')).rows;
+        res.send(juegosPopulares);
     },
 
     addJuego: async (req, res) => {
