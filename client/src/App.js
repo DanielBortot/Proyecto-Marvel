@@ -74,6 +74,7 @@ import { ModSerie } from './components/Formularios/Modificar/modSerie';
 import { ModPelicula } from './components/Formularios/Modificar/modPelicula';
 import { ReproPeli } from './components/Peliculas/repropeli';
 import { ReproSerie } from './components/Series/reproserie';
+import { ReproJuego } from './components/Juegos/reproJuegos';
 import { Reporte1 } from './components/Reportes/Reporte1';
 import { Reporte3 } from './components/Reportes/Reporte3';
 import { Reporte4 } from './components/Reportes/Reporte4';
@@ -160,6 +161,7 @@ function App() {
                 <Route path='/juegos/ModJuego' element={<ModJuego/>}/>
                 <Route path='/juegos/AgPersJuego' element={<AgEsta/>}/>
                 <Route path='/juegos/AgOrgJuego' element={<AgAparece/>}/>
+                <Route path='/juegos/reproJuegos' element={<ReproJuego/>}/>
 
                 <Route path='/medios/ModOrgMedio' element={<ModAparece/>}/>
                 <Route path='/medios/ModPersMedio' element={<ModEsta/>}/>
