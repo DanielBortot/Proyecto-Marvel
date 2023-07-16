@@ -18,13 +18,13 @@ const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod, upPodPers,
 
 const {buscObjPers, addObjPers, compObjPers, getCrea, delCrea} = require('../controllers/objetoPers');
 
-const {buscHerVill, addHerVill, compHerVill, getHerVill, getRelacion} = require('../controllers/HerVill');
+const {buscHerVill, addHerVill, compHerVill, getHerVill, delHerVill} = require('../controllers/HerVill');
 
 const {buscOrgMedio, getOrgMedio, addOrgMedio, compOrgMedio, getMedOrga, upOrgMedio, delOrgMedio} = require('../controllers/orgMedio');
 
 const {buscPersMedio, addPersMedio, compPersMedio, getPersMedio, getMedPerso, upPersMedio, delPersMedio} = require('../controllers/persMedio');
 
-const {buscCivHer, buscCivVill, addCivPers, compCivPers} = require('../controllers/CivRela');
+const {buscCivHer, buscCivVill, addCivPers, compCivPers, delCivRela, getRelacion} = require('../controllers/CivRela');
 
 const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, modOrgPers, delOrgPers} = require('../controllers/persOrg');
 
@@ -166,7 +166,7 @@ router.post('/buscHerVill', buscHerVill);
 router.post('/compHerVill', compHerVill);
 router.post('/addHerVill', addHerVill);
 router.post('/getHerVill', getHerVill);
-router.post('/getRelacion', getRelacion);
+router.post('/delHerVill', delHerVill);
 
 router.post('/buscOrgMedio', buscOrgMedio);
 router.post('/getOrgMedio', getOrgMedio);
@@ -186,6 +186,8 @@ router.post('/buscCivHer', buscCivHer);
 router.post('/buscCivVill', buscCivVill);
 router.post('/compCivPers', compCivPers);
 router.post('/addCivPers', addCivPers);
+router.post('/delCivRela', delCivRela);
+router.post('/getRelacion', getRelacion);
 
 router.post('/getPersOrg', getPersOrg);
 router.post('/getOrgPerso', getOrgPerso);

@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 import ClipLoader from "react-spinners/ClipLoader";
+import { Link } from "react-router-dom";
 
 function VistaObjetos () {
 
@@ -59,8 +60,8 @@ function VistaObjetos () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgObjeto'}>Agregar Objeto</button>
-                <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgCrea'}>Agregar Creador de un Objeto</button>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgObjeto'}>Agregar Objeto</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgCreador'}>Agregar Creador de un Objeto</Link>
             </>
             );
         }

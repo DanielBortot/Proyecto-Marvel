@@ -100,6 +100,15 @@ function DescripcionObj () {
             <br/>
             <br/>
             <div className="tituloCont">
+                <h2>Personajes que Crearon el Objeto</h2>
+            </div>
+            <div className="vistaPersM">
+                {personajes.map(pers => {
+                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} obj={Nombre} pers={personajes} setPers={setPersonajes} op={4}/>
+                })}
+            </div>
+            <br/>
+            <div className="tituloCont">
                 <h2>Combates Donde se ha Usado el Objeto</h2>
             </div>
             <div className="comb">
@@ -123,14 +132,6 @@ function DescripcionObj () {
                         </>
                     ))}
                 </div>
-            </div>
-            <div className="tituloCont">
-                <h2>Personajes que Crearon el Objeto</h2>
-            </div>
-            <div className="vistaPersM">
-                {personajes.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} obj={Nombre} pers={personajes} setPers={setPersonajes} op={4}/>
-                })}
             </div>
         </>
     );
