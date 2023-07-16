@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
-import { Link } from "react-router-dom";
+import '../../assets/combates.css';
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
@@ -14,6 +15,9 @@ import { CuadroPodPers } from "../Poderes/cuadroPodPers";
 import { CuadroObjeto } from "../Objetos/cuadroObjeto";
 import { CuadroPers } from "./cuadroPers";
 import { datosReporte } from "../../reducers/reportesSlice";
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function DescripcionPers () {
     const {descripcion} = useSelector(state => state.personajes);
@@ -25,7 +29,9 @@ function DescripcionPers () {
     const [objetos, setObjetos] = useState([]);
     const [enfrenta, setEnfrenta] = useState([]);
     const [relaciones, setRelaciones] = useState([]);
+    const [combates, setCombates] = useState([]);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     let {Nombre, Genero, Color_Pelo, Color_Ojos, ocupaciones, nacionalidades, creadores, Nom_Comic, E_Marital, op} = descripcion;
     useEffect(()=> {
@@ -72,12 +78,15 @@ function DescripcionPers () {
                     rela[i].imagen = img.img;
                 }
             }
+            let combs = await (await axios.post('../api/getCombates', {buscar: Nombre, op: 1})).data;
+
             setMedios(meds);
             setOrganizaciones(orgs);
             setPoderes(pods);
             setObjetos(objs);
             setEnfrenta(enf);
             setRelaciones(rela);
+            setCombates(combs);
         }
         getDatos();
         switch (Genero){
@@ -197,6 +206,18 @@ function DescripcionPers () {
         return (<></>);
     }
 
+    const eliminar = async (comb) => {
+        await axios.post('../api/delCombate', {nombrePers: Nombre, nombrePod: comb.N_Poder, nombreObj: comb.N_Objeto, fecha: comb.Fecha});
+        let lista = [...combates];
+        lista = lista.filter(c => c.N_Poder !== comb.N_Poder || c.N_Objeto !== comb.N_Objeto || c.Fecha !== comb.Fecha);
+        setCombates(lista);
+    }
+
+    const update = async (comb) => {
+        dispatch(datosReporte(comb));
+        navigate('/personajes/modComb');
+    }
+
     return (
         <>
             <div className="descCont">
@@ -237,6 +258,32 @@ function DescripcionPers () {
             </div>
             <br/>
             <br/>
+            <br/>
+            <div className="tituloCont">
+                <h2>Combates Donde ha Estado el Personaje</h2>
+            </div>
+            <div className="comb">
+                <div className="combCont">
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Lugar de la pelea</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Poderes usados</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Objetos usados</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Fecha de la pelea</span></div>
+                    {combates.map(comb => (
+                        <>
+                            <div className="combContDato">
+                                <div className="combContIcon">
+                                    <FontAwesomeIcon icon={faTrash} onClick={()=>eliminar(comb)} style={{padding: '5px', cursor: 'pointer'}}/>
+                                    <FontAwesomeIcon icon={faPenToSquare} onClick={()=>{update(comb)}} style={{padding: '5px', cursor: 'pointer'}}/>
+                                </div>
+                                <div className="combitem">{comb.Lugar}</div>
+                            </div>
+                            <div className="combitem">{comb.N_Poder}</div>
+                            <div className="combitem">{comb.N_Objeto}</div>
+                            <div className="combitem">{comb.Fecha.slice(0,10)}</div>
+                        </>
+                    ))}
+                </div>
+            </div>
             <br/>
             <div className="tituloCont">
                 <h2>Medios a los que Pertenece</h2>

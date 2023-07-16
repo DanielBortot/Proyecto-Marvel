@@ -78,6 +78,7 @@ import { Reporte1 } from './components/Reportes/Reporte1';
 import { Reporte3 } from './components/Reportes/Reporte3';
 import { Reporte4 } from './components/Reportes/Reporte4';
 import { Reporte8 } from './components/Reportes/Reporte8';
+import { AgCombate } from './components/Formularios/Agregar/AgCombate';
 
 function App() {
   return (
@@ -123,7 +124,7 @@ function App() {
                 <Route path='/personajes/ModCivil' element={<ModCivil/>}/>
                 <Route path='/personajes/AgRelacion' element={<AgRelacion/>}/>
                 <Route path='/personajes/AgEnfrentamiento' element={<AgEnfrenta/>}/>
-                <Route path='/personajes/AgCombate' element={<></>}/>
+                <Route path='/personajes/AgCombate' element={<AgCombate/>}/>
                 <Route path='/personajes/ModCombate' element={<></>}/>
 
 

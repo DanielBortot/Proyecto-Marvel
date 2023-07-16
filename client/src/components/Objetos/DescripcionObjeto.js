@@ -3,17 +3,22 @@ import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import '../../assets/personajesMed.css';
 import 'react-multi-carousel/lib/styles.css';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { datosReporte } from "../../reducers/reportesSlice";
 import { imagenes } from "../../assets/img/imgdb";
 import { CuadroPers } from "../Personajes/cuadroPers";
 import axios from "axios";
+import { faTrash } from '@fortawesome/free-solid-svg-icons'
+import { faPenToSquare} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function DescripcionObj () {
     const {descripcion} = useSelector(state => state.objetos);
     const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
+    const [combates, setCombates] = useState([]);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     
     let {Nombre, Descripcion, Imagen, Material, Tipo, N_Personaje} = descripcion;
     
@@ -26,7 +31,11 @@ function DescripcionObj () {
                     pers[i].imagen = img.img;
                 }
             }
+
+            let combs = await (await axios.post('../api/getCombates', {buscar: Nombre, op: 3})).data;
+
             setPersonajes(pers);
+            setCombates(combs);
         }
         getDatos();
     })
@@ -45,6 +54,18 @@ function DescripcionObj () {
             );
         }
         return (<></>);
+    }
+
+    const eliminar = async (comb) => {
+        await axios.post('../api/delCombate', {nombrePers: comb.N_Personaje, nombrePod: comb.N_Poder, nombreObj: Nombre, fecha: comb.Fecha});
+        let lista = [...combates];
+        lista = lista.filter(c => c.N_Personaje !== comb.N_Personaje || c.N_Poder !== comb.N_Poder || c.Fecha !== comb.Fecha);
+        setCombates(lista);
+    }
+
+    const update = async (comb) => {
+        dispatch(datosReporte(comb));
+        navigate('/poderes/modComb');
     }
 
     return (
@@ -78,6 +99,31 @@ function DescripcionObj () {
             <br/>
             <br/>
             <br/>
+            <div className="tituloCont">
+                <h2>Combates Donde se ha Usado el Objeto</h2>
+            </div>
+            <div className="comb">
+                <div className="combCont">
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Lugar de la pelea</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Personajes que participaron</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Poderes usados</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Fecha de la pelea</span></div>
+                    {combates.map(comb => (
+                        <>
+                            <div className="combContDato">
+                                <div className="combContIcon">
+                                    <FontAwesomeIcon icon={faTrash} onClick={()=>eliminar(comb)} style={{padding: '5px', cursor: 'pointer'}}/>
+                                    <FontAwesomeIcon icon={faPenToSquare} onClick={()=>{update(comb)}} style={{padding: '5px', cursor: 'pointer'}}/>
+                                </div>
+                                <div className="combitem">{comb.Lugar}</div>
+                            </div>
+                            <div className="combitem">{comb.N_Personaje}</div>
+                            <div className="combitem">{comb.N_Poder}</div>
+                            <div className="combitem">{comb.Fecha.slice(0,10)}</div>
+                        </>
+                    ))}
+                </div>
+            </div>
             <div className="tituloCont">
                 <h2>Personajes que Crearon el Objeto</h2>
             </div>

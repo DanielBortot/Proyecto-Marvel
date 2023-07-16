@@ -1,0 +1,40 @@
+.comb {
+    width: 70%;
+    margin: 30px auto;
+}
+
+.combCont {
+    background-color: rgb(127, 130, 133);
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 3px;
+    padding: 10px;
+}
+
+.combitem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    font-size: 18px;
+    background-color: aliceblue;
+}
+
+.combContDato {
+    position: relative;
+    display: grid;
+    grid-template-columns: 100%;
+}
+
+.combContIcon {
+    position: absolute;
+    left: 1%;
+    top: 10%;
+}
+
+.combContIcon i {
+    padding: 5px;
+    cursor: pointer;
+}

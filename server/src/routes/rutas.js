@@ -30,6 +30,8 @@ const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, 
 
 const {getHist, addHist, upHist, getRec} = require('../controllers/historial');
 
+const {getCombates, delCombate, upCombate, addComb, compComb} = require('../controllers/combates');
+
 
 router.post('/sesion', (req,res) => {
     const {descUsuario, descPerfil, perfilUso, descTarjeta, ciudad, estado, pais} = req.body
@@ -192,6 +194,11 @@ router.post('/compOrgPers', compOrgPers);
 router.post('/addOrgPers', addOrgPers);
 router.post('/delOrgPers', delOrgPers);
 
+router.post('/getCombates', getCombates);
+router.post('/delCombate', delCombate);
+router.post('/addComb', addComb);
+router.post('/compComb', compComb);
+
 router.post('/addHist', addHist);
 router.post('/getHist', getHist);
 router.post('/getRec', getRec);
@@ -219,5 +226,6 @@ router.put('/upSede', upSede);
 router.put('/upPodPers', upPodPers);
 router.put('/modOrgPers', modOrgPers);
 router.put('/upHist', upHist);
+router.put('/upCombate', upCombate);
 
 module.exports = router;
