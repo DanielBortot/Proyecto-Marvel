@@ -259,31 +259,6 @@ function DescripcionPers () {
             <br/>
             <br/>
             <br/>
-            <div className="tituloCont">
-                <h2>Combates Donde ha Estado el Personaje</h2>
-            </div>
-            <div className="comb">
-                <div className="combCont">
-                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Lugar de la pelea</span></div>
-                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Poderes usados</span></div>
-                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Objetos usados</span></div>
-                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Fecha de la pelea</span></div>
-                    {combates.map(comb => (
-                        <>
-                            <div className="combContDato">
-                                <div className="combContIcon">
-                                    <FontAwesomeIcon icon={faTrash} onClick={()=>eliminar(comb)} style={{padding: '5px', cursor: 'pointer'}}/>
-                                    <FontAwesomeIcon icon={faPenToSquare} onClick={()=>{update(comb)}} style={{padding: '5px', cursor: 'pointer'}}/>
-                                </div>
-                                <div className="combitem">{comb.Lugar}</div>
-                            </div>
-                            <div className="combitem">{comb.N_Poder}</div>
-                            <div className="combitem">{comb.N_Objeto}</div>
-                            <div className="combitem">{comb.Fecha.slice(0,10)}</div>
-                        </>
-                    ))}
-                </div>
-            </div>
             <br/>
             <div className="tituloCont">
                 <h2>Medios a los que Pertenece</h2>
@@ -357,6 +332,32 @@ function DescripcionPers () {
                 {relaciones.map(pers => {
                     return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} per={descripcion} pers={relaciones} setPers={setRelaciones} act={actualizar} setAct={setActualizar} op={5}/>
                 })}
+            </div>
+            <br/>
+            <div className="tituloCont">
+                <h2>Combates Donde ha Estado el Personaje</h2>
+            </div>
+            <div className="comb">
+                <div className="combCont">
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Lugar de la pelea</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Poderes usados</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Objetos usados</span></div>
+                    <div className="combitem"><span style={{fontWeight: 'bold'}}>Fecha de la pelea</span></div>
+                    {combates.map(comb => (
+                        <>
+                            <div className="combContDato">
+                                <div className="combContIcon">
+                                    <FontAwesomeIcon icon={faTrash} onClick={()=>eliminar(comb)} style={{padding: '5px', cursor: 'pointer'}}/>
+                                    <FontAwesomeIcon icon={faPenToSquare} onClick={()=>{update(comb)}} style={{padding: '5px', cursor: 'pointer'}}/>
+                                </div>
+                                <div className="combitem">{comb.Lugar}</div>
+                            </div>
+                            <div className="combitem">{comb.N_Poder}</div>
+                            <div className="combitem">{comb.N_Objeto}</div>
+                            <div className="combitem">{comb.Fecha.slice(0,10)}</div>
+                        </>
+                    ))}
+                </div>
             </div>
         </>
     );
