@@ -48,7 +48,7 @@ function CuadroPodPers ({prop, email, setPods, pods}) {
                             </div>
                         </div>
                         <div className="contPersM2">
-                            <p><span style={{fontWeight: 'bolder'}}>OBTENCION</span>:</p>
+                            <p><span style={{fontWeight: 'bolder'}}>OBTENCIÓN</span>:</p>
                         </div>
                         <div className="contPersM3">
                             <p>{prop.Obtencion}</p>
