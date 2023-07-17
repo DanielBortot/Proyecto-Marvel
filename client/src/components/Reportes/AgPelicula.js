@@ -19,7 +19,7 @@ function AgPelicula() {
                         titulo: '',
                         fecha: '',
                         compania: '',
-                        rating: '',
+                        rating: '1',
                         sinopsis: '',
                         imagen: '73',
                         director: '',
@@ -104,12 +104,6 @@ function AgPelicula() {
                                 type="text" 
                                 placeholder="Compañia"
                                 name="compania"
-                            />
-                            <ErrorMessage name="rating" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
-                            <Field 
-                                type="text" 
-                                placeholder="Rating de 1-5"
-                                name="rating"
                             />
                             <ErrorMessage name="sinopsis" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.sinopsis}</div>)}/>
                             <Field 
