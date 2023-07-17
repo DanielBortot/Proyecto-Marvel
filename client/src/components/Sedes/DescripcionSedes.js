@@ -55,9 +55,9 @@ function DescripcionSede () {
                 <div className="descContTitu">
                     <div>
                         <p>NOMBRE</p>
-                        <p>TIPO DE EDIFICACION</p>
-                        <p>UBICACION</p>
-                        <p>NOMBRE DE LA ORGANIZACION A LA QUE PERTENECE</p>
+                        <p>TIPO DE EDIFICACIÓN</p>
+                        <p>UBICACIÓN</p>
+                        <p>NOMBRE DE LA ORGANIZACIÓN A LA QUE PERTENECE</p>
                         
                     </div>
                     <div>

@@ -83,7 +83,7 @@ function DescripcionObj () {
                         <p>TIPO DE OBJETO</p>
                         <p>MATERIAL DEL OBJETO</p>
                         <p>DUEÑO DEL OBJETO</p>
-                        <p>DESCRIPCION</p>
+                        <p>DESCRIPCIÓN</p>
                         
                     </div>
                     <div>

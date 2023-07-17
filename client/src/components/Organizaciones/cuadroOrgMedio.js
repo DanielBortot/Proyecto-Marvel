@@ -26,8 +26,8 @@ function CuadroOrgMedio ({prop, email, op, orgs, setOrgs}) {
         if (email && email === 'admin@gmail.com'){
             return (
                 <>
-                    <button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>
-                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/medios/ModOrgMedio'}>Modificar Organizacion</Link>
+                    <button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Organización</button>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(prop))}} style={{margin: '15px 0 15px 10px'}} to={'/medios/ModOrgMedio'}>Modificar Organización</Link>
                 </>
             );
         }

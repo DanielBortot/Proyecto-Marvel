@@ -58,7 +58,7 @@ function AgEsta() {
                             getMedios(val.nombrePers);
                         }
                         if (!val.titulo || val.titulo === -1){
-                            errores.titulo = 'Seleccione el titulo del medio';
+                            errores.titulo = 'Seleccione el título del medio';
                         }
                         if (!val.rol || val.rol === -1){
                             errores.rol = 'Seleccione el rol del personaje en el medio';

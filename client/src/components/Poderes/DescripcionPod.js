@@ -79,7 +79,7 @@ function DescripcionPod () {
                 <div className="descContTitu">
                     <div>
                         <p>NOMBRE</p>
-                        <p>DESCRIPCION</p>
+                        <p>DESCRIPCIÓN</p>
                         
                     </div>
                     <div>

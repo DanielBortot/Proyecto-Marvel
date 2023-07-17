@@ -34,11 +34,11 @@ function Perfil (){
                     validate={(val)=> {
                         let errores = {};
                         if (numPerf){
-                            errores.nombre = 'Ya posee el maximo numero de usuarios posibles';
+                            errores.nombre = 'Ya posee el máximo numero de usuarios posibles';
                             return errores;
                         }
                         if (!val.nombre || !/^[a-zA-Z]{1,50}$/.test(val.nombre)){
-                            errores.nombre = 'Introduzca un nombre valido';
+                            errores.nombre = 'Introduzca un nombre válido';
                         } else {
                             descPerfil.map(perfil => {
                                 if (perfil.Nombre === val.nombre){
@@ -95,7 +95,7 @@ function Perfil (){
 
                             <Field type="text" placeholder="Dispositivo" name="dispositivo" as="select">
                             <option hidden selected>Selecciona tu dispositivo</option>
-                            <option value='Telefono'>Telefono</option>
+                            <option value='Telefono'>Teléfono</option>
                             <option value='Tablet'>Tablet</option>
                             <option value='Televisor'>Televisor</option>
                             <option value='Computadora'>Computadora</option>

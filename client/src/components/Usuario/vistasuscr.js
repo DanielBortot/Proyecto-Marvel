@@ -17,7 +17,7 @@ function VistaSuscr () {
                             <h1 className="p-15px">Suscripción actual</h1>
                             <div className="p-15px resumenbar">
                                 <h5><span style={{fontWeight: 'bold'}}>Tipo de Suscripción:</span> {descSuscripcion.Tipo}</h5>
-                                <p><span style={{fontWeight: 'bold'}}>Descripcion de la Suscripción:</span> {descSuscripcion.Descripcion}</p>
+                                <p><span style={{fontWeight: 'bold'}}>Descripción de la Suscripción:</span> {descSuscripcion.Descripcion}</p>
                                 <h4><span style={{fontWeight: 'bold'}}>Tarifa de la Suscripción:</span> {descSuscripcion.Tarifa}$</h4>
                             </div>
                         </div>

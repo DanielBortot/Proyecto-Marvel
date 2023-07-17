@@ -35,16 +35,16 @@ function ModSerie () {
                         let errores = {};
 
                         if (!val.tituloNew){
-                            errores.tituloNew = 'Introduzca el titulo de la serie';
+                            errores.tituloNew = 'Introduzca el título de la serie';
                         }
                         if (!val.fecha){
-                            errores.fecha = 'Seleccione una fecha de creacion';
+                            errores.fecha = 'Seleccione una fecha de creación';
                         }
                         if (!val.compania){
-                            errores.compania = 'Ingrese la compañia';
+                            errores.compania = 'Ingrese la compañía';
                         }
                         if (!val.rating || isNaN(val.rating) || parseInt(val.rating) > 5 || parseInt(val.rating) < 1){
-                            errores.rating = 'Ingrese un rating valido del 1 al 5';
+                            errores.rating = 'Ingrese un rating válido del 1 al 5';
                         }
                         if (!val.sinopsis){
                             errores.sinopsis = 'Ingrese la sinopsis de la serie';
@@ -59,10 +59,10 @@ function ModSerie () {
                             errores.tipo = 'Ingrese el tipo de la serie';
                         }
                         if (!val.episodios || isNaN(val.episodios) || parseInt(val.episodios) < 1){
-                            errores.episodios = 'Ingrese un numero de episodios valido';
+                            errores.episodios = 'Ingrese un número de episodios válido';
                         }
                         if (!val.duracion || isNaN(val.duracion) || parseInt(val.duracion) < 1){
-                            errores.duracion = 'Ingrese una duracion valida en minutos';
+                            errores.duracion = 'Ingrese una duración válida en minutos';
                         }
                         if (!val.suscripcion || val.suscripcion === -1){
                             errores.suscripcion = 'Seleccione el tipo de suscripcion';
@@ -92,7 +92,7 @@ function ModSerie () {
                             <ErrorMessage name="tituloNew" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tituloNew}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Titulo"
+                                placeholder="Título"
                                 name="tituloNew"
                             />
                             <ErrorMessage name="fecha" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fecha}</div>)}/>
@@ -104,7 +104,7 @@ function ModSerie () {
                             <ErrorMessage name="compania" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.compania}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Compañia"
+                                placeholder="Compañía"
                                 name="compania"
                             />
                             <ErrorMessage name="rating" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
@@ -122,13 +122,13 @@ function ModSerie () {
                             <ErrorMessage name="episodios" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.episodios}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Numero de Episodios"
+                                placeholder="Número de Episodios"
                                 name="episodios"
                             />
                             <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.duracion}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Duracion de la Serie en Minutos"
+                                placeholder="Duración de la Serie en Minutos"
                                 name="duracion"
                             />
                             <ErrorMessage name="creador" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.creador}</div>)}/>
@@ -146,7 +146,7 @@ function ModSerie () {
 
                             <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
                             <Field type="text" name="suscripcion" as="select">
-                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion de la serie</option>
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripción de la serie</option>
                                 <option value={1}>Gold</option>
                                 <option value={2}>Premium</option>
                                 <option value={3}>Vip</option>

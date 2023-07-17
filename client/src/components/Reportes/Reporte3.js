@@ -17,7 +17,7 @@ function Reporte3 (){
     return (
         <>  
             <div className="rep2">
-                <h3>Los 5 objetos mas usados por heroes y villanos.</h3>
+                <h3>Los 5 objetos más usados por heroes y villanos.</h3>
                 <div className="rep2Cont">
                     <div className="rep2item"><span style={{fontWeight: 'bold'}}>Objeto</span></div>
                     <div className="rep2item"><span style={{fontWeight: 'bold'}}>Veces usado</span></div>

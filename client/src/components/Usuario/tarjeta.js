@@ -31,10 +31,10 @@ function Tarjeta () {
                     validate={({tarjeta,codigo,fecha}) => {
                         let errores = {};
                         if (!tarjeta || !/^[0-9]{16,16}$/.test(tarjeta)){
-                            errores.tarjeta = 'Ingrese un numero de tarjeta valido';
+                            errores.tarjeta = 'Ingrese un número de tarjeta válido';
                         }
                         if (!codigo || isNaN(codigo) || parseInt(codigo) < 100 || parseInt(codigo) > 999 ){
-                            errores.codigo = 'Ingrese un codigo de tarjeta valido';
+                            errores.codigo = 'Ingrese un código de tarjeta válido';
                         }
                         if (!fecha){
                             errores.fecha = 'Ingrese una fecha de vencimiento de la tarjeta';

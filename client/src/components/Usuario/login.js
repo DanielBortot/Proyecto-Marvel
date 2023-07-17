@@ -66,10 +66,10 @@ function Login() {
                         let errores = {};
 
                         if (!val.email || !/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(val.email)){
-                            errores.email = 'Introduzca un email valido';
+                            errores.email = 'Introduzca un email válido';
                         }
                         if (!val.contra){
-                            errores.contra = 'Introduzca una contraseña valida';
+                            errores.contra = 'Introduzca una contraseña válida';
                         }
                         return errores;
                     }}

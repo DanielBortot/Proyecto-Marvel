@@ -31,7 +31,7 @@ function ModPoder() {
                             errores.nombrePod = 'Ingresa un nombre de poder';
                         }
                         if (!val.descripcion){
-                            errores.descripcion = 'Ingresa la descripcion del poder';
+                            errores.descripcion = 'Ingresa la descripción del poder';
                         }
                         return errores;
                     }}
@@ -61,7 +61,7 @@ function ModPoder() {
                             <ErrorMessage name="descripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.descripcion}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Descripcion del Poder"
+                                placeholder="Descripción del Poder"
                                 name="descripcion"
                             />
 

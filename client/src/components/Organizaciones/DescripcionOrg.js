@@ -102,10 +102,10 @@ function DescripcionOrg () {
                         <p>NOMBRE</p>
                         <p>LIDER</p>
                         <p>FUNDADOR</p>
-                        <p>LUGAR DE CREACION</p>
-                        <p>TIPO DE ORGANIZACION</p>
-                        <p>PRIMERA APARICION</p>
-                        <p>OBJETIVO DE LA ORGANIZACION</p>
+                        <p>LUGAR DE CREACIÓN</p>
+                        <p>TIPO DE ORGANIZACIÓN</p>
+                        <p>PRIMERA APARICIÓN</p>
+                        <p>OBJETIVO DE LA ORGANIZACIÓN</p>
                         <p>ESLOGAN</p>
                         
                     </div>
@@ -127,7 +127,7 @@ function DescripcionOrg () {
             <br/>
             <br/>
             <div className="tituloCont">
-                <h2>Medios en los que Aparece la Organizacion</h2>
+                <h2>Medios en los que Aparece la Organización</h2>
             </div>
             <div className="carrusel">
             <Carousel 
@@ -150,7 +150,7 @@ function DescripcionOrg () {
             </div>
             <br/>
             <div className="tituloCont">
-                <h2>Sedes que Pertenecen a la Organizacion</h2>
+                <h2>Sedes que Pertenecen a la Organización</h2>
             </div>
             <div className="carrusel">
             <Carousel 
@@ -165,7 +165,7 @@ function DescripcionOrg () {
             </div>
             <br/>
             <div className="tituloCont">
-                <h2>Personajes que Pertenecen a la Organizacion</h2>
+                <h2>Personajes que Pertenecen a la Organización</h2>
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {

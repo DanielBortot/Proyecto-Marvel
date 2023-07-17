@@ -14,7 +14,7 @@ function ModPelicula() {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Modificar Pelicula</h2>
+                <h2 className="titulo">Modificar Película</h2>
             </div>
             <div className="formContReg">
                 <Formik
@@ -37,40 +37,40 @@ function ModPelicula() {
                         let errores = {};
 
                         if (!val.tituloNew){
-                            errores.tituloNew = 'Introduzca el titulo de la pelicula';
+                            errores.tituloNew = 'Introduzca el título de la película';
                         }
                         if (!val.fecha){
-                            errores.fecha = 'Seleccione una fecha de creacion';
+                            errores.fecha = 'Seleccione una fecha de creación';
                         }
                         if (!val.compania){
-                            errores.compania = 'Ingrese la compañia';
+                            errores.compania = 'Ingrese la compañía';
                         }
                         if (!val.rating || isNaN(val.rating) || parseInt(val.rating) > 5 || parseInt(val.rating) < 1){
-                            errores.rating = 'Ingrese un rating valido del 1 al 5';
+                            errores.rating = 'Ingrese un rating válido del 1 al 5';
                         }
                         if (!val.sinopsis){
-                            errores.sinopsis = 'Ingrese la sinopsis de la pelicula';
+                            errores.sinopsis = 'Ingrese la sinopsis de la película';
                         }
                         if (!val.director){
-                            errores.director = 'Ingrese el nombre del director de la pelicula';
+                            errores.director = 'Ingrese el nombre del director de la película';
                         }
                         if (!val.distribuidor){
-                            errores.distribuidor = 'Ingrese el nombre del distribuidor de la pelicula';
+                            errores.distribuidor = 'Ingrese el nombre del distribuidor de la película';
                         }
                         if (!val.duracion || isNaN(val.duracion) || parseInt(val.duracion) < 1){
-                            errores.duracion = 'Ingrese una duracion valida en minutos';
+                            errores.duracion = 'Ingrese una duración válida en minutos';
                         }
                         if (!val.ganancia || isNaN(val.ganancia) || parseInt(val.ganancia) < 0){
-                            errores.ganancia = 'Ingrese una ganacia valida';
+                            errores.ganancia = 'Ingrese una ganacia válida';
                         }
                         if (!val.coste || isNaN(val.coste) || parseInt(val.coste) < 0){
-                            errores.coste = 'Ingrese un coste valido';
+                            errores.coste = 'Ingrese un coste válido';
                         }
                         if (!val.tipo || val.tipo === -1){
-                            errores.tipo = 'Ingrese el tipo de la pelicula';
+                            errores.tipo = 'Ingrese el tipo de la película';
                         }
                         if (!val.suscripcion || val.suscripcion === -1){
-                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
+                            errores.suscripcion = 'Seleccione el tipo de suscripción';
                         }
                         return errores;
                     }}
@@ -97,7 +97,7 @@ function ModPelicula() {
                             <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tituloNew}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Titulo"
+                                placeholder="Título"
                                 name="tituloNew"
                             />
                             <ErrorMessage name="fecha" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fecha}</div>)}/>
@@ -109,7 +109,7 @@ function ModPelicula() {
                             <ErrorMessage name="compania" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.compania}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Compañia"
+                                placeholder="Compañía"
                                 name="compania"
                             />
                             <ErrorMessage name="rating" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
@@ -139,25 +139,25 @@ function ModPelicula() {
                             <ErrorMessage name="duracion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.duracion}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Duracion de la Pelicula en Minutos"
+                                placeholder="Duracion de la Película en Minutos"
                                 name="duracion"
                             />
                             <ErrorMessage name="ganancia" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.ganancia}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Ganancia de la Pelicula"
+                                placeholder="Ganancia de la Película"
                                 name="ganancia"
                             />
                             <ErrorMessage name="coste" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.coste}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Coste de la Pelicula"
+                                placeholder="Coste de la Película"
                                 name="coste"
                             />
 
                             <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
                             <Field type="text" name="suscripcion" as="select">
-                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion de la pelicula</option>
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripción de la película</option>
                                 <option value={1}>Gold</option>
                                 <option value={2}>Premium</option>
                                 <option value={3}>Vip</option>
@@ -167,7 +167,7 @@ function ModPelicula() {
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
 
                             <Field type="text" name="tipo" as="select">
-                                <option hidden selected value={-1}>Selecciona el tipo de la pelicula</option>
+                                <option hidden selected value={-1}>Selecciona el tipo de la película</option>
                                 <option value={'Animacion'}>Animada</option>
                                 <option value={'Live Action'}>Live Action</option>
                             </Field>

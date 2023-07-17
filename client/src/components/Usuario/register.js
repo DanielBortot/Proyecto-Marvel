@@ -85,16 +85,16 @@ function Register() {
                     validate={(val)=> {
                         let errores = {};
                         if (!val.nombre || !/^[a-zA-Z]{1,50}$/.test(val.nombre)){
-                            errores.nombre = 'Introduzca un nombre valido';
+                            errores.nombre = 'Introduzca un nombre válido';
                         }
                         if (!val.apellido || !/^[a-zA-Z]{1,50}$/.test(val.apellido)){
-                            errores.apellido = 'Introduzca un apellido valido';
+                            errores.apellido = 'Introduzca un apellido válido';
                         }
                         if (!val.email || !/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i.test(val.email)){
-                            errores.email = 'Introduzca un email valido';
+                            errores.email = 'Introduzca un email válido';
                         }
                         if (!val.contra){
-                            errores.contra = 'Introduzca una contraseña valido';
+                            errores.contra = 'Introduzca una contraseña válido';
                         }
                         if (!val.repContra){
                             errores.repContra = 'Repita la contraseña';
@@ -105,7 +105,7 @@ function Register() {
                             errores.fecha = 'Introduzca la fecha de nacimiento';
                         }
                         if (!val.pais || val.pais === -1){
-                            errores.pais = 'Seleccione un pais';
+                            errores.pais = 'Seleccione un país';
                         } else {
                             if (op[0] !== val.pais){
                                 val.estado = -1;
@@ -191,7 +191,7 @@ function Register() {
                             <ErrorMessage name="pais" id="pais" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.pais}</div>)}/>
 
                             <Field type="text" placeholder="Pais" name="pais" as="select">
-                            <option hidden selected value={-1}>Selecciona el pais</option>
+                            <option hidden selected value={-1}>Selecciona el país</option>
                             {paises.map(pais => (
                                 <option key={pais.Id_Pais} value={pais.Id_Pais}>{pais.Nombre}</option>
                             ))}

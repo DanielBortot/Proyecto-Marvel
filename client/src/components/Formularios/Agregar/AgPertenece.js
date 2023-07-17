@@ -32,7 +32,7 @@ function AgPertenece() {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Agregar Personaje a Organizacion</h2>
+                <h2 className="titulo">Agregar Personaje a Organización</h2>
             </div>
             <div className="formContReg">
                 <Formik
@@ -50,10 +50,10 @@ function AgPertenece() {
                             getOrganizaciones(val.nombrePers);
                         }
                         if (!val.nombreOrg || val.nombreOrg === -1){
-                            errores.nombreOrg = 'Seleccione la organizacion';
+                            errores.nombreOrg = 'Seleccione la organización';
                         }
                         if (!val.cargo || val.cargo === -1){
-                            errores.cargo = 'Seleccione el cargo del personaje en la organizacion';
+                            errores.cargo = 'Seleccione el cargo del personaje en la organización';
                         }
                         
                         return errores;
@@ -79,7 +79,7 @@ function AgPertenece() {
                             </Field>
                             <ErrorMessage name="nombreOrg" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombreOrg}</div>)}/>
                             <Field type="text" name="nombreOrg" as="select">
-                                <option hidden selected value={-1}>Selecciona la organizacion que desea relacionar</option>
+                                <option hidden selected value={-1}>Selecciona la organización que desea relacionar</option>
                                 {organizaciones.map(pod => (
                                     <option key={pod.Nombre} value={pod.Nombre}>{pod.Nombre}</option>
                                 ))}

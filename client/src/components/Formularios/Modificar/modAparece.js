@@ -13,7 +13,7 @@ function ModAparece() {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Modificar una Organizacion en un Medio</h2>
+                <h2 className="titulo">Modificar una Organización en un Medio</h2>
             </div>
             <div className="formContReg">
                 <Formik
@@ -25,10 +25,10 @@ function ModAparece() {
                         let errores = {};
 
                         if (!val.rol || val.rol === -1){
-                            errores.rol = 'Seleccione el rol de la organizacion en el medio';
+                            errores.rol = 'Seleccione el rol de la organización en el medio';
                         }
                         if (!val.estado){
-                            errores.estado = 'Seleccione el estado de la organizacion en el medio'
+                            errores.estado = 'Seleccione el estado de la organización en el medio'
                         }
                         return errores;
                     }}
@@ -42,13 +42,13 @@ function ModAparece() {
                             <ErrorMessage name="estado" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.estado}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Estado de la Organizacion en el Medio"
+                                placeholder="Estado de la Organización en el Medio"
                                 name="estado"
                             />
 
                             <ErrorMessage name="rol" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rol}</div>)}/>
                             <Field type="text" name="rol" as="select">
-                                <option hidden selected value={-1}>Selecciona el rol de la organizacion en el medio</option>
+                                <option hidden selected value={-1}>Selecciona el rol de la organización en el medio</option>
                                 <option value={'Protagonista'}>Protagonista</option>
                                 <option value={'Antagonista'}>Antagonista</option>
                                 <option value={'Secundario'}>Secundario</option>

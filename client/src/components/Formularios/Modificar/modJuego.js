@@ -51,16 +51,16 @@ function ModJuego() {
                         let errores = {};
 
                         if (!val.titulo){
-                            errores.titulo = 'Introduzca el titulo del juego';
+                            errores.titulo = 'Introduzca el título del juego';
                         }
                         if (!val.fecha){
-                            errores.fecha = 'Seleccione una fecha de creacion';
+                            errores.fecha = 'Seleccione una fecha de creación';
                         }
                         if (!val.compania){
-                            errores.compania = 'Ingrese la compañia';
+                            errores.compania = 'Ingrese la compañía';
                         }
                         if ((!val.rating || isNaN(val.rating) || parseInt(val.rating) > 5 || parseInt(val.rating) < 1)){
-                            errores.rating = 'Ingrese un rating valido del 1 al 5';
+                            errores.rating = 'Ingrese un rating válido del 1 al 5';
                         }
                         if (!val.sinopsis){
                             errores.sinopsis = 'Ingrese la sinopsis del juego';
@@ -75,7 +75,7 @@ function ModJuego() {
                             errores.duracion = 'Ingrese la duración del juego en minutos';
                         }          
                         if (!val.suscripcion || val.suscripcion === -1){
-                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
+                            errores.suscripcion = 'Seleccione el tipo de suscripción';
                         }   
                         if (valPlat.length === 0){
                             errores.plataforma = 'Ingrese la plataforma del juego'
@@ -102,7 +102,7 @@ function ModJuego() {
                             <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Titulo"
+                                placeholder="Título"
                                 name="titulo"
                             />
                             <ErrorMessage name="fecha" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fecha}</div>)}/>
@@ -114,7 +114,7 @@ function ModJuego() {
                             <ErrorMessage name="compania" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.compania}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Compañia"
+                                placeholder="Compañía"
                                 name="compania"
                             />
                             <ErrorMessage name="rating" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
@@ -145,7 +145,7 @@ function ModJuego() {
 
                             <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
                             <Field type="text" name="suscripcion" as="select">
-                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion del juego</option>
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripción del juego</option>
                                 <option value={1}>Gold</option>
                                 <option value={2}>Premium</option>
                                 <option value={3}>Vip</option>

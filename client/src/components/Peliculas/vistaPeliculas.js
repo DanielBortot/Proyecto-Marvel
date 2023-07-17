@@ -69,9 +69,9 @@ function VistaPeliculas () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
             <>
-                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPelicula'}>Agregar Pelicula</Link>
-                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersPeli'}>Agregar Personaje a Pelicula</Link>
-                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgPeli'}>Agregar Organizacion a Pelicula</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPelicula'}>Agregar Película</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersPeli'}>Agregar Personaje a Película</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgPeli'}>Agregar Organizacion a Película</Link>
             </>
             );
         }

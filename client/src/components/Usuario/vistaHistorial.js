@@ -31,8 +31,8 @@ function VistaHistorial () {
                             <div className="p-15px resumenbar">
                                 <div className="histCont">
                                     <div className="histitem"><span style={{fontWeight: 'bold'}}>Medio</span></div>
-                                    <div className="histitem"><span style={{fontWeight: 'bold'}}>Calificacion</span></div>
-                                    <div className="histitem"><span style={{fontWeight: 'bold'}}>Tiempo de reproduccion</span></div>
+                                    <div className="histitem"><span style={{fontWeight: 'bold'}}>Calificación</span></div>
+                                    <div className="histitem"><span style={{fontWeight: 'bold'}}>Tiempo de reproducción</span></div>
                                     {historial.map(rep => (
                                         <>
                                             <div className="histContDato" key={rep.Id_Hist}>
