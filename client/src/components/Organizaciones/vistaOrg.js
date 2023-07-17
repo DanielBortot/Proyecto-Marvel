@@ -62,6 +62,7 @@ function VistaOrgs () {
             <>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrganizacion'}>Agregar Organizacion</Link>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersOrg'}>Agregar Personaje a la Organizacion</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgSede'}>Agregar Sede</Link>
             </>
             );
         }

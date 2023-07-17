@@ -61,7 +61,7 @@ const historial = {
         const {titulo} = req.body;
         const calificacion = (await pool.query('SELECT AVG("Calificacion") promedio FROM "Historial" WHERE "N_Titulo"=$1 AND "Id_Hist" IN (SELECT MAX("Id_Hist") FROM "Historial" WHERE "N_Titulo"=$1 GROUP BY "Id_Perfil")',[titulo])).rows;
         let promedio = calificacion[0].promedio;
-
+        console.log(promedio);
         if (!promedio || promedio < 1){
             promedio = 1;
         }

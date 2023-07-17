@@ -19,7 +19,7 @@ function AgPelicula() {
                         titulo: '',
                         fecha: '',
                         compania: '',
-                        rating: '',
+                        rating: '1',
                         sinopsis: '',
                         imagen: '73',
                         director: '',
@@ -105,12 +105,6 @@ function AgPelicula() {
                                 placeholder="Compañia"
                                 name="compania"
                             />
-                            <ErrorMessage name="rating" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rating}</div>)}/>
-                            <Field 
-                                type="text" 
-                                placeholder="Rating de 1-5"
-                                name="rating"
-                            />
                             <ErrorMessage name="sinopsis" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.sinopsis}</div>)}/>
                             <Field 
                                 type="textarea" 
@@ -151,10 +145,10 @@ function AgPelicula() {
                             <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
                             <Field type="text" name="suscripcion" as="select">
                                 <option hidden selected value={-1}>Selecciona el tipo de suscripcion de la pelicula</option>
-                                <option value={1}>Gold</option>
-                                <option value={2}>Premium</option>
-                                <option value={3}>Vip</option>
-                                <option value={4}>Free</option>
+                                <option value={2}>Gold</option>
+                                <option value={3}>Premium</option>
+                                <option value={4}>Vip</option>
+                                <option value={1}>Free</option>
                             </Field>
 
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>

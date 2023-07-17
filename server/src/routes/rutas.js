@@ -12,7 +12,7 @@ const {buscVillanos, buscHeroes, buscNacionalidades, buscOcupaciones, buscCreado
 
 const {addObjeto, buscObjeto, getObjPers, getObjetos, upObjeto, delObjeto, upTieneObj} = require('../controllers/objetos');
 
-const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes, upOrganizacion, upSede, delOrganizacion} = require('../controllers/organizaciones');
+const {buscOrganizacion, addOrganizacion, buscSedes, addSede, organizaciones, getSedes, upOrganizacion, upSede, delOrganizacion, delSede} = require('../controllers/organizaciones');
 
 const {buscPodPers, addPodPers, compPodPers, getPodPerso, getPersPod, upPodPers, delPodPers} = require('../controllers/poderPers');
 
@@ -146,6 +146,7 @@ router.post('/getObjPers', getObjPers);
 router.post('/buscOrg', buscOrganizacion);
 router.post('/addOrg', addOrganizacion);
 router.post('/delOrg', delOrganizacion);
+router.post('/delSede', delSede);
 
 router.post('/buscSedes', buscSedes);
 router.post('/addSede', addSede);

@@ -52,8 +52,8 @@ function AgSede() {
                         const error = await (await axios.post('../api/buscSedes', {nombreSede: val.nombreSede, nombreOrg: val.nombreOrg})).data;
                         setErrorDB(error);
                         if (!error.nombreSede){
-                            await axios.post('../api/addOrg', {...val});
-                            navigate('/');
+                            await axios.post('../api/addSede', {...val});
+                            navigate('/organizaciones');
                         }
                     }}
                 >

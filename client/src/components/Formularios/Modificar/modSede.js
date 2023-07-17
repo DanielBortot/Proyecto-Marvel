@@ -45,7 +45,7 @@ function ModSede() {
                         }
                         setErrorDB(error);
                         if (!error.nombreSede){
-                            await axios.put('../api/upOrg', {...val, nombreOrg: N_Org, nombreSedeVie: Nombre});
+                            await axios.put('../api/upSede', {...val, nombreOrg: N_Org, nombreSedeVie: Nombre});
                             navigate('/');
                         }
                     }}

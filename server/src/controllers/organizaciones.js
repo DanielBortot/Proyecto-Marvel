@@ -51,6 +51,12 @@ const organizaciones = {
         res.send('modificado');
     },
 
+    delSede: async (req,res) => {
+        const {nombreSede, nombreOrg} = req.body;
+        await pool.query('DELETE FROM "Sede" WHERE "Nombre"=$1 AND "N_Org"=$2',[nombreSede,nombreOrg]);
+        res.send('eliminado');
+    },
+
     organizaciones: async (req,res) => {
         const org = await pool.query('SELECT * FROM "Organizacion"');
         res.send(org.rows);
