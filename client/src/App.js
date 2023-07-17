@@ -80,6 +80,9 @@ import { Reporte3 } from './components/Reportes/Reporte3';
 import { Reporte4 } from './components/Reportes/Reporte4';
 import { Reporte8 } from './components/Reportes/Reporte8';
 import { AgCombate } from './components/Formularios/Agregar/AgCombate';
+import { AgSede } from './components/Formularios/Agregar/AgSede';
+import { DescripcionSede } from './components/Sedes/DescripcionSedes';
+import { ModSede } from './components/Formularios/Modificar/modSede';
 
 function App() {
   return (
@@ -93,21 +96,32 @@ function App() {
               <Route path='/perfil' element={<Perfil/>}/>
               <Route element={<RouteProtectPerfil/>}>
                 <Route path='/' element={<VistaInicio/>}/>
+
                 <Route path='/personajes' element={<VistaPersonajes/>}/>
                 <Route path='/personajes/:nombre' element={<DescripcionPers/>}/>
+
                 <Route path='/series' element={<VistaSeries/>}/>
                 <Route path='/series/:titulo' element={<DescripcionSeries/>}/>
+
                 <Route path='/peliculas' element={<VistaPeliculas/>}/>
                 <Route path='/peliculas/:titulo' element={<DescripcionPeliculas/>}/>
+
                 <Route path='/juegos' element={<VistaJuegos/>}/>
                 <Route path='/juegos/:titulo' element={<DescripcionJuegos/>}/>
+
                 <Route path='/organizaciones' element={<VistaOrgs/>}/>
                 <Route path='/organizaciones/:nombre' element={<DescripcionOrg/>}/>
+                <Route path='/sedes/:nombre' element={<DescripcionSede/>}/>
+                <Route path='/sedes/ModSede' element={<ModSede/>}/>
+
                 <Route path='/poderes' element={<VistaPoderes/>}/>
                 <Route path='/poderes/:nombre' element={<DescripcionPod/>}/>
+
                 <Route path='/objetos' element={<VistaObjetos/>}/>
                 <Route path='/objetos/:nombre' element={<DescripcionObj/>}/>
+
                 <Route path='/comics' element={<VistaComics/>}/>
+
                 <Route path='/usuario' element={<DescUsuario/>}/>
                 <Route path='/usuario/resumen' element={<VistaResumen/>}/>
                 <Route path='/usuario/info' element={<VistaInfo/>}/>
@@ -133,6 +147,7 @@ function App() {
                 <Route path='/organizaciones/ModOrganizacion' element={<ModOrganizacion/>}/>
                 <Route path='/organizaciones/AgPersOrg' element={<AgPertenece/>}/>
                 <Route path='/organizaciones/ModPersOrg' element={<ModPertenece/>}/>
+                <Route path='/organizaciones/AgSede' element={<AgSede/>}/>
 
                 <Route path='/objetos/AgObjeto' element={<AgObjeto/>}/>
                 <Route path='/objetos/ModObjeto' element={<ModObjeto/>}/>

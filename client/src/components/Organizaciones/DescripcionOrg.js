@@ -159,7 +159,7 @@ function DescripcionOrg () {
                 centerMode={true}       
             >
                     {sedes.map(sede => {
-                            return <CuadroSedes prop={sede} key={sede.Nombre}/>
+                            return <CuadroSedes prop={sede} key={sede.Nombre} email={descUsuario.Email} sedes={sedes} setSedes={setSedes} org={Nombre}/>
                         })}     
             </Carousel>
             </div>

@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import '../../assets/personajes.css';
 import 'react-multi-carousel/lib/styles.css';
 import { Link } from "react-router-dom";
+import { datosReporte } from "../../reducers/reportesSlice";
 
-function DescripcionOrg () {
-    const {descripcion} = useSelector(state => state.organizaciones);
+function DescripcionSede () {
+    const {datosSede} = useSelector(state => state.organizaciones);
     const {descUsuario} = useSelector(state => state.usuario);
+    const dispatch = useDispatch()
     
-    let {Nombre, Tipo_Edif, Ubicacion, Imagen, N_Org} = descripcion;
+    let {Nombre, Tipo_Edif, Ubicacion, Imagen, N_Org} = datosSede;
     
 
     const responsive = {
@@ -35,8 +37,7 @@ function DescripcionOrg () {
         if (descUsuario.Email === 'admin@gmail.com'){
             return (
                 <div>
-                    <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={''}>Modificar Sede</Link>
-                    <button className='btn btn-danger' style={{margin: '15px 0 15px 10px'}}>Eliminar Sede</button>
+                    <Link className='btn btn-danger' onClick={()=>{dispatch(datosReporte(datosSede))}} style={{margin: '15px 0 15px 10px'}} to={'/sedes/ModSede'}>Modificar Sede</Link>
                 </div>
             );
         }
@@ -48,7 +49,7 @@ function DescripcionOrg () {
             <div className="descCont">
                 <div className="descContImg">
                     <h2>{Nombre}</h2>
-                    <img src={Imagen} alt="img"/>
+                    <img className="imagen2" src={Imagen} alt="img"/>
                 </div>
 
                 <div className="descContTitu">
@@ -73,4 +74,4 @@ function DescripcionOrg () {
     );
 }
 
-export {DescripcionOrg};
+export {DescripcionSede};
