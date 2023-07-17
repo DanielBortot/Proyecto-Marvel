@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario, eliminarUsuario, villHer} = require('../controllers/acciones');
+const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario, eliminarUsuario, villHer, personajesPopulares} = require('../controllers/acciones');
 
 const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPosee, addPodPersVill, poseeRep6, updatePodPersVill, persRep1, localiRep4, objetosRep3, heroesFRep8} = require('../controllers/reportes');
 
@@ -56,6 +56,7 @@ router.get('/delSesion', (req,res) => {
 
 
 router.get('/personajes', personajes);
+router.get('/persPopulares', personajesPopulares);
 router.post('/peliculas', peliculas);
 router.post('/series', series);
 router.post('/juegos', juegos);

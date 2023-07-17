@@ -3,6 +3,7 @@ const pool = require('../database');
 const acciones = {
     personajes: async (req, res) => {
         const personajes = (await pool.query('SELECT * FROM "Personaje"')).rows;
+        
         for (let i=0; i<personajes.length; i++){
             const nac = (await pool.query('SELECT "Nacionalidad" "Nac" FROM "Pers_Nac" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
             const ocu = (await pool.query('SELECT "Ocupacion" "Ocup" FROM "Pers_Oc" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
@@ -26,8 +27,28 @@ const acciones = {
     },
 
     personajesPopulares: async (req, res) => {
-        const personajesPopulares = (await pool.query('SELECT * FROM "Personaje" WHERE "Nombre" IN (SELECT "N_Personaje" FROM "Esta" WHERE "N_Titulo" IN (SELECT "Titulo" FROM "Medio" WHERE "Rating" > 4))')).rows;
-        res.send(personajesPopulares);
+        const personajes = (await pool.query('SELECT * FROM "Personaje" WHERE "Nombre" IN (SELECT "N_Personaje" FROM "Esta" WHERE "N_Titulo" IN (SELECT "Titulo" FROM "Medio" WHERE "Rating" > 4))')).rows;
+
+        for (let i=0; i<personajes.length; i++){
+            const nac = (await pool.query('SELECT "Nacionalidad" "Nac" FROM "Pers_Nac" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
+            const ocu = (await pool.query('SELECT "Ocupacion" "Ocup" FROM "Pers_Oc" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
+            const crea = (await pool.query('SELECT "N_Creador" "Nom_Creador" FROM "Pers_Creador" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows;
+            let datos = {};
+            const villano = (await pool.query('SELECT * FROM "Villano" WHERE "N_Villano"=$1',[personajes[i].Nombre])).rows;
+            const heroe = (await pool.query('SELECT * FROM "Heroe" WHERE "N_Heroe"=$1',[personajes[i].Nombre])).rows;
+            const civil = (await pool.query('SELECT * FROM "Civil" WHERE "N_Civil"=$1',[personajes[i].Nombre])).rows;
+            if (villano.length > 0){
+            datos = {...villano[0], op: 1};
+            }
+            else if (heroe.length > 0){
+                datos = {...heroe[0], op: 2};
+            }
+            else {
+                datos = {...civil[0], op: 3}
+            }
+            personajes[i] = {...personajes[i], ...datos, nacionalidades: nac, ocupaciones: ocu, creadores: crea}
+        }
+        res.send(personajes);
     },
 
 

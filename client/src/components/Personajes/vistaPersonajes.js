@@ -39,6 +39,7 @@ function VistaPersonajes () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
+    const [persPopulares, setPersPopulares] = useState([]);
     const [persFil, setPersFil] = useState([]);
     const [filtro, setFiltro] = useState(0);
     const [input, setInput] = useState('');
@@ -54,7 +55,15 @@ function VistaPersonajes () {
                     personajes[i].imagen = img.img;
                 }
             }
+            const persPopu = await (await axios.get('/api/persPopulares')).data;
+            for (let i=0; i<persPopu.length;i++){
+                const img = imagenes.find(img => img.pos == persPopu[i].imagen);
+                if (img){
+                    persPopu[i].imagen = img.img;
+                }
+            }
             setPersonajes(personajes);
+            setPersPopulares(persPopu);
             setPersFil(personajes);
             setLoading(false);
         }
@@ -142,7 +151,7 @@ function VistaPersonajes () {
                     infinite={true}
                     centerMode={true}       
                 >
-                        {persFil.map(personaje => {
+                        {persPopulares.map(personaje => {
                                 return <CuadroPers prop={personaje} key={personaje.Nombre} act={actualizar} setAct={setActualizar}/>
                             })}     
                 </Carousel>
