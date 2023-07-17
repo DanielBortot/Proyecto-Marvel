@@ -23,7 +23,7 @@ function ModPertenece() {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Modificar Personaje en Organizacion</h2>
+                <h2 className="titulo">Modificar Personaje en Organización</h2>
             </div>
             <div className="formContReg">
                 <Formik
@@ -34,7 +34,7 @@ function ModPertenece() {
                         let errores = {};
 
                         if (!val.cargo || val.cargo === -1){
-                            errores.cargo = 'Seleccione el cargo del personaje en la organizacion';
+                            errores.cargo = 'Seleccione el cargo del personaje en la organización';
                         }
                         
                         return errores;

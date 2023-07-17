@@ -110,7 +110,7 @@ function VistaPersonajes () {
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgHeroe'}>Agregar Heroe</Link>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgVillano'}>Agregar Villano</Link>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgCivil'}>Agregar Civil</Link>
-                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgRelacion'}>Agregar Relacion</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgRelacion'}>Agregar Relación</Link>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgEnfrentamiento'}>Agregar Enfrentamiento</Link>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgCombate'}>Agregar Combate</Link>
             </>

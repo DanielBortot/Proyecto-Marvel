@@ -84,7 +84,7 @@ function DescripcionPeliculas () {
 
                 <div className="descContTitu">
                     <div>
-                        <p>TITULO</p>
+                        <p>TÍTULO</p>
                         <p>FECHA DE ESTRENO</p>
                         <p>COMPAÑIA</p>
                         <p>RATING</p>
@@ -93,9 +93,9 @@ function DescripcionPeliculas () {
                         <p>DURACIÓN</p>
                         <p>COSTE</p>
                         <p>GANANCIA</p>
-                        <p>TIPO DE PELICULA</p>
+                        <p>TIPO DE PELÍCULA</p>
                         <p>DURACION PROMEDIO</p>
-                        <p>SUSCRIPCION</p>
+                        <p>SUSCRIPCIÓN</p>
                         <p>SINOPSIS</p>
                     </div>
                     <div>

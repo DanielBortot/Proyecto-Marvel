@@ -24,7 +24,7 @@ function CuadroOrganizaciones ({prop, email, orgs, setOrgs, pers, op}) {
 
     const admin = ()=> {
         if (email && email === 'admin@gmail.com'){
-            return (<button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Organizacion</button>);
+            return (<button className='btn btn-danger' onClick={delDatos} style={{margin: '15px 0 15px 10px'}}>Eliminar Organización</button>);
         }
         else {
             return (<></>);

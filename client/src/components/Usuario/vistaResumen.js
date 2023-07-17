@@ -93,11 +93,11 @@ function VistaResumen () {
                             <h1 className="p-15px">Resumen forma de pago</h1>
                             <div className="p-15px resumenbar">
                                 <h5>Banco</h5>
-                                <h5><span style={{fontWeight: 'bold'}}>Numero de Tarjeta:</span> {descTarjeta.N_Tarjeta ? descTarjeta.N_Tarjeta : 'No posee tarjeta'}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>Número de Tarjeta:</span> {descTarjeta.N_Tarjeta ? descTarjeta.N_Tarjeta : 'No posee tarjeta'}</h5>
                             </div>
                         </div>
                         <div className="tituloresumen">
-                            <h1 className="p-15px">Resumen de suscripcion</h1>
+                            <h1 className="p-15px">Resumen de suscripción</h1>
                             <div className="p-15px resumenbar">
                                 <h5><span style={{fontWeight: 'bold'}}>Tipo de Suscripción:</span> {sus.Tipo}</h5>
                                 <h5><span style={{fontWeight: 'bold'}}>Tarifa de la Suscripción:</span> {sus.Tarifa}$</h5>

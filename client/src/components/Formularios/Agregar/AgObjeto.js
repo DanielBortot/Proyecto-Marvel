@@ -39,7 +39,7 @@ function AgObjeto() {
                             errores.nombreObj = 'Introduzca el nombre del objeto';
                         }
                         if (!val.descripcion){
-                            errores.descripcion = 'Introduzca la descripcion del objeto';
+                            errores.descripcion = 'Introduzca la descripción del objeto';
                         }
                         if (!val.material){
                             errores.material = 'Introduzca los materiales del objeto';
@@ -73,7 +73,7 @@ function AgObjeto() {
                             <ErrorMessage name="descripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.descripcion}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Descripcion del Objeto"
+                                placeholder="Descripción del Objeto"
                                 name="descripcion"
                             />
                             <ErrorMessage name="material" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.material}</div>)}/>

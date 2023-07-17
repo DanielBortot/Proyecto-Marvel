@@ -71,7 +71,7 @@ function VistaSeries () {
             <>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgSerie'}>Agregar Serie</Link>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersSerie'}>Agregar Personaje a Serie</Link>
-                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgSerie'}>Agregar Organizacion a Serie</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgSerie'}>Agregar Organización a Serie</Link>
             </>
             );
         }

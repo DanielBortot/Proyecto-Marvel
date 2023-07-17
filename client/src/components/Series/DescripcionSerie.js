@@ -84,16 +84,16 @@ function DescripcionSeries () {
 
                 <div className="descContTitu">
                     <div>
-                        <p>TITULO</p>
+                        <p>TÍTULO</p>
                         <p>FECHA DE ESTRENO</p>
-                        <p>COMPAÑIA</p>
+                        <p>COMPAÑÍA</p>
                         <p>RATING</p>
-                        <p>NUMERO DE EPISODIOS</p>
+                        <p>NÚMERO DE EPISODIOS</p>
                         <p>CREADOR</p>
                         <p>CANAL</p>
                         <p>TIPO DE SERIE</p>
-                        <p>DURACION PROMEDIO</p>
-                        <p>SUSCRIPCION</p>
+                        <p>DURACIÓN PROMEDIO</p>
+                        <p>SUSCRIPCIÓN</p>
                         <p>SINOPSIS</p>
                     </div>
                     <div>

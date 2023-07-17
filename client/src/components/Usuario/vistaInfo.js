@@ -16,10 +16,10 @@ function VistaInfo () {
                     </div>
                     <div className="col-8">
                         <div className="tituloresumen">
-                            <h1 className="p-15px">Informacion personal</h1>
+                            <h1 className="p-15px">Información personal</h1>
                             <div className="p-15px resumenbar">
                                 <h5><span style={{fontWeight: 'bold'}}>Nombre:</span> {descUsuario.Nombre} {descUsuario.Apellido}</h5>
-                                <h5><span style={{fontWeight: 'bold'}}>Pais de Origen:</span> {Pais.Nombre}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>País de Origen:</span> {Pais.Nombre}</h5>
                             </div>
                         </div>
                         <div className="tituloresumen">
@@ -29,14 +29,14 @@ function VistaInfo () {
                             </div>
                         </div>
                         <div className="tituloresumen">
-                            <h1 className="p-15px">direccion</h1>
+                            <h1 className="p-15px">dirección</h1>
                             <div className="p-15px resumenbar">
-                                <h5><span style={{fontWeight: 'bold'}}>Pais:</span> {Pais.Nombre}</h5>
+                                <h5><span style={{fontWeight: 'bold'}}>País:</span> {Pais.Nombre}</h5>
                                 <h5><span style={{fontWeight: 'bold'}}>Estado:</span> {Estado.Nombre}</h5>
                                 <h5><span style={{fontWeight: 'bold'}}>Ciudad:</span> {Ciudad.Nombre}</h5>
                             </div>
                         </div>
-                        <Link className='btn btn-danger' style={{marginTop: '15px'}} to={'/usuario/info/modi'}>Actualizar Informacion</Link> 
+                        <Link className='btn btn-danger' style={{marginTop: '15px'}} to={'/usuario/info/modi'}>Actualizar Información</Link> 
                     </div>
                 </div>  
             </div>     

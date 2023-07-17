@@ -38,7 +38,7 @@ function AgAparece() {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Agregar una Organizacion a un Medio</h2>
+                <h2 className="titulo">Agregar una Organización a un Medio</h2>
             </div>
             <div className="formContReg">
                 <Formik
@@ -52,18 +52,18 @@ function AgAparece() {
                         let errores = {};
 
                         if (!val.nombreOrg || val.nombreOrg === -1){
-                            errores.nombreOrg = 'Seleccione la organizacion';
+                            errores.nombreOrg = 'Seleccione la organización';
                         } else if (selec !== val.nombreOrg){
                             getMedios(val.nombreOrg);
                         }
                         if (!val.titulo || val.titulo === -1){
-                            errores.titulo = 'Seleccione el titulo del medio';
+                            errores.titulo = 'Seleccione el título del medio';
                         }
                         if (!val.rol || val.rol === -1){
-                            errores.rol = 'Seleccione el rol de la organizacion en el medio';
+                            errores.rol = 'Seleccione el rol de la organización en el medio';
                         }
                         if (!val.estado){
-                            errores.estado = 'Seleccione el estado de la organizacion en el medio'
+                            errores.estado = 'Seleccione el estado de la organización en el medio'
                         }
                         return errores;
                     }}
@@ -81,7 +81,7 @@ function AgAparece() {
                             {errorDB.aparece && <div style={{fontSize: "15px", color: "red"}}>{errorDB.aparece}</div>}
                             <ErrorMessage name="nombreOrg" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombreOrg}</div>)}/>
                             <Field type="text" name="nombreOrg" as="select">
-                                <option hidden selected value={-1}>Selecciona la organizacion que desea relacionar</option>
+                                <option hidden selected value={-1}>Selecciona la organización que desea relacionar</option>
                                 {organizaciones.map(org => (
                                     <option key={org.Nombre} value={org.Nombre}>{org.Nombre}</option>
                                 ))}
@@ -104,7 +104,7 @@ function AgAparece() {
 
                             <ErrorMessage name="rol" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.rol}</div>)}/>
                             <Field type="text" name="rol" as="select">
-                                <option hidden selected value={-1}>Selecciona el rol de la organizacion en el medio</option>
+                                <option hidden selected value={-1}>Selecciona el rol de la organización en el medio</option>
                                 <option value={'Protagonista'}>Protagonista</option>
                                 <option value={'Antagonista'}>Antagonista</option>
                                 <option value={'Secundario'}>Secundario</option>

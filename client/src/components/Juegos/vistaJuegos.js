@@ -71,7 +71,7 @@ function VistaJuegos () {
             <>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgJuego'}>Agregar Juego</Link>
                 <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgPersJuego'}>Agregar Personaje a Juego</Link>
-                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgJuego'}>Agregar Organizacion a Juego</Link>
+                <Link className='btn btn-danger' style={{margin: '15px 0 15px 10px'}} to={'AgOrgJuego'}>Agregar Organización a Juego</Link>
             </>
             );
         }

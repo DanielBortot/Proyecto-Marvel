@@ -23,7 +23,7 @@ function ModOrganizacion() {
     return (
         <>
             <div className="tituloContReg">
-                <h2 className="titulo">Modificar Organizacion</h2>
+                <h2 className="titulo">Modificar Organización</h2>
             </div>
             <div className="formContReg">
                 <Formik
@@ -42,28 +42,28 @@ function ModOrganizacion() {
                         let errores = {};
 
                         if (!val.nombreOrg){
-                            errores.nombreOrg = 'Introduzca el nombre de la organizacion';
+                            errores.nombreOrg = 'Introduzca el nombre de la organización';
                         }
                         if (!val.eslogan){
-                            errores.eslogan = 'Escriba el eslogan de la organizacion';
+                            errores.eslogan = 'Escriba el eslogan de la organización';
                         }
                         if (!val.lider || val.lider === -1){
-                            errores.lider = 'Seleccione al lider de la organizacion';
+                            errores.lider = 'Seleccione al lider de la organización';
                         }
                         if (!val.fundador || val.fundador === -1){
-                            errores.fundador = 'Seleccione al fundador de la organizacion';
+                            errores.fundador = 'Seleccione al fundador de la organización';
                         }
                         if (!val.lugarCrea){
-                            errores.lugarCrea = 'Ingrese el lugar de creacion de la organizacion';
+                            errores.lugarCrea = 'Ingrese el lugar de creación de la organización';
                         }
                         if (!val.tipo){
-                            errores.tipo = 'Ingrese el tipo de organizacion';
+                            errores.tipo = 'Ingrese el tipo de organización';
                         }
                         if (!val.comic){
-                            errores.comic = 'Ingrese el comic de su primera aparicion';
+                            errores.comic = 'Ingrese el comic de su primera aparición';
                         }
                         if (!val.objetivo){
-                            errores.objetivo = 'Ingrese el objetivo de la organizacion';
+                            errores.objetivo = 'Ingrese el objetivo de la organización';
                         }
                         
                         return errores;
@@ -86,19 +86,19 @@ function ModOrganizacion() {
                             <ErrorMessage name="nombreOrg" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.nombreOrg}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Nombre de la Organizacion"
+                                placeholder="Nombre de la Organización"
                                 name="nombreOrg"
                             />
                             <ErrorMessage name="eslogan" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.eslogan}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Eslogan de la Organizacion"
+                                placeholder="Eslogan de la Organización"
                                 name="eslogan"
                             />
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Tipo de Organizacion"
+                                placeholder="Tipo de Organización"
                                 name="tipo"
                             />
                             
@@ -106,7 +106,7 @@ function ModOrganizacion() {
 
                             <Field 
                                 type="text" 
-                                placeholder="Lugar de Creacion de la Organizacion"
+                                placeholder="Lugar de Creación de la Organización"
                                 name="lugarCrea"
                             />
 
@@ -114,7 +114,7 @@ function ModOrganizacion() {
 
                             <Field 
                                 type="text" 
-                                placeholder="Nombre del Comic de la Primera Aparicion"
+                                placeholder="Nombre del Comic de la Primera Aparición"
                                 name="comic"
                             />
 
@@ -122,14 +122,14 @@ function ModOrganizacion() {
 
                             <Field 
                                 type="text" 
-                                placeholder="Objetivo de la Organizacion"
+                                placeholder="Objetivo de la Organización"
                                 name="objetivo"
                             />
 
                             <ErrorMessage name="lider" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.lider}</div>)}/>
 
                             <Field type="text" name="lider" as="select">
-                                <option hidden selected value={-1}>Selecciona al lider de la organizacion</option>
+                                <option hidden selected value={-1}>Selecciona al lider de la organización</option>
                                 {personajes.map(personaje => (
                                     <option key={personaje.Nombre} value={personaje.Nombre}>{personaje.Nombre}</option>
                                 ))}
@@ -138,7 +138,7 @@ function ModOrganizacion() {
                             <ErrorMessage name="fundador" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fundador}</div>)}/>
 
                             <Field type="text" name="fundador" as="select">
-                                <option hidden selected value={-1}>Selecciona al fundador de la organizacion</option>
+                                <option hidden selected value={-1}>Selecciona al fundador de la organización</option>
                                 {personajes.map(personaje => (
                                     <option key={personaje.Nombre} value={personaje.Nombre}>{personaje.Nombre}</option>
                                 ))}

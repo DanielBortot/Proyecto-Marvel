@@ -20,10 +20,10 @@ function Reporte2 (){
     return (
         <>  
             <div className="rep2">
-                <h3>Series que han tenido más episodios que el promedio</h3>
+                <h3>Series que han tenido más episodios que el promedio.</h3>
                 <div className="rep2Cont">
                     <div className="rep2item"><span style={{fontWeight: 'bold'}}>Serie</span></div>
-                    <div className="rep2item"><span style={{fontWeight: 'bold'}}>Num Episodios</span></div>
+                    <div className="rep2item"><span style={{fontWeight: 'bold'}}>Número de Episodios</span></div>
                     {reporte.map(rep => (
                         <>
                             <div className="rep2ContDato" key={rep.Titulo}>

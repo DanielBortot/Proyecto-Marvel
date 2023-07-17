@@ -71,13 +71,13 @@ function AgHeroe() {
                             errores.nombrePers = 'Ingresa un nombre de personaje';
                         }
                         if (!val.genero || val.genero === -1){
-                            errores.genero = 'Selecciona un genero';
+                            errores.genero = 'Selecciona un género';
                         }
                         if (!val.ojos || !/^[a-zA-Z]{1,50}$/.test(val.ojos)){
-                            errores.ojos = 'Ingresa un color de ojos valido';
+                            errores.ojos = 'Ingresa un color de ojos válido';
                         }
                         if (!val.pelo || !/^[a-zA-Z]{1,50}$/.test(val.pelo)){
-                            errores.pelo = 'Ingresa un color de pelo valido';
+                            errores.pelo = 'Ingresa un color de pelo válido';
                         }
                         if (!val.comic){
                             errores.comic = 'Ingresa un nombre de comic';
@@ -92,7 +92,7 @@ function AgHeroe() {
                             errores.alias = 'Ingresa o selecciona el alias del villano';
                         }
                         if (!val.traje || !/^[a-zA-Z]{1,50}$/.test(val.ojos)){
-                            errores.traje = 'Ingrese un color de traje valido';
+                            errores.traje = 'Ingrese un color de traje válido';
                         }
                         if (valNac.length === 0){
                             errores.nacionalidad = 'Selecciona las nacionalidades del personaje';
@@ -170,7 +170,7 @@ function AgHeroe() {
                             </Field>
                             <ErrorMessage name="genero" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.genero}</div>)}/>
                             <Field type="text" name="genero" as="select">
-                                <option hidden selected value={-1}>Selecciona el genero del personaje</option>
+                                <option hidden selected value={-1}>Selecciona el género del personaje</option>
                                 <option value={'F'}>Femenino</option>
                                 <option value={'M'}>Masculino</option>
                                 <option value={'Desc'}>Desconocido</option>

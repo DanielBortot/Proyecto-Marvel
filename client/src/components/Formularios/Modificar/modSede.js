@@ -31,10 +31,10 @@ function ModSede() {
                             errores.nombreSede = 'Escriba el nombre de la sede';
                         }
                         if (!val.ubicacion){
-                            errores.ubicacion = 'Ingrese la ubicacion de la sede';
+                            errores.ubicacion = 'Ingrese la ubicación de la sede';
                         }
                         if (!val.tipoEdif){
-                            errores.tipoEdif = 'Ingrese el tipo de edificacion de la sede';
+                            errores.tipoEdif = 'Ingrese el tipo de edificación de la sede';
                         }
                         return errores;
                     }}
@@ -62,13 +62,13 @@ function ModSede() {
                             <ErrorMessage name="tipoEdif" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipoEdif}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Tipo de Edificacion de la Sede"
+                                placeholder="Tipo de Edificación de la Sede"
                                 name="tipoEdif"
                             />
                             <ErrorMessage name="ubicacion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.ubicacion}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Ubicacion de la Sede"
+                                placeholder="Ubicación de la Sede"
                                 name="ubicacion"
                             />
 

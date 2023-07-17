@@ -47,16 +47,16 @@ function AgJuego() {
                         let errores = {};
 
                         if (!val.titulo){
-                            errores.titulo = 'Introduzca el titulo del juego';
+                            errores.titulo = 'Introduzca el tétulo del juego';
                         }
                         if (!val.fecha){
-                            errores.fecha = 'Seleccione una fecha de creacion';
+                            errores.fecha = 'Seleccione una fecha de creación';
                         }
                         if (!val.compania){
-                            errores.compania = 'Ingrese la compañia';
+                            errores.compania = 'Ingrese la compañía';
                         }
                         if ((!val.rating || isNaN(val.rating) || parseInt(val.rating) > 5 || parseInt(val.rating) < 1)){
-                            errores.rating = 'Ingrese un rating valido del 1 al 5';
+                            errores.rating = 'Ingrese un rating válido del 1 al 5';
                         }
                         if (!val.sinopsis){
                             errores.sinopsis = 'Ingrese la sinopsis del juego';
@@ -69,7 +69,7 @@ function AgJuego() {
                         }
                         
                         if (!val.suscripcion || val.suscripcion === -1){
-                            errores.suscripcion = 'Seleccione el tipo de suscripcion';
+                            errores.suscripcion = 'Seleccione el tipo de suscripción';
                         }
 
                         if (!val.tipo || val.tipo === -1){
@@ -96,7 +96,7 @@ function AgJuego() {
                             <ErrorMessage name="titulo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.titulo}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Titulo"
+                                placeholder="Título"
                                 name="titulo"
                             />
                             <ErrorMessage name="fecha" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.fecha}</div>)}/>
@@ -108,7 +108,7 @@ function AgJuego() {
                             <ErrorMessage name="compania" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.compania}</div>)}/>
                             <Field 
                                 type="text" 
-                                placeholder="Compañia"
+                                placeholder="Compañía"
                                 name="compania"
                             />
                             <ErrorMessage name="sinopsis" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.sinopsis}</div>)}/>
@@ -133,7 +133,7 @@ function AgJuego() {
 
                             <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
                             <Field type="text" name="suscripcion" as="select">
-                                <option hidden selected value={-1}>Selecciona el tipo de suscripcion del juego</option>
+                                <option hidden selected value={-1}>Selecciona el tipo de suscripción del juego</option>
                                 <option value={2}>Gold</option>
                                 <option value={3}>Premium</option>
                                 <option value={4}>Vip</option>

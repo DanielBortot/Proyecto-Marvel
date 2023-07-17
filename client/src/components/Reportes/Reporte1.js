@@ -18,7 +18,7 @@ function Reporte1 (){
     return (
         <>  
             <div className="rep2">
-                <h3>Heroes o Villanos con poderes artificiales que han sido lideres.</h3>
+                <h3>Heroes o Villanos con poderes artificiales que han sido líderes.</h3>
                 <div className="rep2Cont">
                     <div className="rep2item"><span style={{fontWeight: 'bold'}}>Personaje</span></div>
                     <div className="rep2item"><span style={{fontWeight: 'bold'}}>Organización</span></div>

@@ -84,15 +84,15 @@ function DescripcionJuegos () {
 
                 <div className="descContTitu">
                     <div>
-                        <p>TITULO</p>
+                        <p>TÍTULO</p>
                         <p>FECHA DE ESTRENO</p>
-                        <p>COMPAÑIA</p>
+                        <p>COMPAÑÍA</p>
                         <p>RATING</p>
                         <p>DISTRIBUIDOR</p>
                         <p>PLATAFORMAS</p>
                         <p>TIPO DE JUEGO</p>
-                        <p>DURACION PROMEDIO</p>
-                        <p>SUSCRIPCION</p>
+                        <p>DURACIÓN PROMEDIO</p>
+                        <p>SUSCRIPCIÓN</p>
                         <p>SINOPSIS</p>
                     </div>
                     <div>
