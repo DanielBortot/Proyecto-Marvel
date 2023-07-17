@@ -36,6 +36,7 @@ function VistaPeliculas () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [peliculas, setPeliculas] = useState([]);
+    const [peliPopu, setPeliPopu] = useState([]);
     const [pelisFil, setPelisFil] = useState([]);
 
     useEffect(()=> {
@@ -48,7 +49,16 @@ function VistaPeliculas () {
                     peliculas[i].Imagen = img.img;
                 }
             }
+            const popu = await (await axios.post('/api/peliPopulares',{suscrip: descUsuario.Id_Suscripcion})).data;
+            for (let i=0; i<popu.length;i++){
+                const img = imagenes.find(img => img.pos == popu[i].Imagen);
+                if (img){
+                    popu[i].Imagen = img.img;
+                }
+            }
+            
             setPeliculas(peliculas);
+            setPeliPopu(popu);
             setPelisFil(peliculas);
             setLoading(false);
         }
@@ -110,7 +120,7 @@ function VistaPeliculas () {
                     centerMode={true}       
                 >
                     
-                        {pelisFil.map(pelicula => {
+                        {peliPopu.map(pelicula => {
                                 return <CuadroPeliculas prop={pelicula} key={pelicula.T_Pelicula}/>
                             })}     
                 </Carousel>

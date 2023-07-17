@@ -36,6 +36,7 @@ function VistaSeries () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [series, setSeries] = useState([]);
+    const [seriesPopu, setSeriesPopu] = useState([]);
     const [seriesFil, setSeriesFil] = useState([]);
 
     useEffect(()=> {
@@ -48,7 +49,16 @@ function VistaSeries () {
                     series[i].Imagen = img.img;
                 }
             }
+
+            const popu = await (await axios.post('/api/seriesPopulares',{suscrip: descUsuario.Id_Suscripcion})).data;
+            for (let i=0; i<popu.length;i++){
+                const img = imagenes.find(img => img.pos == popu[i].Imagen);
+                if (img){
+                    popu[i].Imagen = img.img;
+                }
+            }
             setSeries(series);
+            setSeriesPopu(popu);
             setSeriesFil(series);
             setLoading(false);
         }
@@ -110,7 +120,7 @@ function VistaSeries () {
                         centerMode={true}       
                     >
                         
-                            {seriesFil.map(serie => {
+                            {seriesPopu.map(serie => {
                                     return <CuadroSeries prop={serie} key={serie.T_Serie}/>
                                 })}     
                     </Carousel>

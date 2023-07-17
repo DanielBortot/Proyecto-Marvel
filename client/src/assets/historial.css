@@ -1,0 +1,27 @@
+.hist {
+    width: 50%;
+    margin: 30px auto;
+}
+
+.histCont {
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 3px;
+    padding: 10px;
+}
+
+.histitem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+    font-size: 18px;
+}
+
+.histContDato {
+    position: relative;
+    display: grid;
+    grid-template-columns: 100%;
+}

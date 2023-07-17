@@ -3,7 +3,7 @@ const pool = require('../database');
 const acciones = {
     personajes: async (req, res) => {
         const personajes = (await pool.query('SELECT * FROM "Personaje"')).rows;
-        
+
         for (let i=0; i<personajes.length; i++){
             const nac = (await pool.query('SELECT "Nacionalidad" "Nac" FROM "Pers_Nac" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
             const ocu = (await pool.query('SELECT "Ocupacion" "Ocup" FROM "Pers_Oc" WHERE "N_Personaje"=$1',[personajes[i].Nombre])).rows
@@ -104,7 +104,8 @@ const acciones = {
     },
 
     peliculasPopulares: async (req, res) => {
-        const peliculasPopulares = (await pool.query('SELECT * FROM "Medio" WHERE "Rating" > 4 AND "Titulo" IN (SELECT "T_Pelicula" FROM "Pelicula")')).rows;
+        const {suscrip} = req.body;
+        const peliculasPopulares = (await pool.query('SELECT * FROM "Medio" me INNER JOIN "Pelicula" pe ON (me."Titulo"=pe."T_Pelicula") WHERE me."Rating" > 4 AND (me."Suscripcion" BETWEEN 1 AND $1)',[suscrip])).rows;
         res.send(peliculasPopulares);
     },
 
@@ -143,7 +144,8 @@ const acciones = {
     },
 
     seriesPopulares: async (req, res) => {
-        const seriesPopulares = (await pool.query('SELECT * FROM "Medio" WHERE "Rating" > 4 AND "Titulo" IN (SELECT "T_Serie" FROM "Serie")')).rows;
+        const {suscrip} = req.body;
+        const seriesPopulares = (await pool.query('SELECT * FROM "Medio" me INNER JOIN "Serie" se ON (me."Titulo"=se."T_Serie") WHERE me."Rating" > 4 AND (me."Suscripcion" BETWEEN 1 AND $1)',[suscrip])).rows;
         res.send(seriesPopulares);
     },
 
@@ -183,7 +185,13 @@ const acciones = {
     },
 
     juegosPopulares: async (req, res) => {
-        const juegosPopulares = (await pool.query('SELECT * FROM "Medio" WHERE "Rating" > 4 AND "Titulo" IN (SELECT "T_Juego" FROM "Juego")')).rows;
+        const {suscrip} = req.body;
+        const juegosPopulares = (await pool.query('SELECT * FROM "Medio" me INNER JOIN "Juego" ju ON (me."Titulo"=ju."T_Juego") WHERE "Rating" > 4 AND (me."Suscripcion" BETWEEN 1 AND $1)',[suscrip])).rows;
+
+        for (let i=0; i<juegosPopulares.length; i++){
+            const plat = (await pool.query('SELECT "Plataforma" FROM "Plat_Juego" WHERE "T_Juego"=$1',[juegosPopulares[i].T_Juego])).rows
+            juegosPopulares[i] = {...juegosPopulares[i], plataformas: plat};
+        }
         res.send(juegosPopulares);
     },
 

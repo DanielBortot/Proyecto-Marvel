@@ -60,7 +60,8 @@ const historial = {
     upRating: async (req,res) => {
         const {titulo} = req.body;
         const calificacion = (await pool.query('SELECT AVG("Calificacion") promedio FROM "Historial" WHERE "N_Titulo"=$1 AND "Id_Hist" IN (SELECT MAX("Id_Hist") FROM "Historial" WHERE "N_Titulo"=$1 GROUP BY "Id_Perfil")',[titulo])).rows;
-        let promedio = calificacion.promedio;
+        let promedio = calificacion[0].promedio;
+
         if (!promedio || promedio < 1){
             promedio = 1;
         }
@@ -69,6 +70,12 @@ const historial = {
         }
         await pool.query('UPDATE "Medio" SET "Rating"=$1 WHERE "Titulo"=$2',[promedio,titulo]);
         res.send('modificado');
+    },
+
+    getHistPer: async (req,res) => {
+        const {perfil} = req.body;
+        const hist = await pool.query('SELECT * FROM "Historial" WHERE "Id_Perfil"=$1',[perfil]);
+        res.send(hist.rows);
     }
 }
 

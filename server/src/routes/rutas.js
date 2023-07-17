@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario, eliminarUsuario, villHer, personajesPopulares} = require('../controllers/acciones');
+const {personajes, peliculas, series, juegos, removePersonaje, removePelicula, removeSerie, removeJuego, addPersonaje, addPelicula, addSerie, addJuego, register, login, addPerfil, perfiles, addTarjeta, buscUsuario, buscTarjeta, selecTarjeta, paises, estados, ciudades, setCiudad, setEstado, setPais, buscPerfil, suscripcion, updateUsuTarjeta, updateSusUsuario, updateInfoUsuario, eliminarUsuario, villHer, personajesPopulares, peliculasPopulares, seriesPopulares, juegosPopulares} = require('../controllers/acciones');
 
 const { seriesRep2, peliculasRep5, usuariosRepReg, buscPodPersVill, eliminarPosee, addPodPersVill, poseeRep6, updatePodPersVill, persRep1, localiRep4, objetosRep3, heroesFRep8} = require('../controllers/reportes');
 
@@ -28,7 +28,7 @@ const {buscCivHer, buscCivVill, addCivPers, compCivPers, delCivRela, getRelacion
 
 const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, modOrgPers, delOrgPers} = require('../controllers/persOrg');
 
-const {getHist, addHist, upHist, getRec, upRating} = require('../controllers/historial');
+const {getHist, addHist, upHist, getRec, upRating, getHistPer} = require('../controllers/historial');
 
 const {getCombates, delCombate, upCombate, addComb, compComb} = require('../controllers/combates');
 
@@ -57,6 +57,9 @@ router.get('/delSesion', (req,res) => {
 
 router.get('/personajes', personajes);
 router.get('/persPopulares', personajesPopulares);
+router.post('/peliPopulares', peliculasPopulares);
+router.post('/seriesPopulares', seriesPopulares);
+router.post('/juegosPopulares', juegosPopulares);
 router.post('/peliculas', peliculas);
 router.post('/series', series);
 router.post('/juegos', juegos);
@@ -206,6 +209,7 @@ router.post('/addHist', addHist);
 router.post('/getHist', getHist);
 router.post('/getRec', getRec);
 router.put('/upRating', upRating);
+router.post('/getHistPer', getHistPer);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

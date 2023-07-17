@@ -36,6 +36,7 @@ function VistaJuegos () {
     };
     const {descUsuario} = useSelector(state => state.usuario);
     const [juegos, setJuegos] = useState([]);
+    const [juegosPopu, setJuegosPopu] = useState([]);
     const [juegosFil, setJuegosFil] = useState([]);
 
     useEffect(()=> {
@@ -48,7 +49,16 @@ function VistaJuegos () {
                     juegos[i].Imagen = img.img;
                 }
             }
+
+            const popu = await (await axios.post('/api/juegosPopulares',{suscrip: descUsuario.Id_Suscripcion})).data;
+            for (let i=0; i<popu.length;i++){
+                const img = imagenes.find(img => img.pos == popu[i].Imagen);
+                if (img){
+                    popu[i].Imagen = img.img;
+                }
+            }
             setJuegos(juegos);
+            setJuegosPopu(popu);
             setJuegosFil(juegos);
             setLoading(false);
         }
@@ -110,7 +120,7 @@ function VistaJuegos () {
                         centerMode={true}       
                     >
                         
-                            {juegosFil.map(juego => {
+                            {juegosPopu.map(juego => {
                                     return <CuadroJuegos prop={juego} key={juego.T_Juego}/>
                                 })}     
                     </Carousel>
