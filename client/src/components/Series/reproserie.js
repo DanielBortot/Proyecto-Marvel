@@ -45,7 +45,7 @@ function ReproSerie () {
         <>
             
             <div style={{width: '55%', height: '55%', position: 'absolute', margin: '40px', marginLeft: '20%'}}>
-                <h3>Nombre de la Serie</h3>
+                <h3>{Titulo}</h3>
                 <ReactPlayer 
                     url='https://www.youtube.com/watch?v=dQw4w9WgXcQ'
                     width= '100%'

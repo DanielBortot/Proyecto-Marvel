@@ -87,6 +87,15 @@ import img86 from "./pepper.jpg"
 import img87 from "./ciclop.jpg"
 import img88 from "./magneto.jpg"
 import img89 from "./spidergwen.jpg"
+import img90 from "./torreav.jpg"
+import img91 from "./ofshield.jpg"
+import img92 from "./castilloh.jpg"
+import img93 from "./mansionx.jpg"
+import img94 from "./nowhere.jpg"
+import img95 from "./torrerand.jpg"
+import img96 from "./complejo.jpg"
+
+
 
 const imagenes = [
     {img : img1, pos: 1},
@@ -177,6 +186,13 @@ const imagenes = [
     {img : img86, pos: 86},
     {img : img87, pos: 87},
     {img : img88, pos: 88},
-    {img : img89, pos: 89}
+    {img : img89, pos: 89},
+    {img : img90, pos: 90},
+    {img : img91, pos: 91},
+    {img : img92, pos: 92},
+    {img : img93, pos: 93},
+    {img : img94, pos: 94},
+    {img : img95, pos: 95},
+    {img : img96, pos: 96}
  ]
 export {imagenes}
