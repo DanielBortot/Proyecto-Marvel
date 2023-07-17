@@ -83,6 +83,7 @@ import { AgCombate } from './components/Formularios/Agregar/AgCombate';
 import { AgSede } from './components/Formularios/Agregar/AgSede';
 import { DescripcionSede } from './components/Sedes/DescripcionSedes';
 import { ModSede } from './components/Formularios/Modificar/modSede';
+import ScrollToTop from "./components/scrollToTop";
 
 function App() {
   return (
@@ -210,6 +211,7 @@ function App() {
           </Routes>
       </div>
       <Footer/>
+      <ScrollToTop/>
     </div>
   );
 }

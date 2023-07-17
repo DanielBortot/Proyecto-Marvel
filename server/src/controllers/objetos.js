@@ -59,7 +59,8 @@ const objetos = {
     },
 
     getObjetos: async (req,res) => {
-        const objs = await pool.query('SELECT * FROM "Objeto"');
+        const nombreOnj = 'No posee%';
+        const objs = await pool.query('SELECT * FROM "Objeto" WHERE "Nombre" NOT LIKE $1',[nombreOnj]);
         res.send(objs.rows);
     }
 }
