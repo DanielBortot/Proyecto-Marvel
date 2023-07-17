@@ -206,6 +206,18 @@ function DescripcionPers () {
         return (<></>);
     }
 
+    const admin2 = (comb) => {
+        if (descUsuario.Email === 'admin@gmail.com'){
+            return (
+                <>
+                    <FontAwesomeIcon icon={faTrash} onClick={()=>eliminar(comb)} style={{padding: '5px', cursor: 'pointer'}}/>
+                    <FontAwesomeIcon icon={faPenToSquare} onClick={()=>{update(comb)}} style={{padding: '5px', cursor: 'pointer'}}/>
+                </>
+            );
+        }
+        return (<></>);
+    }
+
     const eliminar = async (comb) => {
         await axios.post('../api/delCombate', {nombrePers: Nombre, nombrePod: comb.N_Poder, nombreObj: comb.N_Objeto, fecha: comb.Fecha});
         let lista = [...combates];
@@ -347,8 +359,7 @@ function DescripcionPers () {
                         <>
                             <div className="combContDato">
                                 <div className="combContIcon">
-                                    <FontAwesomeIcon icon={faTrash} onClick={()=>eliminar(comb)} style={{padding: '5px', cursor: 'pointer'}}/>
-                                    <FontAwesomeIcon icon={faPenToSquare} onClick={()=>{update(comb)}} style={{padding: '5px', cursor: 'pointer'}}/>
+                                    {admin2(comb)}
                                 </div>
                                 <div className="combitem">{comb.Lugar}</div>
                             </div>

@@ -101,20 +101,7 @@ function VistaPoderes () {
                             <input type="text" placeholder="Buscar Poder" onChange={handleChange}/>
                         </div>
                     </div>
-                    <div className="tituloCont">
-                        <h2>Populares</h2>
-                    </div>
-                    <div className="carrusel">
-                    <Carousel 
-                        responsive={responsive}
-                        infinite={true}
-                        centerMode={true}       
-                    >
-                            {podsFil.map(pod => {
-                                    return <CuadroPoder prop={pod} key={pod.Nombre}/>
-                                })}     
-                    </Carousel>
-                    </div>
+                    
                     <div className="tituloCont">
                         <h2>Lista de poderes de marvel</h2>
                     </div>

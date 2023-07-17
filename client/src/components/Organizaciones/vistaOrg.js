@@ -102,20 +102,7 @@ function VistaOrgs () {
                             <input type="text" placeholder="Buscar Organización" onChange={handleChange}/>
                         </div>
                     </div>
-                    <div className="tituloCont">
-                        <h2>Populares</h2>
-                    </div>
-                    <div className="carrusel">
-                    <Carousel 
-                        responsive={responsive}
-                        infinite={true}
-                        centerMode={true}       
-                    >
-                            {orgsFil.map(org => {
-                                    return <CuadroOrganizaciones prop={org} key={org.Nombre}/>
-                                })}     
-                    </Carousel>
-                    </div>
+                    
                     <div className="tituloCont">
                         <h2>Lista de organizaciones de marvel</h2>
                     </div>

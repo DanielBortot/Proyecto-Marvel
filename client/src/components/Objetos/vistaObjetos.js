@@ -101,20 +101,7 @@ function VistaObjetos () {
                             <input type="text" placeholder="Buscar Objeto" onChange={handleChange}/>
                         </div>
                     </div>
-                    <div className="tituloCont">
-                        <h2>Populares</h2>
-                    </div>
-                    <div className="carrusel">
-                    <Carousel 
-                        responsive={responsive}
-                        infinite={true}
-                        centerMode={true}       
-                    >
-                            {objsFil.map(obj => {
-                                    return <CuadroObjeto prop={obj} key={obj.Nombre}/>
-                                })}     
-                    </Carousel>
-                    </div>
+                    
                     <div className="tituloCont">
                         <h2>Lista de objetos de marvel</h2>
                     </div>

@@ -34,7 +34,7 @@ const reportes = {
 
     peliculasRep5: async (req,res) => {
         const tipo = 'Animacion';
-        const datos = (await pool.query('SELECT * FROM "Pelicula" pe INNER JOIN "Medio" me ON (pe."T_Pelicula"=me."Titulo") WHERE ((me."Duracion" > 150) AND (pe."Tipo" = $1) AND (pe."Ganancia" >= (SELECT AVG ("Ganancia") FROM "Pelicula" WHERE "Tipo" = $2))) ORDER BY "Coste"',[tipo,tipo])).rows;
+        const datos = (await pool.query('SELECT * FROM "Pelicula" pe INNER JOIN "Medio" me ON (pe."T_Pelicula"=me."Titulo") WHERE ((me."Duracion" > 120) AND (pe."Tipo" = $1) AND (pe."Ganancia" >= (SELECT AVG ("Ganancia") FROM "Pelicula" WHERE "Tipo" = $2))) ORDER BY "Coste"',[tipo,tipo])).rows;
         res.send(datos);
     },
 
