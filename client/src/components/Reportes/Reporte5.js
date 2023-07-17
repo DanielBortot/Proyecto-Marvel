@@ -5,11 +5,12 @@ import axios from "axios";
 function Reporte5 (){
 
     const [reporte, setReporte] = useState([]);
+    const [promedio, setPromedio] = useState('');
 
     const traerDatos = async ()=> {
         const datos = await (await axios.get('/api/Rep5Peliculas')).data;
         setReporte(datos);
-        console.log(datos);
+        setPromedio(Math.floor(datos[0].promedio));
     }
 
     useEffect(()=> {
@@ -31,13 +32,14 @@ function Reporte5 (){
                             <div className="rep5ContDato" key={rep.titulo}>
                                 <div className="rep5item">{rep.Titulo}</div>
                             </div>
-                            <div className="rep5item">{rep.Duracion}</div>
-                            <div className="rep5item">{rep.Ganancia}</div>
-                            <div className="rep5item">{rep.Coste}</div>
+                            <div className="rep5item">{rep.Duracion} Min</div>
+                            <div className="rep5item">{rep.Ganancia}$</div>
+                            <div className="rep5item">{rep.Coste}$</div>
                             <div className="rep5item">{rep.Fecha_Estreno.slice(0,10)}</div>
                         </>
                     ))}
                 </div>
+                <div style={{margin: '15px auto 10px 15px', fontWeight: 'bold'}}>Promedio de Ganancias: {promedio}$</div>
             </div>
         </>
     );
