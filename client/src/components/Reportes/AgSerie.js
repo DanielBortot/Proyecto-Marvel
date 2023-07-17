@@ -135,10 +135,10 @@ function AgSerie() {
                             <ErrorMessage name="suscripcion" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.suscripcion}</div>)}/>
                             <Field type="text" name="suscripcion" as="select">
                                 <option hidden selected value={-1}>Selecciona el tipo de suscripcion de la serie</option>
-                                <option value={1}>Gold</option>
-                                <option value={2}>Premium</option>
-                                <option value={3}>Vip</option>
-                                <option value={4}>Free</option>
+                                <option value={2}>Gold</option>
+                                <option value={3}>Premium</option>
+                                <option value={4}>Vip</option>
+                                <option value={1}>Free</option>
                             </Field>
 
                             <ErrorMessage name="tipo" component={()=> (<div style={{fontSize: "15px", color: "red"}}>{errors.tipo}</div>)}/>
