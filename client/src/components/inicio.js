@@ -37,6 +37,7 @@ function VistaInicio () {
         }
     };
     const {perfilUso} = useSelector(state => state.perfiles);
+    const {descUsuario} = useSelector(state => state.usuario);
     const [medios, setMedios] = useState([]);
     const [mediosRec, setMediosRec] = useState([]);
     const [mediosFil, setMediosFil] = useState([]);
@@ -44,22 +45,28 @@ function VistaInicio () {
     useEffect(()=> {
         const traerInfo = async () => {
             setLoading(true)
-            const medios = await (await axios.post('/api/getHist',{perfil: perfilUso.Id_Perfil})).data;
+            const medios = await (await axios.post('/api/getHist',{perfil: perfilUso.Id_Perfil, suscrip: descUsuario.Id_Suscripcion})).data;
             for (let i=0; i<medios.length;i++){
                 const img = imagenes.find(img => img.pos == medios[i].Imagen);
                 if (img){
                     medios[i].Imagen = img.img;
                 }
             }
-            const medRec = await (await axios.post('/api/getRec',{perfil: perfilUso.Id_Perfil})).data;
+            let medRec = await (await axios.post('/api/getRec',{perfil: perfilUso.Id_Perfil, suscrip: descUsuario.Id_Suscripcion})).data;
+
+            if (medRec.length === 0){
+                medRec = await (await axios.post('/api/getPopu',{suscrip: descUsuario.Id_Suscripcion})).data;
+            }
+
             for (let i=0; i<medRec.length;i++){
                 const img = imagenes.find(img => img.pos == medRec[i].Imagen);
                 if (img){
                     medRec[i].Imagen = img.img;
                 }
             }
+
             setMedios(medios);
-            setMediosRec(medRec);
+            setMediosRec(medRec)
             setMediosFil(medios);
             setLoading(false);
         }
