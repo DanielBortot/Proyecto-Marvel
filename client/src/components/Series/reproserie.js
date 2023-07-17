@@ -38,6 +38,7 @@ function ReproSerie () {
         setValue(newValue)
         const calc = Math.round((barra*Duracion));
         await axios.put('/api/upHist',{calificacion: newValue, tVista: calc, perfil: Id_Perfil, titulo: Titulo, idHist: idHist})
+        await axios.put('/api/upRating',{titulo: Titulo});
     }
 
     return(

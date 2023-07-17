@@ -28,7 +28,7 @@ const {buscCivHer, buscCivVill, addCivPers, compCivPers, delCivRela, getRelacion
 
 const {getPersOrg, getOrgPerso, buscOrgPers, getCargo, compOrgPers, addOrgPers, modOrgPers, delOrgPers} = require('../controllers/persOrg');
 
-const {getHist, addHist, upHist, getRec} = require('../controllers/historial');
+const {getHist, addHist, upHist, getRec, upRating} = require('../controllers/historial');
 
 const {getCombates, delCombate, upCombate, addComb, compComb} = require('../controllers/combates');
 
@@ -205,6 +205,7 @@ router.post('/compComb', compComb);
 router.post('/addHist', addHist);
 router.post('/getHist', getHist);
 router.post('/getRec', getRec);
+router.put('/upRating', upRating);
 
 router.put('/upUsuTarj', updateUsuTarjeta);
 router.put('/upSusUsu', updateSusUsuario);

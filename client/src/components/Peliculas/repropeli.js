@@ -31,7 +31,8 @@ function ReproPeli () {
     const updateBarra = async (e, newValue) => {
         setBarra(newValue)
         const calc = Math.round((newValue*Duracion)/100);
-        await axios.put('/api/upHist',{calificacion: value, tVista: calc, perfil: Id_Perfil, titulo: Titulo, idHist: idHist})
+        await axios.put('/api/upHist',{calificacion: value, tVista: calc, perfil: Id_Perfil, titulo: Titulo, idHist: idHist});
+        await axios.put('/api/upRating',{titulo: Titulo});
     }
     
     const updateCali = async (e, newValue) => {
