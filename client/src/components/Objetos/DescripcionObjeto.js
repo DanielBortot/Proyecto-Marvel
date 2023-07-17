@@ -17,6 +17,7 @@ function DescripcionObj () {
     const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
     const [combates, setCombates] = useState([]);
+    const [actualizar, setActualizar] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -38,7 +39,7 @@ function DescripcionObj () {
             setCombates(combs);
         }
         getDatos();
-    })
+    },[actualizar])
 
     const delDatos = async () => {
         await axios.post('/api/delObjeto',{nombreObj: Nombre});
@@ -104,7 +105,7 @@ function DescripcionObj () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} obj={Nombre} pers={personajes} setPers={setPersonajes} op={4}/>
+                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} obj={Nombre} pers={personajes} setPers={setPersonajes} act={actualizar} setAct={setActualizar} op={4}/>
                 })}
             </div>
             <br/>

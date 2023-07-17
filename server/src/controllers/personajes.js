@@ -210,7 +210,13 @@ const personajes = {
 
     delPersonaje: async (req,res) => {
         const {nombrePers} = req.body;
-        await pool.query('DELETE FROM "Personaje" WHERE "Nombre"=$1',[nombrePers]);
+        const org = await pool.query('SELECT * FROM "Organizacion" WHERE "Fundador"=$1 OR "Lider"=$1',[nombrePers]);
+        if (org.length === 0){
+            await pool.query('UPDATE "Organizacion" SET "Lider"=NULL WHERE "Lider"=$1',[nombrePers]);
+            await pool.query('UPDATE "Heroe" SET "Archienemigo"=NULL WHERE "Archienemigo"=$1',[nombrePers]);
+            await pool.query('DELETE FROM "Personaje" WHERE "Nombre"=$1',[nombrePers]);
+            await pool.query('UPDATE "Objeto" SET "N_Personaje"=NULL WHERE "N_Personaje"=$1',[nombrePers]);
+        }
         res.send('eliminado');
     }
 }

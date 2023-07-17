@@ -17,6 +17,7 @@ function DescripcionPod () {
     const {descUsuario} = useSelector(state => state.usuario);
     const [personajes, setPersonajes] = useState([]);
     const [combates, setCombates] = useState([]);
+    const [actualizar, setActualizar] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
@@ -37,7 +38,7 @@ function DescripcionPod () {
             setCombates(combs);
         }
         getDatos();
-    },[]);
+    },[actualizar]);
 
     const delDatos = async () => {
         await axios.post('/api/delPoder',{nombrePod: Nombre});
@@ -97,7 +98,7 @@ function DescripcionPod () {
             </div>
             <div className="vistaPersM">
                 {personajes.map(pers => {
-                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} pod={Nombre} pers={personajes} setPers={setPersonajes} op={3}/>
+                    return <CuadroPers prop={pers} key={pers.Nombre} email={descUsuario.Email} pod={Nombre} pers={personajes} setPers={setPersonajes} act={actualizar} setAct={setActualizar} op={3}/>
                 })}
             </div>
             <br/>
